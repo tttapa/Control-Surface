@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$d8/d6b/structTwoByteMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="5,5,165,32"/>
+<area shape="rect" id="node2" href="$da/dbd/structMCU_1_1VPotMatcher.html" title="MIDI Input matcher for Mackie Control Universal VPot LED rings." alt="" coords="213,5,319,32"/>
+</map>

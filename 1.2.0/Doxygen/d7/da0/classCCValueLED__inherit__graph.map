@@ -1,0 +1,9 @@
+<map id="CCValueLED" name="CCValueLED">
+<area shape="rect" id="node1" title="MIDI Input Element that listens for MIDI Control Change messages for the given controller,..." alt="" coords="229,961,356,1039"/>
+<area shape="rect" id="node2" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="199,792,386,913"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="161,476,424,744"/>
+<area shape="rect" id="node4" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="101,263,295,428"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="5,5,180,215"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="205,57,405,163"/>
+<area shape="rect" id="node7" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="319,285,455,406"/>
+</map>

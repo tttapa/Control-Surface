@@ -1,0 +1,14 @@
+<map id="CachedExtIOPin" name="CachedExtIOPin">
+<area shape="rect" id="Node000001" title=" " alt="" coords="208,1183,349,1248"/>
+<area shape="rect" id="Node000002" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="371,303,578,888"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="385,889,296,1168,291,1166,380,887"/>
+<area shape="rect" id="Node000005" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="374,965,575,1465"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="477,888,477,949,472,949,472,888"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="338,1528,611,1893"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="571,1514,585,1465,610,1326,615,1270,616,1216,606,1106,585,966,570,889,576,888,591,965,611,1105,621,1216,620,1270,616,1327,591,1466,576,1516"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,1123,184,1308"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="127,1320,158,1393,198,1464,230,1504,265,1541,339,1609,336,1613,261,1545,226,1507,194,1467,153,1396,123,1322"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="477,1466,477,1512,472,1512,472,1466"/>
+<area shape="rect" id="Node000006" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="417,5,533,211"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="477,211,477,286,472,286,472,211"/>
+</map>

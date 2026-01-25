@@ -1,0 +1,6 @@
+<map id="MIDI_Sink" name="MIDI_Sink">
+<area shape="rect" id="node1" title="Receives MIDI messages from a MIDI pipe." alt="" coords="5,5,247,376"/>
+<area shape="rect" id="node2" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="51,453,294,1220"/>
+<area shape="rect" id="node3" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="60,1283,285,1741"/>
+<area shape="rect" id="node4" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="271,130,405,251"/>
+</map>

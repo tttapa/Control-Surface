@@ -1,0 +1,4 @@
+<map id="BankableTwoByteMIDIMatcher&lt; BankSize &gt;" name="BankableTwoByteMIDIMatcher&lt; BankSize &gt;">
+<area shape="rect" id="node1" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure." alt="" coords="5,5,251,200"/>
+<area shape="rect" id="node2" href="$d2/d5a/structMCU_1_1BankableVPotMatcher.html" title="MIDI Input matcher for Mackie Control Universal VPot LED rings with bank support." alt="" coords="33,248,223,340"/>
+</map>

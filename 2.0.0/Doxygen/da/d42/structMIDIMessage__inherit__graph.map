@@ -1,0 +1,7 @@
+<map id="MIDIMessage" name="MIDIMessage">
+<area shape="rect" id="Node000001" title=" " alt="" coords="55,5,307,451"/>
+<area shape="rect" id="Node000002" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="5,499,160,884"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,465,126,499,121,498,128,463"/>
+<area shape="rect" id="Node000003" href="$d5/dad/structSysCommonMessage.html" title=" " alt="" coords="184,539,379,844"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,463,251,537,246,539,230,465"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;" name="GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="288,505,476,685"/>
+<area shape="rect" id="node6" href="$d9/de5/classBankable_1_1CCRange.html" title="MIDI Input Element that listens to a range of controllers and saves their values." alt="" coords="5,733,169,825"/>
+<area shape="rect" id="node7" href="$d5/d76/classBankable_1_1CCValue.html" title="MIDI Input Element that listens to a single controller and saves its value." alt="" coords="193,741,371,818"/>
+<area shape="rect" id="node8" href="$d2/d68/classBankable_1_1NoteRange.html" title="MIDI Input Element that listens to a range of notes and saves their velocity values." alt="" coords="395,733,572,825"/>
+<area shape="rect" id="node9" href="$de/d3e/classBankable_1_1NoteValue.html" title="MIDI Input Element that listens to a single note and saves its value." alt="" coords="596,741,787,818"/>
+<area shape="rect" id="node2" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="135,175,365,457"/>
+<area shape="rect" id="node3" title=" " alt="" coords="131,27,228,105"/>
+<area shape="rect" id="node4" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="253,5,389,127"/>
+<area shape="rect" id="node5" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="389,182,642,450"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="StreamDebugMIDI_Output" name="StreamDebugMIDI_Output">
+<area shape="rect" id="node1" title="A class for MIDI outputs sending human&#45;readable MIDI messages over a Stream." alt="" coords="241,1732,463,1985"/>
+<area shape="rect" id="node2" href="$de/d65/classStreamDebugMIDI__Base.html" title="A class that implements MIDI debug send functions." alt="" coords="5,1268,224,1448"/>
+<area shape="rect" id="node3" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="248,1033,456,1683"/>
+<area shape="rect" id="node4" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="481,1173,722,1543"/>
+<area shape="rect" id="node5" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="800,204,1043,971"/>
+<area shape="rect" id="node6" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="746,1173,987,1543"/>
+<area shape="rect" id="node7" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="1011,1129,1237,1587"/>
+<area shape="rect" id="node8" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="855,5,988,127"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="MIDIAbsoluteEncoder.hpp" name="MIDIAbsoluteEncoder.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="99,5,287,31"/>
+<area shape="rect" id="Node000002" href="$dd/d09/CCAbsoluteEncoder_8hpp.html" title=" " alt="" coords="5,79,181,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,41,111,81,108,76,165,36"/>
+<area shape="rect" id="Node000004" href="$d9/d50/PBAbsoluteEncoder_8hpp.html" title=" " alt="" coords="206,79,381,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="222,36,279,76,275,81,219,41"/>
+<area shape="rect" id="Node000003" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="125,152,262,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="122,110,179,150,175,154,119,114"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="268,114,211,154,208,150,265,110"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="midi&#45;private.h" name="midi&#45;private.h">
+<area shape="rect" id="Node000001" title="Declarations of internal functions for the MIDI over BLE system, used in the midi&#45;*...." alt="" coords="211,5,325,31"/>
+<area shape="rect" id="Node000002" href="$dc/dc7/midi_8h.html" title="Public MIDI over Bluetooth Low Energy API." alt="" coords="118,79,181,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,33,182,74,179,69,248,28"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="205,79,331,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="271,31,271,65,265,65,265,31"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="355,79,479,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="293,28,382,70,379,75,291,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,88,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="134,106,76,146,73,142,131,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="112,152,187,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="152,104,152,138,147,138,147,104"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="211,152,282,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="167,102,221,141,218,146,163,106"/>
+</map>

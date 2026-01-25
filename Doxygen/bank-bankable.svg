@@ -1,0 +1,111 @@
+<svg 
+    version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    width="496" height="320">
+
+    <style>
+    text {
+        user-select: none;
+    }
+    </style>
+
+    <rect id="incr_bg" x="418" y="20" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue"/>
+    <text x="446" y="57" font-family="sans-serif" font-size="28" text-anchor="middle" stroke="white" fill="white">+</text>
+    <rect id="incr" x="418" y="20" width="56" height="56" rx="4" ry="4" fill="rgba(0,0,0,0)" style="cursor: pointer"/>
+    
+    <rect id="decr_bg" x="418" y="140" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue"/>
+    <text x="446" y="177" font-family="sans-serif" font-size="28" text-anchor="middle" stroke="white" fill="white">–</text>
+    <rect id="decr" x="418" y="140" width="56" height="56" rx="4" ry="4" fill="rgba(0,0,0,0)" style="cursor: pointer"/>
+   
+    <rect id="button0" x="52" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button1" x="136" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button2" x="220" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button3" x="304" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+
+    <text id="tracktext0" x="80" y="60" font-family="sans-serif" font-size="18" text-anchor="middle">Track 1</text>
+    <text id="tracktext1" x="164" y="60" font-family="sans-serif" font-size="18" text-anchor="middle">Track 2</text>
+    <text id="tracktext2" x="248" y="60" font-family="sans-serif" font-size="18" text-anchor="middle">Track 3</text>
+    <text id="tracktext3" x="332" y="60" font-family="sans-serif" font-size="18" text-anchor="middle">Track 4</text>
+
+    <circle id="led0" cx="80" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led1" cx="164" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led2" cx="248" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led3" cx="332" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+
+    <text id="formulatext0" x="50" y="232" font-family="mono" font-size="12" text-anchor="left"></text>
+    <text id="formulatext1" x="134" y="232" font-family="mono" font-size="12" text-anchor="left"></text>
+    <text id="formulatext2" x="218" y="232" font-family="mono" font-size="12" text-anchor="left"></text>
+    <text id="formulatext3" x="302" y="232" font-family="mono" font-size="12" text-anchor="left"></text>
+    
+    <text id="setting" x="446" y="115" font-family="sans-serif" font-size="18" text-anchor="middle">Bank 1</text>
+    <text id="formulatextsetting" x="446" y="236" font-family="mono" font-size="12" text-anchor="middle"></text>
+    
+    <script>
+        const numBanks = 3;
+        const numButtons = 4;
+        const numTracks = numBanks * numButtons;
+        const muteStates = Array(numTracks).fill(0);
+
+        let bankSetting = 0;
+        let bankSettingTxt = document.getElementById("setting");
+        let bankSettingFormulaTxt = document.getElementById("formulatextsetting");
+
+        for (let i = 0; i &lt; numButtons; i++) {
+            let button = document.getElementById("button"+i);
+            button.onclick = function() {
+                let offset = bankSetting * numButtons + i;
+                muteStates[offset] ^= 1;
+                updateLEDs();
+            }
+        }
+
+        function updateLEDs() {
+            for (let i = 0; i &lt; numButtons; i++) {
+                let led = document.getElementById("led"+i);
+                let offset = bankSetting * numButtons + i;
+                led.setAttribute("fill", muteStates[offset] ? "red" : "white");
+            }
+        }
+
+        function updateBankText() {
+            for (let i = 0; i &lt; numButtons; i++) {
+                let txt = document.getElementById("tracktext"+i);
+                txt.textContent = "Track " + (bankSetting * numButtons + 1 + i);
+            }
+            for (let i = 0; i &lt; numButtons; i++) {
+                let txt = document.getElementById("formulatext"+i);
+                txt.innerHTML = addressFormula(i, "" + txt.getAttribute("x"));
+            }
+            bankSettingTxt.textContent = "Bank " + (bankSetting + 1);
+            bankSettingFormulaTxt.textContent = "x = " + bankSetting;
+        }
+
+        let incr = document.getElementById("incr");
+        incr.onclick = function() {
+            bankSetting++;
+            if (bankSetting == numBanks)
+                bankSetting = 0;
+            updateLEDs();
+            updateBankText();
+        }
+        let decr = document.getElementById("decr");
+        decr.onclick = function() {
+            if (bankSetting == 0)
+                bankSetting = numBanks;
+            bankSetting--;
+            updateLEDs();
+            updateBankText();
+        } 
+
+        function addressFormula(i, x) {
+            return `&lt;tspan x="${x}" dy="0">a = ${numButtons}&lt;/tspan>\n` //
+                 + `&lt;tspan x="${x}" dy="1.2em">b = ${i+1}&lt;/tspan>\n` //
+                 + `&lt;tspan x="${x}" dy="1.8em">y = ax+b&lt;/tspan>\n` //
+                 + `&lt;tspan x="${x}" dy="1.2em">  = ${numButtons}·${bankSetting}+${i+1}&lt;/tspan>` //
+                 + `&lt;tspan x="${x}" dy="1.2em">  = ${numButtons * bankSetting + i + 1}&lt;/tspan>`
+        }
+
+        window.onload = updateBankText;
+    </script>
+</svg>

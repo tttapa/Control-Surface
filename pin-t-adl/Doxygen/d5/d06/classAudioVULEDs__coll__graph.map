@@ -1,0 +1,19 @@
+<map id="AudioVULEDs&lt; N &gt;" name="AudioVULEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A VU meter that reads from an Audio stream using the AudioAnalyzePeak class, and displays it on an LE..." alt="" coords="309,1216,452,1401"/>
+<area shape="rect" id="Node000002" href="$d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="231,1001,360,1167"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="334,1178,348,1215,343,1217,329,1180"/>
+<area shape="rect" id="Node000003" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="5,643,135,869"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="117,880,150,937,189,986,232,1028,229,1032,185,989,145,940,113,883"/>
+<area shape="rect" id="Node000004" href="$d0/d49/classMovingCoilBallistics.html" title=" " alt="" coords="159,643,330,869"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="265,868,283,985,278,986,259,869"/>
+<area shape="rect" id="Node000005" href="$d0/d18/classAudioVU_1_1Analyzer.html" title="The AudioAnalyzePeak and AudioAnalyzeRMS classes don&#39;t implement a common interface,..." alt="" coords="354,683,453,829"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="394,830,377,902,354,978,350,987,345,985,349,976,372,901,389,828"/>
+<area shape="rect" id="Node000006" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="409,1021,576,1147"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="458,1161,429,1217,424,1215,453,1158"/>
+<area shape="rect" id="Node000007" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="477,573,671,939"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="528,953,511,1022,505,1020,523,951"/>
+<area shape="rect" id="Node000008" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="365,165,559,351"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="488,363,536,572,530,574,483,364"/>
+<area shape="rect" id="Node000009" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="584,5,791,511"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="632,512,622,558,617,557,627,510"/>
+</map>

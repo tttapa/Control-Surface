@@ -1,0 +1,12 @@
+<map id="MIDIIncrementDecrementButtons&lt; RelativeSender, ResetSender &gt;" name="MIDIIncrementDecrementButtons&lt; RelativeSender, ResetSender &gt;">
+<area shape="rect" id="node1" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="518,1403,755,1583"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="135,1006,274,1289"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,188,112"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="92,161,299,444"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="91,521,318,892"/>
+<area shape="rect" id="node6" href="$df/dc6/classAH_1_1IncrementDecrementButtons.html" title="A class for buttons that increment and decrement some counter or setting." alt="" coords="309,1057,519,1237"/>
+<area shape="rect" id="node7" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="343,551,507,863"/>
+<area shape="rect" id="node8" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="543,969,730,1325"/>
+<area shape="rect" id="node9" title=" " alt="" coords="755,1109,865,1186"/>
+<area shape="rect" id="node10" title=" " alt="" coords="890,1109,989,1186"/>
+</map>

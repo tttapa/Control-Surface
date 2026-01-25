@@ -1,0 +1,23 @@
+<map id="ExtendedIOElement" name="ExtendedIOElement">
+<area shape="rect" id="Node000001" title="An abstract base class for Extended Input/Output elements." alt="" coords="274,652,481,1297"/>
+<area shape="rect" id="Node000004" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title=" " alt="" coords="5,1345,237,1465"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="269,1162,159,1347,154,1344,265,1159"/>
+<area shape="rect" id="Node000005" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title=" " alt="" coords="261,1345,493,1465"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="380,1311,380,1345,375,1345,375,1311"/>
+<area shape="rect" id="Node000007" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title="A class for ExtendedIOElements with a fixed size." alt="" coords="518,1353,765,1458"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="490,1154,612,1351,607,1354,486,1157"/>
+<area shape="rect" id="Node000002" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="241,239,514,604"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="380,618,380,652,375,652,375,618"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="288,5,467,191"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="380,204,380,238,375,238,375,204"/>
+<area shape="rect" id="Node000006" href="$d5/dd2/classAH_1_1MCP23017.html" title="Class for MCP23017 I²C I/O expanders." alt="" coords="277,1513,478,2059"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="380,1479,380,1513,375,1513,375,1479"/>
+<area shape="rect" id="Node000008" href="$de/de9/classAH_1_1MAX7219.html" title="A class for LED outputs using the MAX7219 LED display driver." alt="" coords="519,1586,729,1986"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="641,1472,636,1586,630,1586,636,1472"/>
+<area shape="rect" id="Node000009" href="$dc/d0e/classAH_1_1ShiftRegisterOutBase.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="753,1553,945,2019"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="708,1467,744,1512,767,1552,762,1555,739,1515,704,1470"/>
+<area shape="rect" id="Node000010" href="$d5/d09/classAH_1_1SPIShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595 that are connected to the SPI bu..." alt="" coords="648,2107,837,2247"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="785,2033,764,2107,759,2106,779,2031"/>
+<area shape="rect" id="Node000011" href="$d0/dca/classAH_1_1ShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="861,2114,1051,2239"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="919,2031,942,2113,937,2115,914,2033"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="USBMIDI_Parser" name="USBMIDI_Parser">
+<area shape="rect" id="Node000001" title="Parser for MIDI over USB packets." alt="" coords="270,1189,464,1635"/>
+<area shape="rect" id="Node000002" href="$df/d0c/classMIDI__Parser.html" title="Base class for MIDI parsers." alt="" coords="127,891,327,1037"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,1049,300,1188,295,1190,251,1051"/>
+<area shape="rect" id="Node000003" href="$d4/d61/structMIDIMessage.html" title=" " alt="" coords="101,313,353,739"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="230,739,230,875,224,875,224,739"/>
+<area shape="rect" id="Node000004" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="160,5,294,251"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="162,198,121,252,104,282,91,314,53,434,27,539,12,634,9,723,18,813,38,906,72,1009,117,1126,145,1180,181,1230,220,1277,260,1318,256,1322,216,1281,176,1234,141,1182,113,1128,67,1011,33,908,12,814,4,724,7,633,22,538,48,432,86,312,99,280,117,249,158,194"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="230,251,230,297,224,297,224,251"/>
+<area shape="rect" id="Node000005" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="378,333,543,719"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="296,209,333,259,367,312,372,321,368,324,362,315,328,262,292,213"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="380,714,367,740,285,879,281,876,362,737,375,712"/>
+<area shape="rect" id="Node000006" href="$d1/db1/classSysExBuffer.html" title="Helper for storing the System Exclusive messages being received by a MIDI parser." alt="" coords="351,841,476,1087"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="404,1087,395,1173,389,1173,398,1087"/>
+<area shape="rect" id="Node000007" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="501,801,641,1127"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="510,1128,493,1166,473,1210,468,1208,489,1164,505,1126"/>
+</map>

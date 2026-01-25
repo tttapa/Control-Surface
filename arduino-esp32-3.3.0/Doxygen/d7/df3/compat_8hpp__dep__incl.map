@@ -1,0 +1,46 @@
+<map id="compat.hpp" name="compat.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="723,5,822,31"/>
+<area shape="rect" id="Node000002" href="$dd/d05/BLEAPI_8hpp.html" title="Type definitions and callback interfaces for communication between the low&#45;level BLE stacks and highe..." alt="" coords="725,79,820,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="775,44,775,79,770,79,770,44"/>
+<area shape="rect" id="Node000003" href="$d0/d3e/ArduinoBLEBackend_8hpp.html" title=" " alt="" coords="130,299,309,324"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="711,98,571,109,400,132,317,149,243,170,186,196,165,211,150,227,145,236,145,246,156,265,176,282,198,296,195,301,173,286,152,268,140,247,140,235,145,224,161,207,183,191,242,165,315,143,399,126,571,104,711,93"/>
+<area shape="rect" id="Node000004" href="$d3/dfe/BLERingBuf_8hpp.html" title=" " alt="" coords="432,152,556,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="715,110,540,154,538,149,714,105"/>
+<area shape="rect" id="Node000006" href="$d7/d71/BTstackBackgroundBackend_8hpp.html" title=" " alt="" coords="394,299,626,324"/>
+<area shape="poly" id="edge10_Node000002_Node000006" title=" " alt="" coords="751,115,588,253,527,300,524,296,584,249,747,111"/>
+<area shape="rect" id="Node000007" href="$d8/d26/ESP32Backend_8hpp.html" title=" " alt="" coords="733,299,879,324"/>
+<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="779,117,807,298,802,299,774,118"/>
+<area shape="rect" id="Node000010" href="$d5/d61/GenericBLEMIDI__Interface_8hpp.html" title=" " alt="" coords="1118,152,1337,177"/>
+<area shape="poly" id="edge12_Node000002_Node000010" title=" " alt="" coords="834,99,1155,149,1154,155,833,105"/>
+<area shape="rect" id="Node000012" href="$d1/d0b/PollingBLEMIDISender_8hpp.html" title=" " alt="" coords="159,225,351,251"/>
+<area shape="poly" id="edge14_Node000002_Node000012" title=" " alt="" coords="712,100,576,117,497,133,420,155,378,171,337,191,275,227,272,223,335,186,376,166,418,149,496,128,575,112,711,94"/>
+<area shape="rect" id="Node000013" href="$d2/d66/ThreadedBLEMIDISender_8hpp.html" title=" " alt="" coords="836,225,1045,251"/>
+<area shape="poly" id="edge17_Node000002_Node000013" title=" " alt="" coords="799,111,929,223,925,227,795,115"/>
+<area shape="rect" id="Node000014" href="$d3/d61/advertising_8hpp.html" title=" " alt="" coords="1361,152,1483,177"/>
+<area shape="poly" id="edge19_Node000002_Node000014" title=" " alt="" coords="834,95,1061,117,1349,149,1361,151,1360,156,1348,155,1060,122,833,101"/>
+<area shape="rect" id="Node000015" href="$d6/d2c/app_8hpp.html" title=" " alt="" coords="1038,299,1113,324"/>
+<area shape="poly" id="edge20_Node000002_Node000015" title=" " alt="" coords="834,101,889,117,950,142,1010,176,1037,198,1060,224,1070,242,1076,263,1079,298,1073,298,1071,264,1066,244,1056,227,1033,202,1007,181,948,146,887,122,833,107"/>
+<area shape="rect" id="Node000016" href="$de/d66/events_8hpp.html" title=" " alt="" coords="1508,152,1603,177"/>
+<area shape="poly" id="edge22_Node000002_Node000016" title=" " alt="" coords="834,93,1120,111,1307,128,1496,149,1508,151,1507,156,1495,155,1306,133,1120,116,834,98"/>
+<area shape="rect" id="Node000017" href="$d3/da4/gatt__midi_8hpp.html" title=" " alt="" coords="649,225,761,251"/>
+<area shape="poly" id="edge23_Node000002_Node000017" title=" " alt="" coords="764,118,713,226,708,224,759,116"/>
+<area shape="rect" id="Node000018" href="$d0/d48/midi_8hpp.html" title=" " alt="" coords="5,152,84,177"/>
+<area shape="poly" id="edge25_Node000002_Node000018" title=" " alt="" coords="712,99,447,117,276,134,104,155,85,158,84,152,103,149,275,128,446,112,711,93"/>
+<area shape="rect" id="Node000005" href="$dc/d8a/BufferedBLEMIDIParser_8hpp.html" title=" " alt="" coords="376,225,575,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="490,191,481,226,476,225,485,190"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="422,257,261,301,260,296,421,252"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="489,262,507,297,502,300,485,264"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="542,251,753,296,752,301,541,256"/>
+<area shape="rect" id="Node000008" href="$df/daf/ESP32BluedroidBackend_8hpp.html" title=" " alt="" coords="703,372,909,397"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="809,338,809,372,803,372,803,338"/>
+<area shape="rect" id="Node000009" href="$d7/da6/ESP32NimBLEBackend_8hpp.html" title=" " alt="" coords="963,372,1159,397"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="861,325,1020,369,1019,374,860,330"/>
+<area shape="rect" id="Node000011" href="$df/ded/BluetoothMIDI__Interface_8hpp.html" title=" " alt="" coords="1123,225,1331,251"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="1230,191,1230,225,1225,225,1225,191"/>
+<area shape="poly" id="edge15_Node000012_Node000003" title=" " alt="" coords="246,264,228,300,223,297,241,262"/>
+<area shape="poly" id="edge16_Node000012_Node000006" title=" " alt="" coords="310,252,469,296,468,301,309,257"/>
+<area shape="poly" id="edge18_Node000013_Node000007" title=" " alt="" coords="908,259,829,301,827,296,906,255"/>
+<area shape="poly" id="edge21_Node000015_Node000009" title=" " alt="" coords="1073,338,1066,372,1060,371,1068,337"/>
+<area shape="poly" id="edge24_Node000017_Node000006" title=" " alt="" coords="662,258,543,301,541,296,660,253"/>
+<area shape="poly" id="edge26_Node000018_Node000003" title=" " alt="" coords="59,188,79,219,105,249,147,277,188,296,186,301,144,281,102,253,74,222,55,191"/>
+</map>

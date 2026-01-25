@@ -1,0 +1,15 @@
+<map id="AssignmentDisplay" name="AssignmentDisplay">
+<area shape="rect" id="Node000001" title="Class that receives and stores the text for the Mackie Control Universal 7&#45;segment assignment display..." alt="" coords="143,1851,309,1916"/>
+<area shape="rect" id="Node000002" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="119,1483,333,1803"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="229,1816,229,1850,223,1850,223,1816"/>
+<area shape="rect" id="Node000003" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,1300,260,1435"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="162,1447,174,1482,169,1483,157,1448"/>
+<area shape="rect" id="Node000004" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="37,1007,228,1252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="135,1266,135,1300,130,1300,130,1266"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="37,239,229,959"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="135,972,135,1006,130,1006,130,972"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="43,5,222,191"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="135,204,135,238,130,238,130,204"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="285,1335,357,1400"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="308,1414,284,1483,279,1482,303,1412"/>
+</map>

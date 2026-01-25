@@ -1,0 +1,34 @@
+<map id="EncoderSelector&lt; N &gt;" name="EncoderSelector&lt; N &gt;">
+<area shape="rect" id="Node000001" title="Selector that reads from a rotary encoder." alt="" coords="601,2347,759,2412"/>
+<area shape="rect" id="Node000002" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="583,2117,777,2297"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="683,2311,683,2347,677,2347,677,2311"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="225,1772,372,1972"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="384,1944,585,2120,581,2124,381,1948"/>
+<area shape="rect" id="Node000004" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="9,1271,133,1357"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="81,1370,104,1490,122,1559,146,1626,184,1701,227,1770,223,1773,179,1703,142,1628,117,1560,98,1491,75,1371"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="157,1251,275,1377"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="230,1390,287,1772,281,1772,225,1391"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="119,573,313,939"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="219,952,219,1251,213,1251,213,952"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="129,363,177,572,172,574,124,364"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="274,512,263,558,258,557,268,510"/>
+<area shape="rect" id="Node000009" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="299,1261,464,1367"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="376,1367,318,1756,313,1756,371,1367"/>
+<area shape="rect" id="Node000010" href="$dd/da9/classAHEncoder.html" title="Class for reading quadrature encoders, heavily influenced by http://www.pjrc.com/teensy/td_libs_Encod..." alt="" coords="599,1689,761,2055"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="683,2055,683,2101,677,2101,677,2055"/>
+<area shape="poly" id="edge15_Node000010_Node000010" title=" " alt="" coords="762,1832,780,1846,787,1872,784,1889,777,1902,772,1899,779,1888,782,1872,776,1849,759,1837"/>
+<area shape="rect" id="Node000011" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="489,1001,666,1627"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="638,1626,646,1673,641,1674,632,1627"/>
+<area shape="rect" id="Node000012" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="691,1021,877,1607"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="732,1607,720,1673,714,1672,727,1606"/>
+<area shape="rect" id="Node000013" href="$dc/d9d/structDirectPinRead.html" title=" " alt="" coords="731,723,837,789"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="787,789,787,1005,781,1005,781,789"/>
+<area shape="rect" id="Node000014" href="$df/ddb/structAH_1_1function__traits.html" title=" " alt="" coords="695,218,873,298"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="787,298,787,707,781,707,781,298"/>
+<area shape="rect" id="Node000015" href="$de/d62/structAtomicPosition.html" title=" " alt="" coords="901,1191,1088,1437"/>
+<area shape="poly" id="edge14_Node000010_Node000015" title=" " alt="" coords="968,1438,936,1533,915,1582,892,1628,836,1710,774,1782,770,1779,832,1707,887,1625,911,1579,931,1531,963,1436"/>
+<area shape="rect" id="Node000016" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="914,1769,1030,1975"/>
+<area shape="poly" id="edge16_Node000002_Node000016" title=" " alt="" coords="948,1976,929,2018,905,2056,880,2084,852,2109,792,2152,789,2147,849,2105,876,2080,901,2053,925,2015,943,1974"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="ProgramChanger&lt; N &gt;" name="ProgramChanger&lt; N &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="388,793,559,885"/>
+<area shape="rect" id="node2" href="$de/de7/classSelectable.html" title=" " alt="" coords="5,536,171,672"/>
+<area shape="rect" id="node3" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="195,543,429,665"/>
+<area shape="rect" id="node4" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="189,263,435,428"/>
+<area shape="rect" id="node5" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="228,5,396,200"/>
+<area shape="rect" id="node6" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="453,485,603,723"/>
+<area shape="rect" id="node7" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="628,477,809,731"/>
+</map>

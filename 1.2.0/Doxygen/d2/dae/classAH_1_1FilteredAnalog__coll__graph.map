@@ -1,0 +1,7 @@
+<map id="FilteredAnalog&lt; Precision, FilterShiftFactor, FilterType, AnalogType, IncRes &gt;" name="FilteredAnalog&lt; Precision, FilterShiftFactor, FilterType, AnalogType, IncRes &gt;">
+<area shape="rect" id="node1" title="A class that reads and filters an analog input." alt="" coords="91,823,293,944"/>
+<area shape="rect" id="node2" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title=" " alt="" coords="38,417,346,773"/>
+<area shape="rect" id="node3" href="$d2/dcb/classHysteresis.html" title=" " alt="" coords="5,219,176,340"/>
+<area shape="rect" id="node4" title=" " alt="" coords="51,5,130,83"/>
+<area shape="rect" id="node5" href="$d7/d40/classEMA.html" title=" " alt="" coords="201,204,386,355"/>
+</map>

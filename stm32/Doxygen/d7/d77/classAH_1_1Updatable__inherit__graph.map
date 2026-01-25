@@ -1,0 +1,146 @@
+<map id="Updatable&lt; T &gt;" name="Updatable&lt; T &gt;">
+<area shape="rect" id="node1" title="A super class for object that have to be updated regularly." alt="" coords="8608,593,8735,715"/>
+<area shape="rect" id="node4" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="5,843,212,1023"/>
+<area shape="rect" id="node6" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="236,843,488,1023"/>
+<area shape="rect" id="node8" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="512,843,777,1023"/>
+<area shape="rect" id="node10" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="801,843,1096,1023"/>
+<area shape="rect" id="node12" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="1120,843,1327,1023"/>
+<area shape="rect" id="node14" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="1351,843,1557,1023"/>
+<area shape="rect" id="node16" href="$df/dca/classBankable_1_1MIDIButtonLatched.html" title=" " alt="" coords="1581,814,1783,1053"/>
+<area shape="rect" id="node18" href="$df/dca/classBankable_1_1MIDIButtonLatched.html" title=" " alt="" coords="1807,814,2008,1053"/>
+<area shape="rect" id="node20" href="$d3/d0b/classBankable_1_1MIDIButtonLatching.html" title=" " alt="" coords="2033,851,2291,1016"/>
+<area shape="rect" id="node22" href="$d3/d0b/classBankable_1_1MIDIButtonLatching.html" title=" " alt="" coords="2315,843,2526,1023"/>
+<area shape="rect" id="node24" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="2550,836,2779,1031"/>
+<area shape="rect" id="node26" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="2803,836,3057,1031"/>
+<area shape="rect" id="node28" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="3081,836,3334,1031"/>
+<area shape="rect" id="node30" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="3358,836,3601,1031"/>
+<area shape="rect" id="node32" href="$dc/d22/classBankable_1_1MIDIButtons.html" title=" " alt="" coords="3625,829,3861,1038"/>
+<area shape="rect" id="node34" href="$dc/d22/classBankable_1_1MIDIButtons.html" title=" " alt="" coords="3885,829,4135,1038"/>
+<area shape="rect" id="node36" href="$da/d96/classBankable_1_1MIDIChordButton.html" title=" " alt="" coords="4159,821,4349,1045"/>
+<area shape="rect" id="node39" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="4375,814,4586,1053"/>
+<area shape="rect" id="node41" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="4637,814,4863,1053"/>
+<area shape="rect" id="node43" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="4901,814,5127,1053"/>
+<area shape="rect" id="node45" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="5158,814,5361,1053"/>
+<area shape="rect" id="node47" href="$d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html" title=" " alt="" coords="5389,807,5655,1060"/>
+<area shape="rect" id="node49" href="$d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html" title=" " alt="" coords="5681,807,5985,1060"/>
+<area shape="rect" id="node51" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title=" " alt="" coords="6011,763,6223,1104"/>
+<area shape="rect" id="node53" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title=" " alt="" coords="6247,763,6459,1104"/>
+<area shape="rect" id="node55" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="6483,829,6649,1038"/>
+<area shape="rect" id="node66" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="7055,836,7247,1031"/>
+<area shape="rect" id="node77" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="7271,836,7463,1031"/>
+<area shape="rect" id="node80" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="7488,836,7703,1031"/>
+<area shape="rect" id="node83" href="$d6/d72/classMIDIButton.html" title=" " alt="" coords="7727,836,7957,1031"/>
+<area shape="rect" id="node85" href="$d6/d72/classMIDIButton.html" title=" " alt="" coords="7981,836,8225,1031"/>
+<area shape="rect" id="node87" href="$d6/d72/classMIDIButton.html" title=" " alt="" coords="8249,829,8464,1038"/>
+<area shape="rect" id="node89" href="$d3/d88/classMIDIButtonLatched.html" title=" " alt="" coords="8489,799,8659,1067"/>
+<area shape="rect" id="node91" href="$d3/d88/classMIDIButtonLatched.html" title=" " alt="" coords="8683,799,8854,1067"/>
+<area shape="rect" id="node93" href="$d8/de1/classMIDIButtonLatching.html" title=" " alt="" coords="8879,836,9053,1031"/>
+<area shape="rect" id="node95" href="$d8/de1/classMIDIButtonLatching.html" title=" " alt="" coords="9077,836,9252,1031"/>
+<area shape="rect" id="node97" href="$d0/d54/classMIDIButtonMatrix.html" title=" " alt="" coords="9276,821,9517,1045"/>
+<area shape="rect" id="node99" href="$d0/d54/classMIDIButtonMatrix.html" title=" " alt="" coords="9541,821,9796,1045"/>
+<area shape="rect" id="node101" href="$d2/d87/classMIDIButtons.html" title=" " alt="" coords="9820,807,10051,1060"/>
+<area shape="rect" id="node103" href="$d2/d87/classMIDIButtons.html" title=" " alt="" coords="10075,807,10305,1060"/>
+<area shape="rect" id="node105" href="$d5/d8e/classMIDIFilteredAnalog.html" title=" " alt="" coords="10329,807,10517,1060"/>
+<area shape="rect" id="node107" href="$d5/d8e/classMIDIFilteredAnalog.html" title=" " alt="" coords="10542,807,10750,1060"/>
+<area shape="rect" id="node109" href="$dc/dc2/classMIDIIncrementDecrementButtons.html" title=" " alt="" coords="10774,777,11070,1089"/>
+<area shape="rect" id="node111" href="$df/db5/classBankable_1_1GenericMIDIAbsoluteEncoder.html" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="11095,763,11331,1104"/>
+<area shape="rect" id="node116" href="$d6/dcd/classBankable_1_1GenericMIDIRotaryEncoder.html" title="An abstract class for rotary encoders that send MIDI events and that can be added to a Bank." alt="" coords="11355,836,11577,1031"/>
+<area shape="rect" id="node119" href="$d9/df9/classBankable_1_1MIDIButton.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="11601,843,11800,1023"/>
+<area shape="rect" id="node120" href="$df/dca/classBankable_1_1MIDIButtonLatched.html" title="A class for momentary buttons and switches that send MIDI events." alt="" coords="11825,814,12019,1053"/>
+<area shape="rect" id="node121" href="$d3/d0b/classBankable_1_1MIDIButtonLatching.html" title="A class for latching buttons and switches that send MIDI events." alt="" coords="12044,851,12235,1016"/>
+<area shape="rect" id="node122" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title="MIDIButtonMatrix." alt="" coords="12259,851,12500,1016"/>
+<area shape="rect" id="node123" href="$dc/d22/classBankable_1_1MIDIButtons.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="12524,829,12731,1038"/>
+<area shape="rect" id="node124" href="$da/d96/classBankable_1_1MIDIChordButton.html" title="An abstract class for momentary push buttons that send multiple MIDI events." alt="" coords="12755,829,12963,1038"/>
+<area shape="rect" id="node125" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title="A class for potentiometers and faders that send MIDI events and can be added to a Bank." alt="" coords="12988,821,13179,1045"/>
+<area shape="rect" id="node126" href="$d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="13203,807,13468,1060"/>
+<area shape="rect" id="node127" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title="A class for potentiometers and faders that send MIDI events." alt="" coords="13493,763,13703,1104"/>
+<area shape="rect" id="node128" href="$df/d5d/classGenericMIDIAbsoluteEncoder.html" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="13727,777,13963,1089"/>
+<area shape="rect" id="node131" href="$d0/d9e/classGenericMIDIRotaryEncoder.html" title="An abstract class for rotary encoders that send MIDI events." alt="" coords="13987,821,14209,1045"/>
+<area shape="rect" id="node134" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="14233,836,14387,1031"/>
+<area shape="rect" id="node136" href="$d6/d72/classMIDIButton.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="14411,836,14582,1031"/>
+<area shape="rect" id="node137" href="$d3/d88/classMIDIButtonLatched.html" title="A class for momentary buttons and switches that send MIDI events." alt="" coords="14606,799,14777,1067"/>
+<area shape="rect" id="node138" href="$d8/de1/classMIDIButtonLatching.html" title="A class for latching buttons and switches that send MIDI events." alt="" coords="14801,836,14976,1031"/>
+<area shape="rect" id="node139" href="$d0/d54/classMIDIButtonMatrix.html" title="MIDIButtonMatrix." alt="" coords="15001,821,15203,1045"/>
+<area shape="rect" id="node140" href="$d2/d87/classMIDIButtons.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="15228,807,15459,1060"/>
+<area shape="rect" id="node141" href="$dd/d29/classMIDIChordButton.html" title="An abstract class for momentary push buttons that send multiple MIDI events." alt="" coords="15483,814,15691,1053"/>
+<area shape="rect" id="node142" href="$d5/d8e/classMIDIFilteredAnalog.html" title="A class for potentiometers and faders that send MIDI events." alt="" coords="15715,807,15886,1060"/>
+<area shape="rect" id="node143" href="$dc/dc2/classMIDIIncrementDecrementButtons.html" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="15911,777,16176,1089"/>
+<area shape="rect" id="node144" href="$d4/de3/classVolumeControl.html" title="A class for controlling the volume of AudioMixer4 objects using a potentiometer." alt="" coords="16200,851,16359,1016"/>
+<area shape="rect" id="node2" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="8569,233,8773,545"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="8569,5,8773,185"/>
+<area shape="rect" id="node5" href="$d1/dd4/classBankable_1_1CCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="55,1218,163,1295"/>
+<area shape="rect" id="node7" href="$d0/de3/classBankable_1_1ManyAddresses_1_1CCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="229,1218,413,1295"/>
+<area shape="rect" id="node9" href="$d2/d33/classBankable_1_1ManyAddresses_1_1NoteButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="437,1218,634,1295"/>
+<area shape="rect" id="node11" href="$da/d97/classBankable_1_1ManyAddresses_1_1PCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="659,1218,841,1295"/>
+<area shape="rect" id="node13" href="$de/d36/classBankable_1_1NoteButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="865,1203,987,1310"/>
+<area shape="rect" id="node15" href="$d6/d5c/classBankable_1_1PCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1011,1218,1118,1295"/>
+<area shape="rect" id="node17" href="$d9/d1d/classBankable_1_1CCButtonLatched.html" title="A class of MIDIOutputElements that read the input of a momentary push button, and send out MIDI Contr..." alt="" coords="1142,1218,1377,1295"/>
+<area shape="rect" id="node19" href="$d2/dbf/classBankable_1_1NoteButtonLatched.html" title="A class of MIDIOutputElements that read the input of a momentary push button, and send out MIDI Note ..." alt="" coords="1401,1196,1573,1317"/>
+<area shape="rect" id="node21" href="$d9/df9/classBankable_1_1CCButtonLatching.html" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="1598,1218,1761,1295"/>
+<area shape="rect" id="node23" href="$d9/d3f/classBankable_1_1NoteButtonLatching.html" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="1785,1203,1961,1310"/>
+<area shape="rect" id="node25" href="$db/d2b/classBankable_1_1CCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1985,1211,2195,1303"/>
+<area shape="rect" id="node27" href="$d7/d2b/classBankable_1_1ManyAddresses_1_1CCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="2220,1211,2435,1303"/>
+<area shape="rect" id="node29" href="$d3/d39/classBankable_1_1ManyAddresses_1_1NoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="2459,1196,2687,1317"/>
+<area shape="rect" id="node31" href="$d2/d2b/classBankable_1_1NoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="2711,1196,2933,1317"/>
+<area shape="rect" id="node33" href="$d2/def/classBankable_1_1CCButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="2957,1218,3159,1295"/>
+<area shape="rect" id="node35" href="$d6/d5b/classBankable_1_1NoteButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="3183,1203,3397,1310"/>
+<area shape="rect" id="node37" href="$d8/d9d/classBankable_1_1NoteChordButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="3421,1203,3580,1310"/>
+<area shape="rect" id="node38" href="$d3/d3b/classNoteChordButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="3604,1203,3763,1310"/>
+<area shape="rect" id="node40" href="$d7/dc0/classBankable_1_1CCPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="3787,1218,3945,1295"/>
+<area shape="rect" id="node42" href="$d5/d71/classBankable_1_1ManyAddresses_1_1CCPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="3970,1218,4205,1295"/>
+<area shape="rect" id="node44" href="$d5/d7d/classBankable_1_1ManyAddresses_1_1PBPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="4229,1218,4463,1295"/>
+<area shape="rect" id="node46" href="$de/d8c/classBankable_1_1PBPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="4487,1218,4645,1295"/>
+<area shape="rect" id="node48" href="$d5/dec/classBankable_1_1CCIncrementDecrementButtons.html" title="A class of MIDIOutputElements that read the input of two momentary push buttons to increment or decre..." alt="" coords="4669,1218,4922,1295"/>
+<area shape="rect" id="node50" href="$dc/db3/classBankable_1_1ManyAddresses_1_1CCIncrementDecrementButtons.html" title="A class of MIDIOutputElements that read the input of two momentary push buttons to increment or decre..." alt="" coords="4946,1211,5199,1303"/>
+<area shape="rect" id="node52" href="$d3/dfe/classBankable_1_1CCSmartPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="5223,1211,5421,1303"/>
+<area shape="rect" id="node54" href="$d7/d22/classBankable_1_1PBSmartPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="5445,1211,5641,1303"/>
+<area shape="rect" id="node56" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="5666,1152,5869,1361"/>
+<area shape="rect" id="node58" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="5893,1167,6197,1347"/>
+<area shape="rect" id="node60" href="$d1/d94/classGenericIncrementSelector.html" title=" " alt="" coords="6221,1181,6471,1332"/>
+<area shape="rect" id="node62" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="6495,1189,6746,1325"/>
+<area shape="rect" id="node64" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="6771,1189,7025,1325"/>
+<area shape="rect" id="node57" href="$d8/df7/classEncoderSelectorLEDs.html" title="Selector that reads from a rotary encoder. This version displays the setting using LEDs." alt="" coords="5668,1424,5867,1501"/>
+<area shape="rect" id="node59" href="$d5/d2d/classIncrementDecrementSelectorLEDs.html" title="Selector with two buttons (one to increment, one to decrement). This version displays the setting usi..." alt="" coords="5931,1409,6159,1516"/>
+<area shape="rect" id="node61" href="$dc/df8/classIncrementSelectorLEDs.html" title="Selector with one button that increments the selection. This version displays the setting using LEDs." alt="" coords="6239,1424,6453,1501"/>
+<area shape="rect" id="node63" href="$d0/d68/classManyButtonsSelectorLEDs.html" title="Selector that reads from &#160;buttons. This version displays the setting using LEDs." alt="" coords="6504,1424,6737,1501"/>
+<area shape="rect" id="node65" href="$d9/dee/classProgramChangeSelectorLEDs.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="6773,1424,7023,1501"/>
+<area shape="rect" id="node67" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="7050,1159,7253,1354"/>
+<area shape="rect" id="node69" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="7277,1167,7503,1347"/>
+<area shape="rect" id="node71" href="$d1/d94/classGenericIncrementSelector.html" title=" " alt="" coords="7527,1181,7743,1332"/>
+<area shape="rect" id="node73" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="7768,1189,8004,1325"/>
+<area shape="rect" id="node75" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="8028,1189,8283,1325"/>
+<area shape="rect" id="node68" href="$d3/dc5/classEncoderSelector.html" title="Selector that reads from a rotary encoder." alt="" coords="7068,1424,7235,1501"/>
+<area shape="rect" id="node70" href="$d2/deb/classIncrementDecrementSelector.html" title="Selector with two buttons (one to increment, one to decrement)." alt="" coords="7263,1424,7517,1501"/>
+<area shape="rect" id="node72" href="$dc/d4c/classIncrementSelector.html" title="Selector with one button that increments the selection." alt="" coords="7545,1417,7726,1509"/>
+<area shape="rect" id="node74" href="$d3/d69/classManyButtonsSelector.html" title="Selector that reads from &#160;buttons." alt="" coords="7785,1424,7987,1501"/>
+<area shape="rect" id="node76" href="$dd/dd4/classProgramChangeSelector.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="8046,1424,8265,1501"/>
+<area shape="rect" id="node78" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="8307,1181,8500,1332"/>
+<area shape="rect" id="node79" href="$df/def/classSwitchSelector.html" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch." alt="" coords="8332,1424,8475,1501"/>
+<area shape="rect" id="node81" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="8525,1181,8751,1332"/>
+<area shape="rect" id="node82" href="$df/d64/classSwitchSelectorLED.html" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch...." alt="" coords="8554,1424,8722,1501"/>
+<area shape="rect" id="node84" href="$d2/daa/classCCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="8776,1218,8884,1295"/>
+<area shape="rect" id="node86" href="$d1/d9f/classNoteButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="8908,1203,9029,1310"/>
+<area shape="rect" id="node88" href="$dd/d3d/classPCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="9054,1218,9161,1295"/>
+<area shape="rect" id="node90" href="$d5/da6/classCCButtonLatched.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="9185,1218,9344,1295"/>
+<area shape="rect" id="node92" href="$de/def/classNoteButtonLatched.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="9368,1203,9540,1310"/>
+<area shape="rect" id="node94" href="$d8/db0/classCCButtonLatching.html" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="9565,1218,9727,1295"/>
+<area shape="rect" id="node96" href="$d3/d6c/classNoteButtonLatching.html" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="9751,1203,9927,1310"/>
+<area shape="rect" id="node98" href="$d3/d2a/classCCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="9951,1211,10162,1303"/>
+<area shape="rect" id="node100" href="$d2/daf/classNoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="10185,1196,10408,1317"/>
+<area shape="rect" id="node102" href="$d0/dd3/classCCButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="10432,1218,10633,1295"/>
+<area shape="rect" id="node104" href="$d1/dbd/classNoteButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="10657,1203,10872,1310"/>
+<area shape="rect" id="node106" href="$db/d32/classCCPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="10896,1218,11055,1295"/>
+<area shape="rect" id="node108" href="$da/d6a/classPBPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="11079,1218,11237,1295"/>
+<area shape="rect" id="node110" href="$d3/d60/classCCIncrementDecrementButtons.html" title="A class of MIDIOutputElements that read the input of two momentary push buttons to increment or decre..." alt="" coords="11261,1218,11514,1295"/>
+<area shape="rect" id="node112" href="$d7/d2c/classBankable_1_1CCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="11539,1211,11713,1303"/>
+<area shape="rect" id="node113" href="$da/d5c/classBankable_1_1ManyAddresses_1_1CCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="11737,1211,11912,1303"/>
+<area shape="rect" id="node114" href="$d5/dd6/classBankable_1_1ManyAddresses_1_1PBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="11937,1211,12110,1303"/>
+<area shape="rect" id="node115" href="$d1/d38/classBankable_1_1PBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="12134,1211,12307,1303"/>
+<area shape="rect" id="node117" href="$da/d40/classBankable_1_1CCRotaryEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="12332,1211,12579,1303"/>
+<area shape="rect" id="node118" href="$d4/da8/classBankable_1_1ManyAddresses_1_1CCRotaryEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="12603,1218,12839,1295"/>
+<area shape="rect" id="node129" href="$d8/d2f/classCCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="13544,1211,13721,1303"/>
+<area shape="rect" id="node130" href="$d7/d70/classPBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="13746,1211,13943,1303"/>
+<area shape="rect" id="node132" href="$d5/d7d/classBorrowedCCRotaryEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="13968,1211,14191,1303"/>
+<area shape="rect" id="node133" href="$d3/d62/classCCRotaryEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="14215,1211,14419,1303"/>
+<area shape="rect" id="node135" href="$d1/d54/classSelector.html" title="A Selector with an empty callback." alt="" coords="14443,1218,14558,1295"/>
+</map>

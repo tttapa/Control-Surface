@@ -1,0 +1,9 @@
+<map id="midi.h" name="midi.h">
+<area shape="rect" id="Node000001" title="Public MIDI over Bluetooth Low Energy API." alt="" coords="118,5,181,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,88,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,33,76,73,73,68,131,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="112,79,187,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,31,152,65,147,65,147,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="211,79,282,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="167,29,221,68,218,72,163,33"/>
+</map>

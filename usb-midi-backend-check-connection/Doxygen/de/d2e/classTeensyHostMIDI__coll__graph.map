@@ -1,0 +1,24 @@
+<map id="TeensyHostMIDI&lt; MaxPacketSize &gt;" name="TeensyHostMIDI&lt; MaxPacketSize &gt;">
+<area shape="rect" id="Node000001" title="Teensy USB Host MIDI driver." alt="" coords="161,1189,365,2064"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="61,807,142,873"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,886,157,1139,167,1188,162,1190,152,1141,106,887"/>
+<area shape="rect" id="Node000003" href="$d5/d1c/structBulkRX.html" title="Receives Bulk packets (OUT for device mode, IN for host mode)" alt="" coords="166,690,359,990"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="265,1004,265,1189,260,1189,260,1004"/>
+<area shape="rect" id="Node000004" href="$d2/da9/structBulkRX_1_1Reading.html" title="State for reading incoming USB data." alt="" coords="175,392,281,477"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="234,477,251,673,246,674,229,478"/>
+<area shape="rect" id="Node000005" href="$de/dc6/structBulkRX_1_1Reading_1_1Buffer.html" title=" " alt="" coords="5,93,72,198"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="53,198,67,241,86,284,122,335,165,379,161,383,118,339,82,287,62,243,48,199"/>
+<area shape="rect" id="Node000006" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="333,13,547,278"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="360,280,294,370,284,382,280,378,290,366,356,277"/>
+<area shape="rect" id="Node000009" href="$d4/d25/structBulkTX_1_1Writing.html" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="485,402,590,467"/>
+<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="474,277,504,367,513,386,508,389,499,369,469,279"/>
+<area shape="rect" id="Node000007" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="96,13,309,278"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="217,278,226,375,220,376,212,278"/>
+<area shape="rect" id="Node000008" href="$dc/d2d/structBulkTX.html" title="Sends Bulk packets (IN for device mode, OUT for host mode)" alt="" coords="387,540,579,1140"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="398,1154,367,1262,362,1261,392,1153"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="536,468,528,524,523,523,530,467"/>
+<area shape="rect" id="Node000010" href="$d1/db2/structBulkTX_1_1Writing_1_1Buffer.html" title=" " alt="" coords="571,103,637,188"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="597,189,551,386,546,385,592,188"/>
+<area shape="rect" id="Node000011" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="661,5,875,285"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="696,287,666,330,633,370,605,394,602,390,629,366,662,327,692,284"/>
+</map>

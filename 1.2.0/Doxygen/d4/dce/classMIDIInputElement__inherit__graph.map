@@ -1,0 +1,127 @@
+<map id="MIDIInputElement" name="MIDIInputElement">
+<area shape="rect" id="node1" title="A class for objects that listen for incoming MIDI events." alt="" coords="7649,5,7823,215"/>
+<area shape="rect" id="node2" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="2927,277,3121,443"/>
+<area shape="rect" id="node63" href="$d1/df7/classMIDIInputElementChannelPressure.html" title="Class for objects that listen for incoming MIDI Channel Pressure events." alt="" coords="6366,263,6639,457"/>
+<area shape="rect" id="node79" href="$db/d4b/classMIDIInputElementNote.html" title="Class for objects that listen for incoming MIDI Note events." alt="" coords="8763,277,8970,443"/>
+<area shape="rect" id="node120" href="$db/d1d/classMIDIInputElementPC.html" title="Class for objects that listen for incoming MIDI Program Change events." alt="" coords="10879,270,11071,450"/>
+<area shape="rect" id="node3" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="5,564,200,803"/>
+<area shape="rect" id="node4" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="224,579,437,788"/>
+<area shape="rect" id="node5" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="462,542,754,825"/>
+<area shape="rect" id="node10" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="778,549,1041,817"/>
+<area shape="rect" id="node13" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="1065,542,1309,825"/>
+<area shape="rect" id="node16" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="1333,542,1621,825"/>
+<area shape="rect" id="node19" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="1645,549,1941,817"/>
+<area shape="rect" id="node22" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="1966,542,2210,825"/>
+<area shape="rect" id="node25" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="2234,542,2513,825"/>
+<area shape="rect" id="node30" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="2537,549,2863,817"/>
+<area shape="rect" id="node33" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="2887,542,3161,825"/>
+<area shape="rect" id="node36" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="3185,542,3479,825"/>
+<area shape="rect" id="node39" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="3503,549,3862,817"/>
+<area shape="rect" id="node42" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="3887,542,4193,825"/>
+<area shape="rect" id="node45" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="4218,564,4441,803"/>
+<area shape="rect" id="node47" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="4465,564,4660,803"/>
+<area shape="rect" id="node49" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="4685,579,4907,788"/>
+<area shape="rect" id="node53" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="4931,579,5141,788"/>
+<area shape="rect" id="node56" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="5173,579,5384,788"/>
+<area shape="rect" id="node60" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="5497,579,5708,788"/>
+<area shape="rect" id="node6" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="286,946,485,1082"/>
+<area shape="rect" id="node8" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="509,946,763,1082"/>
+<area shape="rect" id="node7" href="$de/d6f/classCCValueFastLED.html" title=" " alt="" coords="265,1196,505,1303"/>
+<area shape="rect" id="node9" href="$d7/dee/classCCRangeFastLED.html" title=" " alt="" coords="530,1174,745,1325"/>
+<area shape="rect" id="node11" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="816,953,1003,1075"/>
+<area shape="rect" id="node12" href="$da/d34/classCCValueLED.html" title="MIDI Input Element that listens for MIDI Control Change messages for the given controller,..." alt="" coords="846,1211,973,1288"/>
+<area shape="rect" id="node14" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="1093,946,1280,1082"/>
+<area shape="rect" id="node15" href="$d0/d8d/classCCRangeLEDs.html" title="MIDI Input Element that listens for MIDI Control Change messages in a given range,..." alt="" coords="1083,1211,1290,1288"/>
+<area shape="rect" id="node17" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="1380,946,1575,1082"/>
+<area shape="rect" id="node18" href="$dd/dd0/classCCLEDBar.html" title="Class that listens for Control Change events and displays the velocity on an LED Bar Graph." alt="" coords="1387,1189,1567,1310"/>
+<area shape="rect" id="node20" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="1692,953,1895,1075"/>
+<area shape="rect" id="node21" href="$d4/dd8/classCCValueLEDPWM.html" title="MIDI Input Element that listens for MIDI Control Change messages for the given controller,..." alt="" coords="1714,1211,1873,1288"/>
+<area shape="rect" id="node23" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="1959,946,2164,1082"/>
+<area shape="rect" id="node24" href="$df/d1c/classCCRangeLEDsPWM.html" title="MIDI Input Element that listens for MIDI Control Change messages in a given range,..." alt="" coords="1941,1211,2181,1288"/>
+<area shape="rect" id="node26" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="2188,917,2455,1111"/>
+<area shape="rect" id="node28" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="2479,909,2678,1119"/>
+<area shape="rect" id="node27" href="$dc/d55/classBankable_1_1CCValueFastLED.html" title=" " alt="" coords="2218,1189,2425,1310"/>
+<area shape="rect" id="node29" href="$d6/dc3/classBankable_1_1CCRangeFastLED.html" title=" " alt="" coords="2470,1174,2685,1325"/>
+<area shape="rect" id="node31" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="2707,917,2893,1111"/>
+<area shape="rect" id="node32" href="$d3/dca/classBankable_1_1CCValueLED.html" title=" " alt="" coords="2709,1211,2899,1288"/>
+<area shape="rect" id="node34" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="2919,917,3129,1111"/>
+<area shape="rect" id="node35" href="$dd/ddf/classBankable_1_1CCRangeLEDs.html" title=" " alt="" coords="2926,1203,3122,1295"/>
+<area shape="rect" id="node37" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="3201,917,3463,1111"/>
+<area shape="rect" id="node38" href="$de/d55/classBankable_1_1CCLEDBar.html" title="Class that listens for Control Change events and displays the velocity on an LED Bar Graph." alt="" coords="3249,1181,3415,1317"/>
+<area shape="rect" id="node40" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="3574,917,3791,1111"/>
+<area shape="rect" id="node41" href="$d6/db4/classBankable_1_1CCValueLEDPWM.html" title=" " alt="" coords="3571,1211,3795,1288"/>
+<area shape="rect" id="node43" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="3893,917,4136,1111"/>
+<area shape="rect" id="node44" href="$d1/d81/classBankable_1_1CCRangeLEDsPWM.html" title=" " alt="" coords="3900,1203,4129,1295"/>
+<area shape="rect" id="node46" href="$d1/d08/classMCU_1_1AssignmentDisplay.html" title=" " alt="" coords="4160,975,4333,1053"/>
+<area shape="rect" id="node48" href="$df/d69/classMCU_1_1TimeDisplay.html" title=" " alt="" coords="4358,946,4487,1082"/>
+<area shape="rect" id="node50" href="$df/dc2/classMCU_1_1GenericVPotRing.html" title=" " alt="" coords="4511,975,4667,1053"/>
+<area shape="rect" id="node52" href="$df/dc2/classMCU_1_1GenericVPotRing.html" title="A class for MIDI input elements that represent Mackie Control Universal V&#45;Pots." alt="" coords="4691,975,4909,1053"/>
+<area shape="rect" id="node51" href="$d5/ddb/classMCU_1_1VPotRing.html" title="A class for MIDI input elements that represent Mackie Control Universal V&#45;Pots." alt="" coords="4536,1211,4643,1288"/>
+<area shape="rect" id="node54" href="$df/dc2/classMCU_1_1GenericVPotRing.html" title=" " alt="" coords="4933,968,5139,1060"/>
+<area shape="rect" id="node55" href="$d6/d0d/classMCU_1_1VPotRingLEDs.html" title=" " alt="" coords="4967,1211,5105,1288"/>
+<area shape="rect" id="node57" href="$d5/d07/classMCU_1_1Bankable_1_1GenericVPotRing.html" title=" " alt="" coords="5163,946,5395,1082"/>
+<area shape="rect" id="node59" href="$d5/d07/classMCU_1_1Bankable_1_1GenericVPotRing.html" title="A class for MIDI input elements that represent Mackie Control Universal V&#45;Pots." alt="" coords="5419,939,5640,1089"/>
+<area shape="rect" id="node58" href="$da/d93/classMCU_1_1Bankable_1_1VPotRing.html" title="A class for MIDI input elements that represent Mackie Control Universal V&#45;Pots." alt="" coords="5187,1211,5370,1288"/>
+<area shape="rect" id="node61" href="$d5/d07/classMCU_1_1Bankable_1_1GenericVPotRing.html" title=" " alt="" coords="5664,939,5885,1089"/>
+<area shape="rect" id="node62" href="$d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html" title=" " alt="" coords="5667,1211,5882,1288"/>
+<area shape="rect" id="node64" href="$d4/d71/classMCU_1_1VU__Base.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="5820,505,5993,861"/>
+<area shape="rect" id="node65" href="$d4/d71/classMCU_1_1VU__Base.html" title=" " alt="" coords="6017,513,6260,854"/>
+<area shape="rect" id="node69" href="$d4/d71/classMCU_1_1VU__Base.html" title=" " alt="" coords="6284,505,6503,861"/>
+<area shape="rect" id="node72" href="$d4/d71/classMCU_1_1VU__Base.html" title=" " alt="" coords="6527,505,6697,861"/>
+<area shape="rect" id="node76" href="$d4/d71/classMCU_1_1VU__Base.html" title=" " alt="" coords="6822,505,7063,861"/>
+<area shape="rect" id="node66" href="$dd/de4/classMCU_1_1GenericVU.html" title=" " alt="" coords="5910,975,6026,1053"/>
+<area shape="rect" id="node68" href="$dd/de4/classMCU_1_1GenericVU.html" title="A class for MIDI input elements that represent Mackie Control Universal VU meters." alt="" coords="6050,975,6227,1053"/>
+<area shape="rect" id="node67" href="$d8/d4c/classMCU_1_1VU.html" title="A class for MIDI input elements that represent Mackie Control Universal VU meters." alt="" coords="5935,1203,6001,1295"/>
+<area shape="rect" id="node70" href="$dd/de4/classMCU_1_1GenericVU.html" title=" " alt="" coords="6252,968,6465,1060"/>
+<area shape="rect" id="node71" href="$df/d36/classMCU_1_1VULEDs.html" title=" " alt="" coords="6275,1167,6442,1332"/>
+<area shape="rect" id="node73" href="$db/d5e/classMCU_1_1Bankable_1_1GenericVU.html" title=" " alt="" coords="6489,946,6681,1082"/>
+<area shape="rect" id="node75" href="$db/d5e/classMCU_1_1Bankable_1_1GenericVU.html" title="A class for MIDI input elements that represent Mackie Control Universal VU meters." alt="" coords="6706,939,6891,1089"/>
+<area shape="rect" id="node74" href="$d0/d43/classMCU_1_1Bankable_1_1VU.html" title="A class for MIDI input elements that represent Mackie Control Universal VU meters." alt="" coords="6514,1203,6657,1295"/>
+<area shape="rect" id="node77" href="$db/d5e/classMCU_1_1Bankable_1_1GenericVU.html" title=" " alt="" coords="6915,939,7157,1089"/>
+<area shape="rect" id="node78" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title=" " alt="" coords="6884,1167,7129,1332"/>
+<area shape="rect" id="node80" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="7182,542,7487,825"/>
+<area shape="rect" id="node85" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="7511,549,7787,817"/>
+<area shape="rect" id="node88" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="7811,542,8055,825"/>
+<area shape="rect" id="node91" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="8080,542,8381,825"/>
+<area shape="rect" id="node94" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="8405,549,8715,817"/>
+<area shape="rect" id="node97" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="8739,542,8995,825"/>
+<area shape="rect" id="node100" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="9019,535,9298,832"/>
+<area shape="rect" id="node105" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="9322,542,9566,825"/>
+<area shape="rect" id="node108" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="9590,542,9834,825"/>
+<area shape="rect" id="node111" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="9858,542,10145,825"/>
+<area shape="rect" id="node114" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="10169,542,10413,825"/>
+<area shape="rect" id="node117" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="10437,542,10681,825"/>
+<area shape="rect" id="node81" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="7181,946,7379,1082"/>
+<area shape="rect" id="node83" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="7403,946,7658,1082"/>
+<area shape="rect" id="node82" href="$d8/d0d/classNoteValueFastLED.html" title=" " alt="" coords="7153,1196,7407,1303"/>
+<area shape="rect" id="node84" href="$d8/d73/classNoteRangeFastLED.html" title="MIDI Input Element that listens for MIDI Note messages in a given range, and displays their values us..." alt="" coords="7431,1174,7659,1325"/>
+<area shape="rect" id="node86" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="7683,953,7872,1075"/>
+<area shape="rect" id="node87" href="$d3/dd5/classNoteValueLED.html" title="MIDI Input Element that listens for MIDI Note messages for the given note, and displays its value by ..." alt="" coords="7708,1211,7847,1288"/>
+<area shape="rect" id="node89" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="7896,946,8085,1082"/>
+<area shape="rect" id="node90" href="$de/db8/classNoteRangeLEDs.html" title="MIDI Input Element that listens for MIDI Note messages in a given range, and displays their values by..." alt="" coords="7881,1211,8101,1288"/>
+<area shape="rect" id="node92" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="8128,946,8323,1082"/>
+<area shape="rect" id="node93" href="$d9/dac/classNoteLEDBar.html" title="Class that listens for Note events and displays the velocity on an LED Bar Graph." alt="" coords="8129,1189,8322,1310"/>
+<area shape="rect" id="node95" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="8347,953,8549,1075"/>
+<area shape="rect" id="node96" href="$dc/d69/classNoteValueLEDPWM.html" title="MIDI Input Element that listens for MIDI Note messages for the given note, and displays its velocity ..." alt="" coords="8353,1211,8525,1288"/>
+<area shape="rect" id="node98" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="8573,946,8779,1082"/>
+<area shape="rect" id="node99" href="$dd/d35/classNoteRangeLEDsPWM.html" title="MIDI Input Element that listens for MIDI Note messages in a given range, and displays their velocity ..." alt="" coords="8549,1211,8803,1288"/>
+<area shape="rect" id="node101" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="8803,917,9069,1111"/>
+<area shape="rect" id="node103" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="9094,917,9373,1111"/>
+<area shape="rect" id="node102" href="$d3/dca/classBankable_1_1NoteValueFastLED.html" title=" " alt="" coords="8827,1189,9045,1310"/>
+<area shape="rect" id="node104" href="$d5/d2a/classBankable_1_1NoteRangeFastLED.html" title=" " alt="" coords="9119,1174,9347,1325"/>
+<area shape="rect" id="node106" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="9397,917,9587,1111"/>
+<area shape="rect" id="node107" href="$d4/d3c/classBankable_1_1NoteValueLED.html" title=" " alt="" coords="9390,1211,9594,1288"/>
+<area shape="rect" id="node109" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="9611,917,9851,1111"/>
+<area shape="rect" id="node110" href="$d0/d61/classBankable_1_1NoteRangeLEDs.html" title=" " alt="" coords="9626,1203,9835,1295"/>
+<area shape="rect" id="node112" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="9875,917,10138,1111"/>
+<area shape="rect" id="node113" href="$d8/d99/classBankable_1_1NoteLEDBar.html" title="Class that listens for Note events and displays the velocity on an LED Bar Graph." alt="" coords="9917,1181,10096,1317"/>
+<area shape="rect" id="node115" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="10181,917,10398,1111"/>
+<area shape="rect" id="node116" href="$d2/d2b/classBankable_1_1NoteValueLEDPWM.html" title=" " alt="" coords="10171,1211,10408,1288"/>
+<area shape="rect" id="node118" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="10422,917,10695,1111"/>
+<area shape="rect" id="node119" href="$d7/d9a/classBankable_1_1NoteRangeLEDsPWM.html" title=" " alt="" coords="10437,1203,10680,1295"/>
+<area shape="rect" id="node121" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="10705,615,10959,751"/>
+<area shape="rect" id="node122" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="10984,623,11253,744"/>
+<area shape="rect" id="node124" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="11278,615,11533,751"/>
+<area shape="rect" id="node123" href="$dd/dd4/classProgramChangeSelector.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="11009,975,11228,1053"/>
+<area shape="rect" id="node125" href="$d9/dee/classProgramChangeSelectorLEDs.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="11280,975,11531,1053"/>
+</map>

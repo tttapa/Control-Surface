@@ -1,0 +1,28 @@
+<map id="MIDIReadEvent.hpp" name="MIDIReadEvent.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="745,5,896,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="611,79,681,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="794,33,688,76,686,71,792,28"/>
+<area shape="rect" id="Node000003" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="705,79,936,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="823,31,823,65,818,65,818,31"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="858,152,1095,177"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="868,28,911,47,932,60,951,77,968,106,976,137,971,138,963,109,947,80,929,64,909,51,866,33"/>
+<area shape="rect" id="Node000004" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="524,299,784,324"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="814,106,673,289,669,286,810,103"/>
+<area shape="rect" id="Node000005" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="392,372,583,397"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="826,104,834,145,837,204,835,237,828,269,816,299,797,326,784,336,765,346,716,360,657,371,597,378,596,373,656,366,714,355,763,341,781,332,793,322,811,297,823,267,830,236,832,204,828,146,821,105"/>
+<area shape="rect" id="Node000006" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="179,152,345,177"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="731,107,359,154,358,148,731,101"/>
+<area shape="poly" id="edge14_Node000003_Node000011" title=" " alt="" coords="847,102,940,144,938,149,845,106"/>
+<area shape="rect" id="Node000007" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="322,225,503,251"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="287,175,377,217,374,222,285,180"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="215,372,299,397"/>
+<area shape="poly" id="edge13_Node000006_Node000009" title=" " alt="" coords="255,179,238,205,221,241,210,282,210,303,214,323,224,343,237,360,233,363,219,346,209,325,204,303,205,281,216,239,234,202,251,176"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="5,225,148,251"/>
+<area shape="poly" id="edge12_Node000006_Node000010" title=" " alt="" coords="233,180,120,223,119,218,231,175"/>
+<area shape="poly" id="edge11_Node000007_Node000004" title=" " alt="" coords="452,248,602,292,601,297,451,253"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="427,249,446,270,464,297,477,328,485,358,480,359,472,330,460,300,442,274,423,253"/>
+<area shape="rect" id="Node000008" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="223,299,450,324"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="402,253,361,291,357,287,399,249"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="362,322,451,364,449,368,360,326"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="326,326,282,365,278,361,322,322"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="ManyButtonsSelectorLEDs&lt; N &gt;" name="ManyButtonsSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that reads from &#160;buttons. This version displays the setting using LEDs." alt="" coords="77,1359,310,1436"/>
+<area shape="rect" id="node2" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="68,1173,319,1309"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="209,806,375,1015"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="219,461,351,553"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="375,446,502,567"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="515,5,719,317"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="663,446,897,567"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="795,828,999,993"/>
+<area shape="rect" id="node9" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="518,711,733,1111"/>
+<area shape="rect" id="node10" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="10,799,185,1023"/>
+<area shape="rect" id="node11" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="5,380,189,633"/>
+<area shape="rect" id="node12" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="24,93,171,229"/>
+</map>

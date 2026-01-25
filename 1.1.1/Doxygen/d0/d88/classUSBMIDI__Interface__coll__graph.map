@@ -1,0 +1,11 @@
+<map id="USBMIDI_Interface" name="USBMIDI_Interface">
+<area shape="rect" id="node1" title="A class for MIDI interfaces sending MIDI messages over a USB MIDI connection." alt="" coords="303,1129,461,1324"/>
+<area shape="rect" id="node2" href="$de/d76/classParsing__MIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="370,799,549,1067"/>
+<area shape="rect" id="node3" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="567,263,704,736"/>
+<area shape="rect" id="node4" href="$df/d0c/classMIDI__Parser.html" title=" " alt="" coords="196,417,357,582"/>
+<area shape="rect" id="node7" href="$db/db0/classUSBMIDI__Parser.html" title=" " alt="" coords="211,850,343,1015"/>
+<area shape="rect" id="node5" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="215,35,338,171"/>
+<area shape="rect" id="node6" href="$de/d55/classMIDI__Callbacks.html" title="A class for callbacks from MIDI input." alt="" coords="381,439,543,560"/>
+<area shape="rect" id="node8" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="5,387,172,611"/>
+<area shape="rect" id="node9" href="$d1/db1/classSysExBuffer.html" title=" " alt="" coords="27,5,150,200"/>
+</map>

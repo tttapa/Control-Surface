@@ -1,0 +1,7 @@
+<map id="MatrixAddress&lt; nb_rows, nb_cols &gt;" name="MatrixAddress&lt; nb_rows, nb_cols &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="152,661,323,783"/>
+<area shape="rect" id="node2" href="$d3/d43/classBankableMIDIOutput.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="23,455,187,562"/>
+<area shape="rect" id="node3" href="$d4/d6e/classBankableMIDIOutput__Base.html" title=" " alt="" coords="5,219,205,369"/>
+<area shape="rect" id="node4" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="30,5,181,156"/>
+<area shape="rect" id="node5" href="$df/d9b/classMIDICNChannel.html" title="A class for saving a MIDI channel and cable number." alt="" coords="211,419,351,599"/>
+</map>

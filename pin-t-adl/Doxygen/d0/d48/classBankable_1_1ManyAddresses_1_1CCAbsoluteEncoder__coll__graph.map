@@ -1,0 +1,17 @@
+<map id="CCAbsoluteEncoder&lt; NumBanks &gt;" name="CCAbsoluteEncoder&lt; NumBanks &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="329,1820,495,1900"/>
+<area shape="rect" id="Node000002" href="$df/db5/classBankable_1_1GenericMIDIAbsoluteEncoder.html" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="275,1376,549,1771"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="415,1784,415,1820,409,1820,409,1784"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="143,1088,286,1213"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="252,1225,322,1375,317,1377,247,1227"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="117,573,312,939"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="217,953,217,1088,212,1088,212,953"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="129,363,176,572,171,574,124,364"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="273,512,262,558,257,557,268,510"/>
+<area shape="rect" id="Node000007" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="311,988,513,1313"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="415,1314,415,1360,409,1360,409,1314"/>
+<area shape="rect" id="Node000008" href="$db/dd2/classEncoderState.html" title=" " alt="" coords="537,1051,708,1251"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="575,1252,520,1362,515,1360,571,1250"/>
+</map>

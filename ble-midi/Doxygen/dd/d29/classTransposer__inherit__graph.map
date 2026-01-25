@@ -1,0 +1,9 @@
+<map id="Transposer&lt; MinTransposition, MaxTransposition &gt;" name="Transposer&lt; MinTransposition, MaxTransposition &gt;">
+<area shape="rect" id="Node000001" title="Class for transposing the address of NoteButton and other MIDI elements." alt="" coords="87,487,301,647"/>
+<area shape="rect" id="Node000002" href="$db/dbd/classBank.html" title=" " alt="" coords="106,279,282,439"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,452,197,486,191,486,191,452"/>
+<area shape="rect" id="Node000003" href="$de/de7/classSelectable.html" title=" " alt="" coords="5,45,188,191"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="133,202,164,277,159,280,129,204"/>
+<area shape="rect" id="Node000004" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="213,5,373,231"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="244,244,229,280,224,278,239,242"/>
+</map>

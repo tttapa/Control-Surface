@@ -1,0 +1,5 @@
+<map id="Button" name="Button">
+<area shape="rect" id="Node000001" title="A class for reading and debouncing buttons and switches." alt="" coords="5,213,181,519"/>
+<area shape="rect" id="Node000002" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="24,5,163,151"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,151,96,197,91,197,91,151"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="BLERingBuf&lt; Capacity, SizeT &gt;" name="BLERingBuf&lt; Capacity, SizeT &gt;">
+<area shape="rect" id="Node000001" title="Circular FIFO buffer for buffering BLE packet data." alt="" coords="16,208,181,428"/>
+<area shape="rect" id="Node000002" href="$d6/d93/structNonatomicBLERingBufSize.html" title=" " alt="" coords="5,5,192,145"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,145,101,191,96,191,96,145"/>
+</map>

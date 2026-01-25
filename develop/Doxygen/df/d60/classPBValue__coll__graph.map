@@ -1,0 +1,11 @@
+<map id="PBValue" name="PBValue">
+<area shape="rect" id="node1" title="Class that listens for MIDI Pitch Bend events on a single address and saves their value." alt="" coords="357,1315,496,1436"/>
+<area shape="rect" id="node2" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="211,1129,448,1265"/>
+<area shape="rect" id="node3" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="121,857,319,1067"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="120,483,320,795"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,123,205,303"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,5,440,420"/>
+<area shape="rect" id="node7" href="$d7/d37/structPitchBendMIDIMatcher.html" title="Matcher for MIDI Pitch Bend messages. Matches a single address." alt="" coords="344,916,539,1008"/>
+<area shape="rect" id="node8" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="351,512,532,765"/>
+<area shape="rect" id="node9" href="$dd/d7f/classInterfaces_1_1IValue14.html" title="Abstract interface for MIDI input elements that receive and store a 14&#45;bit value." alt="" coords="472,1144,579,1251"/>
+</map>

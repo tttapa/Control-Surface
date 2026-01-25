@@ -1,0 +1,34 @@
+<map id="Quaternion.hpp" name="Quaternion.hpp">
+<area shape="rect" id="Node000001" title="Definition of Quaternion and EulerAngles." alt="" coords="662,5,785,31"/>
+<area shape="rect" id="Node000002" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="524,372,715,397"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="748,28,783,49,820,79,850,117,859,139,862,163,862,240,858,267,847,290,830,311,808,328,757,354,703,371,702,366,755,349,806,323,826,307,842,287,853,265,857,239,857,164,854,141,845,120,816,82,780,53,746,33"/>
+<area shape="rect" id="Node000003" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="278,152,443,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="691,33,560,81,400,149,398,144,558,76,689,28"/>
+<area shape="rect" id="Node000009" href="$de/d79/Degrees_8hpp.html" title="Conversions between radians and degrees." alt="" coords="468,152,632,177"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="668,33,622,51,600,64,581,80,564,109,556,139,550,138,559,107,577,77,597,60,620,46,666,28"/>
+<area shape="rect" id="Node000010" href="$de/dd9/Vector_8hpp.html" title="Definition of Vec2f and Vec3f." alt="" coords="592,79,743,104"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="716,33,687,69,683,66,712,29"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="708,152,821,177"/>
+<area shape="poly" id="edge19_Node000001_Node000011" title=" " alt="" coords="734,30,747,51,758,78,764,109,767,137,762,138,759,109,753,79,742,54,729,32"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="897,79,1006,104"/>
+<area shape="poly" id="edge20_Node000001_Node000012" title=" " alt="" coords="761,28,902,72,900,77,759,33"/>
+<area shape="rect" id="Node000004" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="173,225,354,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="347,180,292,219,289,215,344,175"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="19,372,103,397"/>
+<area shape="poly" id="edge10_Node000003_Node000006" title=" " alt="" coords="278,173,209,184,134,207,98,223,65,244,36,270,12,300,8,315,13,331,23,347,36,361,32,364,19,350,8,333,3,315,8,297,32,266,62,240,96,219,132,202,208,179,277,168"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="379,225,521,251"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="377,175,426,214,423,219,373,179"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="269,250,283,286,295,306,312,322,345,337,394,351,511,370,510,375,393,356,343,342,309,326,291,309,278,289,264,252"/>
+<area shape="rect" id="Node000005" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="22,299,249,324"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="244,253,170,294,167,289,242,248"/>
+<area shape="rect" id="Node000007" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="323,299,583,324"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="295,248,410,291,408,296,293,253"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="214,321,528,367,527,373,213,327"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="125,326,85,364,81,361,122,322"/>
+<area shape="poly" id="edge14_Node000009_Node000002" title=" " alt="" coords="557,177,597,298,615,358,610,359,591,299,552,179"/>
+<area shape="poly" id="edge13_Node000009_Node000007" title=" " alt="" coords="553,178,549,212,544,233,535,252,514,276,490,294,487,289,511,272,530,249,539,231,544,211,548,177"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="536,180,479,219,476,215,532,175"/>
+<area shape="poly" id="edge16_Node000010_Node000002" title=" " alt="" coords="668,104,626,359,621,358,663,104"/>
+<area shape="poly" id="edge17_Node000010_Node000003" title=" " alt="" coords="619,107,424,151,423,146,618,101"/>
+<area shape="poly" id="edge18_Node000010_Node000011" title=" " alt="" coords="685,102,739,141,736,146,681,106"/>
+</map>

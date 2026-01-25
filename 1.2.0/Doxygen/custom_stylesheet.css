@@ -1,0 +1,236 @@
+img.xbm {
+    image-rendering:optimizeSpeed;             /* Legal fallback */
+    image-rendering:-moz-crisp-edges;          /* Firefox        */
+    image-rendering:-o-crisp-edges;            /* Opera          */
+    image-rendering:-webkit-optimize-contrast; /* Safari         */
+    image-rendering:optimize-contrast;         /* CSS3 Proposed  */
+    image-rendering:crisp-edges;               /* CSS4 Proposed  */
+    image-rendering:pixelated;                 /* CSS4 Proposed  */
+    -ms-interpolation-mode:nearest-neighbor;   /* IE8+           */
+    border: 1px solid #CCC;
+}
+div.image {
+    text-align: initial;
+}
+div.contents {
+    max-width: 1100px;
+    box-sizing: border-box;
+    margin: 0 auto 6em auto;
+    padding: 1em 2.5em 2.5em 2.5em;
+    box-shadow: 1px 1px 5px #555;
+    background-color: white;
+}
+div.memitem {
+    display: block !important;
+    overflow: inherit;
+    clear: both;
+}
+div.memproto, div.memdoc, div.directory, div.dyncontent {
+    overflow: auto;
+}
+body {
+    background-color: #DDD;
+    width: 100%;
+}
+* {
+    max-width: 100%;
+}
+iframe {
+    max-width: initial;
+}
+#MSearchField {
+    max-width: initial;
+}
+body > div.header, div.PageDoc > div.header {
+    max-width: 1100px;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 0.8em 2.5em 0.6em 2.5em;
+    box-shadow: 1px 0px 5px #555;
+    border-bottom: solid white 5px;
+}
+div.ingroups {
+    font-size: initial;
+}
+hr.footer { display: none; }
+address.footer {
+    box-shadow: 1px 1px 4px #555;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+}
+address.footer * {
+    display: inline-block;
+}
+address.footer > small {
+    padding: 0.6em;
+}
+div#top {
+    /* position: sticky; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+}
+body > div.header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+ul.sm-dox {
+    background-color: #dde;
+    background-image: none;
+    box-shadow: 0px 1px 2px #458;
+}
+div.navpath > ul {
+    background-color: #dde;
+    background-image: none;
+    box-shadow: 0px 1px 1px #569;
+    margin-bottom: -3px;
+    z-index: 101;
+    position: relative;
+}
+.directory td > .el {
+    display: inline-block;
+    padding: 0.4em 0.5em 0.4em 0;
+}
+.directory td.desc {
+    padding: 0.4em 0.5em 0.4em 0.5em;
+}
+.markdownTable tr:last-child td {
+    border-bottom: 1px solid #334262;
+}
+h2.memtitle, .memproto, .fieldtable th {
+    background-color: #dde;
+    background-image: none;
+    border-radius: 0;
+}
+table.fieldtable {
+    border-radius: 0;
+}
+.fieldtable th {
+    font-size: 1.1em;
+}
+span.mlabel {
+    font-size: 0.9em;
+}
+.memdoc {
+    border-radius: 0;
+}
+#MSearchResultsWindow {
+    margin-top: 8px;
+}
+code {
+    background-color: #f4f4ff;
+    padding: 0 1px;
+}
+div.fragment {
+    padding: 0.6em;
+}
+
+
+/* --------------------- */
+
+/* Portrait and Landscape */
+@media only screen and (max-width: 900px) /* and (orientation : portrait) */ {
+    div#top {
+        position: relative;
+    }
+    #side-nav { display: none; }
+    #nav-path { display: none; }
+    body { 
+        overflow-x: hidden; 
+    }
+    .summary { display: none; }
+    .memitem { page-break-inside: avoid; }
+    div.contents {
+      margin-left:0 !important;
+      overflow-x: hidden;
+      display: block;
+      padding: 0.6em;
+      margin-bottom: 0;
+    }
+    #MSearchResultsWindow {
+        display: none;
+        position: initial;
+        left: 0; 
+        top: 0;
+        bottom: 0;
+        border: 1px solid #ddd;
+        z-index: 9999;
+    }
+    .sm-dox a, .sm-dox a:focus, .sm-dox a:hover, .sm-dox a:active {
+        line-height: 2.4;
+    }
+    .sm-dox a:hover {
+        background-image: url(tab_a.png);
+        background-repeat: repeat-x;
+        color: white;
+        text-shadow: initial;
+    }
+    .sm-dox li>a span.sub-arrow:before {
+        display: block;
+        content: '+';
+    }
+    .sm-dox li {
+        border-bottom: 1px solid #ccd;
+    }
+
+    /*
+    address.footer {
+        position: initial;
+        box-shadow: none;
+        background-image: url(nav_h.png);
+        background-repeat: repeat-x;
+        background-color: #F9FAFC;
+        text-align: center;
+    }
+    */
+    address.footer {
+        display: none;
+    }
+
+    div.fragment {
+        font-size: 11px;
+    }
+
+    div.contents p, 
+    div.dyncontent, 
+    div.textblock, 
+    table.memberdecls, 
+    div.memitem,
+    div.contents p *, 
+    div.dyncontent *, 
+    table.memberdecls *, 
+    div.memitem * {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    div.memproto * {
+        font-size: 11px;
+        line-height: 1.2;
+    }
+    .textblock h2 {
+        font-size: 16px;
+    }
+    .textblock h3 {
+        font-size: 14px;
+    }
+    .textblock h4 {
+        font-size: 13px;
+    }
+    h2.groupheader {
+        font-size: 20px;
+    }
+    h2.memtitle {
+        font-size: 18px;
+    }
+    td.memSeparator {
+        line-height: 1px;
+    }
+}

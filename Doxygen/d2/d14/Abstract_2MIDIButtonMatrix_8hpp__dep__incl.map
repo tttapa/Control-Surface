@@ -1,0 +1,10 @@
+<map id="MIDIButtonMatrix.hpp" name="MIDIButtonMatrix.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="91,5,257,31"/>
+<area shape="rect" id="Node000002" href="$d5/d9b/CCButtonMatrix_8hpp.html" title=" " alt="" coords="5,79,159,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,41,99,81,95,76,147,37"/>
+<area shape="rect" id="Node000004" href="$d2/da8/NoteButtonMatrix_8hpp.html" title=" " alt="" coords="183,79,349,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="201,37,253,76,249,81,198,41"/>
+<area shape="rect" id="Node000003" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="105,152,243,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="109,110,161,150,157,154,106,114"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="242,114,191,154,187,150,239,110"/>
+</map>

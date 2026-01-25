@@ -1,0 +1,10 @@
+<map id="GenericSelector&lt; N, Callback &gt;" name="GenericSelector&lt; N, Callback &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="147,675,302,855"/>
+<area shape="rect" id="node2" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,381,137,473"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="161,367,288,488"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="547,5,751,317"/>
+<area shape="rect" id="node6" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="646,367,881,488"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="779,683,983,848"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="465,565,680,965"/>
+<area shape="rect" id="node8" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="313,374,486,481"/>
+</map>

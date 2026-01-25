@@ -1,0 +1,19 @@
+<map id="SoftwareSerialDebugMIDI_Output" name="SoftwareSerialDebugMIDI_Output">
+<area shape="rect" id="Node000001" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a SoftwareSerial interface." alt="" coords="240,1643,435,1737"/>
+<area shape="rect" id="Node000002" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="238,1475,437,1595"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="340,1609,340,1643,335,1643,335,1609"/>
+<area shape="rect" id="Node000003" href="$d5/d12/classMIDIOutputOnly.html" title=" " alt="" coords="157,1224,310,1329"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="262,1341,316,1474,311,1476,257,1343"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="5,469,208,849"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="151,862,225,1223,220,1224,146,863"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="17,5,196,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="109,204,109,469,104,469,104,204"/>
+<area shape="rect" id="Node000006" href="$d0/d9c/classStreamDebugMIDI__Output.html" title="A class for MIDI outputs sending human&#45;readable MIDI messages over a Stream." alt="" coords="345,1127,559,1427"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="382,1440,366,1475,361,1473,377,1438"/>
+<area shape="rect" id="Node000007" href="$db/d85/classPrintDebugMIDI__Base.html" title="A class that implements MIDI debug send functions." alt="" coords="233,556,442,761"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="361,775,427,1126,422,1127,356,776"/>
+<area shape="rect" id="Node000008" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="467,239,667,1079"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="489,1093,482,1127,477,1126,483,1092"/>
+<area shape="rect" id="Node000009" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="691,426,930,891"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="761,906,727,996,705,1039,681,1080,655,1115,625,1148,561,1204,558,1200,621,1144,651,1112,676,1077,701,1037,722,993,756,904"/>
+</map>

@@ -1,0 +1,41 @@
+<map id="MIDIButtonMatrix.hpp" name="MIDIButtonMatrix.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="611,5,776,32"/>
+<area shape="rect" id="node2" href="$d9/d4b/ButtonMatrix_8hpp.html" title=" " alt="" coords="1733,87,1958,114"/>
+<area shape="rect" id="node29" href="$d0/d4e/Def_8hpp.html" title=" " alt="" coords="397,251,496,278"/>
+<area shape="rect" id="node32" href="$d1/d41/MIDIOutputElement_8hpp.html" title=" " alt="" coords="473,80,655,121"/>
+<area shape="rect" id="node3" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="1143,1095,1334,1121"/>
+<area shape="rect" id="node4" href="$d4/d35/Hardware-Types_8hpp.html" title=" " alt="" coords="1610,333,1785,375"/>
+<area shape="rect" id="node26" href="$d5/d41/ButtonMatrix_8ipp.html" title=" " alt="" coords="1780,169,1911,196"/>
+<area shape="rect" id="node5" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="1553,423,1733,449"/>
+<area shape="rect" id="node9" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="1301,1020,1561,1047"/>
+<area shape="rect" id="node22" title=" " alt="" coords="110,796,181,823"/>
+<area shape="rect" id="node6" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="1573,497,1712,524"/>
+<area shape="rect" id="node14" title=" " alt="" coords="1569,945,1711,972"/>
+<area shape="rect" id="node21" title=" " alt="" coords="687,796,761,823"/>
+<area shape="rect" id="node25" title=" " alt="" coords="901,572,1021,599"/>
+<area shape="rect" id="node7" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="1387,572,1549,599"/>
+<area shape="rect" id="node8" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="1217,721,1447,748"/>
+<area shape="rect" id="node16" href="$de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html" title=" " alt="" coords="1067,647,1304,673"/>
+<area shape="rect" id="node24" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="1328,647,1440,673"/>
+<area shape="rect" id="node10" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="808,871,973,897"/>
+<area shape="rect" id="node15" title=" " alt="" coords="213,796,451,823"/>
+<area shape="rect" id="node11" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="800,945,981,972"/>
+<area shape="rect" id="node13" title=" " alt="" coords="630,1095,714,1121"/>
+<area shape="rect" id="node12" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="732,1020,959,1047"/>
+<area shape="rect" id="node17" href="$d5/d4f/AH_2Settings_2Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="1038,721,1141,748"/>
+<area shape="rect" id="node23" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="783,721,1014,748"/>
+<area shape="rect" id="node18" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="1135,945,1313,972"/>
+<area shape="rect" id="node19" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="786,796,995,823"/>
+<area shape="rect" id="node20" title=" " alt="" coords="1019,796,1090,823"/>
+<area shape="rect" id="node27" href="$dd/ddf/ExtendedInputOutput_8hpp.html" title=" " alt="" coords="1579,244,1815,285"/>
+<area shape="rect" id="node28" title=" " alt="" coords="1839,251,1910,278"/>
+<area shape="rect" id="node30" href="$d7/d42/Channel_8hpp.html" title=" " alt="" coords="94,721,197,748"/>
+<area shape="rect" id="node31" href="$d2/dbc/Cable_8hpp.html" title=" " alt="" coords="221,721,307,748"/>
+<area shape="rect" id="node33" href="$d4/d93/Updatable_8hpp.html" title=" " alt="" coords="917,423,1131,449"/>
+<area shape="rect" id="node39" href="$db/dd6/MIDIAddress_8hpp.html" title=" " alt="" coords="367,169,526,196"/>
+<area shape="rect" id="node34" href="$d8/db4/AH_2Containers_2CRTP_8hpp.html" title=" " alt="" coords="820,497,999,524"/>
+<area shape="rect" id="node35" href="$de/dd1/LinkedList_8hpp.html" title=" " alt="" coords="534,497,746,524"/>
+<area shape="rect" id="node37" href="$d4/d84/Mutex_8hpp.html" title=" " alt="" coords="1023,497,1211,524"/>
+<area shape="rect" id="node38" title=" " alt="" coords="1235,497,1346,524"/>
+<area shape="rect" id="node36" title=" " alt="" coords="674,572,745,599"/>
+</map>

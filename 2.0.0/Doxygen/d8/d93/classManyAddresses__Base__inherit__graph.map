@@ -1,0 +1,11 @@
+<map id="ManyAddresses_Base" name="ManyAddresses_Base">
+<area shape="rect" id="Node000001" title="A base class for all MIDIOutputElements that can have one of many addresses." alt="" coords="248,253,429,319"/>
+<area shape="rect" id="Node000003" href="$d1/da6/classBankable_1_1ManyAddresses_1_1DualManyAddresses.html" title=" " alt="" coords="5,367,205,507"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="279,328,207,374,204,369,276,324"/>
+<area shape="rect" id="Node000004" href="$d8/d58/classBankable_1_1ManyAddresses_1_1ManyAddresses.html" title=" " alt="" coords="229,394,448,479"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="341,332,341,394,336,394,336,332"/>
+<area shape="rect" id="Node000005" href="$d7/dc9/classBankable_1_1ManyAddresses_1_1ManyMatrixAddresses.html" title=" " alt="" coords="472,369,656,504"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="400,324,461,364,473,372,470,377,459,369,397,329"/>
+<area shape="rect" id="Node000002" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="219,5,458,205"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="341,219,341,253,336,253,336,219"/>
+</map>

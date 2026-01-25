@@ -1,0 +1,14 @@
+<map id="Arduino_Helpers.h" name="Arduino_Helpers.h">
+<area shape="rect" id="Node000001" title="Dummy header file for Arduino builder." alt="" coords="198,5,339,31"/>
+<area shape="rect" id="Node000002" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="178,79,359,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="271,31,271,65,266,65,266,31"/>
+<area shape="rect" id="Node000003" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="290,152,517,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="292,102,370,143,368,148,289,106"/>
+<area shape="rect" id="Node000006" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="5,152,265,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="248,106,170,148,168,143,246,102"/>
+<area shape="rect" id="Node000004" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="93,225,284,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="370,180,237,223,236,218,368,175"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="361,225,445,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="406,178,406,212,401,212,401,178"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="146,176,174,213,170,216,142,179"/>
+</map>

@@ -1,0 +1,23 @@
+<map id="MCUNameFromNoteNumber.cpp" name="MCUNameFromNoteNumber.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="549,5,783,31"/>
+<area shape="rect" id="Node000002" href="$d8/dc0/MCUNameFromNoteNumber_8hpp.html" title=" " alt="" coords="549,79,783,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="669,31,669,65,663,65,663,31"/>
+<area shape="rect" id="Node000003" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="471,152,637,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="649,106,586,147,583,142,647,102"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="661,152,898,177"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="686,102,751,142,748,147,683,106"/>
+<area shape="rect" id="Node000004" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="313,225,494,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="531,180,442,222,439,217,529,175"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="436,372,520,397"/>
+<area shape="poly" id="edge10_Node000003_Node000007" title=" " alt="" coords="557,178,553,242,545,284,531,325,518,346,503,364,499,360,514,343,526,323,540,283,548,242,552,178"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="592,225,735,251"/>
+<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="573,175,635,215,632,220,570,180"/>
+<area shape="rect" id="Node000005" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="290,299,517,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="406,251,406,285,401,285,401,251"/>
+<area shape="rect" id="Node000008" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="5,299,265,324"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="361,253,192,298,191,293,360,248"/>
+<area shape="rect" id="Node000006" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="168,372,359,397"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="382,326,299,368,297,363,380,322"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="417,322,458,361,454,364,413,326"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="157,322,231,363,229,367,155,326"/>
+</map>

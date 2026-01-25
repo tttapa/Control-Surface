@@ -1,0 +1,5 @@
+<map id="SingleAddress" name="SingleAddress">
+<area shape="rect" id="node1" title=" " alt="" coords="48,403,209,509"/>
+<area shape="rect" id="node2" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="12,233,245,355"/>
+<area shape="rect" id="node3" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="5,5,252,185"/>
+</map>

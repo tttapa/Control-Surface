@@ -1,0 +1,11 @@
+<map id="CCValueFastLED&lt; BankSize, ColorMapper &gt;" name="CCValueFastLED&lt; BankSize, ColorMapper &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="343,1049,541,1171"/>
+<area shape="rect" id="node2" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="314,807,570,1001"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="175,476,439,759"/>
+<area shape="rect" id="node4" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="91,263,267,428"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="5,5,161,215"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="186,57,367,163"/>
+<area shape="rect" id="node7" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="292,285,419,406"/>
+<area shape="rect" id="node8" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="464,483,692,751"/>
+<area shape="rect" id="node9" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="489,292,667,399"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="MIDIBLEInstance" name="MIDIBLEInstance">
+<area shape="rect" id="Node000001" title="Defines the interface for callback functions registered by the low&#45;level BLE code." alt="" coords="203,5,362,171"/>
+<area shape="rect" id="Node000002" href="$d9/d88/classArduinoBLEBackend.html" title="ArduinoBLE backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="5,289,160,594"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,183,174,220,138,290,134,287,170,217,196,180"/>
+<area shape="rect" id="Node000003" href="$d5/d2a/classBTstackBackgroundBackend.html" title="Raspberry Pi Pico BTstack background backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="185,289,381,594"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="285,185,285,289,280,289,280,185"/>
+<area shape="rect" id="Node000004" href="$de/d82/classESP32BLEBackend.html" title="ESP32 backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="405,219,598,664"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="368,180,396,217,407,235,402,238,391,220,364,183"/>
+</map>

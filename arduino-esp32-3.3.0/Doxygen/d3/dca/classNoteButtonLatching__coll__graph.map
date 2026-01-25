@@ -1,0 +1,23 @@
+<map id="NoteButtonLatching" name="NoteButtonLatching">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="467,1799,635,1904"/>
+<area shape="rect" id="Node000002" href="$d8/de1/classMIDIButtonLatching.html" title=" " alt="" coords="467,1569,634,1749"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="553,1763,553,1798,548,1798,548,1763"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="143,1191,286,1317"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="228,1330,238,1373,253,1419,274,1464,301,1505,338,1543,380,1575,425,1602,468,1624,466,1628,422,1607,377,1580,334,1547,297,1508,269,1466,248,1420,233,1374,223,1331"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="117,573,312,939"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="217,953,217,1191,212,1191,212,953"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="129,363,176,572,171,574,124,364"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="273,512,262,558,257,557,268,510"/>
+<area shape="rect" id="Node000007" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="311,1101,487,1407"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="458,1406,514,1553,509,1554,453,1408"/>
+<area shape="rect" id="Node000008" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="338,653,454,859"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="399,859,400,1085,395,1085,394,859"/>
+<area shape="rect" id="Node000009" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="479,683,617,829"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="529,830,452,1086,447,1085,524,828"/>
+<area shape="rect" id="Node000010" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="511,1001,692,1507"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="572,1507,567,1553,561,1553,567,1507"/>
+<area shape="rect" id="Node000011" href="$dc/dd4/classDigitalNoteSender.html" title="Class that sends MIDI note on and off messages." alt="" coords="716,1181,873,1327"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="781,1328,751,1417,731,1464,706,1508,679,1545,648,1579,644,1575,675,1542,702,1505,726,1461,746,1415,775,1326"/>
+</map>

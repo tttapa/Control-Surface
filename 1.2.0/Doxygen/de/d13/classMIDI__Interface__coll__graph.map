@@ -1,0 +1,15 @@
+<map id="MIDI_Interface" name="MIDI_Interface">
+<area shape="rect" id="node1" title="An abstract class for MIDI interfaces." alt="" coords="305,2428,467,2725"/>
+<area shape="rect" id="node2" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="88,2177,247,2254"/>
+<area shape="rect" id="node3" href="$d5/dc1/structTrueMIDI__Sink.html" title="A MIDI_Sink that is not a MIDI_Pipe." alt="" coords="6,1053,121,1131"/>
+<area shape="rect" id="node4" href="$d9/db6/classMIDI__Sink.html" title="Class that can receive MIDI messages from a MIDI pipe." alt="" coords="5,5,247,303"/>
+<area shape="rect" id="node5" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="146,365,319,1029"/>
+<area shape="rect" id="node6" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="123,1206,348,1518"/>
+<area shape="rect" id="node8" href="$d2/dcd/structTrueMIDI__Source.html" title="A MIDI_Source that is not a MIDI_Pipe." alt="" coords="133,1779,263,1856"/>
+<area shape="rect" id="node7" href="$d6/da4/classAH_1_1BitArray.html" title=" " alt="" coords="275,42,425,266"/>
+<area shape="rect" id="node9" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="271,2052,501,2379"/>
+<area shape="rect" id="node10" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="525,2155,740,2276"/>
+<area shape="rect" id="node11" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="531,1632,735,2003"/>
+<area shape="rect" id="node12" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="452,1309,656,1415"/>
+<area shape="rect" id="node13" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="680,1155,895,1569"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="LCD&lt; BufferSize &gt;" name="LCD&lt; BufferSize &gt;">
+<area shape="rect" id="Node000001" title="A class that represents the Mackie Control Universal LCD display and saves the text it receives." alt="" coords="389,1405,525,1571"/>
+<area shape="rect" id="Node000002" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="116,1057,287,1303"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="279,1313,301,1341,345,1388,391,1430,387,1434,341,1392,297,1344,275,1316"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="105,588,297,968"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="204,982,204,1057,199,1057,199,982"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="119,371,164,587,159,588,114,372"/>
+<area shape="rect" id="Node000005" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="257,526,247,573,242,571,252,525"/>
+<area shape="rect" id="Node000006" href="$d5/d37/classMCU_1_1LCDCounter.html" title="Counts the number of instances of the LCD class." alt="" coords="311,1127,438,1233"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="395,1245,438,1404,433,1406,390,1247"/>
+<area shape="rect" id="Node000007" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="462,1017,621,1343"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="499,1344,487,1390,482,1389,494,1342"/>
+<area shape="rect" id="Node000008" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="645,1057,779,1303"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="662,1304,635,1344,590,1393,540,1434,537,1430,586,1389,631,1341,658,1301"/>
+</map>

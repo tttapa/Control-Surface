@@ -1,0 +1,17 @@
+<map id="ManyMatrixAddresses&lt; NumBanks, NumRows, NumCols &gt;" name="ManyMatrixAddresses&lt; NumBanks, NumRows, NumCols &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="279,1644,463,1759"/>
+<area shape="rect" id="Node000002" href="$dd/d3a/classManyAddresses__Base.html" title="A base class for all MIDIOutputElements that can have one of many addresses." alt="" coords="54,1249,235,1314"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,1327,193,1446,221,1514,256,1580,280,1612,307,1642,304,1645,276,1616,252,1583,216,1517,188,1447,152,1328"/>
+<area shape="rect" id="Node000003" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="5,516,244,696"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="130,710,146,1249,141,1249,125,710"/>
+<area shape="rect" id="Node000004" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="45,5,205,231"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="127,231,127,499,122,499,122,231"/>
+<area shape="rect" id="Node000005" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="266,981,477,1581"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="374,1582,374,1627,369,1627,369,1582"/>
+<area shape="rect" id="Node000006" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="268,293,480,919"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="375,919,375,965,370,965,370,919"/>
+<area shape="rect" id="Node000007" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="501,981,689,1581"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="504,1561,491,1583,451,1634,447,1631,486,1580,499,1558"/>
+<area shape="rect" id="Node000008" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="507,453,684,759"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="598,759,598,965,593,965,593,759"/>
+</map>

@@ -1,0 +1,27 @@
+<map id="ManyButtonsSelectorLEDs&lt; N &gt;" name="ManyButtonsSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="Selector that reads from &#160;buttons. &#160;&#160;This version displays the setting using LEDs." alt="" coords="238,1927,463,1992"/>
+<area shape="rect" id="Node000002" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="229,1737,472,1877"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="353,1891,353,1927,348,1927,348,1891"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="188,1422,335,1622"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="299,1634,331,1736,326,1738,294,1636"/>
+<area shape="rect" id="Node000004" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="7,1111,131,1197"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="97,1208,145,1305,207,1420,203,1423,140,1308,92,1210"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="155,1091,274,1217"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="227,1230,251,1422,246,1422,222,1230"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="117,573,312,939"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="217,952,217,1091,212,1091,212,952"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="129,363,176,572,171,574,124,364"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="273,512,262,558,257,557,268,510"/>
+<area shape="rect" id="Node000009" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="297,1101,463,1207"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="366,1208,301,1407,296,1406,361,1206"/>
+<area shape="rect" id="Node000010" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="421,1369,587,1675"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="424,1676,398,1724,393,1722,419,1674"/>
+<area shape="rect" id="Node000011" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="487,1001,663,1307"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="548,1308,539,1353,534,1352,543,1307"/>
+<area shape="rect" id="Node000012" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="441,653,557,859"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="521,859,545,985,540,986,516,860"/>
+<area shape="rect" id="Node000013" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="581,683,720,829"/>
+<area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="640,829,610,985,604,984,634,828"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="Vector.hpp" name="Vector.hpp">
+<area shape="rect" id="Node000001" title="Definition of Vec2f and Vec3f." alt="" coords="87,5,177,31"/>
+<area shape="rect" id="Node000002" href="$d3/d1f/Quaternion_8hpp.html" title="Definition of Quaternion and EulerAngles." alt="" coords="5,79,128,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,43,79,80,75,77,110,39"/>
+<area shape="rect" id="Node000004" href="$dd/d4e/Vector_8cpp.html" title=" " alt="" coords="153,79,242,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="154,39,189,77,185,80,150,43"/>
+<area shape="rect" id="Node000003" href="$d4/d11/Quaternion_8cpp.html" title=" " alt="" coords="6,152,127,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="69,118,69,152,64,152,64,118"/>
+</map>

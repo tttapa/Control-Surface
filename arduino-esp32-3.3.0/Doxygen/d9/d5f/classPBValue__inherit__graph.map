@@ -1,0 +1,13 @@
+<map id="PBValue" name="PBValue">
+<area shape="rect" id="Node000001" title="Class that listens for MIDI Pitch Bend events on a single address and saves their value." alt="" coords="146,1143,275,1268"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,960,229,1095"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,1105,180,1141,175,1143,157,1108"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="22,667,213,912"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="120,926,120,960,115,960,115,926"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="21,239,213,619"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="120,633,120,667,115,667,115,633"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="28,5,207,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="120,204,120,239,115,239,115,204"/>
+<area shape="rect" id="Node000006" href="$dd/d7f/classInterfaces_1_1IValue14.html" title="Abstract interface for MIDI input elements that receive and store a 14&#45;bit value." alt="" coords="254,975,357,1080"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="273,1094,246,1143,242,1141,269,1091"/>
+</map>

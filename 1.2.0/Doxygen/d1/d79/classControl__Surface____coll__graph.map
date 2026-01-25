@@ -1,0 +1,15 @@
+<map id="Control_Surface_" name="Control_Surface_">
+<area shape="rect" id="node1" title="This class ensures initialization, updating, and interaction between all other classes,..." alt="" coords="390,2061,609,2476"/>
+<area shape="rect" id="node2" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="5,1643,172,1984"/>
+<area shape="rect" id="node3" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="196,1775,355,1852"/>
+<area shape="rect" id="node4" href="$d5/dc1/structTrueMIDI__Sink.html" title="A MIDI_Sink that is not a MIDI_Pipe." alt="" coords="53,1053,167,1131"/>
+<area shape="rect" id="node5" href="$d9/db6/classMIDI__Sink.html" title="Class that can receive MIDI messages from a MIDI pipe." alt="" coords="61,5,303,303"/>
+<area shape="rect" id="node6" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="202,365,375,1029"/>
+<area shape="rect" id="node7" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="147,1155,372,1467"/>
+<area shape="rect" id="node9" href="$d2/dcd/structTrueMIDI__Source.html" title="A MIDI_Source that is not a MIDI_Pipe." alt="" coords="205,1516,335,1593"/>
+<area shape="rect" id="node8" href="$d6/da4/classAH_1_1BitArray.html" title=" " alt="" coords="331,42,481,266"/>
+<area shape="rect" id="node10" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="446,1672,609,1955"/>
+<area shape="rect" id="node11" href="$db/d45/structSysExMessage.html" title=" " alt="" coords="633,1716,777,1911"/>
+<area shape="rect" id="node12" href="$d2/de5/classAH_1_1Timer.html" title=" " alt="" coords="819,1731,974,1896"/>
+<area shape="rect" id="node13" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="999,1716,1165,1911"/>
+</map>

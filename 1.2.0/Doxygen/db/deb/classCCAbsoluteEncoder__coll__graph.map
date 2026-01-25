@@ -1,0 +1,10 @@
+<map id="CCAbsoluteEncoder" name="CCAbsoluteEncoder">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="331,1580,505,1657"/>
+<area shape="rect" id="node2" href="$dd/dcc/classMIDIAbsoluteEncoder.html" title=" " alt="" coords="324,1351,512,1531"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="164,1035,315,1156"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="137,483,341,853"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,159,228,266"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="252,5,475,420"/>
+<area shape="rect" id="node7" href="$da/d07/classContinuousCCSender.html" title="Class that sends continuous MIDI control change messages with a resolution of 7 bits." alt="" coords="339,1049,497,1141"/>
+<area shape="rect" id="node8" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="522,903,711,1288"/>
+</map>

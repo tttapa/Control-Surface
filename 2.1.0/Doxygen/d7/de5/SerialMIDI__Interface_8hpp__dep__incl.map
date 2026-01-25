@@ -1,0 +1,9 @@
+<map id="SerialMIDI_Interface.hpp" name="SerialMIDI_Interface.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="167,5,349,31"/>
+<area shape="rect" id="Node000002" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="5,86,143,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,38,102,88,100,84,218,33"/>
+<area shape="rect" id="Node000003" href="$d5/db6/SerialMIDI__Interface_8cpp.html" title=" " alt="" coords="167,86,349,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="261,44,261,86,255,86,255,44"/>
+<area shape="rect" id="Node000004" href="$d3/df2/SoftwareSerialMIDI__Interface_8hpp.html" title=" " alt="" coords="373,79,519,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="299,33,402,76,400,81,297,38"/>
+</map>

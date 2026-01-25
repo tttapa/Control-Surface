@@ -1,0 +1,10 @@
+<map id="NoteValue&lt; NumBanks &gt;" name="NoteValue&lt; NumBanks &gt;">
+<area shape="rect" id="node1" title="MIDI Input Element that listens to a single note and saves its value." alt="" coords="331,839,521,916"/>
+<area shape="rect" id="node2" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="306,639,546,789"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="179,321,409,589"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,93,103,171"/>
+<area shape="rect" id="node5" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="127,71,263,193"/>
+<area shape="rect" id="node6" href="$da/dcc/classNoteCCRangeEmptyCallback.html" title="A callback for NoteCCRange that doesn&#39;t do anything." alt="" coords="287,79,498,185"/>
+<area shape="rect" id="node7" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="523,5,737,259"/>
+<area shape="rect" id="node8" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="433,321,686,589"/>
+</map>

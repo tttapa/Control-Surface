@@ -1,0 +1,11 @@
+<map id="IVPot" name="IVPot">
+<area shape="rect" id="Node000001" title=" " alt="" coords="137,5,263,151"/>
+<area shape="rect" id="Node000002" href="$da/d93/classMCU_1_1Bankable_1_1VPotRing.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="11,199,194,604"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,165,166,199,161,197,172,163"/>
+<area shape="rect" id="Node000004" href="$d5/ddb/classMCU_1_1VPotRing.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="218,269,377,534"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="228,163,260,267,255,269,223,165"/>
+<area shape="rect" id="Node000003" href="$d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays its value usin..." alt="" coords="5,652,200,817"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="105,618,105,652,100,652,100,618"/>
+<area shape="rect" id="Node000005" href="$d6/d0d/classMCU_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays it using LEDs." alt="" coords="231,662,364,807"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="300,548,300,662,295,662,295,548"/>
+</map>

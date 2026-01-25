@@ -1,0 +1,9 @@
+<map id="NoteValue" name="NoteValue">
+<area shape="rect" id="node1" title="MIDI Input Element that listens to a single note and saves its velocity value." alt="" coords="194,765,297,843"/>
+<area shape="rect" id="node2" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="159,624,332,716"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="145,321,346,575"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,93,96,171"/>
+<area shape="rect" id="node5" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="121,71,247,193"/>
+<area shape="rect" id="node6" title=" " alt="" coords="271,93,345,171"/>
+<area shape="rect" id="node7" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="369,5,567,259"/>
+</map>

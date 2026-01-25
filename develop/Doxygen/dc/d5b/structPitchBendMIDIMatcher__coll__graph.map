@@ -1,0 +1,4 @@
+<map id="PitchBendMIDIMatcher" name="PitchBendMIDIMatcher">
+<area shape="rect" id="node1" title="Matcher for MIDI Pitch Bend messages. Matches a single address." alt="" coords="5,321,200,413"/>
+<area shape="rect" id="node2" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="12,5,193,259"/>
+</map>

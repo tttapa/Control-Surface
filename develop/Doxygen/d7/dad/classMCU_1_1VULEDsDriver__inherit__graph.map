@@ -1,0 +1,7 @@
+<map id="VULEDsDriver&lt; NumLEDs &gt;" name="VULEDsDriver&lt; NumLEDs &gt;">
+<area shape="rect" id="node1" title="Small helper to display the VU meters on an LED bar display." alt="" coords="131,461,338,553"/>
+<area shape="rect" id="node4" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="5,601,240,781"/>
+<area shape="rect" id="node5" href="$df/d36/classMCU_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="263,609,430,774"/>
+<area shape="rect" id="node2" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="148,219,321,413"/>
+<area shape="rect" id="node3" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="167,5,302,171"/>
+</map>
