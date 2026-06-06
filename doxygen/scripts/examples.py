@@ -7,13 +7,14 @@ from pathlib import Path
 
 dirnm = os.path.dirname(os.path.realpath(__file__))
 doxydir = join(dirnm, "..")
+repodir = join(doxydir, "..")
 # exclude = re.compile(r'(examples/Arduino-Helpers/)|(examples/test/)')
 exclude = re.compile(r"examples/test/")
 
 template = """\
 /**
  * @example   "{pathname}"
- * 
+ *
  * {title}
  * {underline}
  *{docstr}*/
@@ -180,7 +181,7 @@ with open(join(doxydir, "Doxyfile")) as doxy:
     m = re.search(r"EXAMPLE_PATH\s*=\s*(.+)", doxy_content)
     if m:
         exampledir = m.group(1).split('" "')[0]
-        exampledir = realpath(join(doxydir, stripQuotes(exampledir)))
+        exampledir = realpath(join(repodir, stripQuotes(exampledir)))
         print("Example directory =", exampledir)
     else:
         print("Error: couldn't find EXAMPLE_PATH in Doxyfile")
@@ -188,7 +189,7 @@ with open(join(doxydir, "Doxyfile")) as doxy:
     m = re.search(r"INPUT\s*=\s*([./a-zA-Z0-9_-]+)", doxy_content)
     if m:
         lastInclude = m.group(1).split(" ")[-1]
-        outputfile = realpath(join(doxydir, stripQuotes(lastInclude)))
+        outputfile = realpath(join(repodir, stripQuotes(lastInclude)))
         print("Output file =", outputfile)
     else:
         print("Error: couldn't find INPUT in Doxyfile")
@@ -229,30 +230,32 @@ for root, dirs, files in os.walk(exampledir):
                     print('\t       → "' + str(Path(root) / file) + '"')
 
 
-def add_page(title: str, groups, prefix="", level=0):
+def add_page(title: str | None, groups, prefix="", level=0):
     output = ""
     if level > 0:
+        assert title is not None
         prefix += "-" + title
         sanitized = re.sub("[^a-z0-9]", "-", prefix.lower())
         sanitized = re.sub("(-+)", "-", sanitized)
         sanitized = re.sub("-+$|^-+", "", sanitized)
-        output += f" * {'#' * level} {title} {{#examples-{sanitized}}}\n"
+        output += f"{'#' * (level + 1)} {title} {{#examples-{sanitized}}}\n"
     if isinstance(groups, dict):
         for title, subgroups in groups.items():
             output += add_page(title, subgroups, prefix, level + 1)
     else:
         for example, descr in groups:
-            output += " * - @ref " + example + ".ino\n"
+            output += " - @ref " + example + ".ino\n"
             if descr:
-                output += " *   (" + descr + ")\n"
-        output += " * \n"
+                output += "   (" + descr + ")\n"
+        output += "\n"
 
     return output
 
 
-output += "/**\n" " * @page examples Examples\n * \n * @tableofcontents\n * \n"
-output += add_page(None, groups)
-output += " */"
+output_md = "# Examples {#examples}\n\n@tableofcontents\n\n"
+output_md += add_page(None, groups)
 
-with open(outputfile, "w") as f:
+with open(Path(outputfile), "w") as f:
     f.write(output)
+with open(Path(outputfile).with_suffix(".md"), "w") as f:
+    f.write(output_md)

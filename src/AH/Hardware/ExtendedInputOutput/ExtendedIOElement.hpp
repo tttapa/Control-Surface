@@ -20,7 +20,7 @@ BEGIN_AH_NAMESPACE
  * You can supply this pin number to the IO functions in the @ref ExtIO
  * namespace.  
  * If the pin number corresponds to an actual Arduino pin, the default Arduino
- * IO function (`digitalRead`, `digitalWrite, ...) will be called.  
+ * IO function (`digitalRead`, `digitalWrite`, ...) will be called.  
  * If the pin number does not correspond to a valid Arduino pin, it is an
  * extended IO pin number, so the extended IO element that this pin belongs to
  * is looked up, and the IO function for this element is executed with the
@@ -36,7 +36,7 @@ BEGIN_AH_NAMESPACE
  * The first pin (pin 0) of `mux1` will be extended IO pin number 20,
  * the last pin (pin 7) of `mux1` will be extended IO pin number 27, etc.
  * The first pin of `mux2` will be extended IO pin number 28, you get the idea.
- * If you now call `ExtIO::digitalRead(mux1.#pin (7))` or
+ * If you now call `ExtIO::digitalRead(mux1.pin(7))` or
  * `ExtIO::digitalRead(27)`, both will be translated to `mux1.digitalRead(7)`.
  *
  * The number of extended IO elements is limited only by the size of

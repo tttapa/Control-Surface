@@ -4,6 +4,12 @@
 #include <Settings/SettingsWrapper.hpp>
 #include <stdint.h>
 
+/**
+ * @file XBitmaps.hpp
+ * @note    Don't edit this file directly, place your XBM image in the 
+ *          `XBM` folder, and run the python script in `Scripts`.
+ */
+
 BEGIN_CS_NAMESPACE
 
 /**
@@ -20,9 +26,9 @@ struct XBitmap {
 /**
  * @brief   A namespace containing XBitmap definitions.
  *
- * @note    Don't edit this file directly, place your XBM image in the 
- *          `XBM` folder, and run the python script in `Scripts`.
  * @see     @ref md_pages_xbm
+ *
+ * @ingroup DisplayElements
  */
 namespace XBM {
 

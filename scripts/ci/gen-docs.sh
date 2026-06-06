@@ -9,33 +9,31 @@ mkdir -p "$output_folder"
 # coverage information.
 # usage:    run_doxygen_coverage <branch-name> <output-directory>
 function run_doxygen_coverage {
-    repodir=$PWD/../..
-    pushd ../../doxygen
+    repodir="$PWD/../.."
+    pushd "$repodir"
     if [ "$1" = "main" ]; then dir="Doxygen"; else dir="$1/Doxygen"; fi
     # Remove the old documentation
     rm -rf "$2/$dir"
     mkdir -p "$2/$dir"
     pushd "$2/$dir"
+    # python3 -m pip install -r "${repodir}/src/Display/Bitmaps/Scripts/requirements.txt"
     python3 "${repodir}/src/Display/Bitmaps/Scripts/XBM-export.py"
     popd
-    python3 ./scripts/examples.py
     # Tweak some Doxyfile verion numbers and output paths
     ( 
-        cat Doxyfile;
+        cat doxygen/Doxyfile;
         echo;
         echo "PROJECT_NUMBER = \"$1\"";
         echo "OUTPUT_DIRECTORY = \"$2\"";
         echo "HTML_OUTPUT = \"$dir\"";
-        echo "GENERATE_LATEX = NO" 
-    ) > tmp-Doxyfile
+        echo "GENERATE_LATEX = NO";
+    ) > doxygen/tmp-Doxyfile
     # Generate the documentation
-    python3 scripts/examples.py
-    doxygen tmp-Doxyfile
-    rm -rf tmp-Doxyfile
-    popd
+    python3 doxygen/scripts/examples.py
+    doxygen doxygen/tmp-Doxyfile
+    rm -rf doxygen/tmp-Doxyfile
 
     if [ "$1" = "main" ]; then dir="Coverage"; else dir="$1/Coverage"; fi
-    pushd ../..
     rm -rf docs/Coverage build
     cmake -S. --preset ci-cov
     cmake --build --preset ci-cov -t coverage

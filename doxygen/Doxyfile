@@ -189,7 +189,7 @@ STRIP_FROM_PATH        =
 # specify the list of include paths that are normally passed to the compiler
 # using the -I flag.
 
-STRIP_FROM_INC_PATH    = ../src
+STRIP_FROM_INC_PATH    = src
 
 # If the SHORT_NAMES tag is set to YES, doxygen will generate much shorter (but
 # less readable) file names. This can be useful is your file systems doesn't
@@ -812,7 +812,7 @@ FILE_VERSION_FILTER    =
 # DoxygenLayout.xml, doxygen will parse it automatically even if the LAYOUT_FILE
 # tag is left empty.
 
-LAYOUT_FILE            = DoxygenLayout.xml
+LAYOUT_FILE            = doxygen/DoxygenLayout.xml
 
 # The CITE_BIB_FILES tag can be used to specify one or more bib files containing
 # the reference definitions. This must be a list of .bib files. The .bib
@@ -940,19 +940,21 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../examples/examples.dox \
-                         ../src/ \
-                         pages/Manual.md \
-                         pages/Control-Surface.md \
-                         pages/Getting-Started.md \
-                         pages/Installation.md \
-                         pages/MIDI-over-USB.md \
-                         pages/MIDI-over-BLE.md \
-                         pages/MIDI.md \
-                         pages/Debug.md \
-                         pages/Basics.md \
-                         pages/FAQ.md \
-                         ../README.md
+INPUT                  = examples/examples.dox \
+                         examples/examples.md \
+                         src/ \
+                         src/Display/Bitmaps/bitmaps.md \
+                         doxygen/pages/Manual.md \
+                         doxygen/pages/Control-Surface.md \
+                         doxygen/pages/Getting-Started.md \
+                         doxygen/pages/Installation.md \
+                         doxygen/pages/MIDI-over-USB.md \
+                         doxygen/pages/MIDI-over-BLE.md \
+                         doxygen/pages/MIDI.md \
+                         doxygen/pages/Debug.md \
+                         doxygen/pages/Basics.md \
+                         doxygen/pages/FAQ.md \
+                         README.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1012,10 +1014,10 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = ../src/AH/STL \
-                         ../src/MIDI_Interfaces/BLEMIDI/ESP32/README.md \
-                         ../src/MIDI_Interfaces/BLEMIDI/ESP32-NimBLE/README.md \
-                         ../src/Submodules/Encoder/README.md
+EXCLUDE                = src/AH/STL \
+                         src/MIDI_Interfaces/BLEMIDI/ESP32/README.md \
+                         src/MIDI_Interfaces/BLEMIDI/ESP32-NimBLE/README.md \
+                         src/Submodules/Encoder/README.md
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1045,7 +1047,7 @@ EXCLUDE_SYMBOLS        = _*
 # that contain example code fragments that are included (see the \include
 # command).
 
-EXAMPLE_PATH           = ../examples
+EXAMPLE_PATH           = examples
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and
@@ -1065,8 +1067,8 @@ EXAMPLE_RECURSIVE      = YES
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = svg \
-                         images
+IMAGE_PATH             = doxygen/svg \
+                         doxygen/images
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -1127,7 +1129,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE = ../README.md
+USE_MDFILE_AS_MAINPAGE = ./README.md
 
 # The Fortran standard specifies that for fixed formatted Fortran code all
 # characters from position 72 are to be considered as comment. A common
@@ -1300,7 +1302,7 @@ GENERATE_HTML          = YES
 # The default directory is: html.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_OUTPUT            = ../docs/Doxygen
+HTML_OUTPUT            = docs/Doxygen
 
 # The HTML_FILE_EXTENSION tag can be used to specify the file extension for each
 # generated HTML page (for example: .htm, .php, .asp).
@@ -1327,7 +1329,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            = header.html
+HTML_HEADER            = doxygen/header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1367,7 +1369,7 @@ HTML_STYLESHEET        =
 # documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = custom_stylesheet.css
+HTML_EXTRA_STYLESHEET  = doxygen/custom_stylesheet.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1377,12 +1379,12 @@ HTML_EXTRA_STYLESHEET  = custom_stylesheet.css
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = svg/selector-multiple-momentary-switches-LED.svg \
-                         svg/selector-increment-decrement-LED.svg \
-                         svg/selector-one-toggle-switch-LED.svg \
-                         svg/selector-increment-LED.svg \
-                         svg/bank-bankable.svg \
-                         modules.html
+HTML_EXTRA_FILES       = doxygen/svg/selector-multiple-momentary-switches-LED.svg \
+                         doxygen/svg/selector-increment-decrement-LED.svg \
+                         doxygen/svg/selector-one-toggle-switch-LED.svg \
+                         doxygen/svg/selector-increment-LED.svg \
+                         doxygen/svg/bank-bankable.svg \
+                         doxygen/modules.html
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
@@ -2407,7 +2409,7 @@ SEARCH_INCLUDES        = YES
 # RECURSIVE has no effect here.
 # This tag requires that the tag SEARCH_INCLUDES is set to YES.
 
-INCLUDE_PATH           = ../src
+INCLUDE_PATH           = src
 
 # You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard
 # patterns (like *.h and *.hpp) to filter out the header-files in the

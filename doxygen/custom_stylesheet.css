@@ -12,6 +12,8 @@ html {
     --nav-hover-color: #283a5d;
     --box-shadow-color: #555;
     --footer-logo-width: 80px;
+    --accent-color: #0d90a5;
+    /* --memname-color-detail: #238899; */
 }
 /* Dark mode */
 html.dark-mode {
@@ -43,11 +45,16 @@ html.dark-mode {
     --deprecated-color-text: white;
     --bug-color-text: white;
     --invariant-color-text: white;
+    --accent-color: #31b2ff;
+    /* --memname-color-detail: var(--accent-color); */
 }
 html.dark-mode img.footer {
     filter: brightness(0.666);
 }
 /* Image alignment */
+#projectlogo img {
+    max-height: 4.5em;
+}
 img.xbm {
     image-rendering:optimizeSpeed;             /* Legal fallback */
     image-rendering:-moz-crisp-edges;          /* Firefox        */
@@ -63,8 +70,10 @@ img.inline {
     vertical-align: text-bottom;
     max-width: 100%;
 }
-div.image img {
+div.image img, div.image object {
+    margin: 0 auto;
     max-width: 100%;
+    display: block;
 }
 div.image {
     text-align: initial;
@@ -147,6 +156,20 @@ div.memproto, div.memdoc, div.directory, div.dyncontent {
 div.contents > div.textblock > hr {
     margin-right: 15px; /* To match width of doxygen headers and code blocks */
 }
+.memtitle {
+    box-shadow: none;
+}
+.memtitle::after {
+    display: none;
+}
+.permalink {
+    vertical-align: top;
+}
+/* Accent color in declarations */
+.memItemRight>a.el:first-child {
+    color: var(--accent-color);
+}
+
 /* Footer */
 hr.footer { display: none; }
 address.footer {
@@ -381,25 +404,25 @@ span.keywordtype {
 span.keyword {
     color: var(--keyword-color);
 }
-div.line a.code.hl_function,
-div.line a.code.hl_interface {
+div.line a.code.hl_function, div.line a.code.hl_functionRef,
+div.line a.code.hl_interface, div.line a.code.hl_interfaceRef {
     color: var(--function-color);
 }
-div.line a.code.hl_define {
+div.line a.code.hl_define, div.line a.code.hl_defineRef {
     color: var(--macro-color);
 }
-div.line a.code.hl_class,
-div.line a.code.hl_union,
-div.line a.code.hl_struct,
-div.line a.code.hl_typedef,
-div.line a.code.hl_enumeration,
-div.line a.code.hl_exception {
+div.line a.code.hl_class, div.line a.code.hl_classRef,
+div.line a.code.hl_union, div.line a.code.hl_unionRef,
+div.line a.code.hl_struct, div.line a.code.hl_structRef,
+div.line a.code.hl_typedef, div.line a.code.hl_typedefRef,
+div.line a.code.hl_enumeration, div.line a.code.hl_enumerationRef,
+div.line a.code.hl_exception, div.line a.code.hl_exceptionRef {
     color: var(--type-color);
 }
-div.line a.code.hl_enumvalue {
+div.line a.code.hl_enumvalue, div.line a.code.hl_enumvalueRef {
     color: var(--enum-value-color);
 }
-div.line a.code.hl_concept {
+div.line a.code.hl_concept, div.line a.code.hl_conceptRef {
     color: var(--concept-color);
 }
 span.preprocessor a,
@@ -407,10 +430,10 @@ span.preprocessor a.code {
     color: var(--preprocessor-color);
     text-decoration: underline;
 }
-div.line a.code.hl_namespace {
+div.line a.code.hl_namespace, div.line a.code.hl_namespaceRef {
     color: var(--namespace-color);
 }
-div.line a.code.hl_variable {
+div.line a.code.hl_variable, div.line a.code.hl_variableRef {
     color: var(--variable-color);
 }
 div.line a.code:hover {
@@ -446,8 +469,8 @@ blockquote.doxtable > p:last-child {
     }
     /* #side-nav { display: none; } */
     /* #nav-path { display: none; } */
-    body { 
-        overflow-x: hidden; 
+    body {
+        overflow-x: hidden;
     }
     .summary { display: none; }
     .memitem { page-break-inside: avoid; }
@@ -461,7 +484,7 @@ blockquote.doxtable > p:last-child {
     #MSearchResultsWindow {
         display: none;
         position: initial;
-        left: 0; 
+        left: 0;
         top: 0;
         bottom: 0;
         border: 1px solid #ddd;
@@ -499,15 +522,15 @@ blockquote.doxtable > p:last-child {
         font-size: 11px;
     }
 
-    div.contents p:not([class]), 
-    div.dyncontent, 
-    div.textblock, 
-    table.memberdecls, 
+    div.contents p:not([class]),
+    div.dyncontent,
+    div.textblock,
+    table.memberdecls,
     div.memitem,
-    div.contents p:not([class]) *, 
-    div.dyncontent *, 
-    table.memberdecls *, 
-    div.memitem * {
+    div.contents p:not([class]),
+    div.dyncontent,
+    table.memberdecls,
+    div.memitem {
         font-size: 12px;
         line-height: 1.5;
     }
@@ -535,33 +558,16 @@ blockquote.doxtable > p:last-child {
     }
 }
 
-/* ---- Start search box ---- */
+/* ---- Start print ---- */
 
-#MSearchField {
-    max-width: initial;
+@media print {
+    address.footer {
+        display: none;
+    }
+    th {
+        break-after: avoid;
+    }
+    html {
+        --body-background-color: #FFF;
+    }
 }
-iframe#MSearchResults {
-    height: auto;
-    width: 100%;
-    max-width: 25em;
-    margin-left: auto;
-    margin-right: 0;
-    display: block;
-    resize: vertical;
-}
-#MSearchResultsWindow {
-    position: relative;
-    border: none;
-    z-index: 10000;
-    width: 100% !important;
-    top: 0 !important; 
-    left: 0 !important; 
-    box-shadow: inset #778 1px 0px 4px 0px;
-}
-.SRResult {
-    margin-left: auto;
-    margin-right: 0;
-    max-width: 25em;
-}
-
-/* ---- End search box ---- */

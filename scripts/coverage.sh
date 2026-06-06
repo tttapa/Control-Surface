@@ -53,7 +53,7 @@ lcov \
     --include "$proj_dir"'/src/**' \
     --output-file "$dest"/coverage_base.info \
     --gcov-tool "$gcov_bin" \
-    --rc lcov_branch_coverage=$branches
+    --rc branch_coverage=$branches
 
 # Run tests
 ctest
@@ -65,7 +65,7 @@ lcov \
     --include "$proj_dir"'/src/**' \
     --output-file "$dest"/coverage_test.info \
     --gcov-tool "$gcov_bin" \
-    --rc lcov_branch_coverage=$branches
+    --rc branch_coverage=$branches
 
 # Combine captures
 lcov \
@@ -73,7 +73,8 @@ lcov \
     --add-tracefile "$dest"/coverage_test.info \
     --output-file "$dest"/coverage_total.info \
     --gcov-tool "$gcov_bin" \
-    --rc lcov_branch_coverage=$branches
+    --rc branch_coverage=$branches \
+    --ignore-errors inconsistent
 
 # Generate HTML coverage report
 genhtml \
@@ -81,7 +82,7 @@ genhtml \
     "$dest"/coverage_total.info \
     --output-directory="$html_dest" \
     --legend --title `cd "$proj_dir" && git rev-parse HEAD` \
-    --rc lcov_branch_coverage=$branches \
+    --rc branch_coverage=$branches \
     -s \
     --demangle-cpp
 

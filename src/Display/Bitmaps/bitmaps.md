@@ -1,4 +1,4 @@
-## Adding custom bitmaps to display {#md_pages_xbm}
+# Adding custom bitmaps to display {#md_pages_xbm}
 
 1. Use [GIMP](https://www.gimp.org/) to create a small black-and-white image, and export it as an X BitMap (`.xbm`) file.
 2. Copy the XBM file to the `src/Display/Bitmaps/XBM` folder. The filename can only contain alphanumeric characters and underscores, and cannot start with a number.
@@ -12,6 +12,6 @@ mkdir -p docs/Doxygen
 cd docs/Doxygen
 python3 -m pip install -r ../../src/Display/Bitmaps/Scripts/requirements.txt
 python3 ../../src/Display/Bitmaps/Scripts/XBM-export.py
-cd ../../doxygen
+cd ../..
 doxygen
 ```
