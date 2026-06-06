@@ -156,6 +156,8 @@ struct BLESettings {
         uint16_t minimum = 0x000C;
         uint16_t maximum = 0x000C;
     } connection_interval {};
+    /// Encrypt the MIDI characteristic (NimBLE only).
+    bool require_encryption = false;
     /// Set to true if you want the Arduino to always initiate the Bluetooth
     /// bonding or secure connection. As a result, it will show up as a "paired"
     /// device on your computer/phone/tablet. If set to false, security is still

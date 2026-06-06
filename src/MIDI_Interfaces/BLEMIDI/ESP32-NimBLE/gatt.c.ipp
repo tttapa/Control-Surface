@@ -34,14 +34,13 @@ inline const ble_uuid128_t midi_ble_characteristic_uuid {
             0xdb, 0xe5, 0x72, 0x77},
 };
 
-inline const struct ble_gatt_chr_def midi_ble_characteristic[] = {
+inline struct ble_gatt_chr_def midi_ble_characteristic[] = {
     {.uuid = &midi_ble_characteristic_uuid.u,
      .access_cb = cs_midi_ble_characteristic_callback,
      .arg = nullptr,
      .descriptors = nullptr,
-     .flags = BLE_GATT_CHR_F_READ | BLE_GATT_CHR_F_READ_ENC |
-              BLE_GATT_CHR_F_WRITE_NO_RSP | BLE_GATT_CHR_F_WRITE_ENC |
-              BLE_GATT_CHR_F_NOTIFY | BLE_GATT_CHR_F_NOTIFY_INDICATE_ENC,
+     .flags = BLE_GATT_CHR_F_READ | BLE_GATT_CHR_F_WRITE_NO_RSP |
+              BLE_GATT_CHR_F_NOTIFY,
      .min_key_size = 0,
      .val_handle = nullptr,
 #ifdef BLE_GATT_DSC_CLT_PRE_FMT16 // https://github.com/apache/mynewt-nimble/pull/1667
@@ -61,6 +60,8 @@ inline const struct ble_gatt_svc_def midi_ble_service[] = {
 
 #else
 
+#include <stdbool.h>
+
 const ble_uuid128_t midi_ble_service_uuid =
     BLE_UUID128_INIT(0x00, 0xc7, 0xc4, 0x4e, 0xe3, 0x6c, //
                      0x51, 0xa7,                         //
@@ -74,12 +75,11 @@ const ble_uuid128_t midi_ble_characteristic_uuid =
                      0x68, 0x38,                         //
                      0xdb, 0xe5, 0x72, 0x77);
 
-static const struct ble_gatt_chr_def midi_ble_characteristic[] = {
+static struct ble_gatt_chr_def midi_ble_characteristic[] = {
     {.uuid = &midi_ble_characteristic_uuid.u,
      .access_cb = cs_midi_ble_characteristic_callback,
-     .flags = BLE_GATT_CHR_F_READ | BLE_GATT_CHR_F_READ_ENC |
-              BLE_GATT_CHR_F_WRITE_NO_RSP | BLE_GATT_CHR_F_WRITE_ENC |
-              BLE_GATT_CHR_F_NOTIFY | BLE_GATT_CHR_F_NOTIFY_INDICATE_ENC},
+     .flags = BLE_GATT_CHR_F_READ | BLE_GATT_CHR_F_WRITE_NO_RSP |
+              BLE_GATT_CHR_F_NOTIFY},
     {0}, // sentinel
 };
 
@@ -91,6 +91,16 @@ static const struct ble_gatt_svc_def midi_ble_service[] = {
 };
 
 #endif
+
+inline void midi_ble_configure_enc(bool enable) {
+    ble_gatt_chr_flags enc_flags =
+        BLE_GATT_CHR_F_READ_ENC | BLE_GATT_CHR_F_WRITE_ENC;
+#ifdef BLE_GATT_CHR_F_NOTIFY_INDICATE_ENC
+    enc_flags |= BLE_GATT_CHR_F_NOTIFY_INDICATE_ENC;
+#endif
+    enable ? midi_ble_characteristic[0].flags |= enc_flags
+           : midi_ble_characteristic[0].flags &= ~enc_flags;
+}
 
 inline const struct ble_gatt_svc_def *midi_ble_get_service(void) {
     return midi_ble_service;

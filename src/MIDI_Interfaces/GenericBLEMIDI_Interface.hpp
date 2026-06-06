@@ -94,6 +94,9 @@ class GenericBLEMIDI_Interface : public MIDI_Interface {
     /// Set the BLE device name. Must be called before @ref begin().
     /// Length is limited by the size of the BLE advertising packets.
     void setName(const char *name);
+    /// Require encryption of the MIDI characteristic. Must be called before
+    /// @ref begin(). Currently only supported by the NimBLE backend.
+    void requireEncryption(bool require = true);
     /// Set the timeout, the number of milliseconds to buffer the outgoing MIDI
     /// messages. A shorter timeout usually results in lower latency, but also
     /// causes more overhead, because more packets might be required.

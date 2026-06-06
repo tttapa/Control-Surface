@@ -75,6 +75,7 @@ inline bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
     cs_midi_ble_state.instance = &instance;
     cs_midi_ble_state.settings = ble_settings;
     cs::midi_ble_nimble::state = &cs_midi_ble_state;
+    midi_ble_configure_enc(ble_settings.require_encryption);
     const auto *gatt_server_services = midi_ble_get_service();
     CS_CHECK_ZERO(ble_gatts_count_cfg(gatt_server_services));
     CS_CHECK_ZERO(ble_gatts_add_svcs(gatt_server_services));

@@ -154,6 +154,11 @@ void GenericBLEMIDI_Interface<BackendT>::setName(const char *name) {
 }
 
 template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::requireEncryption(bool require) {
+    ble_settings.require_encryption = require;
+}
+
+template <class BackendT>
 void GenericBLEMIDI_Interface<BackendT>::begin() {
     backend.begin(ble_settings);
 }

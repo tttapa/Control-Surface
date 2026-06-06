@@ -217,26 +217,34 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
                 auto rc = ble_gap_conn_find(conn_handle, &desc);
                 assert(rc == 0);
                 cs::midi_ble_nimble::print_conn_desc(&desc);
-                // TODO: is this the correct place?
-                // Without this, Android does not initiate bonding or SC, but
-                // with it, Windows starts a connect/disconnect loop on the
-                // second connection ...
-                // I believe this should be handled by the Android
-                // security manager automatically, and the peripheral should not
-                // initiate security itself. Anyway, this is disabled by default
-                // for now; I've spent enough time on this already.
-                if (settings.initiate_security && !desc.sec_state.bonded &&
-                    !desc.sec_state.encrypted &&
-                    !desc.sec_state.authenticated) {
-                    ESP_LOGI("CS-BLEMIDI", "initiating secure connection");
-                    if (auto rc = ble_gap_security_initiate(conn_handle);
-                        rc != 0) {
-                        ESP_LOGE("CS-BLEMIDI",
-                                 "failed to initiate secure connection; rc=%d",
-                                 rc);
-                        return ble_gap_terminate(conn_handle,
-                                                 BLE_ERR_REM_USER_CONN_TERM);
+                // If encryption required for the MIDI characteristic, the
+                // central will initiate security automatically. If encryption
+                // is not required we could initiate it ourselves, because in
+                // that case Android does not initiate bonding or SC. However,
+                // this causes issues on Windows, which enters a
+                // connect/disconnect loop on the second connection, because
+                // then both the peripheral and the central are trying to
+                // initiate a secure connection at the same time. Therefore,
+                // initiate_security is off by default.
+                if (settings.initiate_security) {
+                    if (!desc.sec_state.bonded && !desc.sec_state.encrypted &&
+                        !desc.sec_state.authenticated) {
+                        ESP_LOGI("CS-BLEMIDI", "initiating secure connection");
+                        if (auto rc = ble_gap_security_initiate(conn_handle);
+                            rc != 0) {
+                            ESP_LOGE(
+                                "CS-BLEMIDI",
+                                "failed to initiate secure connection; rc=%d",
+                                rc);
+                            return ble_gap_terminate(
+                                conn_handle, BLE_ERR_REM_USER_CONN_TERM);
+                        }
                     }
+                } else if (!settings.require_encryption) {
+                    // Update the connection parameters immediately.
+                    // If encryption is enabled, we will do this after
+                    // encryption is established
+                    update_connection_params(conn_handle, settings);
                 }
                 if (auto *inst = cs::midi_ble_nimble::state->instance)
                     inst->handleConnect(cs::BLEConnectionHandle {conn_handle});
@@ -285,12 +293,13 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
             auto conn_handle = event->enc_change.conn_handle;
             struct ble_gap_conn_desc desc;
             auto rc = ble_gap_conn_find(conn_handle, &desc);
-            assert(rc == 0);
-            cs::midi_ble_nimble::print_conn_desc(&desc);
-            // Update the connection parameters if successful
-            if (event->enc_change.status == 0) {
-                const auto &settings = cs::midi_ble_nimble::state->settings;
-                update_connection_params(conn_handle, settings);
+            if (rc == 0) {
+                cs::midi_ble_nimble::print_conn_desc(&desc);
+                // Update the connection parameters if successful
+                if (event->enc_change.status == 0) {
+                    const auto &settings = cs::midi_ble_nimble::state->settings;
+                    update_connection_params(conn_handle, settings);
+                }
             }
         } break;
 
@@ -331,8 +340,8 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
             struct ble_gap_conn_desc desc;
             auto rc =
                 ble_gap_conn_find(event->repeat_pairing.conn_handle, &desc);
-            assert(rc == 0);
-            ble_store_util_delete_peer(&desc.peer_id_addr);
+            if (rc == 0)
+                ble_store_util_delete_peer(&desc.peer_id_addr);
 
             // Return BLE_GAP_REPEAT_PAIRING_RETRY to indicate that the host should
             // continue with the pairing operation.

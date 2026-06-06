@@ -60,6 +60,8 @@ BidirectionalMIDI_Pipe pipes;
 void setup() {
   // Change the name of the BLE device (must be done before initializing it)
   midi_ble.setName("MIDI Adapter");
+  // Do not require pairing or encryption
+  midi_ble.requireEncryption(false);
   // Manually route MIDI input from the serial interface to the BLE interface,
   // and the MIDI input from the BLE interface to the serial interface
   midi_ser | pipes | midi_ble;
