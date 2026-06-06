@@ -1,0 +1,26 @@
+<map id="NoteCCKPRangeLEDs&lt; Type, BankSize, RangeLen &gt;" name="NoteCCKPRangeLEDs&lt; Type, BankSize, RangeLen &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="484,2451,687,2671"/>
+<area shape="rect" id="Node000002" href="$d9/dd1/classBankable_1_1NoteCCKPRange.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="402,2110,585,2350"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="533,2363,557,2450,552,2451,528,2364"/>
+<area shape="rect" id="Node000003" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="136,1465,379,2009"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="387,2002,438,2109,434,2111,382,2004"/>
+<area shape="rect" id="Node000004" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="59,960,365,1375"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="232,1388,238,1465,233,1465,227,1388"/>
+<area shape="rect" id="Node000005" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="117,665,307,911"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="215,925,215,960,209,960,209,925"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="116,396,308,616"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="215,630,215,665,209,665,209,630"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,95,197,235"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="131,247,179,395,174,396,125,249"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="221,5,424,325"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="273,327,255,381,250,379,268,325"/>
+<area shape="rect" id="Node000009" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="390,1135,589,1200"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="474,1214,371,1466,366,1464,469,1212"/>
+<area shape="rect" id="Node000010" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="403,1677,611,1797"/>
+<area shape="poly" id="edge10_Node000010_Node000009" title=" " alt="" coords="482,1201,459,1290,440,1399,439,1469,448,1539,463,1604,480,1661,475,1662,457,1605,442,1539,433,1469,435,1398,454,1288,477,1200"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="511,1663,518,1539,516,1399,505,1290,492,1201,497,1200,510,1289,521,1399,523,1540,516,1663"/>
+<area shape="rect" id="Node000011" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="635,1580,824,1895"/>
+<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="675,1896,625,2010,579,2097,574,2095,620,2008,670,1894"/>
+<area shape="rect" id="Node000012" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="609,2080,749,2380"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="639,2381,623,2436,618,2434,634,2380"/>
+</map>

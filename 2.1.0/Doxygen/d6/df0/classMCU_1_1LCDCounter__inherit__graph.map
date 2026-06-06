@@ -1,0 +1,5 @@
+<map id="LCDCounter" name="LCDCounter">
+<area shape="rect" id="Node000001" title="Counts the number of instances of the LCD class." alt="" coords="21,5,147,111"/>
+<area shape="rect" id="Node000002" href="$d5/d2e/classMCU_1_1LCD.html" title="A class that represents the Mackie Control Universal LCD display and saves the text it receives." alt="" coords="5,159,163,464"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,125,87,158,81,158,81,125"/>
+</map>

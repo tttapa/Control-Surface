@@ -1,0 +1,8 @@
+<map id="GenericMIDIAbsoluteEncoder&lt; Enc, Sender &gt;" name="GenericMIDIAbsoluteEncoder&lt; Enc, Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="81,763,317,1075"/>
+<area shape="rect" id="node5" href="$d8/d2f/classCCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="5,1123,183,1215"/>
+<area shape="rect" id="node6" href="$d7/d70/classPBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="207,1123,405,1215"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="124,593,275,715"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="97,233,301,545"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="97,5,301,185"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="NoteChordButton" name="NoteChordButton">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="573,1748,732,1855"/>
+<area shape="rect" id="node2" href="$da/d96/classBankable_1_1MIDIChordButton.html" title=" " alt="" coords="557,1533,748,1699"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="164,1239,315,1361"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="137,703,341,1074"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,373,228,479"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="252,219,475,633"/>
+<area shape="rect" id="node7" href="$df/d0d/classAH_1_1UniquePtr.html" title=" " alt="" coords="339,1151,537,1449"/>
+<area shape="rect" id="node8" href="$db/dbe/classIChord.html" title=" " alt="" coords="388,835,488,942"/>
+<area shape="rect" id="node9" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="561,1144,745,1456"/>
+<area shape="rect" id="node10" href="$dc/dd4/classDigitalNoteSender.html" title="Class that sends MIDI note on and off messages." alt="" coords="769,1232,936,1368"/>
+<area shape="rect" id="node11" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="960,1247,1121,1353"/>
+<area shape="rect" id="node12" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="757,835,991,942"/>
+<area shape="rect" id="node13" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title=" " alt="" coords="738,351,1010,501"/>
+<area shape="rect" id="node14" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="793,5,955,156"/>
+<area shape="rect" id="node15" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="1015,696,1205,1081"/>
+</map>

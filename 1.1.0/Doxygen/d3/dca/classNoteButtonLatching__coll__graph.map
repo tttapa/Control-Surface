@@ -1,0 +1,11 @@
+<map id="NoteButtonLatching" name="NoteButtonLatching">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="272,1559,429,1665"/>
+<area shape="rect" id="node2" href="$d8/de1/classMIDIButtonLatching.html" title=" " alt="" coords="272,1373,429,1509"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="5,991,144,1274"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="9,5,191,112"/>
+<area shape="rect" id="node6" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="91,161,325,444"/>
+<area shape="rect" id="node5" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="91,521,317,892"/>
+<area shape="rect" id="node7" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="169,991,333,1274"/>
+<area shape="rect" id="node8" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="357,955,544,1311"/>
+<area shape="rect" id="node9" href="$dc/dd4/classDigitalNoteSender.html" title=" " alt="" coords="569,1065,717,1201"/>
+</map>

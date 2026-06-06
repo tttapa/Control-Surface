@@ -1,0 +1,7 @@
+<map id="BluetoothMIDI_Interface" name="BluetoothMIDI_Interface">
+<area shape="rect" id="node1" title="Bluetooth Low Energy MIDI Interface for the ESP32." alt="" coords="188,857,372,1301"/>
+<area shape="rect" id="node2" href="$de/d76/classParsing__MIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="5,527,184,809"/>
+<area shape="rect" id="node3" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="15,5,174,479"/>
+<area shape="rect" id="node4" title=" " alt="" coords="209,629,351,707"/>
+<area shape="rect" id="node5" title=" " alt="" coords="376,629,563,707"/>
+</map>

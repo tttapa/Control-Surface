@@ -1,0 +1,8 @@
+<map id="Bankable::MIDIButtons&lt; Sender, NUMBER_OF_BUTTONS &gt;" name="Bankable::MIDIButtons&lt; Sender, NUMBER_OF_BUTTONS &gt;">
+<area shape="rect" id="node1" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="87,549,337,744"/>
+<area shape="rect" id="node6" href="$d6/d5b/classBankable_1_1NoteButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="115,792,309,928"/>
+<area shape="rect" id="node2" href="$d3/d43/classBankableMIDIOutput.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="33,307,197,413"/>
+<area shape="rect" id="node3" href="$d4/d6e/classBankableMIDIOutput__Base.html" title=" " alt="" coords="5,5,205,171"/>
+<area shape="rect" id="node4" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="241,219,380,501"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="230,35,413,141"/>
+</map>

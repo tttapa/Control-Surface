@@ -1,0 +1,14 @@
+<map id="SysExBuffer.hpp" name="SysExBuffer.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="475,5,602,32"/>
+<area shape="rect" id="node2" href="$d1/d22/SerialMIDI__Parser_8hpp.html" title=" " alt="" coords="288,80,451,107"/>
+<area shape="rect" id="node9" href="$d5/d0b/SysExBuffer_8cpp.html" title=" " alt="" coords="475,80,602,107"/>
+<area shape="rect" id="node10" href="$d8/d21/USBMIDI__Parser_8hpp.html" title=" " alt="" coords="626,80,779,107"/>
+<area shape="rect" id="node3" href="$d1/d23/SerialMIDI__Interface_8hpp.html" title=" " alt="" coords="230,155,413,181"/>
+<area shape="rect" id="node8" href="$d1/d49/SerialMIDI__Parser_8cpp.html" title=" " alt="" coords="437,155,600,181"/>
+<area shape="rect" id="node4" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="435,304,573,331"/>
+<area shape="rect" id="node5" href="$df/ded/BluetoothMIDI__Interface_8hpp.html" title=" " alt="" coords="5,229,213,256"/>
+<area shape="rect" id="node6" href="$db/d55/DebugMIDI__Interface_8hpp.html" title=" " alt="" coords="237,229,424,256"/>
+<area shape="rect" id="node7" href="$d1/d40/DebugMIDI__Interface_8cpp.html" title=" " alt="" coords="224,304,411,331"/>
+<area shape="rect" id="node11" href="$d1/d64/USBMIDI__Interface_8hpp.html" title=" " alt="" coords="543,229,715,256"/>
+<area shape="rect" id="node12" href="$d8/dd8/USBMIDI__Parser_8cpp.html" title=" " alt="" coords="675,155,827,181"/>
+</map>

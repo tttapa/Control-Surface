@@ -1,0 +1,41 @@
+<map id="CCSmartPotentiometer&lt; NumBanks &gt;" name="CCSmartPotentiometer&lt; NumBanks &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="811,2657,1001,2737"/>
+<area shape="rect" id="Node000002" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title=" " alt="" coords="804,2093,1008,2608"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="909,2622,909,2657,903,2657,903,2622"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="663,1540,805,1665"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="751,1678,821,2002,842,2092,837,2094,815,2003,746,1680"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="277,769,473,989"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="467,998,520,1065,577,1130,599,1150,618,1163,636,1178,654,1201,675,1244,692,1289,716,1381,729,1468,735,1540,730,1540,724,1468,711,1382,687,1290,670,1246,649,1204,632,1181,615,1167,596,1154,573,1134,516,1068,462,1002"/>
+<area shape="rect" id="Node000006" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="186,1480,413,1725"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="365,1003,315,1480,310,1479,360,1002"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="313,2291,509,2411"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="415,2277,429,2069,438,1825,442,1636,438,1446,422,1203,410,1093,393,990,399,989,415,1092,427,1202,443,1446,447,1636,443,1826,434,2069,421,2277"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="314,1725,333,1889,358,2069,397,2274,392,2275,353,2070,327,1889,309,1726"/>
+<area shape="rect" id="Node000007" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="5,2201,212,2501"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="271,1726,153,2185,148,2184,266,1725"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="68,2201,48,2108,30,1998,15,1875,5,1744,5,1607,15,1469,39,1333,57,1266,80,1202,114,1132,160,1069,211,1012,263,963,267,967,215,1015,164,1072,119,1135,84,1204,62,1268,45,1334,21,1470,10,1607,11,1744,20,1875,35,1997,53,2107,73,2200"/>
+<area shape="rect" id="Node000008" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="829,1550,983,1655"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="909,1656,909,2077,903,2077,903,1656"/>
+<area shape="rect" id="Node000009" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="793,817,1019,942"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="909,956,909,1550,903,1550,903,956"/>
+<area shape="rect" id="Node000010" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="664,339,903,519"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="814,532,892,816,887,817,809,533"/>
+<area shape="rect" id="Node000011" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="703,5,863,231"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="786,231,786,322,781,322,781,231"/>
+<area shape="rect" id="Node000012" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="587,627,769,1132"/>
+<area shape="poly" id="edge13_Node000008_Node000012" title=" " alt="" coords="771,1102,784,1131,803,1166,820,1202,848,1290,870,1380,899,1533,894,1534,865,1381,843,1291,816,1204,799,1168,780,1133,766,1104"/>
+<area shape="rect" id="Node000013" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="1007,1203,1203,2003"/>
+<area shape="poly" id="edge14_Node000002_Node000013" title=" " alt="" coords="1009,1977,985,2070,982,2078,977,2077,979,2069,1004,1976"/>
+<area shape="rect" id="Node000014" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="1119,685,1330,1074"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="1193,1088,1174,1203,1168,1202,1188,1087"/>
+<area shape="rect" id="Node000015" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="1425,326,1541,531"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="1430,533,1416,557,1341,688,1336,685,1412,555,1425,530"/>
+<area shape="rect" id="Node000016" href="$d9/d74/classAH_1_1EMA.html" title=" " alt="" coords="927,301,1120,556"/>
+<area shape="poly" id="edge17_Node000014_Node000016" title=" " alt="" coords="1083,555,1133,669,1129,671,1078,558"/>
+<area shape="rect" id="Node000017" href="$da/df9/classAH_1_1Hysteresis.html" title=" " alt="" coords="1144,307,1401,551"/>
+<area shape="poly" id="edge18_Node000014_Node000017" title=" " alt="" coords="1262,552,1250,669,1244,668,1257,551"/>
+<area shape="rect" id="Node000018" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="1227,1460,1441,1745"/>
+<area shape="poly" id="edge19_Node000002_Node000018" title=" " alt="" coords="1310,1746,1274,1875,1248,1941,1218,2004,1175,2072,1125,2137,1073,2196,1022,2249,1018,2245,1069,2193,1121,2133,1170,2069,1213,2001,1244,1939,1269,1873,1305,1745"/>
+<area shape="rect" id="Node000019" href="$da/d07/classContinuousCCSender.html" title="Class that sends continuous MIDI control change messages with a resolution of 7 bits." alt="" coords="488,1560,639,1645"/>
+<area shape="poly" id="edge20_Node000002_Node000019" title=" " alt="" coords="569,1645,578,1715,594,1805,618,1905,654,2002,684,2060,719,2118,796,2222,791,2225,715,2121,679,2063,649,2004,613,1906,588,1806,573,1716,564,1646"/>
+</map>

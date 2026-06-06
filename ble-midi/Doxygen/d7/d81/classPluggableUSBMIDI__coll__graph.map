@@ -1,0 +1,14 @@
+<map id="PluggableUSBMIDI" name="PluggableUSBMIDI">
+<area shape="rect" id="Node000001" title=" " alt="" coords="48,511,260,1905"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,313,159,378"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,392,91,510,86,511,79,392"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="93,392,106,510,100,511,87,392"/>
+<area shape="rect" id="Node000003" href="$d3/d97/structPluggableUSBMIDI_1_1Reading.html" title="State for reading incoming USB&#45;MIDI data." alt="" coords="183,243,272,448"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="221,448,217,495,212,494,216,448"/>
+<area shape="rect" id="Node000004" href="$d8/d24/structPluggableUSBMIDI_1_1Reading_1_1Buffer.html" title=" " alt="" coords="194,25,261,131"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="230,131,230,226,225,226,225,131"/>
+<area shape="rect" id="Node000005" href="$da/d5e/structPluggableUSBMIDI_1_1Writing.html" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="297,263,475,428"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="367,429,267,798,262,797,361,428"/>
+<area shape="rect" id="Node000006" href="$d1/d78/structPluggableUSBMIDI_1_1Writing_1_1Buffer.html" title=" " alt="" coords="324,5,448,151"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="389,151,389,246,383,246,383,151"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="BulkRX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;" name="BulkRX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;">
+<area shape="rect" id="Node000001" title="Receives Bulk packets (OUT for device mode, IN for host mode)" alt="" coords="11,5,204,325"/>
+<area shape="rect" id="Node000002" href="$de/d93/classTeensyHostMIDI.html" title="Teensy USB Host MIDI driver." alt="" coords="5,373,209,1248"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,339,110,373,105,373,105,339"/>
+</map>

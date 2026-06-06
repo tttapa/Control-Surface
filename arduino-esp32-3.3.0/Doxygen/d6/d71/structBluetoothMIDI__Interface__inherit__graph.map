@@ -1,0 +1,23 @@
+<map id="BluetoothMIDI_Interface" name="BluetoothMIDI_Interface">
+<area shape="rect" id="Node000001" title="A class for MIDI interfaces sending MIDI messages over a Bluetooth Low Energy (BLE) connection." alt="" coords="515,2947,687,3012"/>
+<area shape="rect" id="Node000002" href="$d0/dea/classGenericBLEMIDI__Interface.html" title=" " alt="" coords="496,2379,705,2899"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="603,2912,603,2946,598,2946,598,2912"/>
+<area shape="rect" id="Node000003" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="496,1745,705,2331"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="603,2344,603,2378,598,2378,598,2344"/>
+<area shape="rect" id="Node000004" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="196,1252,347,1317"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,1331,286,1403,302,1496,326,1597,362,1696,391,1754,425,1811,498,1914,494,1917,420,1814,386,1757,357,1698,321,1599,297,1497,281,1404,272,1332"/>
+<area shape="rect" id="Node000005" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="5,299,244,764"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="175,777,268,1251,263,1252,170,778"/>
+<area shape="rect" id="Node000006" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="268,239,491,824"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="338,839,279,1252,273,1251,333,838"/>
+<area shape="rect" id="Node000007" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="371,872,593,1697"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="552,1711,557,1744,552,1745,547,1711"/>
+<area shape="rect" id="Node000008" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="617,1222,824,1347"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="711,1361,650,1746,645,1745,706,1360"/>
+<area shape="rect" id="Node000009" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="623,349,818,714"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="723,728,723,1222,718,1222,718,728"/>
+<area shape="rect" id="Node000010" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="623,5,818,191"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="723,205,723,348,718,348,718,205"/>
+<area shape="rect" id="Node000011" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="849,1222,974,1347"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="910,1361,902,1434,888,1520,868,1610,838,1698,810,1756,778,1812,708,1914,703,1911,774,1809,806,1754,833,1696,863,1609,883,1519,897,1433,904,1361"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="VUDisplay&lt; VU_t &gt;" name="VUDisplay&lt; VU_t &gt;">
+<area shape="rect" id="Node000001" title="Displays a MCU level meter." alt="" coords="490,1072,663,1457"/>
+<area shape="rect" id="Node000002" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="225,616,379,981"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="389,923,480,1071,492,1092,487,1094,476,1073,384,926"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1212,252,1317"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="227,874,178,935,157,970,141,1006,128,1054,121,1104,122,1195,117,1195,116,1103,122,1053,135,1004,152,968,174,932,223,871"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="277,1115,466,1415"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="294,981,301,1048,312,1098,307,1099,295,1048,289,982"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="155,1198,217,1047,241,980,246,982,222,1049,160,1200"/>
+<area shape="rect" id="Node000004" href="$df/d42/classDisplayInterface.html" title="An interface for displays." alt="" coords="199,120,405,545"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="305,546,305,600,299,600,299,546"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="280,5,324,71"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="305,85,305,120,299,120,299,85"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="354,1115,339,1006,338,998,343,997,345,1005,359,1114"/>
+<area shape="rect" id="Node000007" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="512,686,641,911"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="579,912,579,1056,574,1056,574,912"/>
+</map>

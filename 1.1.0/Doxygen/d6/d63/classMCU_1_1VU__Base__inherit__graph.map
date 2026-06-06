@@ -1,0 +1,7 @@
+<map id="MCU::VU_Base&lt; NumValues, Callback &gt;" name="MCU::VU_Base&lt; NumValues, Callback &gt;">
+<area shape="rect" id="node1" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="183,505,384,861"/>
+<area shape="rect" id="node2" href="$d1/df7/classMIDIInputElementChannelPressure.html" title=" " alt="" coords="55,263,303,457"/>
+<area shape="rect" id="node3" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="5,5,161,215"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="185,57,368,163"/>
+<area shape="rect" id="node5" href="$d2/de9/classIVU.html" title="An abstract interface for VU meters." alt="" coords="327,292,450,428"/>
+</map>

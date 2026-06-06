@@ -1,0 +1,15 @@
+<map id="VULEDs&lt; BankSize, NumLEDs &gt;" name="VULEDs&lt; BankSize, NumLEDs &gt;">
+<area shape="rect" id="node1" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="439,1637,673,1817"/>
+<area shape="rect" id="node2" href="$d0/d43/classMCU_1_1Bankable_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="350,1307,541,1589"/>
+<area shape="rect" id="node3" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="66,1071,374,1251"/>
+<area shape="rect" id="node4" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,865,229,1001"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="18,593,217,803"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="17,233,217,545"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="17,5,217,185"/>
+<area shape="rect" id="node8" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="254,895,461,972"/>
+<area shape="rect" id="node9" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="249,608,465,788"/>
+<area shape="rect" id="node10" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="398,1064,535,1259"/>
+<area shape="rect" id="node11" href="$d1/d29/classMCU_1_1VULEDsDriver.html" title="Small helper to display the VU meters on an LED bar display." alt="" coords="565,1402,771,1494"/>
+<area shape="rect" id="node12" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="581,1064,755,1259"/>
+<area shape="rect" id="node13" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="601,851,735,1016"/>
+</map>

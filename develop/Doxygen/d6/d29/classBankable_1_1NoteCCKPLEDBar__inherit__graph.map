@@ -1,0 +1,27 @@
+<map id="NoteCCKPLEDBar&lt; Type, BankSize, NumLEDs &gt;" name="NoteCCKPLEDBar&lt; Type, BankSize, NumLEDs &gt;">
+<area shape="rect" id="Node000001" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="465,2077,648,2257"/>
+<area shape="rect" id="Node000002" href="$d5/dcd/classBankable_1_1NoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="360,1829,543,2029"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="503,2041,519,2076,514,2078,499,2043"/>
+<area shape="rect" id="Node000003" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="167,1237,403,1781"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="400,1793,414,1828,409,1830,395,1795"/>
+<area shape="rect" id="Node000004" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,775,271,1189"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="202,1202,212,1236,206,1238,197,1203"/>
+<area shape="rect" id="Node000005" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="43,481,233,727"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="141,740,141,774,135,774,135,740"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="42,193,234,433"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="141,447,141,481,135,481,135,447"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="42,5,234,145"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="141,159,141,193,135,193,135,159"/>
+<area shape="rect" id="Node000008" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="295,949,493,1015"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="387,1029,344,1238,339,1237,382,1028"/>
+<area shape="rect" id="Node000009" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="290,534,498,674"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="397,688,397,949,391,949,391,688"/>
+<area shape="rect" id="Node000010" href="$d8/d87/classInterfaces_1_1IValue.html" title="Abstract interface for MIDI input elements that receive and store a 7&#45;bit value." alt="" coords="427,1457,529,1562"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="477,1576,460,1829,455,1829,471,1576"/>
+<area shape="rect" id="Node000011" href="$d6/d44/classNoteCCKPLEDBarDriver.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="567,1879,759,1979"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="638,1993,599,2078,595,2076,633,1991"/>
+<area shape="rect" id="Node000012" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="581,1339,746,1679"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="666,1693,666,1879,661,1879,661,1693"/>
+<area shape="rect" id="Node000013" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="600,889,727,1075"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="666,1088,666,1339,661,1339,661,1088"/>
+</map>

@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/MIDI_Outputs/Bankable/Abstract">src/MIDI_Outputs/Bankable/Abstract</a> - MIDIFilteredAnalog.hpp<span style="font-size: 80%;"> (source / <a href="MIDIFilteredAnalog.hpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">20.0&nbsp;%</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">2</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 17:27:32</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryLo">25.0&nbsp;%</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">4</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #pragma once</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : #include &lt;AH/Hardware/FilteredAnalog.hpp&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              : #include &lt;Banks/BankableAddresses.hpp&gt;</span>
+<span id="L5"><span class="lineNum">       5</span>              : #include &lt;Def/Def.hpp&gt;</span>
+<span id="L6"><span class="lineNum">       6</span>              : #include &lt;MIDI_Outputs/Abstract/MIDIOutputElement.hpp&gt;</span>
+<span id="L7"><span class="lineNum">       7</span>              : </span>
+<span id="L8"><span class="lineNum">       8</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L9"><span class="lineNum">       9</span>              : </span>
+<span id="L10"><span class="lineNum">      10</span>              : namespace Bankable {</span>
+<span id="L11"><span class="lineNum">      11</span>              : </span>
+<span id="L12"><span class="lineNum">      12</span>              : /**</span>
+<span id="L13"><span class="lineNum">      13</span>              :  * @brief   A class for potentiometers and faders that send MIDI events</span>
+<span id="L14"><span class="lineNum">      14</span>              :  *          and can be added to a Bank.</span>
+<span id="L15"><span class="lineNum">      15</span>              :  *</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * The analog input is filtered and hysteresis is applied.</span>
+<span id="L17"><span class="lineNum">      17</span>              :  *</span>
+<span id="L18"><span class="lineNum">      18</span>              :  * @see     FilteredAnalog</span>
+<span id="L19"><span class="lineNum">      19</span>              :  */</span>
+<span id="L20"><span class="lineNum">      20</span>              : template &lt;class BankAddress, class Sender&gt;</span>
+<span id="L21"><span class="lineNum">      21</span>              : class MIDIFilteredAnalog : public MIDIOutputElement {</span>
+<span id="L22"><span class="lineNum">      22</span>              :   protected:</span>
+<span id="L23"><span class="lineNum">      23</span>              :     /**</span>
+<span id="L24"><span class="lineNum">      24</span>              :      * @brief   Construct a new MIDIFilteredAnalog.</span>
+<span id="L25"><span class="lineNum">      25</span>              :      *</span>
+<span id="L26"><span class="lineNum">      26</span>              :      * @param   bankAddress</span>
+<span id="L27"><span class="lineNum">      27</span>              :      *          The bankable MIDI address to send to.</span>
+<span id="L28"><span class="lineNum">      28</span>              :      * @param   analogPin</span>
+<span id="L29"><span class="lineNum">      29</span>              :      *          The analog input pin with the wiper of the potentiometer</span>
+<span id="L30"><span class="lineNum">      30</span>              :      *          connected.</span>
+<span id="L31"><span class="lineNum">      31</span>              :      * @param   sender</span>
+<span id="L32"><span class="lineNum">      32</span>              :      *          The MIDI sender to use.</span>
+<span id="L33"><span class="lineNum">      33</span>              :      */</span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           4 :     MIDIFilteredAnalog(BankAddress bankAddress, pin_t analogPin,</span></span>
+<span id="L35"><span class="lineNum">      35</span>              :                        const Sender &amp;sender)</span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           4 :         : address(bankAddress), filteredAnalog(analogPin), sender(sender) {}</span></span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              :   public:</span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaUNC">           0 :     void begin() final override { filteredAnalog.resetToCurrentValue(); }</span></span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :     void update() final override {</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC">           0 :         if (filteredAnalog.update())</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaUNC">           0 :             forcedUpdate();</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span>              :     /// Send the value of the analog input over MIDI, even if the value didn't</span>
+<span id="L47"><span class="lineNum">      47</span>              :     /// change.</span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC">           0 :     void forcedUpdate() {</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :         sender.send(filteredAnalog.getValue(), address.getActiveAddress());</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L51"><span class="lineNum">      51</span>              : </span>
+<span id="L52"><span class="lineNum">      52</span>              :     /**</span>
+<span id="L53"><span class="lineNum">      53</span>              :      * @brief   Specify a mapping function that is applied to the raw</span>
+<span id="L54"><span class="lineNum">      54</span>              :      *          analog value before sending.</span>
+<span id="L55"><span class="lineNum">      55</span>              :      *</span>
+<span id="L56"><span class="lineNum">      56</span>              :      * @param   fn</span>
+<span id="L57"><span class="lineNum">      57</span>              :      *          A function pointer to the mapping function. This function</span>
+<span id="L58"><span class="lineNum">      58</span>              :      *          should take the filtered analog value of @f$ 16 - </span>
+<span id="L59"><span class="lineNum">      59</span>              :      *          \mathrm{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits as a parameter, </span>
+<span id="L60"><span class="lineNum">      60</span>              :      *          and should return a value in the same range.</span>
+<span id="L61"><span class="lineNum">      61</span>              :      * </span>
+<span id="L62"><span class="lineNum">      62</span>              :      * @see     FilteredAnalog::map     </span>
+<span id="L63"><span class="lineNum">      63</span>              :      */</span>
+<span id="L64"><span class="lineNum">      64</span>              :     void map(MappingFunction fn) { filteredAnalog.map(fn); }</span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span>              :     /// Invert the analog value.</span>
+<span id="L67"><span class="lineNum">      67</span>              :     void invert() { filteredAnalog.invert(); }</span>
+<span id="L68"><span class="lineNum">      68</span>              : </span>
+<span id="L69"><span class="lineNum">      69</span>              :     /**</span>
+<span id="L70"><span class="lineNum">      70</span>              :      * @brief   Get the raw value of the analog input (this is the value </span>
+<span id="L71"><span class="lineNum">      71</span>              :      *          without applying the filter or the mapping function first).</span>
+<span id="L72"><span class="lineNum">      72</span>              :      */</span>
+<span id="L73"><span class="lineNum">      73</span>              :     analog_t getRawValue() const { return filteredAnalog.getRawValue(); }</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              :     /**</span>
+<span id="L76"><span class="lineNum">      76</span>              :      * @brief   Get the maximum value that can be returned from @ref getRawValue.</span>
+<span id="L77"><span class="lineNum">      77</span>              :      */</span>
+<span id="L78"><span class="lineNum">      78</span>              :     static constexpr analog_t getMaxRawValue() {</span>
+<span id="L79"><span class="lineNum">      79</span>              :         return FilteredAnalog::getMaxRawValue();</span>
+<span id="L80"><span class="lineNum">      80</span>              :     }</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              :     /**</span>
+<span id="L83"><span class="lineNum">      83</span>              :      * @brief   Get the value of the analog input (this is the value after first</span>
+<span id="L84"><span class="lineNum">      84</span>              :      *          applying the mapping function).</span>
+<span id="L85"><span class="lineNum">      85</span>              :      */</span>
+<span id="L86"><span class="lineNum">      86</span>              :     analog_t getValue() const { return filteredAnalog.getValue(); }</span>
+<span id="L87"><span class="lineNum">      87</span>              : </span>
+<span id="L88"><span class="lineNum">      88</span>              :   protected:</span>
+<span id="L89"><span class="lineNum">      89</span>              :     BankAddress address;</span>
+<span id="L90"><span class="lineNum">      90</span>              :     using FilteredAnalog = AH::FilteredAnalog&lt;Sender::precision()&gt;;</span>
+<span id="L91"><span class="lineNum">      91</span>              :     FilteredAnalog filteredAnalog;</span>
+<span id="L92"><span class="lineNum">      92</span>              : </span>
+<span id="L93"><span class="lineNum">      93</span>              :   public:</span>
+<span id="L94"><span class="lineNum">      94</span>              :     Sender sender;</span>
+<span id="L95"><span class="lineNum">      95</span>              : };</span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              : } // namespace Bankable</span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span>              : END_CS_NAMESPACE</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

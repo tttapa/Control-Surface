@@ -1,0 +1,7 @@
+<map id="Parsing_MIDI_Interface" name="Parsing_MIDI_Interface">
+<area shape="rect" id="node1" title="An abstract class for MIDI interfaces." alt="" coords="319,740,498,1008"/>
+<area shape="rect" id="node2" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="5,204,143,677"/>
+<area shape="rect" id="node3" href="$df/d0c/classMIDI__Parser.html" title=" " alt="" coords="328,358,489,523"/>
+<area shape="rect" id="node4" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="347,5,470,141"/>
+<area shape="rect" id="node5" href="$de/d55/classMIDI__Callbacks.html" title="A class for callbacks from MIDI input." alt="" coords="513,380,675,501"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="NoteCCKPLED&lt; Type &gt;" name="NoteCCKPLED&lt; Type &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="33,1223,198,1408"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,775,225,1175"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,1188,118,1223,113,1223,113,1188"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="20,481,211,727"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,740,118,774,113,774,113,740"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="19,193,211,433"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="118,447,118,481,113,481,113,447"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="19,5,211,145"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="118,159,118,193,113,193,113,159"/>
+</map>

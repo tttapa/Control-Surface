@@ -1,0 +1,4 @@
+<map id="USBMIDI_Parser" name="USBMIDI_Parser">
+<area shape="rect" id="node1" title="Parser for MIDI over USB packets." alt="" coords="8,204,211,589"/>
+<area shape="rect" id="node2" href="$df/d0c/classMIDI__Parser.html" title="Base class for MIDI parsers." alt="" coords="5,5,213,156"/>
+</map>

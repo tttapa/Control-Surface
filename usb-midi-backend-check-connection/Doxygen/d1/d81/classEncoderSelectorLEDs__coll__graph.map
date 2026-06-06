@@ -1,0 +1,32 @@
+<map id="EncoderSelectorLEDs&lt; N &gt;" name="EncoderSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="Selector that reads from a rotary encoder. &#160;&#160;This version displays the setting using LEDs." alt="" coords="462,2061,653,2127"/>
+<area shape="rect" id="Node000002" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="461,1817,654,2012"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="560,2026,560,2061,555,2061,555,2026"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="224,1472,371,1672"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="381,1679,486,1815,481,1819,377,1682"/>
+<area shape="rect" id="Node000004" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="7,1121,131,1207"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,1218,145,1325,232,1470,228,1473,140,1328,89,1221"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="155,1101,274,1227"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="233,1240,280,1471,275,1472,227,1241"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="117,573,312,939"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="217,953,217,1101,212,1101,212,953"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="129,363,176,572,171,574,124,364"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="273,512,262,558,257,557,268,510"/>
+<area shape="rect" id="Node000009" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="297,1111,463,1217"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="372,1217,323,1456,318,1455,367,1216"/>
+<area shape="rect" id="Node000010" href="$dd/da9/classAHEncoder.html" title="Class for reading quadrature encoders, heavily influenced by http://www.pjrc.com/teensy/td_libs_Encod..." alt="" coords="477,1389,638,1755"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="560,1755,560,1801,555,1801,555,1755"/>
+<area shape="poly" id="edge14_Node000010_Node000010" title=" " alt="" coords="640,1532,658,1546,665,1572,662,1589,654,1602,650,1599,657,1588,659,1572,653,1549,636,1537"/>
+<area shape="rect" id="Node000011" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="487,1001,627,1327"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="560,1327,560,1373,555,1373,555,1327"/>
+<area shape="rect" id="Node000012" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="652,1011,839,1317"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="677,1318,647,1383,643,1380,673,1316"/>
+<area shape="rect" id="Node000013" href="$dc/d9d/structDirectPinRead.html" title=" " alt="" coords="692,723,799,789"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="748,789,748,995,743,995,743,789"/>
+<area shape="rect" id="Node000014" href="$de/d62/structAtomicPosition.html" title=" " alt="" coords="863,1041,1049,1287"/>
+<area shape="poly" id="edge13_Node000010_Node000014" title=" " alt="" coords="885,1288,853,1329,776,1396,652,1497,649,1493,772,1392,849,1325,880,1285"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="791,1539,838,1605"/>
+<area shape="poly" id="edge15_Node000002_Node000015" title=" " alt="" coords="818,1605,811,1677,800,1718,782,1756,759,1787,731,1815,670,1860,666,1856,727,1811,755,1783,778,1753,795,1716,806,1676,813,1605"/>
+</map>

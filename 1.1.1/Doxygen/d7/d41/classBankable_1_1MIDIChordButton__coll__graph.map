@@ -1,0 +1,16 @@
+<map id="MIDIChordButton&lt; Sender &gt;" name="MIDIChordButton&lt; Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for momentary push buttons that send multiple MIDI events." alt="" coords="335,1401,525,1552"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="90,1027,229,1309"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,27,188,134"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="91,219,297,501"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="90,579,317,949"/>
+<area shape="rect" id="node6" title=" " alt="" coords="253,1129,316,1207"/>
+<area shape="rect" id="node7" href="$df/d0d/classAH_1_1UniquePtr.html" title=" " alt="" coords="341,1019,519,1317"/>
+<area shape="rect" id="node8" href="$db/dbe/classIChord.html" title=" " alt="" coords="385,711,475,817"/>
+<area shape="rect" id="node9" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="544,1012,708,1324"/>
+<area shape="rect" id="node10" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="732,1115,877,1221"/>
+<area shape="rect" id="node11" href="$d3/d43/classBankableMIDIOutput.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="584,711,748,817"/>
+<area shape="rect" id="node12" href="$d4/d6e/classBankableMIDIOutput__Base.html" title=" " alt="" coords="566,285,766,435"/>
+<area shape="rect" id="node13" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="591,5,741,156"/>
+<area shape="rect" id="node14" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="773,586,959,942"/>
+</map>

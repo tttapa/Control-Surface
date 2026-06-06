@@ -1,0 +1,16 @@
+<map id="MIDIFilteredAnalog.hpp" name="MIDIFilteredAnalog.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="274,5,449,31"/>
+<area shape="rect" id="Node000002" href="$d6/ddd/Bankable_2CCPotentiometer_8hpp.html" title=" " alt="" coords="5,79,165,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="304,37,131,81,129,76,303,31"/>
+<area shape="rect" id="Node000004" href="$d1/d82/ManyAddresses_2CCPotentiometer_8hpp.html" title=" " alt="" coords="189,79,349,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="338,41,286,81,283,76,334,37"/>
+<area shape="rect" id="Node000005" href="$d9/d99/Bankable_2PBPotentiometer_8hpp.html" title=" " alt="" coords="374,79,533,104"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="388,37,440,76,437,81,385,41"/>
+<area shape="rect" id="Node000006" href="$da/df2/ManyAddresses_2PBPotentiometer_8hpp.html" title=" " alt="" coords="557,79,715,104"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="419,32,592,76,591,81,418,37"/>
+<area shape="rect" id="Node000003" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="293,152,430,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="144,105,317,149,316,154,142,110"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="296,110,348,150,345,154,293,114"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="430,114,378,154,375,150,426,110"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="579,110,406,154,405,149,578,105"/>
+</map>

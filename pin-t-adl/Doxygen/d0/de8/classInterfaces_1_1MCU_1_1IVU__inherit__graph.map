@@ -1,0 +1,15 @@
+<map id="IVU" name="IVU">
+<area shape="rect" id="Node000001" title="An abstract interface for VU meters." alt="" coords="221,5,351,231"/>
+<area shape="rect" id="Node000002" href="$d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="27,349,156,554"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,228,184,280,145,350,141,347,180,277,212,225"/>
+<area shape="rect" id="Node000004" href="$d0/d43/classMCU_1_1Bankable_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="195,279,377,624"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="289,244,289,278,283,278,283,244"/>
+<area shape="rect" id="Node000006" href="$d8/d4c/classMCU_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="412,329,571,574"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="360,227,392,277,423,327,418,330,388,280,356,230"/>
+<area shape="rect" id="Node000003" href="$d9/dbf/classAudioVULEDs.html" title="A VU meter that reads from an Audio stream using the AudioAnalyzePeak class, and displays it on an LE..." alt="" coords="5,682,148,867"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,568,84,682,78,682,83,568"/>
+<area shape="rect" id="Node000005" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="173,672,399,877"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="289,638,289,672,283,672,283,638"/>
+<area shape="rect" id="Node000007" href="$df/d36/classMCU_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="424,682,583,867"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="499,588,503,682,497,682,494,588"/>
+</map>

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/MIDI_Outputs/Bankable/CCAbsoluteEncoder.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/MIDI_Outputs/Bankable">src/MIDI_Outputs/Bankable</a> - CCAbsoluteEncoder.hpp<span style="font-size: 80%;"> (source / <a href="CCAbsoluteEncoder.hpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 18:06:03</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #pragma once</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : #include &lt;Banks/BankAddresses.hpp&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              : #include &lt;MIDI_Outputs/Bankable/Abstract/MIDIAbsoluteEncoder.hpp&gt;</span>
+<span id="L5"><span class="lineNum">       5</span>              : #include &lt;MIDI_Senders/ContinuousCCSender.hpp&gt;</span>
+<span id="L6"><span class="lineNum">       6</span>              : </span>
+<span id="L7"><span class="lineNum">       7</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L8"><span class="lineNum">       8</span>              : </span>
+<span id="L9"><span class="lineNum">       9</span>              : namespace Bankable {</span>
+<span id="L10"><span class="lineNum">      10</span>              : </span>
+<span id="L11"><span class="lineNum">      11</span>              : /**</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * @brief   A class of MIDIOutputElement%s that read the input of a **quadrature</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *          (rotary) encoder** and send out absolute MIDI **Control Change**</span>
+<span id="L14"><span class="lineNum">      14</span>              :  *          events.</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * </span>
+<span id="L16"><span class="lineNum">      16</span>              :  * This version can be banked.</span>
+<span id="L17"><span class="lineNum">      17</span>              :  *</span>
+<span id="L18"><span class="lineNum">      18</span>              :  * @tparam  NumBanks</span>
+<span id="L19"><span class="lineNum">      19</span>              :  *          The number of banks.</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * </span>
+<span id="L21"><span class="lineNum">      21</span>              :  * @ingroup BankableMIDIOutputElements</span>
+<span id="L22"><span class="lineNum">      22</span>              :  */</span>
+<span id="L23"><span class="lineNum">      23</span>              : template &lt;size_t NumBanks&gt;</span>
+<span id="L24"><span class="lineNum">      24</span>              : class CCAbsoluteEncoder</span>
+<span id="L25"><span class="lineNum">      25</span>              :     : public MIDIAbsoluteEncoder&lt;NumBanks, SingleAddress, ContinuousCCSender&gt; {</span>
+<span id="L26"><span class="lineNum">      26</span>              :   public:</span>
+<span id="L27"><span class="lineNum">      27</span>              :     /**</span>
+<span id="L28"><span class="lineNum">      28</span>              :      * @brief   Construct a new Bankable CCAbsoluteEncoder object with the given </span>
+<span id="L29"><span class="lineNum">      29</span>              :      *          pins, controller, channel, speed factor, and number of pulses</span>
+<span id="L30"><span class="lineNum">      30</span>              :      *          per step.</span>
+<span id="L31"><span class="lineNum">      31</span>              :      * </span>
+<span id="L32"><span class="lineNum">      32</span>              :      * @param   config</span>
+<span id="L33"><span class="lineNum">      33</span>              :      *          The bank configuration to use: the bank to add this element to,</span>
+<span id="L34"><span class="lineNum">      34</span>              :      *          and whether to change the address, channel or cable number.</span>
+<span id="L35"><span class="lineNum">      35</span>              :      * @param   encoder</span>
+<span id="L36"><span class="lineNum">      36</span>              :      *          The Encoder object to use.  </span>
+<span id="L37"><span class="lineNum">      37</span>              :      *          Usually passed as a list of the two pins connected to the </span>
+<span id="L38"><span class="lineNum">      38</span>              :      *          A and B outputs of the encoder, e.g. `{2, 3}`.  </span>
+<span id="L39"><span class="lineNum">      39</span>              :      *          The internal pull-up resistors will be enabled by the Encoder</span>
+<span id="L40"><span class="lineNum">      40</span>              :      *          library.</span>
+<span id="L41"><span class="lineNum">      41</span>              :      * @param   address</span>
+<span id="L42"><span class="lineNum">      42</span>              :      *          The MIDI address containing the controller number [0, 119], </span>
+<span id="L43"><span class="lineNum">      43</span>              :      *          channel [Channel_1, Channel_16], and optional cable number </span>
+<span id="L44"><span class="lineNum">      44</span>              :      *          [0, 15].</span>
+<span id="L45"><span class="lineNum">      45</span>              :      * @param   speedMultiply</span>
+<span id="L46"><span class="lineNum">      46</span>              :      *          A constant factor to increase the speed of the rotary encoder.</span>
+<span id="L47"><span class="lineNum">      47</span>              :      *          The difference in position will just be multiplied by this </span>
+<span id="L48"><span class="lineNum">      48</span>              :      *          factor. </span>
+<span id="L49"><span class="lineNum">      49</span>              :      * @param   pulsesPerStep</span>
+<span id="L50"><span class="lineNum">      50</span>              :      *          The number of pulses per physical click of the encoder.</span>
+<span id="L51"><span class="lineNum">      51</span>              :      *          For a normal encoder, this is 4. If you want to increase the</span>
+<span id="L52"><span class="lineNum">      52</span>              :      *          resolution, for the use of Jog wheels, for example, you can go</span>
+<span id="L53"><span class="lineNum">      53</span>              :      *          as 1.  </span>
+<span id="L54"><span class="lineNum">      54</span>              :      *          Whereas a greater speedMultiply factor will increase the </span>
+<span id="L55"><span class="lineNum">      55</span>              :      *          speed, increasing the number of pulsesPerStep will result in a </span>
+<span id="L56"><span class="lineNum">      56</span>              :      *          lower speed.</span>
+<span id="L57"><span class="lineNum">      57</span>              :      */</span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           1 :     CCAbsoluteEncoder(BankConfig&lt;NumBanks&gt; config, AHEncoder &amp;&amp;encoder,</span></span>
+<span id="L59"><span class="lineNum">      59</span>              :                       MIDIAddress address, int16_t speedMultiply = 1,</span>
+<span id="L60"><span class="lineNum">      60</span>              :                       uint8_t pulsesPerStep = 4)</span>
+<span id="L61"><span class="lineNum">      61</span>              :         : MIDIAbsoluteEncoder&lt;NumBanks, SingleAddress, ContinuousCCSender&gt;(</span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">           1 :               {config, address}, std::move(encoder), speedMultiply,</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           2 :               pulsesPerStep, {}) {}</span></span>
+<span id="L64"><span class="lineNum">      64</span>              : };</span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span>              : } // namespace Bankable</span>
+<span id="L67"><span class="lineNum">      67</span>              : </span>
+<span id="L68"><span class="lineNum">      68</span>              : END_CS_NAMESPACE</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

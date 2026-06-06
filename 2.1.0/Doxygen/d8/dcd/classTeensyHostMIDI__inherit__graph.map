@@ -1,0 +1,9 @@
+<map id="TeensyHostMIDI&lt; MaxPacketSize &gt;" name="TeensyHostMIDI&lt; MaxPacketSize &gt;">
+<area shape="rect" id="Node000001" title="Teensy USB Host MIDI driver." alt="" coords="105,673,309,1548"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,283,87,348"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,361,101,625,110,672,105,673,95,626,50,362"/>
+<area shape="rect" id="Node000003" href="$d5/d1c/structBulkRX.html" title="Receives Bulk packets (OUT for device mode, IN for host mode)" alt="" coords="111,155,304,475"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,489,210,673,205,673,205,489"/>
+<area shape="rect" id="Node000004" href="$dc/d2d/structBulkTX.html" title="Sends Bulk packets (IN for device mode, OUT for host mode)" alt="" coords="329,5,521,625"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="339,639,312,737,307,736,334,638"/>
+</map>

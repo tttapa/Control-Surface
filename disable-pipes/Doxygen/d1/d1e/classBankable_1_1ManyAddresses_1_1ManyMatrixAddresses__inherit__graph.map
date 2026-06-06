@@ -1,0 +1,5 @@
+<map id="ManyMatrixAddresses&lt; NumBanks, NumRows, NumCols &gt;" name="ManyMatrixAddresses&lt; NumBanks, NumRows, NumCols &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="33,359,225,495"/>
+<area shape="rect" id="node2" href="$dd/d3a/classManyAddresses__Base.html" title="A base class for all MIDIOutputElements that can have one of many addresses." alt="" coords="34,233,223,311"/>
+<area shape="rect" id="node3" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="5,5,252,185"/>
+</map>

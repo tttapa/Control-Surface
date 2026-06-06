@@ -1,0 +1,5 @@
+<map id="MIDIButtons&lt; Sender, NUMBER_OF_BUTTONS &gt;" name="MIDIButtons&lt; Sender, NUMBER_OF_BUTTONS &gt;">
+<area shape="rect" id="node1" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="5,491,199,671"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="33,160,171,443"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="11,5,193,112"/>
+</map>

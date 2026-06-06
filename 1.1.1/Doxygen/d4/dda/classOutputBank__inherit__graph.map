@@ -1,0 +1,6 @@
+<map id="OutputBank" name="OutputBank">
+<area shape="rect" id="node1" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="114,5,265,156"/>
+<area shape="rect" id="node2" href="$db/dbd/classBank.html" title="A class that groups Bankable BankableMIDIOutputs and BankableMIDIInputs, and allows the user to chang..." alt="" coords="5,211,163,347"/>
+<area shape="rect" id="node3" href="$db/dbd/classBank.html" title=" " alt="" coords="187,204,402,355"/>
+<area shape="rect" id="node4" href="$da/db8/classTransposer.html" title=" " alt="" coords="204,403,385,524"/>
+</map>

@@ -1,0 +1,21 @@
+<map id="VU&lt; BankSize &gt;" name="VU&lt; BankSize &gt;">
+<area shape="rect" id="Node000001" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="250,1401,433,1747"/>
+<area shape="rect" id="Node000010" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="228,1795,455,2000"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="344,1761,344,1794,339,1794,339,1761"/>
+<area shape="rect" id="Node000002" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="94,1151,365,1330"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="266,1342,286,1400,281,1402,261,1344"/>
+<area shape="rect" id="Node000003" href="$d5/dae/classMatchingMIDIInputElement.html" title="The MIDIInputElement base class is very general: you give it a MIDI message, and it calls the updateW..." alt="" coords="5,960,221,1080"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="153,1091,185,1150,180,1152,149,1094"/>
+<area shape="rect" id="Node000004" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="18,667,209,912"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="116,926,116,960,111,960,111,926"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="17,239,209,619"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="116,633,116,667,111,667,111,633"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="24,5,203,191"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="116,204,116,239,111,239,111,204"/>
+<area shape="rect" id="Node000007" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="246,987,445,1053"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="325,1066,279,1152,274,1150,320,1064"/>
+<area shape="rect" id="Node000008" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="241,689,449,889"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="348,903,348,987,343,987,343,903"/>
+<area shape="rect" id="Node000009" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="389,1128,518,1353"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="414,1367,402,1402,397,1400,409,1365"/>
+</map>

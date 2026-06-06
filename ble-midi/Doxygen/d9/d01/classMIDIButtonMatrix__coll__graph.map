@@ -1,0 +1,19 @@
+<map id="MIDIButtonMatrix&lt; Sender, NumRows, NumCols &gt;" name="MIDIButtonMatrix&lt; Sender, NumRows, NumCols &gt;">
+<area shape="rect" id="Node000001" title="MIDIButtonMatrix." alt="" coords="337,1399,532,1639"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="143,1106,286,1231"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,1243,301,1335,343,1397,339,1400,296,1337,246,1245"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="117,573,312,939"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="217,952,217,1106,212,1106,212,952"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="129,363,176,572,171,574,124,364"/>
+<area shape="rect" id="Node000005" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="273,512,262,558,257,557,268,510"/>
+<area shape="rect" id="Node000006" href="$dd/d29/classAH_1_1ButtonMatrix.html" title=" " alt="" coords="311,1001,559,1336"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="437,1349,437,1399,432,1399,432,1349"/>
+<area shape="rect" id="Node000007" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="349,593,494,919"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="429,919,431,985,426,985,424,919"/>
+<area shape="rect" id="Node000008" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="519,593,657,919"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="530,920,505,987,500,985,525,918"/>
+<area shape="rect" id="Node000009" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="583,1016,761,1321"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="585,1319,573,1338,538,1387,534,1384,568,1334,581,1316"/>
+</map>

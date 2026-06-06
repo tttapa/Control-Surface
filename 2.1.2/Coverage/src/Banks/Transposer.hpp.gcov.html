@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/Banks/Transposer.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/Banks">src/Banks</a> - Transposer.hpp<span style="font-size: 80%;"> (source / <a href="Transposer.hpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 18:06:03</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #pragma once</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : #include &lt;Banks/Bank.hpp&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              : #include &lt;Control_Surface/Control_Surface_Class.hpp&gt;</span>
+<span id="L5"><span class="lineNum">       5</span>              : #include &lt;Def/Def.hpp&gt;</span>
+<span id="L6"><span class="lineNum">       6</span>              : </span>
+<span id="L7"><span class="lineNum">       7</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L8"><span class="lineNum">       8</span>              : </span>
+<span id="L9"><span class="lineNum">       9</span>              : /// Class for transposing the address of @ref NoteButton and other MIDI elements.</span>
+<span id="L10"><span class="lineNum">      10</span>              : template &lt;int8_t MinTransposition, int8_t MaxTransposition&gt;</span>
+<span id="L11"><span class="lineNum">      11</span>              : class Transposer : public Bank&lt;MaxTransposition - MinTransposition + 1&gt; {</span>
+<span id="L12"><span class="lineNum">      12</span>              :   public:</span>
+<span id="L13"><span class="lineNum">      13</span> <span class="tlaGNC">           4 :     Transposer(int8_t step = 1)</span></span>
+<span id="L14"><span class="lineNum">      14</span> <span class="tlaGNC">           4 :         : Bank&lt;NumBanks&gt;(step, -MinTransposition, MinTransposition) {</span></span>
+<span id="L15"><span class="lineNum">      15</span>              :         static_assert(MinTransposition &lt;= 0,</span>
+<span id="L16"><span class="lineNum">      16</span>              :                       &quot;Error: the minimum transposition must be negative&quot;);</span>
+<span id="L17"><span class="lineNum">      17</span>              :         static_assert(MaxTransposition &gt;= 0,</span>
+<span id="L18"><span class="lineNum">      18</span>              :                       &quot;Error: the maximum transposition must be positive&quot;);</span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           4 :     }</span></span>
+<span id="L20"><span class="lineNum">      20</span>              : </span>
+<span id="L21"><span class="lineNum">      21</span>              :     /// Set the transposition.</span>
+<span id="L22"><span class="lineNum">      22</span>              :     /// @param  tp</span>
+<span id="L23"><span class="lineNum">      23</span>              :     ///         The new transposition in the range</span>
+<span id="L24"><span class="lineNum">      24</span>              :     ///         [ @p MinTransposition, @p MaxTransposition ].</span>
+<span id="L25"><span class="lineNum">      25</span>              :     /// @note   The @ref Bank::select() method expects a zero-based argument,</span>
+<span id="L26"><span class="lineNum">      26</span>              :     ///         which is cumbersome if the minimum transposition is nonzero.</span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           8 :     void setTransposition(int8_t tp) { this-&gt;select(tp - MinTransposition); }</span></span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              :     /// Get the transposition.</span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           8 :     int8_t getTransposition() const {</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           8 :         return this-&gt;getSelection() + MinTransposition;</span></span>
+<span id="L32"><span class="lineNum">      32</span>              :     }</span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span>              :     /// Get the transposition as a number of semitones.</span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           8 :     int8_t getTranspositionSemitones() const { return this-&gt;getOffset(); }</span></span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              :     static constexpr setting_t N = MaxTransposition - MinTransposition + 1;</span>
+<span id="L38"><span class="lineNum">      38</span>              :     static constexpr setting_t NumBanks = N;</span>
+<span id="L39"><span class="lineNum">      39</span>              : };</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : END_CS_NAMESPACE</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

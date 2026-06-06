@@ -1,0 +1,7 @@
+<map id="CCRotaryEncoder" name="CCRotaryEncoder">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="37,1035,197,1112"/>
+<area shape="rect" id="node2" href="$d0/d9e/classGenericMIDIRotaryEncoder.html" title="An abstract class for rotary encoders that send MIDI events." alt="" coords="5,763,228,987"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="41,593,192,715"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="15,233,219,545"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="15,5,219,185"/>
+</map>

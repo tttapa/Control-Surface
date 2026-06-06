@@ -1,0 +1,11 @@
+<map id="EncoderSelectorLEDs&lt; N &gt;" name="EncoderSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that reads from a rotary encoder. This version displays the setting using LEDs." alt="" coords="77,1589,276,1667"/>
+<area shape="rect" id="node2" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="75,1345,278,1540"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="27,1073,193,1283"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="28,917,160,1009"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="184,903,295,1024"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="137,483,341,853"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,159,228,266"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="252,5,475,420"/>
+<area shape="rect" id="node9" title=" " alt="" coords="217,1139,272,1217"/>
+</map>

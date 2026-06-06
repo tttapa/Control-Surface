@@ -1,0 +1,6 @@
+<map id="MIDIButtons&lt; BankAddress, Sender, NumButtons &gt;" name="MIDIButtons&lt; BankAddress, Sender, NumButtons &gt;">
+<area shape="rect" id="node1" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="5,763,212,972"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="33,593,184,715"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="7,233,211,545"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="7,5,211,185"/>
+</map>

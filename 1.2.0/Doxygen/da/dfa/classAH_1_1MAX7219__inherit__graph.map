@@ -1,0 +1,8 @@
+<map id="MAX7219&lt; NumChips &gt;" name="MAX7219&lt; NumChips &gt;">
+<area shape="rect" id="node1" title="A class for LED outputs using the MAX7219 LED display driver." alt="" coords="80,1431,299,1743"/>
+<area shape="rect" id="node2" href="$dd/de5/classAH_1_1MAX7219__Base.html" title="A base class for classes that control MAX7219 LED drivers." alt="" coords="5,1056,155,1383"/>
+<area shape="rect" id="node3" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title=" " alt="" coords="179,1159,419,1280"/>
+<area shape="rect" id="node4" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="191,564,406,1008"/>
+<area shape="rect" id="node5" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="158,160,439,516"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="199,5,398,112"/>
+</map>

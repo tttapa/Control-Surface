@@ -1,0 +1,12 @@
+<map id="IncrementSelectorLEDs&lt; N &gt;" name="IncrementSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector with one button that increments the selection. This version displays the setting using LEDs." alt="" coords="198,1801,393,1879"/>
+<area shape="rect" id="node2" href="$d1/d94/classGenericIncrementSelector.html" title=" " alt="" coords="180,1601,411,1752"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="104,1329,263,1539"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,1065,124,1157"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="149,969,258,1252"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="133,5,316,112"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="220,161,427,444"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="219,521,446,892"/>
+<area shape="rect" id="node9" href="$d7/d83/classAH_1_1IncrementButton.html" title="A class for buttons that increment some counter or setting." alt="" coords="287,1344,456,1524"/>
+<area shape="rect" id="node10" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="289,955,453,1267"/>
+</map>

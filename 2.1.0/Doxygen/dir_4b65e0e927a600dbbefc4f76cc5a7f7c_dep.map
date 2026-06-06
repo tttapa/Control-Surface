@@ -1,0 +1,24 @@
+<map id="MIDI_Inputs" name="MIDI_Inputs">
+<area shape="rect" id="node1" href="dir_15b6432dff6a6d357bf70f8fbf2cdf14.html" title="AH" alt="" coords="97,209,138,235"/>
+<area shape="rect" id="node2" href="dir_96809ae32da64306a703eb7e36380126.html" title="Banks" alt="" coords="465,136,527,161"/>
+<area shape="rect" id="node3" href="dir_9c9f4aef8027530753ea2ed5df8d4f38.html" title="MIDI_Parsers" alt="" coords="237,136,344,161"/>
+<area shape="rect" id="node4" href="dir_c90f87021e89d05236fc514cb49c4dcf.html" title="Def" alt="" coords="368,136,413,161"/>
+<area shape="poly" id="edge1" href="dir_000038_000002.html" alt="" coords="216,76,296,82,378,98,411,110,433,127,439,137,440,148,436,161,427,174,408,188,379,199,303,214,221,221,152,223,152,218,220,216,302,209,377,194,405,183,423,170,431,158,435,148,434,138,429,130,408,115,377,103,295,88,216,81"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000038_000002.html" title="15" alt="" coords="148,222,165,236"/>
+<area shape="poly" id="edge2" href="dir_000038_000006.html" alt="" coords="217,84,446,133,452,135,451,140,445,139,215,90"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000038_000006.html" title="3" alt="" coords="444,121,453,135"/>
+<area shape="poly" id="edge3" href="dir_000038_000041.html" alt="" coords="188,86,260,127,257,131,185,90"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000038_000041.html" title="1" alt="" coords="254,112,263,127"/>
+<area shape="poly" id="edge4" href="dir_000038_000014.html" alt="" coords="204,85,356,133,354,138,203,91"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000038_000014.html" title="2" alt="" coords="349,119,358,134"/>
+<area shape="rect" id="node6" href="dir_99d6f7b7d8bb8b10aff5b424c27eafa5.html" title="LEDs" alt="" coords="38,63,93,88"/>
+<area shape="poly" id="edge5" href="dir_000028_000002.html" alt="" coords="77,87,93,108,106,135,115,166,119,196,114,196,110,167,102,137,88,111,73,90"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000028_000002.html" title="10" alt="" coords="116,183,133,198"/>
+<area shape="rect" id="node7" href="dir_046483ea20191d09651a99698d6396a9.html" title="MCU" alt="" coords="39,136,92,161"/>
+<area shape="poly" id="edge6" href="dir_000028_000036.html" alt="" coords="68,88,68,122,63,122,63,88"/>
+<area shape="rect" id="edge6-headlabel" href="dir_000028_000036.html" title="2" alt="" coords="69,110,78,125"/>
+<area shape="poly" id="edge7" href="dir_000036_000002.html" alt="" coords="76,160,103,197,99,200,72,163"/>
+<area shape="rect" id="edge7-headlabel" href="dir_000036_000002.html" title="4" alt="" coords="100,182,110,197"/>
+<area shape="rect" id="clust2" href="dir_4b65e0e927a600dbbefc4f76cc5a7f7c.html" alt="" coords="27,52,227,172"/>
+<area shape="rect" id="clust1" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" title="src" alt="" coords="16,16,539,245"/>
+</map>

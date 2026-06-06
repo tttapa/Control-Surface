@@ -1,0 +1,21 @@
+<map id="NoteCCKPLED&lt; Type, BankSize &gt;" name="NoteCCKPLED&lt; Type, BankSize &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="271,2077,453,2357"/>
+<area shape="rect" id="Node000002" href="$d5/dcd/classBankable_1_1NoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="271,1829,453,2029"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="365,2043,365,2077,359,2077,359,2043"/>
+<area shape="rect" id="Node000003" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="148,1237,384,1781"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="334,1794,342,1828,337,1830,329,1795"/>
+<area shape="rect" id="Node000004" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,775,271,1189"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="194,1202,202,1236,197,1238,189,1203"/>
+<area shape="rect" id="Node000005" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="43,481,233,727"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="141,740,141,774,135,774,135,740"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="42,193,234,433"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="141,447,141,481,135,481,135,447"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="42,5,234,145"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="141,159,141,193,135,193,135,159"/>
+<area shape="rect" id="Node000008" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="295,949,493,1015"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="386,1029,335,1238,329,1236,380,1028"/>
+<area shape="rect" id="Node000009" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="290,534,498,674"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="397,688,397,949,391,949,391,688"/>
+<area shape="rect" id="Node000010" href="$d8/d87/classInterfaces_1_1IValue.html" title="Abstract interface for MIDI input elements that receive and store a 7&#45;bit value." alt="" coords="408,1457,511,1562"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="447,1576,388,1830,382,1829,442,1575"/>
+</map>

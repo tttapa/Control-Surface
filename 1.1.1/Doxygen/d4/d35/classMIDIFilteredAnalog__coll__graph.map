@@ -1,0 +1,14 @@
+<map id="MIDIFilteredAnalog&lt; Sender &gt;" name="MIDIFilteredAnalog&lt; Sender &gt;">
+<area shape="rect" id="node1" title="A class for potentiometers and faders that send MIDI events (with only a channel, no address)." alt="" coords="577,1417,731,1597"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="135,1035,274,1318"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,188,112"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="92,161,299,444"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="91,565,318,936"/>
+<area shape="rect" id="node6" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="500,1079,659,1274"/>
+<area shape="rect" id="node7" href="$d7/d40/classEMA.html" title=" " alt="" coords="343,683,536,819"/>
+<area shape="rect" id="node8" title=" " alt="" coords="561,712,611,789"/>
+<area shape="rect" id="node9" href="$d2/dcb/classHysteresis.html" title=" " alt="" coords="739,661,993,841"/>
+<area shape="rect" id="node10" title=" " alt="" coords="691,264,761,341"/>
+<area shape="rect" id="node11" title=" " alt="" coords="683,1138,745,1215"/>
+<area shape="rect" id="node12" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="770,999,957,1355"/>
+</map>

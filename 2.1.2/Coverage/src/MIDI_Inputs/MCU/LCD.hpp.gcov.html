@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/MIDI_Inputs/MCU/LCD.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/MIDI_Inputs/MCU">src/MIDI_Inputs/MCU</a> - LCD.hpp<span style="font-size: 80%;"> (source / <a href="LCD.hpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">93.0&nbsp;%</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntry">40</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 18:06:03</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">92.3&nbsp;%</td>
+            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntry">24</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #pragma once</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : #include &lt;AH/Debug/Debug.hpp&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              : #include &lt;AH/Math/MinMaxFix.hpp&gt;</span>
+<span id="L5"><span class="lineNum">       5</span>              : #include &lt;MIDI_Inputs/MIDIInputElement.hpp&gt;</span>
+<span id="L6"><span class="lineNum">       6</span>              : #include &lt;string.h&gt; // memcpy</span>
+<span id="L7"><span class="lineNum">       7</span>              : </span>
+<span id="L8"><span class="lineNum">       8</span>              : #ifndef ARDUINO</span>
+<span id="L9"><span class="lineNum">       9</span>              : #include &lt;cassert&gt;</span>
+<span id="L10"><span class="lineNum">      10</span>              : #endif</span>
+<span id="L11"><span class="lineNum">      11</span>              : </span>
+<span id="L12"><span class="lineNum">      12</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : using AH::max;</span>
+<span id="L15"><span class="lineNum">      15</span>              : using AH::min;</span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span>              : namespace MCU {</span>
+<span id="L18"><span class="lineNum">      18</span>              : </span>
+<span id="L19"><span class="lineNum">      19</span>              : /// Counts the number of instances of the LCD class.</span>
+<span id="L20"><span class="lineNum">      20</span>              : /// If there are multiple LCD objects, we have to update all of them before</span>
+<span id="L21"><span class="lineNum">      21</span>              : /// breaking out of the MIDI input handling loop.</span>
+<span id="L22"><span class="lineNum">      22</span>              : class LCDCounter {</span>
+<span id="L23"><span class="lineNum">      23</span>              :   public:</span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">          13 :     LCDCounter() { instances++; }</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">          13 :     ~LCDCounter() { instances--; }</span></span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">          16 :     static uint8_t getInstances() { return instances; }</span></span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              :   private:</span>
+<span id="L30"><span class="lineNum">      30</span>              :     static uint8_t instances;</span>
+<span id="L31"><span class="lineNum">      31</span>              : };</span>
+<span id="L32"><span class="lineNum">      32</span>              : /**</span>
+<span id="L33"><span class="lineNum">      33</span>              :  * @brief   A class that represents the Mackie Control Universal LCD display and</span>
+<span id="L34"><span class="lineNum">      34</span>              :  *          saves the text it receives.</span>
+<span id="L35"><span class="lineNum">      35</span>              :  * </span>
+<span id="L36"><span class="lineNum">      36</span>              :  * The format of the MIDI message is as follows (hex):</span>
+<span id="L37"><span class="lineNum">      37</span>              :  * | SysEx Start | Data 1 | Data 2 | Data 3 | Data 4 | Data 5 | Data 6 | Data 7 | &amp;emsp;...&amp;emsp; | SysEx End |</span>
+<span id="L38"><span class="lineNum">      38</span>              :  * |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:---:|:----:|</span>
+<span id="L39"><span class="lineNum">      39</span>              :  * | `F0` | `mm` | `mm` | `mm` | `nn` | `12` | `oo` | `yy` | ... | `F7` |</span>
+<span id="L40"><span class="lineNum">      40</span>              :  * </span>
+<span id="L41"><span class="lineNum">      41</span>              :  * - `mm` is manufacturer ID (`00 00 66` for Mackie)</span>
+<span id="L42"><span class="lineNum">      42</span>              :  * - `nn` is model number (`10` for Logic Control, `11` for Logic Control XT)</span>
+<span id="L43"><span class="lineNum">      43</span>              :  * - `oo` is offset relative to the first character of the LCD [0x00, 0x6F]</span>
+<span id="L44"><span class="lineNum">      44</span>              :  * - `yy`... is the ASCII text data</span>
+<span id="L45"><span class="lineNum">      45</span>              :  * </span>
+<span id="L46"><span class="lineNum">      46</span>              :  * The manufacturer ID and model number are ignored by this class.</span>
+<span id="L47"><span class="lineNum">      47</span>              :  * </span>
+<span id="L48"><span class="lineNum">      48</span>              :  * @ingroup MIDIInputElements</span>
+<span id="L49"><span class="lineNum">      49</span>              :  */</span>
+<span id="L50"><span class="lineNum">      50</span>              : template &lt;uint8_t BufferSize = 112&gt;</span>
+<span id="L51"><span class="lineNum">      51</span>              : class LCD : public MIDIInputElementSysEx, private LCDCounter {</span>
+<span id="L52"><span class="lineNum">      52</span>              :   public:</span>
+<span id="L53"><span class="lineNum">      53</span>              :     /// @param  offset</span>
+<span id="L54"><span class="lineNum">      54</span>              :     ///         The text sent over MIDI is 112 characters long, by changing the</span>
+<span id="L55"><span class="lineNum">      55</span>              :     ///         offset within this text and the length of the text, we can</span>
+<span id="L56"><span class="lineNum">      56</span>              :     ///         listen to just a section of the text. E.g. `offset = 56` and</span>
+<span id="L57"><span class="lineNum">      57</span>              :     ///         `BufferSize = 56` will listen to just the second line of the</span>
+<span id="L58"><span class="lineNum">      58</span>              :     ///         LCD display. The default is `offset = 0` and `BufferSize = 112`,</span>
+<span id="L59"><span class="lineNum">      59</span>              :     ///         i.e. listening to the entire display.</span>
+<span id="L60"><span class="lineNum">      60</span>              :     /// @param  cable</span>
+<span id="L61"><span class="lineNum">      61</span>              :     ///         The MIDI USB cable number to listen for.</span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          13 :     LCD(uint8_t offset = 0, Cable cable = Cable_1)</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          13 :         : offset(offset), cable(cable) {</span></span>
+<span id="L64"><span class="lineNum">      64</span>              :         // Null-terminate the buffer</span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          13 :         buffer[BufferSize] = '\0';</span></span>
+<span id="L66"><span class="lineNum">      66</span>              :         // Fill the buffer with spaces</span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         185 :         for (uint8_t i = 0; i &lt; BufferSize; i++) buffer[i] = ' ';</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">          13 :     }</span></span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              :   protected:</span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">          16 :     bool updateWith(SysExMessage midimsg) override {</span></span>
+<span id="L72"><span class="lineNum">      72</span>              :         // If this message is meant for a different cable than ours, return:</span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          16 :         if (midimsg.getCable() != this-&gt;cable)</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC">           0 :             return false;</span></span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              :         // We can't handle chunked SysEx data (yet), and it wouldn't make a ton</span>
+<span id="L77"><span class="lineNum">      77</span>              :         // of sense, since the default SysEx buffer size is the same size as the</span>
+<span id="L78"><span class="lineNum">      78</span>              :         // SysEx message we expect, so it shouldn't arrive in chunks.</span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">          16 :         if (!midimsg.isCompleteMessage())</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaUNC">           0 :             return false;</span></span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              :         // Format:</span>
+<span id="L83"><span class="lineNum">      83</span>              :         // F0 mm mm mm nn 12 oo yy... F7</span>
+<span id="L84"><span class="lineNum">      84</span>              :         // mm = manufacturer ID (00 00 66 for Mackie)</span>
+<span id="L85"><span class="lineNum">      85</span>              :         // nn = model number (10 for Logic Control, 11 for Logic Control XT)</span>
+<span id="L86"><span class="lineNum">      86</span>              :         // oo = offset [0x00, 0x6F]</span>
+<span id="L87"><span class="lineNum">      87</span>              :         // yy... = ASCII data</span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          16 :         if (midimsg.data[5] != 0x12)</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaUNC">           0 :             return false;</span></span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">          16 :         const uint8_t midiOffset = midimsg.data[6];</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">          16 :         const uint8_t midiLength = midimsg.length - 8;</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">          16 :         const uint8_t *text = midimsg.data + 7;</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          16 :         const uint8_t midiBufferEnd = midiOffset + midiLength;</span></span>
+<span id="L95"><span class="lineNum">      95</span>              : </span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          16 :         const uint8_t bufferEnd = this-&gt;offset + BufferSize;</span></span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span>              :         // If there's no overlap between incoming range and the range that we're</span>
+<span id="L99"><span class="lineNum">      99</span>              :         // listening for, return:</span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">          16 :         if (midiOffset &gt;= bufferEnd || this-&gt;offset &gt;= midiBufferEnd)</span></span>
+<span id="L101"><span class="lineNum">     101</span>              :             // If there are other instances, maybe it'll match one of those,</span>
+<span id="L102"><span class="lineNum">     102</span>              :             // otherwise, stop handling this message:</span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">           2 :             return getInstances() == 1;</span></span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              :         // Find the ranges that overlap between the text data in the message</span>
+<span id="L106"><span class="lineNum">     106</span>              :         // (src) and the range of characters we're listening for (dst):</span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          14 :         uint8_t srcStart = max(0, this-&gt;offset - midiOffset);</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">          14 :         uint8_t dstStart = max(0, midiOffset - this-&gt;offset);</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">          14 :         uint8_t length = midiBufferEnd - midiOffset -</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">          42 :                          max(0, this-&gt;offset - midiOffset) -</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">          28 :                          max(0, midiBufferEnd - bufferEnd);</span></span>
+<span id="L112"><span class="lineNum">     112</span>              : </span>
+<span id="L113"><span class="lineNum">     113</span>              :         // Copy the interesting part to our buffer:</span>
+<span id="L114"><span class="lineNum">     114</span>              : #ifdef ARDUINO</span>
+<span id="L115"><span class="lineNum">     115</span>              :         memcpy(&amp;buffer[dstStart], &amp;text[srcStart], length);</span>
+<span id="L116"><span class="lineNum">     116</span>              : #else // Tests</span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">          72 :         for (uint8_t i = 0; i &lt; length; ++i) {</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">          58 :             buffer[dstStart + i] = text[srcStart + i];</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          58 :             assert(dstStart + i &lt; BufferSize);</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">          58 :             assert(srcStart + i &lt; midiLength);</span></span>
+<span id="L121"><span class="lineNum">     121</span>              :         }</span>
+<span id="L122"><span class="lineNum">     122</span>              : #endif</span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">          14 :         markDirty();</span></span>
+<span id="L125"><span class="lineNum">     125</span>              : </span>
+<span id="L126"><span class="lineNum">     126</span>              :         // If this is the only instance, the others don't have to be updated</span>
+<span id="L127"><span class="lineNum">     127</span>              :         // anymore, so we return true to break the loop:</span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          14 :         return getInstances() == 1;</span></span>
+<span id="L129"><span class="lineNum">     129</span>              :     }</span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span>              :   public:</span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           1 :     void begin() override { markDirty(); }</span></span>
+<span id="L133"><span class="lineNum">     133</span>              : </span>
+<span id="L134"><span class="lineNum">     134</span>              :     /// @name   Data access</span>
+<span id="L135"><span class="lineNum">     135</span>              :     /// @{</span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span>              :     /// Get a pointer to the null-terminated display text.</span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">          45 :     const char *getText() const { return buffer.data; }</span></span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              :     /// @}</span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span>              :     /// @name   Detecting changes</span>
+<span id="L143"><span class="lineNum">     143</span>              :     /// @{</span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              :     ///</span>
+<span id="L146"><span class="lineNum">     146</span>              :     /// Check if the text was updated since the last time the dirty flag was</span>
+<span id="L147"><span class="lineNum">     147</span>              :     /// cleared.</span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">          27 :     bool getDirty() const { return dirty &gt; 0; }</span></span>
+<span id="L149"><span class="lineNum">     149</span>              :     /// Clear the dirty flag.</span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">          20 :     void clearDirty() {</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">          20 :         if (dirty &gt; 0)</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">           7 :             --dirty;</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          20 :     }</span></span>
+<span id="L154"><span class="lineNum">     154</span>              :     /// Set the dirty counter to the number of subscribers (or one).</span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">          15 :     void markDirty() { dirty = num_subscribers &gt; 0 ? num_subscribers : 1; }</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">           2 :     void addSubscriber() { ++num_subscribers; }</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           2 :     void removeSubscriber() { --num_subscribers; }</span></span>
+<span id="L158"><span class="lineNum">     158</span>              : </span>
+<span id="L159"><span class="lineNum">     159</span>              :     /// @}</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              :   private:</span>
+<span id="L162"><span class="lineNum">     162</span>              :     Array&lt;char, BufferSize + 1&gt; buffer;</span>
+<span id="L163"><span class="lineNum">     163</span>              :     uint8_t offset;</span>
+<span id="L164"><span class="lineNum">     164</span>              :     Cable cable;</span>
+<span id="L165"><span class="lineNum">     165</span>              :     uint8_t dirty = 0;</span>
+<span id="L166"><span class="lineNum">     166</span>              :     uint8_t num_subscribers = 0;</span>
+<span id="L167"><span class="lineNum">     167</span>              : };</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span>              : } // namespace MCU</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              : END_CS_NAMESPACE</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

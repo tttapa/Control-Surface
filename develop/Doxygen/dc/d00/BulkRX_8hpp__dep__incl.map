@@ -1,0 +1,11 @@
+<map id="BulkRX.hpp" name="BulkRX.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="175,5,273,31"/>
+<area shape="rect" id="Node000002" href="$dd/dbf/PluggableUSBMIDI_8hpp.html" title=" " alt="" coords="35,79,205,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,41,139,81,136,76,194,36"/>
+<area shape="rect" id="Node000004" href="$d2/df7/TeensyHostMIDI_8hpp.html" title=" " alt="" coords="251,79,405,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="254,36,312,76,309,81,251,41"/>
+<area shape="rect" id="Node000003" href="$d5/d22/USBMIDI__Arduino__mbed_8hpp.html" title=" " alt="" coords="5,152,213,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="119,118,114,152,108,151,114,117"/>
+<area shape="rect" id="Node000005" href="$df/d33/USBHostMIDI__Interface_8hpp.html" title=" " alt="" coords="237,152,440,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="334,117,340,151,334,152,329,118"/>
+</map>

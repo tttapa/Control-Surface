@@ -1,0 +1,9 @@
+<map id="USBMIDI_Parser" name="USBMIDI_Parser">
+<area shape="rect" id="node1" title="Parser for MIDI over USB packets." alt="" coords="264,983,467,1339"/>
+<area shape="rect" id="node2" href="$df/d0c/classMIDI__Parser.html" title="Base class for MIDI parsers." alt="" coords="116,733,324,869"/>
+<area shape="rect" id="node3" href="$d4/d61/structMIDIMessage.html" title=" " alt="" coords="90,277,350,619"/>
+<area shape="rect" id="node4" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="152,5,288,215"/>
+<area shape="rect" id="node5" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="374,292,576,604"/>
+<area shape="rect" id="node6" href="$d1/db1/classSysExBuffer.html" title="Helper for storing the System Exclusive messages being received by a MIDI parser." alt="" coords="348,696,482,905"/>
+<area shape="rect" id="node7" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="506,681,654,920"/>
+</map>

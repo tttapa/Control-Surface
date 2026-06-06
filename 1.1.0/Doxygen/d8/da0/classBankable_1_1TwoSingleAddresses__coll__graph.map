@@ -1,0 +1,8 @@
+<map id="Bankable::TwoSingleAddresses" name="Bankable::TwoSingleAddresses">
+<area shape="rect" id="node1" title=" " alt="" coords="134,939,341,1045"/>
+<area shape="rect" id="node2" href="$d3/d43/classBankableMIDIOutput.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="30,703,194,810"/>
+<area shape="rect" id="node3" href="$d4/d6e/classBankableMIDIOutput__Base.html" title=" " alt="" coords="5,321,205,472"/>
+<area shape="rect" id="node4" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="30,5,181,156"/>
+<area shape="rect" id="node5" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="227,637,416,876"/>
+<area shape="rect" id="node6" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="229,219,416,575"/>
+</map>

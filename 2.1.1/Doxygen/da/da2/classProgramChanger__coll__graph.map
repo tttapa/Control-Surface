@@ -1,0 +1,9 @@
+<map id="ProgramChanger&lt; N &gt;" name="ProgramChanger&lt; N &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="177,693,340,779"/>
+<area shape="rect" id="Node000002" href="$de/de7/classSelectable.html" title=" " alt="" coords="5,245,163,391"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,404,131,514,151,573,177,629,197,662,221,691,216,695,193,665,172,632,146,575,125,516,97,405"/>
+<area shape="rect" id="Node000003" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="187,5,330,631"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="261,631,261,677,256,677,256,631"/>
+<area shape="rect" id="Node000004" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="354,165,531,471"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="419,472,387,573,365,624,338,671,329,683,325,680,334,668,360,621,382,571,414,470"/>
+</map>

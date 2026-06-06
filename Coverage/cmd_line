@@ -1,0 +1,1 @@
+genhtml --prefix /home/runner/work/Control-Surface/Control-Surface /home/runner/work/Control-Surface/Control-Surface/build/ci-cov/coverage/coverage_total.info --output-directory=/home/runner/work/Control-Surface/Control-Surface/docs/Coverage --legend --title 73449d9b107c772cf65493691543348214e5d5eb --rc branch_coverage=0 -s --demangle-cpp

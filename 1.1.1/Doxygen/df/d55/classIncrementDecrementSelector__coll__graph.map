@@ -1,0 +1,13 @@
+<map id="IncrementDecrementSelector&lt; N &gt;" name="IncrementDecrementSelector&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector with two buttons (one to increment, one to decrement)." alt="" coords="354,1801,581,1879"/>
+<area shape="rect" id="node2" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="367,1587,568,1752"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="172,1344,347,1524"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,1065,124,1157"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="149,969,258,1252"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="133,5,316,112"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="220,161,427,444"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="219,521,446,892"/>
+<area shape="rect" id="node9" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="283,1057,441,1164"/>
+<area shape="rect" id="node10" href="$df/dc6/classAH_1_1IncrementDecrementButtons.html" title="A class for buttons that increment and decrement some counter or setting." alt="" coords="433,1344,643,1524"/>
+<area shape="rect" id="node11" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="465,955,629,1267"/>
+</map>

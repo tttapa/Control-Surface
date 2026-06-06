@@ -1,0 +1,11 @@
+<map id="VULEDsDriver&lt; NumLEDs &gt;" name="VULEDsDriver&lt; NumLEDs &gt;">
+<area shape="rect" id="Node000001" title="Small helper to display the VU meters on an LED bar display." alt="" coords="127,507,326,592"/>
+<area shape="rect" id="Node000004" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="5,640,232,845"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="199,605,178,641,174,638,194,603"/>
+<area shape="rect" id="Node000005" href="$df/d36/classMCU_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="257,650,415,835"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="259,602,286,649,281,651,255,605"/>
+<area shape="rect" id="Node000002" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="144,239,309,459"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="229,472,229,506,224,506,224,472"/>
+<area shape="rect" id="Node000003" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="163,5,290,191"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="229,205,229,238,224,238,224,205"/>
+</map>

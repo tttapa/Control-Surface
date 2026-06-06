@@ -1,0 +1,7 @@
+<map id="ArduinoBLEBackend" name="ArduinoBLEBackend">
+<area shape="rect" id="Node000001" title="ArduinoBLE backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="105,453,299,879"/>
+<area shape="rect" id="Node000002" href="$d9/dc8/classPollingBLEMIDISender.html" title=" " alt="" coords="5,5,199,405"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,418,158,453,153,454,146,420"/>
+<area shape="rect" id="Node000003" href="$dd/da4/classMIDIBLEInstance.html" title="Defines the interface for callback functions registered by the low&#45;level BLE code." alt="" coords="223,123,381,288"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="284,302,251,454,246,453,279,301"/>
+</map>

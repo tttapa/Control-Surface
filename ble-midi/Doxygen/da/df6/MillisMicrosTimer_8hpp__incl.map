@@ -1,0 +1,21 @@
+<map id="MillisMicrosTimer.hpp" name="MillisMicrosTimer.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="427,5,592,31"/>
+<area shape="rect" id="Node000002" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="190,299,381,324"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="522,29,556,69,594,127,607,159,614,192,611,223,595,252,582,264,563,273,514,288,455,299,394,306,394,301,454,294,513,283,561,268,579,259,591,249,606,222,608,192,602,161,589,129,552,72,518,33"/>
+<area shape="rect" id="Node000003" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="219,79,384,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="477,33,349,77,347,72,475,28"/>
+<area shape="rect" id="Node000007" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="322,225,582,251"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="511,31,504,94,496,136,485,178,468,215,463,213,480,176,491,135,499,94,506,30"/>
+<area shape="rect" id="Node000004" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="123,152,304,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="289,106,240,145,237,141,285,102"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="13,299,97,324"/>
+<area shape="poly" id="edge10_Node000003_Node000006" title=" " alt="" coords="219,105,162,119,103,143,75,159,50,178,29,200,12,226,8,242,12,258,33,288,29,291,7,260,3,242,7,224,24,197,46,174,72,154,100,138,160,114,218,100"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="329,152,471,177"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="319,102,374,142,371,146,315,106"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="226,176,245,197,262,224,275,255,283,284,278,286,270,257,257,227,240,200,222,179"/>
+<area shape="rect" id="Node000005" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="21,225,248,251"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="202,179,159,218,156,214,199,175"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="252,175,401,219,399,224,251,180"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="160,248,249,290,247,295,158,253"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="123,253,79,292,76,288,120,249"/>
+</map>

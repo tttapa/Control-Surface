@@ -1,0 +1,9 @@
+<map id="ThreadedBLEMIDISender.hpp" name="ThreadedBLEMIDISender.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="116,5,325,31"/>
+<area shape="rect" id="Node000002" href="$d8/d26/ESP32Backend_8hpp.html" title=" " alt="" coords="148,79,293,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,44,223,79,218,79,218,44"/>
+<area shape="rect" id="Node000003" href="$df/daf/ESP32BluedroidBackend_8hpp.html" title=" " alt="" coords="5,152,212,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="192,114,128,154,126,150,189,109"/>
+<area shape="rect" id="Node000004" href="$d7/da6/ESP32NimBLEBackend_8hpp.html" title=" " alt="" coords="236,152,432,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="252,109,317,150,314,154,249,114"/>
+</map>

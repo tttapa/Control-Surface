@@ -1,0 +1,13 @@
+<map id="SingleAddressMultipleBanks&lt; N &gt;" name="SingleAddressMultipleBanks&lt; N &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="219,1303,458,1448"/>
+<area shape="rect" id="Node000002" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="5,847,288,1112"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,1111,299,1286,294,1289,208,1113"/>
+<area shape="rect" id="Node000003" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="34,531,259,656"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="149,656,149,830,144,830,144,656"/>
+<area shape="rect" id="Node000004" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="27,301,266,481"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="149,495,149,530,144,530,144,495"/>
+<area shape="rect" id="Node000005" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="67,5,227,231"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="149,231,149,285,144,285,144,231"/>
+<area shape="rect" id="Node000006" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="312,727,493,1232"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="364,1233,356,1287,350,1286,359,1232"/>
+</map>

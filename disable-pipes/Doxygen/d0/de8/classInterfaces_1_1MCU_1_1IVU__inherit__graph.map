@@ -1,0 +1,9 @@
+<map id="IVU" name="IVU">
+<area shape="rect" id="node1" title="An abstract interface for VU meters." alt="" coords="229,5,367,200"/>
+<area shape="rect" id="node2" href="$d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="27,299,164,479"/>
+<area shape="rect" id="node4" href="$d0/d43/classMCU_1_1Bankable_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="203,248,393,531"/>
+<area shape="rect" id="node6" href="$d8/d4c/classMCU_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="428,285,595,494"/>
+<area shape="rect" id="node3" href="$d9/dbf/classAudioVULEDs.html" title="A VU meter that reads from an Audio stream using the AudioAnalyzePeak class, and displays it on an LE..." alt="" coords="5,586,156,751"/>
+<area shape="rect" id="node5" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="181,579,415,759"/>
+<area shape="rect" id="node7" href="$df/d36/classMCU_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="439,586,605,751"/>
+</map>

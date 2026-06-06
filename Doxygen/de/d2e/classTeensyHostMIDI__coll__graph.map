@@ -1,0 +1,24 @@
+<map id="TeensyHostMIDI&lt; MaxPacketSize &gt;" name="TeensyHostMIDI&lt; MaxPacketSize &gt;">
+<area shape="rect" id="Node000001" title="Teensy USB Host MIDI driver." alt="" coords="167,1161,371,2036"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="73,799,154,865"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,878,169,1111,179,1160,174,1161,164,1113,119,879"/>
+<area shape="rect" id="Node000003" href="$d5/d1c/structBulkRX.html" title=" " alt="" coords="179,682,360,982"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="272,996,272,1161,267,1161,267,996"/>
+<area shape="rect" id="Node000004" href="$d2/da9/structBulkRX_1_1Reading.html" title="State for reading incoming USB data." alt="" coords="175,396,281,481"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="235,481,255,665,249,666,230,482"/>
+<area shape="rect" id="Node000005" href="$de/dc6/structBulkRX_1_1Reading_1_1Buffer.html" title=" " alt="" coords="5,83,72,188"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="55,187,90,278,116,326,147,370,165,388,161,392,143,374,111,329,85,280,50,189"/>
+<area shape="rect" id="Node000006" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="333,13,547,258"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="376,260,339,318,298,374,288,386,284,382,294,370,335,315,371,257"/>
+<area shape="rect" id="Node000009" href="$d4/d25/structBulkTX_1_1Writing.html" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="483,406,589,471"/>
+<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="464,257,479,315,498,371,508,391,503,393,494,373,474,316,459,259"/>
+<area shape="rect" id="Node000007" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="96,13,309,258"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="216,258,226,380,220,380,210,258"/>
+<area shape="rect" id="Node000008" href="$dc/d2d/structBulkTX.html" title=" " alt="" coords="389,552,569,1112"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="401,1126,374,1226,369,1224,396,1125"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="534,472,525,536,519,535,529,472"/>
+<area shape="rect" id="Node000010" href="$d1/db2/structBulkTX_1_1Writing_1_1Buffer.html" title=" " alt="" coords="571,93,637,178"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="597,179,549,391,544,390,592,178"/>
+<area shape="rect" id="Node000011" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="661,5,875,265"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="713,267,680,323,639,374,604,403,601,399,635,370,675,320,709,264"/>
+</map>

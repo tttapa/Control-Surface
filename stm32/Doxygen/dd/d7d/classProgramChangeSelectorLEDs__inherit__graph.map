@@ -1,0 +1,13 @@
+<map id="ProgramChangeSelectorLEDs&lt; N &gt;" name="ProgramChangeSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="211,1292,462,1369"/>
+<area shape="rect" id="node2" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="209,1108,464,1244"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="139,851,305,1060"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,652,137,744"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="161,637,288,759"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="123,233,327,545"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="123,5,327,185"/>
+<area shape="rect" id="node8" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="329,887,576,1023"/>
+<area shape="rect" id="node9" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="353,593,552,803"/>
+<area shape="rect" id="node10" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="353,233,553,545"/>
+<area shape="rect" id="node11" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="353,5,553,185"/>
+</map>

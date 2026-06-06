@@ -1,0 +1,32 @@
+<map id="GenericEncoderSelector&lt; N, Callback &gt;" name="GenericEncoderSelector&lt; N, Callback &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="583,1817,777,1997"/>
+<area shape="rect" id="Node000002" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="225,1472,372,1672"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="384,1644,585,1820,581,1824,381,1648"/>
+<area shape="rect" id="Node000003" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="9,1121,133,1207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,1218,146,1325,234,1470,229,1473,142,1328,91,1221"/>
+<area shape="rect" id="Node000004" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="157,1101,275,1227"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="234,1240,281,1471,276,1472,229,1241"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="119,573,313,939"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="219,953,219,1101,213,1101,213,953"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="129,363,177,572,172,574,124,364"/>
+<area shape="rect" id="Node000007" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="274,512,263,558,258,557,268,510"/>
+<area shape="rect" id="Node000008" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="299,1111,464,1217"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="373,1217,325,1456,319,1455,368,1216"/>
+<area shape="rect" id="Node000009" href="$dd/da9/classAHEncoder.html" title="Class for reading quadrature encoders, heavily influenced by http://www.pjrc.com/teensy/td_libs_Encod..." alt="" coords="599,1389,761,1755"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="683,1755,683,1801,677,1801,677,1755"/>
+<area shape="poly" id="edge14_Node000009_Node000009" title=" " alt="" coords="762,1532,780,1546,787,1572,784,1589,777,1602,772,1599,779,1588,782,1572,776,1549,759,1537"/>
+<area shape="rect" id="Node000010" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="489,1001,666,1327"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="621,1326,633,1373,627,1374,616,1327"/>
+<area shape="rect" id="Node000011" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="691,1011,877,1317"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="748,1318,733,1374,728,1373,743,1316"/>
+<area shape="rect" id="Node000012" href="$dc/d9d/structDirectPinRead.html" title=" " alt="" coords="731,723,837,789"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="787,789,787,995,781,995,781,789"/>
+<area shape="rect" id="Node000013" href="$df/ddb/structAH_1_1function__traits.html" title=" " alt="" coords="695,218,873,298"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="787,298,787,707,781,707,781,298"/>
+<area shape="rect" id="Node000014" href="$de/d62/structAtomicPosition.html" title=" " alt="" coords="901,1041,1088,1287"/>
+<area shape="poly" id="edge13_Node000009_Node000014" title=" " alt="" coords="920,1288,891,1328,833,1402,774,1471,770,1468,829,1399,887,1325,916,1285"/>
+<area shape="rect" id="Node000015" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="914,1469,1030,1675"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="948,1676,929,1718,905,1756,880,1784,852,1809,792,1852,789,1847,849,1805,876,1780,901,1753,925,1715,943,1674"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$de/d07/structSimpleNoteCCValueCallback.html" title="A callback for NoteCCRange with an action that can be implemented by the user." alt="" coords="5,238,213,265"/>
+<area shape="rect" id="node2" href="$d8/d80/classNoteCCFastLEDCallback.html" title="Callback for Note or CC range or value input that displays the value to a FastLED strip." alt="" coords="283,5,462,47"/>
+<area shape="rect" id="node3" href="$d8/d80/classNoteCCFastLEDCallback.html" title=" " alt="" coords="281,71,464,112"/>
+<area shape="rect" id="node4" href="$d5/ddd/classNoteCCLED.html" title="Callback for Note or CC range or value input that displays the value to a normal on/off LED." alt="" coords="278,137,467,163"/>
+<area shape="rect" id="node5" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="305,187,440,214"/>
+<area shape="rect" id="node6" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="277,238,468,265"/>
+<area shape="rect" id="node7" href="$de/d34/classNoteCCLEDBarCallback.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="285,289,460,331"/>
+<area shape="rect" id="node8" href="$db/d17/classNoteCCLEDPWM.html" title="Callback for Note or CC range or value input that displays the value to a PWM LED." alt="" coords="261,355,484,382"/>
+<area shape="rect" id="node9" href="$db/d17/classNoteCCLEDPWM.html" title=" " alt="" coords="289,406,456,433"/>
+<area shape="rect" id="node10" href="$db/d17/classNoteCCLEDPWM.html" title=" " alt="" coords="261,457,484,483"/>
+</map>

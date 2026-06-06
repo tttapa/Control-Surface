@@ -1,0 +1,5 @@
+<map id="midi.h" name="midi.h">
+<area shape="rect" id="node1" title="Public MIDI over Bluetooth Low Energy API." alt="" coords="169,5,232,32"/>
+<area shape="rect" id="node2" href="$d8/d2c/BluetoothMIDI__Interface_8cpp.html" title=" " alt="" coords="5,80,212,107"/>
+<area shape="rect" id="node3" href="$da/de2/midi-private_8h.html" title="Declarations of internal functions for the MIDI over BLE system, used in the midi&#45;*...." alt="" coords="237,80,351,107"/>
+</map>

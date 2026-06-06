@@ -1,0 +1,13 @@
+<map id="CCButtonMatrix&lt; NumRows, NumCols &gt;" name="CCButtonMatrix&lt; NumRows, NumCols &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="91,1317,293,1397"/>
+<area shape="rect" id="Node000002" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="81,1060,303,1269"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,1283,195,1317,189,1317,189,1283"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="31,769,174,895"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="125,907,167,1059,161,1060,120,909"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="5,239,200,604"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="105,618,105,769,100,769,100,618"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,200,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="105,204,105,238,100,238,100,204"/>
+<area shape="rect" id="Node000006" href="$dd/d29/classAH_1_1ButtonMatrix.html" title="A class that reads the states of a button matrix." alt="" coords="198,652,367,1012"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="233,1026,223,1061,218,1059,227,1024"/>
+</map>

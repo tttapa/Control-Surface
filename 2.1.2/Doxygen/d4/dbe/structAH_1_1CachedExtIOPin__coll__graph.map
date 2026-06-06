@@ -1,0 +1,15 @@
+<map id="CachedExtIOPin" name="CachedExtIOPin">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,1115,147,1180"/>
+<area shape="rect" id="Node000002" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="273,321,479,907"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="275,798,161,999,103,1102,99,1099,156,996,270,795"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="171,1087,362,1207"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="319,907,285,1071,280,1070,313,906"/>
+<area shape="rect" id="Node000005" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="386,997,587,1297"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="439,906,455,980,450,981,434,907"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="350,1368,623,1573"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="575,1355,582,1343,605,1295,621,1253,629,1214,632,1176,629,1137,622,1096,597,998,575,932,546,868,512,808,477,752,482,750,517,805,551,866,580,930,603,997,627,1095,635,1136,637,1176,635,1214,626,1254,610,1297,586,1345,579,1358"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="317,1217,419,1366,415,1369,313,1220"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="489,1298,489,1351,484,1351,484,1298"/>
+<area shape="rect" id="Node000006" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="318,5,434,211"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="379,211,379,304,373,304,373,211"/>
+</map>

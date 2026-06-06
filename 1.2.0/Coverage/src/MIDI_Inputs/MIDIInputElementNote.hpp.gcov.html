@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - e224b347cd670555e44f06608ac41bd1ace9d9d8 - src/MIDI_Inputs/MIDIInputElementNote.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">src/MIDI_Inputs</a> - MIDIInputElementNote.hpp<span style="font-size: 80%;"> (source / <a href="MIDIInputElementNote.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">e224b347cd670555e44f06608ac41bd1ace9d9d8</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntryMed">86.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-09-08 17:44:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryMed">75.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #pragma once</a>
+<a name="2"><span class="lineNum">       2 </span>            : </a>
+<a name="3"><span class="lineNum">       3 </span>            : #include &quot;MIDIInputElement.hpp&quot;</a>
+<a name="4"><span class="lineNum">       4 </span>            : #include &lt;AH/Containers/Updatable.hpp&gt;</a>
+<a name="5"><span class="lineNum">       5 </span>            : </a>
+<a name="6"><span class="lineNum">       6 </span>            : #if defined(ESP32)</a>
+<a name="7"><span class="lineNum">       7 </span>            : #include &lt;mutex&gt;</a>
+<a name="8"><span class="lineNum">       8 </span>            : #define GUARD_LIST_LOCK std::lock_guard&lt;std::mutex&gt; guard_(mutex)</a>
+<a name="9"><span class="lineNum">       9 </span>            : #else</a>
+<a name="10"><span class="lineNum">      10 </span>            : #define GUARD_LIST_LOCK</a>
+<a name="11"><span class="lineNum">      11 </span>            : #endif</a>
+<a name="12"><span class="lineNum">      12 </span>            : </a>
+<a name="13"><span class="lineNum">      13 </span>            : BEGIN_CS_NAMESPACE</a>
+<a name="14"><span class="lineNum">      14 </span>            : </a>
+<a name="15"><span class="lineNum">      15 </span>            : /**</a>
+<a name="16"><span class="lineNum">      16 </span>            :  * @brief   Class for objects that listen for incoming MIDI Note events.</a>
+<a name="17"><span class="lineNum">      17 </span>            :  * </a>
+<a name="18"><span class="lineNum">      18 </span>            :  * @ingroup MIDIInputElements</a>
+<a name="19"><span class="lineNum">      19 </span>            :  */</a>
+<a name="20"><span class="lineNum">      20 </span>            : class MIDIInputElementNote : public MIDIInputElement,</a>
+<a name="21"><span class="lineNum">      21 </span>            :                              public DoublyLinkable&lt;MIDIInputElementNote&gt; {</a>
+<a name="22"><span class="lineNum">      22 </span>            :                              // public AH::UpdatableCRTP&lt;MIDIInputElementNote&gt; {</a>
+<a name="23"><span class="lineNum">      23 </span>            :   protected:</a>
+<a name="24"><span class="lineNum">      24 </span>            :     /**</a>
+<a name="25"><span class="lineNum">      25 </span>            :      * @brief   Constructor.</a>
+<a name="26"><span class="lineNum">      26 </span>            :      * @todo    Documentation.</a>
+<a name="27"><span class="lineNum">      27 </span>            :      */</a>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">         12 :     MIDIInputElementNote(const MIDIAddress &amp;address)</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">         24 :         : MIDIInputElement{address} {</span></a>
+<a name="30"><span class="lineNum">      30 </span>            :         GUARD_LIST_LOCK;</a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">         12 :         elements.append(this);</span></a>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">         12 :     }</span></a>
+<a name="33"><span class="lineNum">      33 </span>            : </a>
+<a name="34"><span class="lineNum">      34 </span>            :   public:</a>
+<a name="35"><span class="lineNum">      35 </span>            :     /**</a>
+<a name="36"><span class="lineNum">      36 </span>            :      * @brief   Destructor.</a>
+<a name="37"><span class="lineNum">      37 </span>            :      * @todo    Documentation.</a>
+<a name="38"><span class="lineNum">      38 </span>            :      */</a>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">         12 :     virtual ~MIDIInputElementNote() {</span></a>
+<a name="40"><span class="lineNum">      40 </span>            :         GUARD_LIST_LOCK;</a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">         12 :         elements.remove(this);</span></a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">         12 :     }</span></a>
+<a name="43"><span class="lineNum">      43 </span>            : </a>
+<a name="44"><span class="lineNum">      44 </span>            :     /**</a>
+<a name="45"><span class="lineNum">      45 </span>            :      * @brief   Initialize all MIDIInputElementNote elements.</a>
+<a name="46"><span class="lineNum">      46 </span>            :      * </a>
+<a name="47"><span class="lineNum">      47 </span>            :      * @see     MIDIInputElementNote#begin</a>
+<a name="48"><span class="lineNum">      48 </span>            :      */</a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          2 :     static void beginAll() {</span></a>
+<a name="50"><span class="lineNum">      50 </span>            :         GUARD_LIST_LOCK;</a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">          4 :         for (MIDIInputElementNote &amp;e : elements)</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          2 :             e.begin();</span></a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          2 :     }</span></a>
+<a name="54"><span class="lineNum">      54 </span>            : </a>
+<a name="55"><span class="lineNum">      55 </span>            :     /**</a>
+<a name="56"><span class="lineNum">      56 </span>            :      * @brief   Update all MIDIInputElementNote elements.</a>
+<a name="57"><span class="lineNum">      57 </span>            :      * </a>
+<a name="58"><span class="lineNum">      58 </span>            :      * @see     MIDIInputElementNote#update</a>
+<a name="59"><span class="lineNum">      59 </span>            :      */</a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineNoCov">          0 :     static void updateAll() {</span></a>
+<a name="61"><span class="lineNum">      61 </span>            :         GUARD_LIST_LOCK;</a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 :         for (MIDIInputElementNote &amp;e : elements)</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineNoCov">          0 :             e.update();</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineNoCov">          0 :     }</span></a>
+<a name="65"><span class="lineNum">      65 </span>            : </a>
+<a name="66"><span class="lineNum">      66 </span>            :     /** </a>
+<a name="67"><span class="lineNum">      67 </span>            :      * @brief   Reset all MIDIInputElementNote elements to their initial state.</a>
+<a name="68"><span class="lineNum">      68 </span>            :      * </a>
+<a name="69"><span class="lineNum">      69 </span>            :      * @see     MIDIInputElementNote#reset</a>
+<a name="70"><span class="lineNum">      70 </span>            :      */</a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          1 :     static void resetAll() {</span></a>
+<a name="72"><span class="lineNum">      72 </span>            :         GUARD_LIST_LOCK;</a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          2 :         for (MIDIInputElementNote &amp;e : elements)</span></a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          1 :             e.reset();</span></a>
+<a name="75"><span class="lineNum">      75 </span>            :         // MIDIInputElementNote::applyToAll(&amp;MIDIInputElementNote::reset);</a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          1 :     }</span></a>
+<a name="77"><span class="lineNum">      77 </span>            : </a>
+<a name="78"><span class="lineNum">      78 </span>            :     /**</a>
+<a name="79"><span class="lineNum">      79 </span>            :      * @brief   Update all MIDIInputElementNote elements with a new MIDI </a>
+<a name="80"><span class="lineNum">      80 </span>            :      *          message.</a>
+<a name="81"><span class="lineNum">      81 </span>            :      * </a>
+<a name="82"><span class="lineNum">      82 </span>            :      * @see     MIDIInputElementNote#updateWith</a>
+<a name="83"><span class="lineNum">      83 </span>            :      */</a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">         16 :     static void updateAllWith(const ChannelMessageMatcher &amp;midimsg) {</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">         32 :         for (MIDIInputElementNote &amp;e : elements)</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">         16 :             if (e.updateWith(midimsg)) {</span></a>
+<a name="87"><span class="lineNum">      87 </span><span class="lineCov">         16 :                 e.moveDown();</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">         16 :                 return;</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">         16 :             }</span></a>
+<a name="90"><span class="lineNum">      90 </span>            :         // No mutex required:</a>
+<a name="91"><span class="lineNum">      91 </span>            :         // e.moveDown may alter the list, but if it does, it always returns,</a>
+<a name="92"><span class="lineNum">      92 </span>            :         // and we stop iterating, so it doesn't matter.</a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         16 :     }</span></a>
+<a name="94"><span class="lineNum">      94 </span>            : </a>
+<a name="95"><span class="lineNum">      95 </span>            :   private:</a>
+<a name="96"><span class="lineNum">      96 </span>            :     /**</a>
+<a name="97"><span class="lineNum">      97 </span>            :      * @brief   Move down this element in the linked list of elements.</a>
+<a name="98"><span class="lineNum">      98 </span>            :      * </a>
+<a name="99"><span class="lineNum">      99 </span>            :      * This means that the element will be checked earlier on the next</a>
+<a name="100"><span class="lineNum">     100 </span>            :      * iteration.</a>
+<a name="101"><span class="lineNum">     101 </span>            :      */</a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         16 :     void moveDown() {</span></a>
+<a name="103"><span class="lineNum">     103 </span>            :         GUARD_LIST_LOCK;</a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">         16 :         elements.moveDown(this);</span></a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">         16 :     }</span></a>
+<a name="106"><span class="lineNum">     106 </span>            : </a>
+<a name="107"><span class="lineNum">     107 </span>            :     static DoublyLinkedList&lt;MIDIInputElementNote&gt; elements;</a>
+<a name="108"><span class="lineNum">     108 </span>            : #ifdef ESP32</a>
+<a name="109"><span class="lineNum">     109 </span>            :     static std::mutex mutex;</a>
+<a name="110"><span class="lineNum">     110 </span>            : #endif</a>
+<a name="111"><span class="lineNum">     111 </span>            : };</a>
+<a name="112"><span class="lineNum">     112 </span>            : </a>
+<a name="113"><span class="lineNum">     113 </span>            : #undef GUARD_LIST_LOCK</a>
+<a name="114"><span class="lineNum">     114 </span>            : </a>
+<a name="115"><span class="lineNum">     115 </span>            : END_CS_NAMESPACE</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14-6-g40580cd</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<map id="DoublyLinkedList&lt; Node &gt;::node_iterator_base&lt; INode &gt;" name="DoublyLinkedList&lt; Node &gt;::node_iterator_base&lt; INode &gt;">
+<area shape="rect" id="Node000001" title="Base class for doubly linked list iterators." alt="" coords="477,5,651,180"/>
+<area shape="rect" id="Node000002" href="$dd/d02/classDoublyLinkedList_1_1node__iterator.html" title=" " alt="" coords="5,235,171,421"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="464,118,399,136,327,161,253,192,184,230,172,238,169,234,181,226,251,187,325,156,397,131,463,113"/>
+<area shape="rect" id="Node000003" href="$dd/d02/classDoublyLinkedList_1_1node__iterator.html" title=" " alt="" coords="195,228,346,428"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="466,154,412,190,360,230,348,241,344,237,357,226,409,185,463,149"/>
+<area shape="rect" id="Node000004" href="$d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html" title=" " alt="" coords="371,228,552,428"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="523,194,507,229,503,227,518,192"/>
+<area shape="rect" id="Node000005" href="$d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html" title=" " alt="" coords="576,228,757,428"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="610,192,625,227,621,229,605,194"/>
+<area shape="rect" id="Node000006" href="$dd/d02/classDoublyLinkedList_1_1node__iterator.html" title="Forward bidirectional doubly linked list iterator." alt="" coords="782,275,951,381"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="665,151,719,186,771,226,821,273,818,277,768,230,715,191,662,155"/>
+<area shape="rect" id="Node000007" href="$d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html" title="Reverse bidirectional doubly linked list iterator." alt="" coords="976,268,1157,388"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="665,112,734,130,812,155,891,187,965,226,1016,266,1013,270,963,230,888,192,810,160,733,135,664,117"/>
+</map>

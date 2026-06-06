@@ -1,0 +1,31 @@
+<map id="LEDs&lt; N &gt;" name="LEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A class for collections of LEDs that can display ranges." alt="" coords="862,5,989,191"/>
+<area shape="rect" id="Node000002" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="744,239,909,579"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="894,205,883,239,878,237,889,203"/>
+<area shape="rect" id="Node000015" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title="A class for LED bars." alt="" coords="934,306,1114,511"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="961,203,994,305,989,307,956,205"/>
+<area shape="rect" id="Node000003" href="$d1/d29/classMCU_1_1VULEDsDriver.html" title="Small helper to display the VU meters on an LED bar display." alt="" coords="237,634,435,719"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="733,464,414,636,411,632,730,459"/>
+<area shape="rect" id="Node000006" href="$d6/d44/classNoteCCKPLEDBarDriver.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="1223,627,1415,727"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="921,575,923,576,957,599,994,618,1073,646,1152,662,1223,670,1222,676,1151,668,1071,651,992,623,955,604,920,581,918,580"/>
+<area shape="rect" id="Node000004" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="5,1169,232,1375"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="280,731,246,776,222,824,201,876,168,981,146,1082,132,1170,126,1169,140,1081,163,979,196,874,217,822,242,773,276,727"/>
+<area shape="rect" id="Node000005" href="$df/d36/classMCU_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="257,1179,415,1365"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="339,733,339,1179,333,1179,333,733"/>
+<area shape="rect" id="Node000007" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title=" " alt="" coords="439,775,670,1769"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1209,683,1069,691,913,707,839,719,774,735,720,754,683,777,672,787,668,783,680,773,718,749,772,729,838,714,912,701,1068,685,1208,678"/>
+<area shape="rect" id="Node000008" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title=" " alt="" coords="694,775,925,1769"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="1209,696,1130,710,1050,728,982,751,956,763,938,777,927,788,923,784,934,773,953,759,980,746,1049,723,1129,705,1208,690"/>
+<area shape="rect" id="Node000009" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title=" " alt="" coords="949,775,1179,1769"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="1228,737,1193,776,1182,794,1177,791,1189,773,1224,734"/>
+<area shape="rect" id="Node000010" href="$d2/daa/classNoteCCKPLEDBar.html" title=" " alt="" coords="1203,922,1434,1622"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="1321,741,1321,922,1316,922,1316,741"/>
+<area shape="rect" id="Node000011" href="$d2/daa/classNoteCCKPLEDBar.html" title=" " alt="" coords="1459,922,1693,1622"/>
+<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="1413,734,1449,773,1489,844,1519,921,1514,923,1484,847,1445,776,1409,737"/>
+<area shape="rect" id="Node000012" href="$d2/daa/classNoteCCKPLEDBar.html" title=" " alt="" coords="1718,922,1949,1622"/>
+<area shape="poly" id="edge11_Node000006_Node000012" title=" " alt="" coords="1428,690,1509,704,1590,723,1661,745,1688,758,1707,773,1736,805,1760,842,1780,880,1797,921,1792,923,1775,882,1755,844,1732,809,1704,777,1685,763,1659,750,1589,728,1508,709,1427,695"/>
+<area shape="rect" id="Node000013" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="1973,1182,2155,1362"/>
+<area shape="poly" id="edge12_Node000006_Node000013" title=" " alt="" coords="1429,677,1570,684,1728,700,1803,712,1870,728,1925,748,1963,773,2000,816,2029,866,2050,919,2064,975,2073,1031,2077,1085,2076,1182,2071,1182,2072,1086,2067,1032,2059,976,2045,921,2024,868,1996,819,1960,777,1922,753,1869,733,1802,717,1728,705,1570,689,1428,682"/>
+<area shape="rect" id="Node000014" href="$d2/daa/classNoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="2180,1202,2356,1342"/>
+<area shape="poly" id="edge13_Node000006_Node000014" title=" " alt="" coords="1429,681,1629,693,1860,712,1968,725,2061,739,2131,755,2154,763,2170,773,2210,819,2239,871,2260,929,2274,988,2281,1048,2283,1105,2280,1202,2274,1202,2278,1105,2276,1048,2268,989,2255,930,2234,874,2205,822,2166,777,2152,768,2129,760,2060,744,1968,730,1860,718,1628,698,1429,686"/>
+</map>

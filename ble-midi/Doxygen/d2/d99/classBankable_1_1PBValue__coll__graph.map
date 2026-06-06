@@ -1,0 +1,24 @@
+<map id="PBValue&lt; BankSize &gt;" name="PBValue&lt; BankSize &gt;">
+<area shape="rect" id="Node000001" title="Class that listens for MIDI Pitch Bend events on a single address and saves their value." alt="" coords="599,1897,782,2063"/>
+<area shape="rect" id="Node000002" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="79,1583,382,1761"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="321,1769,358,1802,396,1832,446,1865,499,1894,600,1941,598,1946,497,1899,444,1869,393,1837,354,1806,318,1773"/>
+<area shape="rect" id="Node000003" href="$d5/dae/classMatchingMIDIInputElement.html" title="The MIDIInputElement base class is very general: you give it a MIDI message, and it calls the updateW..." alt="" coords="93,1312,309,1432"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="211,1445,225,1582,219,1582,206,1446"/>
+<area shape="rect" id="Node000004" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="106,1017,297,1263"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="204,1276,204,1312,199,1312,199,1276"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="105,588,297,968"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="204,982,204,1017,199,1017,199,982"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="119,371,164,587,159,588,114,372"/>
+<area shape="rect" id="Node000007" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="257,526,247,573,242,571,252,525"/>
+<area shape="rect" id="Node000008" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="334,1339,533,1405"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="406,1418,293,1584,289,1581,402,1415"/>
+<area shape="rect" id="Node000009" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="407,1582,615,1762"/>
+<area shape="poly" id="edge9_Node000009_Node000008" title=" " alt="" coords="428,1405,424,1444,427,1485,439,1526,455,1566,450,1568,434,1528,421,1486,418,1444,423,1405"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="514,1568,509,1512,495,1457,481,1430,463,1406,467,1403,485,1427,500,1455,514,1511,519,1568"/>
+<area shape="rect" id="Node000010" href="$dd/d7f/classInterfaces_1_1IValue14.html" title="Abstract interface for MIDI input elements that receive and store a 14&#45;bit value." alt="" coords="639,1619,742,1725"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="693,1739,693,1897,688,1897,688,1739"/>
+<area shape="rect" id="Node000011" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="767,1509,967,1835"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="776,1836,748,1885,743,1882,771,1834"/>
+</map>

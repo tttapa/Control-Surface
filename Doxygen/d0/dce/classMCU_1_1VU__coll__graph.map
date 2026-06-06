@@ -1,0 +1,23 @@
+<map id="VU" name="VU">
+<area shape="rect" id="Node000001" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="531,1753,690,1979"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="187,1288,455,1683"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="466,1677,469,1681,533,1764,529,1767,465,1684,461,1680"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="139,972,330,1217"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="267,1230,280,1287,275,1288,262,1232"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="116,539,308,759"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="221,772,231,972,226,972,216,773"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,95,197,235"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="123,248,190,538,184,539,118,250"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="221,5,424,325"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="289,326,243,523,238,522,284,325"/>
+<area shape="rect" id="Node000007" href="$db/d84/structMCU_1_1VUMatcher.html" title="MIDI Input matcher for Mackie Control Universal VU meters." alt="" coords="363,1052,474,1137"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="411,1138,377,1273,372,1271,406,1137"/>
+<area shape="rect" id="Node000008" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="332,396,513,901"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="423,901,422,1035,417,1035,418,901"/>
+<area shape="rect" id="Node000009" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="479,1373,609,1598"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="569,1611,594,1752,588,1753,563,1612"/>
+<area shape="rect" id="Node000010" href="$dc/d11/structMCU_1_1VUState.html" title="Struct that keeps track of the value and overload indicator of a Mackie Control Universal VU meter." alt="" coords="633,1423,725,1548"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="670,1549,636,1738,631,1737,665,1548"/>
+<area shape="rect" id="Node000011" href="$d2/de5/classAH_1_1Timer.html" title=" " alt="" coords="749,1393,896,1578"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="790,1579,740,1684,702,1745,697,1743,735,1681,785,1577"/>
+</map>

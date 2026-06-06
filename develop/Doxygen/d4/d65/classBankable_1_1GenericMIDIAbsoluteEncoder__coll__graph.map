@@ -1,0 +1,19 @@
+<map id="GenericMIDIAbsoluteEncoder&lt; Enc, NumBanks, BankAddress, Sender &gt;" name="GenericMIDIAbsoluteEncoder&lt; Enc, NumBanks, BankAddress, Sender &gt;">
+<area shape="rect" id="Node000001" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="160,651,388,1045"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="5,355,148,480"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,492,186,649,181,651,109,494"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="584,5,780,225"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="571,130,476,146,369,174,314,193,261,216,210,244,162,277,128,313,103,356,99,353,124,310,159,273,207,240,258,212,312,188,367,169,475,141,570,124"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="645,295,871,540"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="716,238,730,294,725,295,710,239"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="532,788,728,908"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="621,774,615,675,612,550,616,412,630,274,641,225,646,226,635,275,621,413,617,550,620,675,626,774"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="724,541,655,773,650,771,719,539"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="795,698,1001,998"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="800,539,847,682,842,683,795,541"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="925,698,934,599,934,491,928,435,918,380,902,327,881,276,864,248,842,223,792,179,795,175,846,219,868,245,886,273,907,325,923,379,933,434,939,490,939,600,930,698"/>
+<area shape="rect" id="Node000007" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="173,275,375,560"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="277,561,277,635,271,635,271,561"/>
+<area shape="rect" id="Node000008" href="$db/dd2/classEncoderState.html" title=" " alt="" coords="399,317,570,517"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="438,519,380,637,375,635,434,516"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="EncoderSelector&lt; N &gt;" name="EncoderSelector&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that reads from a rotary encoder." alt="" coords="64,1248,231,1325"/>
+<area shape="rect" id="node2" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="46,1005,249,1200"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="51,763,243,957"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,608,137,700"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="161,593,288,715"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="123,233,327,545"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="123,5,327,185"/>
+</map>

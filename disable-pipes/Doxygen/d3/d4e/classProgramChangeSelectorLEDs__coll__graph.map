@@ -1,0 +1,18 @@
+<map id="ProgramChangeSelectorLEDs&lt; N &gt;" name="ProgramChangeSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="415,1779,666,1856"/>
+<area shape="rect" id="node2" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="413,1593,668,1729"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="109,1239,276,1449"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,916,137,1008"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="161,901,288,1023"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="272,483,476,795"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="363,901,598,1023"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="300,1261,504,1427"/>
+<area shape="rect" id="node9" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="528,1144,743,1544"/>
+<area shape="rect" id="node10" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="767,1276,1013,1412"/>
+<area shape="rect" id="node11" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="780,857,979,1067"/>
+<area shape="rect" id="node12" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="779,483,979,795"/>
+<area shape="rect" id="node13" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="665,123,865,303"/>
+<area shape="rect" id="node14" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="889,5,1099,420"/>
+<area shape="rect" id="node15" href="$dc/dd7/structOneByteMIDIMatcher.html" title="Matcher for MIDI messages with 1 data byte, such as Channel Pressure and Program Change." alt="" coords="1003,916,1190,1008"/>
+<area shape="rect" id="node16" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="1006,519,1187,758"/>
+</map>

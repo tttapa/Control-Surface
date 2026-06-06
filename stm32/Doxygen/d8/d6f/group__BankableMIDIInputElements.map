@@ -1,0 +1,4 @@
+<map id="Bankable MIDI Input Elements" name="Bankable MIDI Input Elements">
+<area shape="rect" id="node1" title="All Elements that listen for incoming MIDI events, and that can be banked." alt="" coords="208,5,361,45"/>
+<area shape="rect" id="node2" href="$df/d8b/group__MIDIInputElements.html" title="All Elements that listen for incoming MIDI events." alt="" coords="5,13,160,38"/>
+</map>

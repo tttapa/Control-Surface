@@ -1,0 +1,18 @@
+<map id="LEDs.hpp" name="LEDs.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="329,5,412,31"/>
+<area shape="rect" id="Node000002" href="$d6/d3a/DotBarDisplayLEDs_8hpp.html" title=" " alt="" coords="176,79,352,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="344,40,283,81,280,76,341,36"/>
+<area shape="rect" id="Node000007" href="$dc/d48/VPotRingLEDs_8hpp.html" title=" " alt="" coords="407,79,548,104"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="400,36,461,76,458,81,398,40"/>
+<area shape="rect" id="Node000003" href="$d4/dde/AudioVULEDs_8hpp.html" title=" " alt="" coords="5,152,144,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="222,111,107,154,105,149,220,106"/>
+<area shape="rect" id="Node000005" href="$db/db4/NoteCCKPLEDBar_8hpp.html" title=" " alt="" coords="168,152,331,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="261,118,254,152,249,151,256,117"/>
+<area shape="rect" id="Node000006" href="$de/d3d/VULEDs_8hpp.html" title=" " alt="" coords="355,152,456,177"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="300,108,383,149,381,154,297,112"/>
+<area shape="rect" id="Node000004" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="258,225,395,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="129,179,287,223,285,228,128,184"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="274,185,316,223,312,227,270,189"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="384,189,341,227,338,223,381,185"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="484,118,482,149,478,165,470,179,454,196,434,210,391,228,389,223,431,205,450,192,466,176,473,163,477,148,478,118"/>
+</map>

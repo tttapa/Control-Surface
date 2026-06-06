@@ -1,0 +1,5 @@
+<map id="MIDI Output Elements" name="MIDI Output Elements">
+<area shape="rect" id="node1" title="All Elements that send out MIDI events. &#160;&#160;This includes potentiometers, faders, buttons,..." alt="" coords="5,45,159,70"/>
+<area shape="rect" id="node2" href="$d2/d00/group__BankableMIDIOutputElements.html" title="All Elements that send out MIDI events, and that can be banked. &#160;&#160;This includes the bankable versions..." alt="" coords="207,5,359,45"/>
+<area shape="rect" id="node3" href="$d3/dc0/group__ManyAddressesMIDIOutputElements.html" title="All Elements that send out MIDI events, and that can banked, with a list of arbitrary addresses...." alt="" coords="207,69,360,109"/>
+</map>

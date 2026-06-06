@@ -1,0 +1,17 @@
+<map id="SerialDebugMIDI_Output&lt; T &gt;" name="SerialDebugMIDI_Output&lt; T &gt;">
+<area shape="rect" id="Node000001" title="A wrapper class for debug MIDI outputs sending human&#45;readable MIDI messages over a Serial port of cla..." alt="" coords="231,1209,443,1315"/>
+<area shape="rect" id="Node000002" href="$d5/d12/classMIDIOutputOnly.html" title=" " alt="" coords="157,959,310,1064"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="263,1075,318,1208,313,1210,258,1077"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="5,383,208,623"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="142,636,223,958,218,959,137,638"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,208,145"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="109,159,109,383,104,383,104,159"/>
+<area shape="rect" id="Node000005" href="$d0/d9c/classStreamDebugMIDI__Output.html" title="A class for MIDI outputs sending human&#45;readable MIDI messages over a Stream." alt="" coords="345,861,559,1161"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="380,1175,364,1210,359,1208,375,1173"/>
+<area shape="rect" id="Node000006" href="$db/d85/classPrintDebugMIDI__Base.html" title="A class that implements MIDI debug send functions." alt="" coords="233,401,442,606"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="366,619,421,860,416,862,361,620"/>
+<area shape="rect" id="Node000007" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="467,193,667,813"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="496,827,488,861,483,860,491,826"/>
+<area shape="rect" id="Node000008" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="691,271,930,736"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="722,749,681,815,624,880,561,935,558,931,620,876,677,812,717,747"/>
+</map>

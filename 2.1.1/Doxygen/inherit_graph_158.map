@@ -1,0 +1,10 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="5,5,224,75"/>
+<area shape="rect" id="Node000001" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="285,25,461,65"/>
+<area shape="poly" id="edge354_Node000000_Node000001" title=" " alt="" coords="238,40,285,41,285,46,238,45"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title="A class that reads and filters an analog input." alt="" coords="272,95,475,150"/>
+<area shape="poly" id="edge355_Node000000_Node000003" title=" " alt="" coords="237,76,288,93,286,98,236,81"/>
+<area shape="rect" id="Node000002" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="5,99,224,168"/>
+<area shape="poly" id="edge356_Node000002_Node000001" title=" " alt="" coords="229,92,313,63,314,68,231,97"/>
+<area shape="poly" id="edge357_Node000002_Node000003" title=" " alt="" coords="238,126,272,124,272,130,238,131"/>
+</map>

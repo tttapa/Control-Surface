@@ -1,0 +1,11 @@
+<map id="HardwareSerialDebugMIDI_Output" name="HardwareSerialDebugMIDI_Output">
+<area shape="rect" id="node1" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a HardwareSerial port." alt="" coords="243,1401,453,1537"/>
+<area shape="rect" id="node2" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="245,1232,451,1353"/>
+<area shape="rect" id="node3" href="$d5/d12/classMIDIOutputOnly.html" title=" " alt="" coords="159,1004,321,1111"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="5,402,216,714"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,216,185"/>
+<area shape="rect" id="node6" href="$d0/d9c/classStreamDebugMIDI__Output.html" title="A class for MIDI outputs sending human&#45;readable MIDI messages over a Stream." alt="" coords="357,931,579,1184"/>
+<area shape="rect" id="node7" href="$de/d65/classStreamDebugMIDI__Base.html" title="A class that implements MIDI debug send functions." alt="" coords="240,468,459,648"/>
+<area shape="rect" id="node8" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="483,233,691,883"/>
+<area shape="rect" id="node9" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="715,373,957,743"/>
+</map>

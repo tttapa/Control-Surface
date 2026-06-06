@@ -1,0 +1,24 @@
+<map id="SmartMIDIFilteredAnalog&lt; NumBanks, BankAddress, Sender &gt;" name="SmartMIDIFilteredAnalog&lt; NumBanks, BankAddress, Sender &gt;">
+<area shape="rect" id="Node000001" title="A class for potentiometers and faders that send MIDI events." alt="" coords="507,1393,709,1768"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="283,1115,426,1241"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="399,1251,446,1329,509,1427,505,1430,442,1332,395,1254"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="229,585,424,951"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="343,964,353,1115,348,1115,337,965"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="150,362,214,510,248,584,243,586,210,512,145,364"/>
+<area shape="rect" id="Node000005" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="330,511,330,568,325,568,325,511"/>
+<area shape="rect" id="Node000006" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="456,1118,624,1238"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="541,1238,542,1301,549,1369,551,1377,545,1378,544,1370,537,1302,536,1238"/>
+<area shape="rect" id="Node000007" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="448,573,659,963"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="549,977,545,1118,539,1118,544,977"/>
+<area shape="rect" id="Node000008" href="$d9/d74/classAH_1_1EMA.html" title=" " alt="" coords="457,131,650,385"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="556,385,556,557,551,557,551,385"/>
+<area shape="rect" id="Node000009" href="$da/df9/classAH_1_1Hysteresis.html" title=" " alt="" coords="674,136,931,380"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="746,381,658,560,653,557,741,379"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="687,735,758,801"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="720,801,687,1026,677,1122,673,1198,668,1273,656,1370,655,1377,650,1377,651,1369,663,1273,668,1197,672,1122,681,1025,715,800"/>
+<area shape="rect" id="Node000011" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="750,1025,965,1331"/>
+<area shape="poly" id="edge11_Node000011_Node000010" title=" " alt="" coords="736,800,805,1009,800,1011,731,802"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="765,1333,720,1405,715,1402,760,1330"/>
+</map>

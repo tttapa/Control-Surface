@@ -1,0 +1,6 @@
+<map id="VPotRingLEDsDriver" name="VPotRingLEDsDriver">
+<area shape="rect" id="node1" title=" " alt="" coords="115,219,293,311"/>
+<area shape="rect" id="node3" href="$d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays its value usin..." alt="" coords="5,359,208,509"/>
+<area shape="rect" id="node4" href="$d6/d0d/classMCU_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays it using LEDs." alt="" coords="232,366,373,502"/>
+<area shape="rect" id="node2" href="$df/d06/classAH_1_1LEDs.html" title=" " alt="" coords="137,5,271,171"/>
+</map>

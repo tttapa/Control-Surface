@@ -1,0 +1,21 @@
+<map id="VULEDs&lt; NumLEDs &gt;" name="VULEDs&lt; NumLEDs &gt;">
+<area shape="rect" id="Node000001" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="368,2041,527,2227"/>
+<area shape="rect" id="Node000002" href="$d8/d4c/classMCU_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="267,1748,425,1993"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="401,2005,414,2040,409,2042,396,2007"/>
+<area shape="rect" id="Node000003" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,1433,273,1567"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="186,1578,280,1747,275,1749,181,1581"/>
+<area shape="rect" id="Node000004" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="44,1007,235,1252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="142,1266,142,1433,137,1433,137,1266"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="43,239,235,959"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="142,972,142,1006,137,1006,137,972"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="50,5,229,191"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="142,204,142,238,137,238,137,204"/>
+<area shape="rect" id="Node000007" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="297,1387,427,1613"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="359,1627,354,1748,349,1747,354,1626"/>
+<area shape="rect" id="Node000008" href="$d1/d29/classMCU_1_1VULEDsDriver.html" title="Small helper to display the VU meters on an LED bar display." alt="" coords="449,1828,648,1913"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="530,1927,485,2042,480,2040,525,1926"/>
+<area shape="rect" id="Node000009" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="466,1300,631,1700"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="551,1714,551,1828,546,1828,546,1714"/>
+<area shape="rect" id="Node000010" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="485,1037,612,1222"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="551,1236,551,1300,546,1300,546,1236"/>
+</map>

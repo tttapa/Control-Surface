@@ -1,0 +1,9 @@
+<map id="BulkTX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;::Writing" name="BulkTX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;::Writing">
+<area shape="rect" id="Node000001" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="107,396,299,491"/>
+<area shape="rect" id="Node000002" href="$d1/db2/structBulkTX_1_1Writing_1_1Buffer.html" title=" " alt="" coords="5,93,72,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="51,177,82,270,105,322,134,371,143,382,139,385,130,373,101,324,77,272,46,179"/>
+<area shape="rect" id="Node000003" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="96,5,309,265"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="205,266,205,379,200,379,200,266"/>
+<area shape="rect" id="Node000004" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="333,13,547,258"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="413,259,386,319,368,348,347,374,314,401,311,397,343,370,364,345,381,317,408,257"/>
+</map>

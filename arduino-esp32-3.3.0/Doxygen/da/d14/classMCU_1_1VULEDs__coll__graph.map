@@ -1,0 +1,35 @@
+<map id="VULEDs&lt; NumLEDs &gt;" name="VULEDs&lt; NumLEDs &gt;">
+<area shape="rect" id="Node000001" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="763,2027,922,2212"/>
+<area shape="rect" id="Node000002" href="$d8/d4c/classMCU_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="663,1752,822,1977"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="794,1989,809,2025,804,2027,790,1991"/>
+<area shape="rect" id="Node000003" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="251,1509,519,1644"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="480,1650,665,1798,662,1802,477,1655"/>
+<area shape="rect" id="Node000004" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="133,1156,323,1401"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="302,1412,353,1508,348,1511,297,1415"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="105,651,297,1031"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="216,1044,223,1155,218,1156,211,1045"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="117,371,169,650,164,651,112,372"/>
+<area shape="rect" id="Node000007" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="263,526,243,635,237,634,258,525"/>
+<area shape="rect" id="Node000008" href="$db/d84/structMCU_1_1VUMatcher.html" title="MIDI Input matcher for Mackie Control Universal VU meters." alt="" coords="353,1236,463,1321"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="407,1322,394,1493,389,1493,402,1321"/>
+<area shape="rect" id="Node000009" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="321,588,503,1093"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="412,1093,411,1220,406,1220,407,1093"/>
+<area shape="rect" id="Node000010" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="543,1464,673,1689"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="669,1700,692,1751,688,1753,664,1703"/>
+<area shape="rect" id="Node000011" href="$dc/d11/structMCU_1_1VUState.html" title="Struct that keeps track of the value and overload indicator of a Mackie Control Universal VU meter." alt="" coords="697,1514,789,1639"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="745,1640,745,1736,740,1736,740,1640"/>
+<area shape="rect" id="Node000012" href="$d2/de5/classAH_1_1Timer.html" title=" " alt="" coords="813,1484,960,1669"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="843,1671,809,1738,804,1736,838,1668"/>
+<area shape="rect" id="Node000013" href="$d1/d29/classMCU_1_1VULEDsDriver.html" title="Small helper to display the VU meters on an LED bar display." alt="" coords="887,1822,1086,1907"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="958,1921,897,2028,893,2025,954,1918"/>
+<area shape="rect" id="Node000014" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="984,1467,1149,1687"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="1035,1700,1001,1823,996,1821,1030,1699"/>
+<area shape="rect" id="Node000015" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="1003,1186,1130,1371"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="1069,1385,1069,1466,1064,1466,1064,1385"/>
+<area shape="rect" id="Node000016" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="1009,688,1125,993"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="1069,994,1069,1170,1064,1170,1064,994"/>
+<area shape="rect" id="Node000017" href="$d7/d14/classN.html" title=" " alt="" coords="1055,233,1079,298"/>
+<area shape="poly" id="edge16_Node000016_Node000017" title=" " alt="" coords="1069,298,1069,671,1064,671,1064,298"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="AudioVULEDs&lt; N &gt;" name="AudioVULEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="A VU meter that reads from an Audio stream using the AudioAnalyzePeak class, and displays it on an LE..." alt="" coords="161,725,303,891"/>
+<area shape="rect" id="node2" href="$d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="171,329,293,479"/>
+<area shape="rect" id="node3" href="$d2/de9/classIVU.html" title="An abstract interface for VU meters." alt="" coords="5,35,128,171"/>
+<area shape="rect" id="node4" href="$d0/d49/classMovingCoilBallistics.html" title=" " alt="" coords="152,5,312,200"/>
+<area shape="rect" id="node5" href="$d0/d18/classAudioVU_1_1Analyzer.html" title="The AudioAnalyzePeak and AudioAnalyzeRMS classes don&#39;t implement a common interface,..." alt="" coords="336,35,469,171"/>
+<area shape="rect" id="node6" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="404,263,588,545"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="327,762,510,854"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="534,623,711,993"/>
+</map>

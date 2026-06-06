@@ -1,0 +1,16 @@
+<map id="ProgramChangeSelector&lt; N &gt;" name="ProgramChangeSelector&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="112,1977,311,2055"/>
+<area shape="rect" id="node2" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="90,1682,333,1803"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="123,1300,297,1480"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,1050,124,1142"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="149,955,258,1237"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="85,5,268,112"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="172,161,379,444"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="171,521,398,892"/>
+<area shape="rect" id="node9" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="283,1043,441,1149"/>
+<area shape="rect" id="node10" href="$db/d1d/classMIDIInputElementPC.html" title=" " alt="" coords="443,1300,617,1480"/>
+<area shape="rect" id="node13" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="358,1697,539,1789"/>
+<area shape="rect" id="node14" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="563,1557,755,1928"/>
+<area shape="rect" id="node11" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="465,991,621,1201"/>
+<area shape="rect" id="node12" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="450,529,637,885"/>
+</map>

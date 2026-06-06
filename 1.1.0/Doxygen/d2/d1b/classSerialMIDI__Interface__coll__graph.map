@@ -1,0 +1,12 @@
+<map id="SerialMIDI_Interface&lt; T &gt;" name="SerialMIDI_Interface&lt; T &gt;">
+<area shape="rect" id="node1" title="A wrapper class for MIDI interfaces sending and receiving MIDI messages over a Serial port of class T..." alt="" coords="305,1284,479,1376"/>
+<area shape="rect" id="node2" href="$d3/dc3/classStreamMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Stream." alt="" coords="211,1071,381,1221"/>
+<area shape="rect" id="node3" href="$de/d76/classParsing__MIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="327,740,505,1008"/>
+<area shape="rect" id="node4" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="523,204,661,677"/>
+<area shape="rect" id="node5" href="$df/d0c/classMIDI__Parser.html" title=" " alt="" coords="153,358,314,523"/>
+<area shape="rect" id="node8" href="$d0/d0d/classSerialMIDI__Parser.html" title=" " alt="" coords="169,806,298,942"/>
+<area shape="rect" id="node6" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="172,5,295,141"/>
+<area shape="rect" id="node7" href="$de/d55/classMIDI__Callbacks.html" title="A class for callbacks from MIDI input." alt="" coords="338,380,499,501"/>
+<area shape="rect" id="node9" href="$d1/db1/classSysExBuffer.html" title=" " alt="" coords="5,343,128,538"/>
+<area shape="rect" id="node10" title=" " alt="" coords="406,1107,445,1185"/>
+</map>

@@ -1,0 +1,21 @@
+<map id="Selector&lt; N &gt;" name="Selector&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A Selector with an empty callback." alt="" coords="159,960,266,1025"/>
+<area shape="rect" id="Node000002" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="139,661,286,861"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,874,215,960,210,960,210,874"/>
+<area shape="rect" id="Node000003" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,355,129,440"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="92,452,175,659,170,661,87,454"/>
+<area shape="rect" id="Node000004" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="153,335,272,460"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="215,474,215,661,210,661,210,474"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="525,5,721,225"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="513,151,457,173,397,201,338,236,285,277,261,305,241,336,237,333,256,301,282,273,335,231,394,197,455,168,512,146"/>
+<area shape="rect" id="Node000007" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="625,275,851,520"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="676,237,691,274,686,276,671,239"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="752,701,948,821"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="871,687,891,599,899,547,903,493,903,437,897,381,883,327,861,276,834,238,799,206,760,179,721,157,723,152,763,174,802,202,838,234,866,273,888,325,902,380,908,436,909,493,904,548,896,600,876,688"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="776,519,797,586,828,684,823,686,791,587,771,521"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="444,611,651,911"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="676,522,636,597,632,594,671,519"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="511,611,501,533,496,447,501,359,518,274,532,239,537,241,523,275,506,360,502,447,506,532,516,610"/>
+<area shape="rect" id="Node000009" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="295,345,461,450"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="357,451,267,647,262,645,352,449"/>
+</map>

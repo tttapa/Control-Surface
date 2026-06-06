@@ -1,0 +1,11 @@
+<map id="PBValue&lt; BankSize &gt;" name="PBValue&lt; BankSize &gt;">
+<area shape="rect" id="node1" title="Class that listens for MIDI Pitch Bend events on a single address and saves their value." alt="" coords="306,1263,497,1428"/>
+<area shape="rect" id="node2" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="117,1035,445,1215"/>
+<area shape="rect" id="node3" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,851,288,987"/>
+<area shape="rect" id="node4" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="47,593,246,803"/>
+<area shape="rect" id="node5" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="47,233,247,545"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="47,5,247,185"/>
+<area shape="rect" id="node7" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="313,880,519,957"/>
+<area shape="rect" id="node8" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="308,608,524,788"/>
+<area shape="rect" id="node9" href="$dd/d7f/classInterfaces_1_1IValue14.html" title="Abstract interface for MIDI input elements that receive and store a 14&#45;bit value." alt="" coords="469,1071,576,1178"/>
+</map>

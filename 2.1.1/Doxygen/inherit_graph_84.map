@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d5/d1c/structBulkRX.html" title=" " alt="" coords="5,5,215,45"/>
+<area shape="rect" id="Node000001" href="$d1/dd4/classPluggableUSBMIDI.html" title=" " alt="" coords="263,77,405,102"/>
+<area shape="poly" id="edge13_Node000000_Node000001" title=" " alt="" coords="195,47,289,74,288,79,193,52"/>
+<area shape="rect" id="Node000002" href="$dc/d2d/structBulkTX.html" title=" " alt="" coords="6,69,214,109"/>
+<area shape="poly" id="edge14_Node000002_Node000001" title=" " alt="" coords="228,87,262,87,262,92,228,92"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="29,134,191,159"/>
+<area shape="poly" id="edge15_Node000003_Node000001" title=" " alt="" coords="177,128,214,119,286,99,287,105,215,124,178,133"/>
+</map>

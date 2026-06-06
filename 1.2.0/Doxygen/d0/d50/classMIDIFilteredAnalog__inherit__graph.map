@@ -1,0 +1,6 @@
+<map id="MIDIFilteredAnalog&lt; Sender &gt;" name="MIDIFilteredAnalog&lt; Sender &gt;">
+<area shape="rect" id="node1" title="A class for potentiometers and faders that send MIDI events (with only a channel, no address)." alt="" coords="31,763,202,972"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="41,593,192,715"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="15,160,219,545"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,228,112"/>
+</map>

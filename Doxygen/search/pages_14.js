@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['names_0',['names',['../d3/df7/midi-tutorial.html#midi_md-midi-control-change-names',1,'MIDI Control Change names'],['../d3/df7/midi-tutorial.html#midi_md-midi-note-names',1,'MIDI Note names'],['../d3/df7/midi-tutorial.html#midi_md-midi-program-change-names',1,'MIDI Program Change names']]],
+  ['native_20usb_20support_1',['native USB support',['../d8/d4a/md_pages_MIDI-over-USB.html#arduino-boards-with-native-usb-support',1,'Arduino boards with native USB support'],['../d8/d4a/md_pages_MIDI-over-USB.html#mbed-os-boards-with-native-usb-support',1,'Mbed OS boards with native USB support']]],
+  ['nc_20button_2',['Transpose-Octave-NC-Button',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#transpose-octave-nc-button',1,'']]],
+  ['newer_20not_20yet_20supported_20arduino_20boards_3',['Newer, not yet supported Arduino boards',['../d8/d4a/md_pages_MIDI-over-USB.html#newer-not-yet-supported-arduino-boards',1,'']]],
+  ['no_20interrupts_4',['No Interrupts',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#mcp23017-encoders-no-interrupts',1,'MCP23017-Encoders-No-Interrupts'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#mcp23017-rotaryencoder-no-interrupts',1,'MCP23017-RotaryEncoder-No-Interrupts']]],
+  ['normal_20banks_5',['Normal banks',['../da/dc1/FAQ.html#faq-normal-banks',1,'']]],
+  ['not_20yet_20supported_20arduino_20boards_6',['Newer, not yet supported Arduino boards',['../d8/d4a/md_pages_MIDI-over-USB.html#newer-not-yet-supported-arduino-boards',1,'']]],
+  ['note_20fastled_7',['9.Note-FastLED',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md9note-fastled',1,'']]],
+  ['note_20fastled_20colormapper_8',['10.Note-FastLED-ColorMapper',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md10note-fastled-colormapper',1,'']]],
+  ['note_20led_9',['1.Note-LED',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md1note-led',1,'']]],
+  ['note_20led_20input_20element_20callback_10',['Custom-Note-LED-Input-Element-Callback',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#custom-note-led-input-element-callback',1,'']]],
+  ['note_20led_20input_20element_20callback_20fastled_11',['Custom-Note-LED-Input-Element-Callback-FastLED',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#custom-note-led-input-element-callback-fastled',1,'']]],
+  ['note_20led_20pwm_12',['5.Note-LED-PWM',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md5note-led-pwm',1,'']]],
+  ['note_20manyaddresses_20transposer_13',['Note-ManyAddresses-Transposer',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#note-manyaddresses-transposer',1,'']]],
+  ['note_20names_14',['MIDI Note names',['../d3/df7/midi-tutorial.html#midi_md-midi-note-names',1,'']]],
+  ['note_20range_20leds_15',['2.Note-Range-LEDs',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md2note-range-leds',1,'']]],
+  ['notebutton_16',['NoteButton',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#notebutton',1,'']]],
+  ['notebuttonmatrix_17',['NoteButtonMatrix',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#notebuttonmatrix',1,'']]],
+  ['notechordbutton_18',['NoteChordButton',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#notechordbutton',1,'']]],
+  ['noteled_19',['6.MAX7219-NoteLED',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md6max7219-noteled',1,'']]],
+  ['noteledbar_20',['3.NoteLEDBar',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md3noteledbar',1,'']]],
+  ['notes_21',['Send-MIDI-Notes',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#send-midi-notes',1,'']]],
+  ['number_20midi_20channel_20etc_20at_20runtime_22',['Can I change the address, controller number, MIDI channel, etc. at runtime?',['../da/dc1/FAQ.html#faq-change-address-runtime',1,'']]],
+  ['number_20of_20individual_20midi_20elements_23',['Reducing the number of individual MIDI elements',['../da/dc1/FAQ.html#faq-save-memory-number-of-individual-elements',1,'']]],
+  ['numeric_24',['Numeric',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#numeric',1,'']]]
+];

@@ -1,0 +1,35 @@
+<map id="Display" name="Display">
+<area shape="rect" id="node1" href="dir_15b6432dff6a6d357bf70f8fbf2cdf14.html" title="AH" alt="" coords="285,209,326,235"/>
+<area shape="rect" id="node2" href="dir_4b65e0e927a600dbbefc4f76cc5a7f7c.html" title="MIDI_Inputs" alt="" coords="368,136,467,161"/>
+<area shape="rect" id="node3" href="dir_96809ae32da64306a703eb7e36380126.html" title="Banks" alt="" coords="491,136,554,161"/>
+<area shape="rect" id="node4" href="dir_ab77b90ed5338b1b1a87b678e21cf0af.html" title="Selectors" alt="" coords="605,136,688,161"/>
+<area shape="rect" id="node5" href="dir_c90f87021e89d05236fc514cb49c4dcf.html" title="Def" alt="" coords="712,136,757,161"/>
+<area shape="poly" id="edge1" href="dir_000015_000002.html" alt="" coords="347,75,425,81,512,96,547,108,572,125,579,135,581,147,578,160,569,174,553,186,529,196,467,210,399,218,340,222,340,217,398,213,466,205,527,191,550,181,565,170,573,158,576,147,574,137,568,128,545,113,510,101,424,86,346,80"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000015_000002.html" title="4" alt="" coords="340,220,349,235"/>
+<area shape="poly" id="edge2" href="dir_000015_000038.html" alt="" coords="329,86,390,126,387,131,326,90"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000015_000038.html" title="5" alt="" coords="385,111,394,126"/>
+<area shape="poly" id="edge3" href="dir_000015_000006.html" alt="" coords="346,85,479,130,478,135,344,91"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000015_000006.html" title="2" alt="" coords="472,116,481,130"/>
+<area shape="poly" id="edge4" href="dir_000015_000045.html" alt="" coords="347,82,593,133,592,138,346,87"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000015_000045.html" title="1" alt="" coords="585,119,594,134"/>
+<area shape="poly" id="edge5" href="dir_000015_000014.html" alt="" coords="347,77,497,96,596,112,699,134,698,139,595,118,496,101,346,83"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000015_000014.html" title="1" alt="" coords="691,120,701,134"/>
+<area shape="rect" id="node7" href="dir_e6ba192adc2adb3ce3b2e0adb29999df.html" title="Bitmaps" alt="" coords="267,136,343,161"/>
+<area shape="poly" id="edge6" href="dir_000015_000007.html" alt="" coords="312,89,310,123,305,122,307,88"/>
+<area shape="rect" id="edge6-headlabel" href="dir_000015_000007.html" title="1" alt="" coords="311,111,321,126"/>
+<area shape="poly" id="edge7" href="dir_000007_000002.html" alt="" coords="308,162,308,196,303,196,303,162"/>
+<area shape="rect" id="edge7-headlabel" href="dir_000007_000002.html" title="1" alt="" coords="309,184,318,198"/>
+<area shape="rect" id="node8" href="dir_965e073eaba29e56fe24a79643756430.html" title="DisplayInterfaces" alt="" coords="115,63,251,88"/>
+<area shape="rect" id="node9" href="dir_98b9f38142d5ac07d73233a9749fe85e.html" title="Helpers" alt="" coords="104,136,176,161"/>
+<area shape="poly" id="edge8" href="dir_000026_000002.html" alt="" coords="168,159,273,204,271,209,166,164"/>
+<area shape="rect" id="edge8-headlabel" href="dir_000026_000002.html" title="1" alt="" coords="267,190,276,204"/>
+<area shape="rect" id="node10" href="dir_2eb901c66973ee1eed5eb41e94490a94.html" title="MCU" alt="" coords="37,63,91,88"/>
+<area shape="poly" id="edge9" href="dir_000034_000038.html" alt="" coords="92,82,103,85,229,111,355,132,354,137,228,116,102,91,90,88"/>
+<area shape="rect" id="edge9-headlabel" href="dir_000034_000038.html" title="4" alt="" coords="347,118,356,133"/>
+<area shape="poly" id="edge10" href="dir_000034_000006.html" alt="" coords="92,83,103,85,206,103,288,110,372,118,478,134,477,139,371,123,288,116,205,108,102,91,90,88"/>
+<area shape="rect" id="edge10-headlabel" href="dir_000034_000006.html" title="1" alt="" coords="470,120,479,134"/>
+<area shape="poly" id="edge11" href="dir_000034_000026.html" alt="" coords="78,86,119,125,116,128,74,90"/>
+<area shape="rect" id="edge11-headlabel" href="dir_000034_000026.html" title="1" alt="" coords="115,110,125,125"/>
+<area shape="rect" id="clust2" href="dir_8b29354ea792f14f229ba6ab36888b3c.html" alt="" coords="27,52,357,172"/>
+<area shape="rect" id="clust1" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" title="src" alt="" coords="16,16,768,245"/>
+</map>

@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['dac_0',['DAC',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md1volume-controlled-usb-dac',1,'1.Volume-Controlled-USB-DAC'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md2vu-meter-oled-usb-dac',1,'2.VU-Meter-OLED-USB-DAC']]],
+  ['debug_1',['Debug',['../de/daf/md_pages_Debug.html',1,'Debug'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#debug',1,'Debug']]],
+  ['debug_20menu_20in_20the_20arduino_20ide_2',['Adding a &apos;Debug&apos; menu in the Arduino IDE',['../de/daf/md_pages_Debug.html#adding-a-debug-menu-in-the-arduino-ide',1,'']]],
+  ['debug_20midi_20interface_3',['Debug-MIDI-Interface',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#debug-midi-interface',1,'']]],
+  ['debug_20mode_4',['Debug mode',['../d8/d4a/md_pages_MIDI-over-USB.html#debug-mode',1,'']]],
+  ['default_20routing_5',['Default routing',['../d3/df7/midi-tutorial.html#midi_md-default-routing',1,'']]],
+  ['demo_6',['Demo',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#demo',1,'Demo'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#demo-1',1,'Demo'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#demo-2',1,'Demo'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#demo-3',1,'Demo'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#demo-4',1,'Demo'],['../todo.html#_todo000001',1,'Demo']]],
+  ['dependencies_7',['3. Dependencies',['../d8/da8/md_pages_Installation.html#autotoc_md3-dependencies',1,'']]],
+  ['difference_20between_20the_20control_20surface_20and_20midi_20controller_20libraries_8',['What&apos;s the difference between the Control Surface and MIDI Controller libraries?',['../da/dc1/FAQ.html#faq-control-surface-vs-midi-controller',1,'']]],
+  ['different_20kinds_20of_20displays_9',['How can I add support for different kinds of displays?',['../da/dc1/FAQ.html#faq-add-display-support',1,'']]],
+  ['digitalreadserial_10',['2.DigitalReadSerial',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md2digitalreadserial',1,'']]],
+  ['disable_11',['Enable-disable',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#enable-disable',1,'']]],
+  ['disabling_20memory_20hungry_20components_12',['Disabling memory-hungry components',['../da/dc1/FAQ.html#faq-save-memory-disable-components',1,'']]],
+  ['display_13',['VU-Bridge-Dual-Display',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#vu-bridge-dual-display',1,'']]],
+  ['display_14',['Adding custom bitmaps to display',['../d1/de7/md_pages_xbm.html',1,'']]],
+  ['displays_15',['Displays',['../d4/de9/examples.html#examples-displays',1,'']]],
+  ['displays_16',['How can I add support for different kinds of displays?',['../da/dc1/FAQ.html#faq-add-display-support',1,'']]],
+  ['do_20banks_20work_17',['How do banks work?',['../da/dc1/FAQ.html#faq-banks',1,'']]],
+  ['documentation_18',['Documentation',['../index.html#documentation',1,'']]],
+  ['download_19',['1. Download',['../d8/da8/md_pages_Installation.html#autotoc_md1-download',1,'']]],
+  ['dual_20display_20',['VU-Bridge-Dual-Display',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#vu-bridge-dual-display',1,'']]],
+  ['dual_20midi_20interface_21',['Dual-MIDI-Interface',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#dual-midi-interface',1,'']]]
+];

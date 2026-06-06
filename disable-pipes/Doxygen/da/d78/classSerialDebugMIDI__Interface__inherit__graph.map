@@ -1,0 +1,14 @@
+<map id="SerialDebugMIDI_Interface&lt; T &gt;" name="SerialDebugMIDI_Interface&lt; T &gt;">
+<area shape="rect" id="node1" title="A wrapper class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a S..." alt="" coords="374,2245,609,2352"/>
+<area shape="rect" id="node2" href="$d8/d0b/classStreamDebugMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving human&#45;readable MIDI messages over a Stream." alt="" coords="376,1915,607,2197"/>
+<area shape="rect" id="node3" href="$de/d65/classStreamDebugMIDI__Base.html" title="A class that implements MIDI debug send functions." alt="" coords="261,1555,479,1735"/>
+<area shape="rect" id="node4" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="503,1423,722,1867"/>
+<area shape="rect" id="node5" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="191,1019,349,1096"/>
+<area shape="rect" id="node6" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="5,277,247,648"/>
+<area shape="rect" id="node7" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="271,233,496,692"/>
+<area shape="rect" id="node8" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="374,740,603,1375"/>
+<area shape="rect" id="node9" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="628,997,843,1118"/>
+<area shape="rect" id="node10" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="633,307,837,619"/>
+<area shape="rect" id="node11" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="633,5,837,185"/>
+<area shape="rect" id="node12" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="867,997,1001,1118"/>
+</map>

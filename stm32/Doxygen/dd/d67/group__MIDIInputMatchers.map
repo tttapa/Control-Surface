@@ -1,0 +1,4 @@
+<map id="MIDI Input Matchers" name="MIDI Input Matchers">
+<area shape="rect" id="node1" href="$df/d8b/group__MIDIInputElements.html" title="All Elements that listen for incoming MIDI events." alt="" coords="5,5,160,31"/>
+<area shape="rect" id="node2" title="Classes for matching incoming MIDI messages." alt="" coords="208,5,361,31"/>
+</map>

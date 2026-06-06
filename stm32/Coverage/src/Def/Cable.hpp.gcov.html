@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - ae75e8c9903d852740cfd410b15b056541c13218 - src/Def/Cable.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">src/Def</a> - Cable.hpp<span style="font-size: 80%;"> (source / <a href="Cable.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">ae75e8c9903d852740cfd410b15b056541c13218</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-05-28 15:38:22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /* ✔ */</a>
+<a name="2"><span class="lineNum">       2 </span>            : </a>
+<a name="3"><span class="lineNum">       3 </span>            : #pragma once</a>
+<a name="4"><span class="lineNum">       4 </span>            : </a>
+<a name="5"><span class="lineNum">       5 </span>            : #include &lt;AH/Arduino-Wrapper.h&gt; // Print</a>
+<a name="6"><span class="lineNum">       6 </span>            : #include &lt;Settings/NamespaceSettings.hpp&gt;</a>
+<a name="7"><span class="lineNum">       7 </span>            : </a>
+<a name="8"><span class="lineNum">       8 </span>            : BEGIN_CS_NAMESPACE</a>
+<a name="9"><span class="lineNum">       9 </span>            : </a>
+<a name="10"><span class="lineNum">      10 </span>            : /** </a>
+<a name="11"><span class="lineNum">      11 </span>            :  * A type-safe class for MIDI USB Cable numbers.</a>
+<a name="12"><span class="lineNum">      12 </span>            :  */</a>
+<a name="13"><span class="lineNum">      13 </span>            : class Cable {</a>
+<a name="14"><span class="lineNum">      14 </span>            :   public:</a>
+<a name="15"><span class="lineNum">      15 </span>            :     /**</a>
+<a name="16"><span class="lineNum">      16 </span>            :      * @brief   Create a MIDI Cable object.</a>
+<a name="17"><span class="lineNum">      17 </span>            :      * </a>
+<a name="18"><span class="lineNum">      18 </span>            :      * @param   zeroBasedCable</a>
+<a name="19"><span class="lineNum">      19 </span>            :      *          The zero-based cable (0 is the first cable).</a>
+<a name="20"><span class="lineNum">      20 </span>            :      */</a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">       2543 :     explicit constexpr Cable(uint8_t zeroBasedCable)</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">       2543 :         : zeroBasedCable(zeroBasedCable) {}</span></a>
+<a name="23"><span class="lineNum">      23 </span>            : </a>
+<a name="24"><span class="lineNum">      24 </span>            :     /**</a>
+<a name="25"><span class="lineNum">      25 </span>            :      * @brief   Get the cable as an integer.</a>
+<a name="26"><span class="lineNum">      26 </span>            :      * </a>
+<a name="27"><span class="lineNum">      27 </span>            :      * @return  The zero-based cable (0 is the first cable).</a>
+<a name="28"><span class="lineNum">      28 </span>            :      */</a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">       3087 :     constexpr uint8_t getRaw() const { return zeroBasedCable; }</span></a>
+<a name="30"><span class="lineNum">      30 </span>            : </a>
+<a name="31"><span class="lineNum">      31 </span>            :     /**</a>
+<a name="32"><span class="lineNum">      32 </span>            :      * @brief   Get the cable as an integer.</a>
+<a name="33"><span class="lineNum">      33 </span>            :      * </a>
+<a name="34"><span class="lineNum">      34 </span>            :      * @return  The one-based cable (1 is the first cable).</a>
+<a name="35"><span class="lineNum">      35 </span>            :      */</a>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">         17 :     constexpr uint8_t getOneBased() const { return zeroBasedCable + 1; }</span></a>
+<a name="37"><span class="lineNum">      37 </span>            : </a>
+<a name="38"><span class="lineNum">      38 </span>            :     /**</a>
+<a name="39"><span class="lineNum">      39 </span>            :      * @brief   Create a cable.</a>
+<a name="40"><span class="lineNum">      40 </span>            :      * </a>
+<a name="41"><span class="lineNum">      41 </span>            :      * @param   oneBasedCable</a>
+<a name="42"><span class="lineNum">      42 </span>            :      *          The cable number (1 is the first cable).</a>
+<a name="43"><span class="lineNum">      43 </span>            :      */</a>
+<a name="44"><span class="lineNum">      44 </span>            :     static constexpr Cable createCable(uint8_t oneBasedCable) {</a>
+<a name="45"><span class="lineNum">      45 </span>            :         return Cable{uint8_t(oneBasedCable - 1)};</a>
+<a name="46"><span class="lineNum">      46 </span>            :     }</a>
+<a name="47"><span class="lineNum">      47 </span>            : </a>
+<a name="48"><span class="lineNum">      48 </span>            :     /**</a>
+<a name="49"><span class="lineNum">      49 </span>            :      * @brief   Check if two cables are the same.</a>
+<a name="50"><span class="lineNum">      50 </span>            :      * </a>
+<a name="51"><span class="lineNum">      51 </span>            :      * @param   rhs</a>
+<a name="52"><span class="lineNum">      52 </span>            :      *          The other cable to compare this cable to.</a>
+<a name="53"><span class="lineNum">      53 </span>            :      */</a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">        300 :     constexpr bool operator==(const Cable &amp;rhs) const {</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">        300 :         return this-&gt;zeroBasedCable == rhs.zeroBasedCable;</span></a>
+<a name="56"><span class="lineNum">      56 </span>            :     }</a>
+<a name="57"><span class="lineNum">      57 </span>            : </a>
+<a name="58"><span class="lineNum">      58 </span>            :     /**</a>
+<a name="59"><span class="lineNum">      59 </span>            :      * @brief   Check if two cables are the different.</a>
+<a name="60"><span class="lineNum">      60 </span>            :      * </a>
+<a name="61"><span class="lineNum">      61 </span>            :      * @param   rhs</a>
+<a name="62"><span class="lineNum">      62 </span>            :      *          The other cable to compare this cable to.</a>
+<a name="63"><span class="lineNum">      63 </span>            :      */</a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         32 :     constexpr bool operator!=(const Cable &amp;rhs) const {</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         32 :         return this-&gt;zeroBasedCable != rhs.zeroBasedCable;</span></a>
+<a name="66"><span class="lineNum">      66 </span>            :     }</a>
+<a name="67"><span class="lineNum">      67 </span>            : </a>
+<a name="68"><span class="lineNum">      68 </span>            :     /**</a>
+<a name="69"><span class="lineNum">      69 </span>            :      * @brief   Add an offset.</a>
+<a name="70"><span class="lineNum">      70 </span>            :      * </a>
+<a name="71"><span class="lineNum">      71 </span>            :      * @param   rhs</a>
+<a name="72"><span class="lineNum">      72 </span>            :      *          The offset to add to this cable.</a>
+<a name="73"><span class="lineNum">      73 </span>            :      */</a>
+<a name="74"><span class="lineNum">      74 </span>            :     Cable &amp;operator+=(uint8_t rhs) {</a>
+<a name="75"><span class="lineNum">      75 </span>            :         this-&gt;zeroBasedCable += rhs;</a>
+<a name="76"><span class="lineNum">      76 </span>            :         return *this;</a>
+<a name="77"><span class="lineNum">      77 </span>            :     }</a>
+<a name="78"><span class="lineNum">      78 </span>            : </a>
+<a name="79"><span class="lineNum">      79 </span>            :     /**</a>
+<a name="80"><span class="lineNum">      80 </span>            :      * @brief   Add an offset to a cable.</a>
+<a name="81"><span class="lineNum">      81 </span>            :      * </a>
+<a name="82"><span class="lineNum">      82 </span>            :      * @param   rhs</a>
+<a name="83"><span class="lineNum">      83 </span>            :      *          The offset to add to the cable.</a>
+<a name="84"><span class="lineNum">      84 </span>            :      */</a>
+<a name="85"><span class="lineNum">      85 </span>            :     Cable operator+(uint8_t rhs) const {</a>
+<a name="86"><span class="lineNum">      86 </span>            :         Cable copy = *this;</a>
+<a name="87"><span class="lineNum">      87 </span>            :         copy += rhs;</a>
+<a name="88"><span class="lineNum">      88 </span>            :         return copy;</a>
+<a name="89"><span class="lineNum">      89 </span>            :     }</a>
+<a name="90"><span class="lineNum">      90 </span>            : </a>
+<a name="91"><span class="lineNum">      91 </span>            :     /**</a>
+<a name="92"><span class="lineNum">      92 </span>            :      * @brief   Subtract an offset.</a>
+<a name="93"><span class="lineNum">      93 </span>            :      * </a>
+<a name="94"><span class="lineNum">      94 </span>            :      * @param   rhs</a>
+<a name="95"><span class="lineNum">      95 </span>            :      *          The offset to subtract from this cable.</a>
+<a name="96"><span class="lineNum">      96 </span>            :      */</a>
+<a name="97"><span class="lineNum">      97 </span>            :     Cable &amp;operator-=(uint8_t rhs) {</a>
+<a name="98"><span class="lineNum">      98 </span>            :         this-&gt;zeroBasedCable -= rhs;</a>
+<a name="99"><span class="lineNum">      99 </span>            :         return *this;</a>
+<a name="100"><span class="lineNum">     100 </span>            :     }</a>
+<a name="101"><span class="lineNum">     101 </span>            : </a>
+<a name="102"><span class="lineNum">     102 </span>            :     /**</a>
+<a name="103"><span class="lineNum">     103 </span>            :      * @brief   Subtract an offset from a cable.</a>
+<a name="104"><span class="lineNum">     104 </span>            :      * </a>
+<a name="105"><span class="lineNum">     105 </span>            :      * @param   rhs</a>
+<a name="106"><span class="lineNum">     106 </span>            :      *          The offset to subtract from the cable.</a>
+<a name="107"><span class="lineNum">     107 </span>            :      */</a>
+<a name="108"><span class="lineNum">     108 </span>            :     Cable operator-(uint8_t rhs) const {</a>
+<a name="109"><span class="lineNum">     109 </span>            :         Cable copy = *this;</a>
+<a name="110"><span class="lineNum">     110 </span>            :         copy -= rhs;</a>
+<a name="111"><span class="lineNum">     111 </span>            :         return copy;</a>
+<a name="112"><span class="lineNum">     112 </span>            :     }</a>
+<a name="113"><span class="lineNum">     113 </span>            : </a>
+<a name="114"><span class="lineNum">     114 </span>            :   private:</a>
+<a name="115"><span class="lineNum">     115 </span>            :     uint8_t zeroBasedCable : 4;</a>
+<a name="116"><span class="lineNum">     116 </span>            : };</a>
+<a name="117"><span class="lineNum">     117 </span>            : </a>
+<a name="118"><span class="lineNum">     118 </span>            : constexpr Cable CABLE_1 = Cable::createCable(1);</a>
+<a name="119"><span class="lineNum">     119 </span>            : constexpr Cable CABLE_2 = Cable::createCable(2);</a>
+<a name="120"><span class="lineNum">     120 </span>            : constexpr Cable CABLE_3 = Cable::createCable(3);</a>
+<a name="121"><span class="lineNum">     121 </span>            : constexpr Cable CABLE_4 = Cable::createCable(4);</a>
+<a name="122"><span class="lineNum">     122 </span>            : constexpr Cable CABLE_5 = Cable::createCable(5);</a>
+<a name="123"><span class="lineNum">     123 </span>            : constexpr Cable CABLE_6 = Cable::createCable(6);</a>
+<a name="124"><span class="lineNum">     124 </span>            : constexpr Cable CABLE_7 = Cable::createCable(7);</a>
+<a name="125"><span class="lineNum">     125 </span>            : constexpr Cable CABLE_8 = Cable::createCable(8);</a>
+<a name="126"><span class="lineNum">     126 </span>            : constexpr Cable CABLE_9 = Cable::createCable(9);</a>
+<a name="127"><span class="lineNum">     127 </span>            : constexpr Cable CABLE_10 = Cable::createCable(10);</a>
+<a name="128"><span class="lineNum">     128 </span>            : constexpr Cable CABLE_11 = Cable::createCable(11);</a>
+<a name="129"><span class="lineNum">     129 </span>            : constexpr Cable CABLE_12 = Cable::createCable(12);</a>
+<a name="130"><span class="lineNum">     130 </span>            : constexpr Cable CABLE_13 = Cable::createCable(13);</a>
+<a name="131"><span class="lineNum">     131 </span>            : constexpr Cable CABLE_14 = Cable::createCable(14);</a>
+<a name="132"><span class="lineNum">     132 </span>            : constexpr Cable CABLE_15 = Cable::createCable(15);</a>
+<a name="133"><span class="lineNum">     133 </span>            : constexpr Cable CABLE_16 = Cable::createCable(16);</a>
+<a name="134"><span class="lineNum">     134 </span>            : </a>
+<a name="135"><span class="lineNum">     135 </span>            : Print &amp;operator&lt;&lt;(Print &amp;, Cable);</a>
+<a name="136"><span class="lineNum">     136 </span>            : </a>
+<a name="137"><span class="lineNum">     137 </span>            : END_CS_NAMESPACE</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.15</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

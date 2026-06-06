@@ -1,0 +1,4 @@
+<map id="NoteCCLEDBarCallback&lt; NumLEDs &gt;" name="NoteCCLEDBarCallback&lt; NumLEDs &gt;">
+<area shape="rect" id="node1" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="19,175,205,340"/>
+<area shape="rect" id="node2" href="$de/d07/structSimpleNoteCCValueCallback.html" title="A callback for NoteCCRange with an action that can be implemented by the user." alt="" coords="5,5,219,127"/>
+</map>

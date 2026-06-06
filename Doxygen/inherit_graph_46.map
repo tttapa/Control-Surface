@@ -1,0 +1,19 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d5/d1c/structBulkRX.html" title=" " alt="" coords="10,69,199,109"/>
+<area shape="rect" id="Node000001" href="$de/d93/classTeensyHostMIDI.html" title="Teensy USB Host MIDI driver." alt="" coords="252,69,464,109"/>
+<area shape="poly" id="edge7_Node000000_Node000001" title=" " alt="" coords="213,87,252,87,252,92,213,92"/>
+<area shape="rect" id="Node000005" href="$d5/d1c/structBulkRX.html" title=" " alt="" coords="5,262,204,317"/>
+<area shape="rect" id="Node000004" href="$de/d93/classTeensyHostMIDI.html" title=" " alt="" coords="252,220,464,260"/>
+<area shape="poly" id="edge8_Node000005_Node000004" title=" " alt="" coords="217,265,254,257,255,263,218,270"/>
+<area shape="rect" id="Node000006" href="$de/d93/classTeensyHostMIDI.html" title=" " alt="" coords="267,170,449,195"/>
+<area shape="poly" id="edge9_Node000005_Node000006" title=" " alt="" coords="191,254,202,247,226,226,236,216,251,206,283,193,285,198,253,210,239,220,229,230,206,251,194,258"/>
+<area shape="rect" id="Node000002" href="$dc/d2d/structBulkTX.html" title=" " alt="" coords="11,5,199,45"/>
+<area shape="poly" id="edge10_Node000002_Node000001" title=" " alt="" coords="198,46,279,67,278,72,197,51"/>
+<area shape="rect" id="Node000007" href="$dc/d2d/structBulkTX.html" title=" " alt="" coords="5,183,204,238"/>
+<area shape="poly" id="edge11_Node000007_Node000004" title=" " alt="" coords="218,221,252,225,252,230,217,226"/>
+<area shape="poly" id="edge12_Node000007_Node000006" title=" " alt="" coords="218,195,267,190,267,195,218,201"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="60,134,149,159"/>
+<area shape="poly" id="edge15_Node000003_Node000001" title=" " alt="" coords="162,131,268,107,269,112,164,136"/>
+<area shape="poly" id="edge13_Node000003_Node000004" title=" " alt="" coords="164,154,205,168,230,186,253,204,284,217,282,222,251,209,227,190,203,173,162,159"/>
+<area shape="poly" id="edge14_Node000003_Node000006" title=" " alt="" coords="163,152,269,167,268,173,163,157"/>
+</map>

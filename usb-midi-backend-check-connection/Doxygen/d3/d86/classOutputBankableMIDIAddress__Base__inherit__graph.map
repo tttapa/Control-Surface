@@ -1,0 +1,19 @@
+<map id="OutputBankableMIDIAddress_Base" name="OutputBankableMIDIAddress_Base">
+<area shape="rect" id="Node000001" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="498,5,737,205"/>
+<area shape="rect" id="Node000002" href="$dd/d3a/classManyAddresses__Base.html" title="A base class for all MIDIOutputElements that can have one of many addresses." alt="" coords="413,283,595,349"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="559,219,524,284,519,282,555,216"/>
+<area shape="rect" id="Node000006" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="726,253,951,379"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="735,213,775,251,771,255,731,217"/>
+<area shape="rect" id="Node000003" href="$d1/da6/classBankable_1_1ManyAddresses_1_1DualManyAddresses.html" title=" " alt="" coords="5,439,205,579"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="401,352,311,386,219,429,198,441,195,437,216,424,309,381,399,347"/>
+<area shape="rect" id="Node000004" href="$d8/d58/classBankable_1_1ManyAddresses_1_1ManyAddresses.html" title=" " alt="" coords="229,467,448,552"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="470,361,377,468,373,465,466,357"/>
+<area shape="rect" id="Node000005" href="$d7/dc9/classBankable_1_1ManyAddresses_1_1ManyMatrixAddresses.html" title=" " alt="" coords="472,442,656,577"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="521,361,546,441,541,442,516,363"/>
+<area shape="rect" id="Node000007" href="$dc/d06/classBankable_1_1DualAddresses.html" title=" " alt="" coords="680,427,880,592"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="818,392,808,427,803,426,813,391"/>
+<area shape="rect" id="Node000008" href="$d7/db5/classBankable_1_1MatrixAddress.html" title=" " alt="" coords="905,439,1098,579"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="902,388,945,437,941,441,898,391"/>
+<area shape="rect" id="Node000009" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="1122,457,1275,562"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="965,354,1040,385,1112,424,1151,454,1148,459,1109,429,1037,390,963,359"/>
+</map>
