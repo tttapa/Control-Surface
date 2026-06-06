@@ -29,6 +29,30 @@ $darkmode
 <link href="$relpath^$stylesheet" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Roboto:wght@400&family=Roboto:wght@500&display=swap" rel="stylesheet">
 $extrastylesheet
+<script>
+(function () {
+    function processImages() {
+        document.querySelectorAll('img').forEach(img => {
+            let src = img.getAttribute('src');
+            if (!src) return;
+            if (src.endsWith('#gh-dark-mode-only')) {
+                img.classList.add('gh-dark-mode-only');
+                src = src.replace('#gh-dark-mode-only', '');
+            }
+            if (src.endsWith('#gh-light-mode-only')) {
+                img.classList.add('gh-light-mode-only');
+                src = src.replace('#gh-light-mode-only', '');
+            }
+            if (src.startsWith('doxygen/images/')) {
+                const relpath = '$relpath^';
+                src = src.replace('doxygen/images/', relpath);
+            }
+            img.setAttribute('src', src);
+        });
+    }
+    document.addEventListener('DOMContentLoaded', processImages);
+})();
+</script>
 </head>
 <body>
 <!--BEGIN DISABLE_INDEX-->

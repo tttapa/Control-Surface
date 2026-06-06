@@ -4,7 +4,10 @@
 [![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
 [![Documentation](https://img.shields.io/badge/Documentation-main-blue)](https://tttapa.github.io/Control-Surface/Doxygen)
 
-# Control Surface
+![Control Surface](doxygen/images/Control-Surface-text-logo-dark.svg#gh-dark-mode-only)
+![Control Surface](doxygen/images/Control-Surface-text-logo.svg#gh-light-mode-only)
+
+<hr>
 
 Control Surface is an Arduino library for building MIDI controllers and control
 surfaces.

@@ -51,6 +51,12 @@ html.dark-mode {
 html.dark-mode img.footer {
     filter: brightness(0.666);
 }
+html.dark-mode img.gh-light-mode-only {
+    display: none;
+}
+html.light-mode img.gh-dark-mode-only {
+    display: none;
+}
 /* Image alignment */
 #projectlogo img {
     max-height: 4.5em;
