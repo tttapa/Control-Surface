@@ -1,0 +1,19 @@
+<map id="TimeDisplayDisplay" name="TimeDisplayDisplay">
+<area shape="rect" id="node1" title=" " alt="" coords="514,2349,693,2617"/>
+<area shape="rect" id="node2" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="216,1908,377,2205"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,2407,260,2558"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="285,2283,482,2683"/>
+<area shape="rect" id="node4" href="$df/d42/classDisplayInterface.html" title="An interface for displays." alt="" coords="97,1504,312,1845"/>
+<area shape="rect" id="node5" title=" " alt="" coords="177,1283,229,1361"/>
+<area shape="rect" id="node7" href="$df/d69/classMCU_1_1TimeDisplay.html" title="Class that receives and stores the text of the Mackie Control Universal 7&#45;segment time display." alt="" coords="539,1989,668,2125"/>
+<area shape="rect" id="node8" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="507,1548,702,1801"/>
+<area shape="rect" id="node9" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="253,1254,540,1390"/>
+<area shape="rect" id="node10" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="155,931,353,1140"/>
+<area shape="rect" id="node11" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="154,519,354,831"/>
+<area shape="rect" id="node12" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="39,123,239,303"/>
+<area shape="rect" id="node13" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="263,5,474,420"/>
+<area shape="rect" id="node14" href="$d1/d7a/structTwoByteRangeMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="378,989,605,1081"/>
+<area shape="rect" id="node15" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="397,483,586,868"/>
+<area shape="rect" id="node16" title=" " alt="" coords="565,1283,645,1361"/>
+<area shape="rect" id="node17" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="669,1203,845,1441"/>
+</map>

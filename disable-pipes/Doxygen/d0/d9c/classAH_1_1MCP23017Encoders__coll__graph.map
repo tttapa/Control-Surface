@@ -1,0 +1,5 @@
+<map id="MCP23017Encoders&lt; WireType, EncoderPositionType, InterruptSafe &gt;" name="MCP23017Encoders&lt; WireType, EncoderPositionType, InterruptSafe &gt;">
+<area shape="rect" id="node1" title="Class for reading 8 rotary encoders using a MCP23017 I²C port expander." alt="" coords="5,564,235,847"/>
+<area shape="rect" id="node2" href="$d2/d7b/classAH_1_1RegisterEncoders.html" title=" " alt="" coords="25,321,215,501"/>
+<area shape="rect" id="node3" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="7,5,233,259"/>
+</map>

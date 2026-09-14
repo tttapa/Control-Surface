@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['ram_0',['How can I save memory when running out of RAM?',['../da/dc1/FAQ.html#faq-save-memory',1,'']]],
+  ['range_20leds_1',['2.Note-Range-LEDs',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md2note-range-leds',1,'']]],
+  ['reading_20rotary_20encoders_2',['Can I use multiplexers for reading rotary encoders?',['../da/dc1/FAQ.html#faq-mux-encoder',1,'']]],
+  ['receive_3',['SysEx-Send-Receive',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#sysex-send-receive',1,'']]],
+  ['receiving_20midi_4',['Receiving MIDI',['../da/dc1/FAQ.html#faq-recv-midi',1,'']]],
+  ['receiving_20midi_20messages_5',['Receiving MIDI messages',['../d3/df7/midi-tutorial.html#midi_md-receiving',1,'']]],
+  ['receiving_20midi_20messages_6',['Sending and receiving MIDI messages',['../d4/de9/examples.html#examples-midi-interfaces-sending-and-receiving-midi-messages',1,'']]],
+  ['reducing_20the_20number_20of_20individual_20midi_20elements_7',['Reducing the number of individual MIDI elements',['../da/dc1/FAQ.html#faq-save-memory-number-of-individual-elements',1,'']]],
+  ['reverse_20engineering_8',['Mackie-Control-Universal-Reverse-Engineering',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#mackie-control-universal-reverse-engineering',1,'']]],
+  ['rgb_20led_20chaser_9',['2.RGB-LED-Chaser',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md2rgb-led-chaser',1,'']]],
+  ['rotary_20encoders_10',['Rotary Encoders',['../d4/de9/examples.html#examples-midi-output-elements-rotary-encoders',1,'']]],
+  ['rotary_20encoders_11',['Can I use multiplexers for reading rotary encoders?',['../da/dc1/FAQ.html#faq-mux-encoder',1,'']]],
+  ['rotaryencoder_12',['RotaryEncoder',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#rotaryencoder',1,'']]],
+  ['rotaryencoder_20interrupts_13',['MCP23017-RotaryEncoder-Interrupts',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#mcp23017-rotaryencoder-interrupts',1,'']]],
+  ['rotaryencoder_20no_20interrupts_14',['MCP23017-RotaryEncoder-No-Interrupts',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#mcp23017-rotaryencoder-no-interrupts',1,'']]],
+  ['routing_15',['MIDI_Pipes-Routing',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#midi_pipes-routing',1,'']]],
+  ['routing_16',['routing',['../d3/df7/midi-tutorial.html#midi_md-default-routing',1,'Default routing'],['../d4/de9/examples.html#examples-midi-interfaces-interfaces-transports-and-routing',1,'Interfaces, transports and routing'],['../d3/df7/midi-tutorial.html#midi_md-manual-routing',1,'Manual routing']]],
+  ['routing_20between_20midi_20interfaces_17',['Routing between MIDI interfaces',['../d3/df7/midi-tutorial.html#midi_md-routing-between-interfaces',1,'']]],
+  ['routing_20midi_18',['Routing MIDI',['../da/dc1/FAQ.html#faq-route-midi',1,'']]],
+  ['routing_20midi_20messages_19',['Routing MIDI messages',['../d3/df7/midi-tutorial.html#midi_md-routing',1,'']]],
+  ['rtp_20midi_20bridge_20linux_20',['RTP MIDI Bridge (Linux)',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#rtp-midi-bridge-linux',1,'']]],
+  ['running_20out_20of_20ram_21',['How can I save memory when running out of RAM?',['../da/dc1/FAQ.html#faq-save-memory',1,'']]],
+  ['runtime_22',['Can I change the address, controller number, MIDI channel, etc. at runtime?',['../da/dc1/FAQ.html#faq-change-address-runtime',1,'']]]
+];

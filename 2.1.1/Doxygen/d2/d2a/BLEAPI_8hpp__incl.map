@@ -1,0 +1,19 @@
+<map id="BLEAPI.hpp" name="BLEAPI.hpp">
+<area shape="rect" id="Node000001" title="Type definitions and callback interfaces for communication between the low&#45;level BLE stacks and highe..." alt="" coords="305,5,399,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,152,243,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="335,33,156,147,153,142,332,29"/>
+<area shape="rect" id="Node000003" href="$dc/da9/compat_8hpp.html" title=" " alt="" coords="289,79,415,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="355,31,355,65,349,65,349,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="266,152,337,177"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="329,33,301,52,288,65,278,80,275,95,276,110,288,140,283,142,271,111,269,94,274,78,284,62,297,48,326,29"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="440,79,507,104"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="373,28,443,69,441,74,370,33"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="531,79,621,104"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="389,28,528,72,526,77,387,33"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="316,107,175,150,173,145,315,101"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="346,106,320,142,315,139,341,103"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="361,152,453,177"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="363,103,392,140,387,143,359,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="477,152,537,177"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="378,102,470,144,468,149,376,106"/>
+</map>

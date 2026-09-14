@@ -1,0 +1,27 @@
+<map id="ButtonMatrix&lt; Derived, NumRows, NumCols &gt;" name="ButtonMatrix&lt; Derived, NumRows, NumCols &gt;">
+<area shape="rect" id="Node000001" title="A class that reads the states of a button matrix." alt="" coords="690,5,859,365"/>
+<area shape="rect" id="Node000002" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="5,439,227,648"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="678,217,582,249,469,293,351,349,294,381,240,416,209,440,205,436,237,411,292,376,349,344,467,289,580,244,676,212"/>
+<area shape="rect" id="Node000004" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="251,439,496,648"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="681,268,510,415,482,441,479,437,506,411,677,264"/>
+<area shape="rect" id="Node000006" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="520,439,765,648"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="706,379,684,439,679,438,701,377"/>
+<area shape="rect" id="Node000008" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="789,439,1024,648"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="848,377,871,438,866,439,843,379"/>
+<area shape="rect" id="Node000010" href="$d0/d54/classMIDIButtonMatrix.html" title=" " alt="" coords="1049,413,1282,673"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="872,265,1038,411,1050,423,1047,427,1034,415,868,269"/>
+<area shape="rect" id="Node000012" href="$d0/d54/classMIDIButtonMatrix.html" title=" " alt="" coords="1306,413,1553,673"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="873,215,966,249,1074,293,1188,347,1296,411,1307,419,1304,423,1293,416,1185,352,1072,298,964,254,871,220"/>
+<area shape="rect" id="Node000003" href="$db/d2b/classBankable_1_1CCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="15,741,217,821"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="119,662,119,741,113,741,113,662"/>
+<area shape="rect" id="Node000005" href="$d7/d2b/classBankable_1_1ManyAddresses_1_1CCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="270,741,477,821"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="376,662,376,741,371,741,371,662"/>
+<area shape="rect" id="Node000007" href="$d3/d39/classBankable_1_1ManyAddresses_1_1NoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="533,721,753,841"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="645,662,645,721,640,721,640,662"/>
+<area shape="rect" id="Node000009" href="$d2/d2b/classBankable_1_1NoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="799,721,1014,841"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="909,662,909,721,904,721,904,662"/>
+<area shape="rect" id="Node000011" href="$d3/d2a/classCCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1064,741,1267,821"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="1168,687,1168,741,1163,741,1163,687"/>
+<area shape="rect" id="Node000013" href="$d2/daf/classNoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1322,721,1537,841"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="1432,687,1432,721,1427,721,1427,687"/>
+</map>

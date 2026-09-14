@@ -1,0 +1,16 @@
+<map id="SoftwareSerialDebugMIDI_Output" name="SoftwareSerialDebugMIDI_Output">
+<area shape="rect" id="node1" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a SoftwareSerial interface." alt="" coords="539,2628,741,2735"/>
+<area shape="rect" id="node2" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="537,2202,743,2323"/>
+<area shape="rect" id="node3" href="$d5/d12/classMIDIOutputOnly.html" title=" " alt="" coords="324,1805,487,1912"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,2180,216,2345"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="239,2063,462,2463"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="245,2525,456,2837"/>
+<area shape="rect" id="node7" href="$d0/d9c/classStreamDebugMIDI__Output.html" title="A class for MIDI outputs sending human&#45;readable MIDI messages over a Stream." alt="" coords="529,1732,751,1985"/>
+<area shape="rect" id="node8" href="$de/d65/classStreamDebugMIDI__Base.html" title="A class that implements MIDI debug send functions." alt="" coords="293,1268,512,1448"/>
+<area shape="rect" id="node9" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="536,1033,744,1683"/>
+<area shape="rect" id="node10" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="769,1173,1010,1543"/>
+<area shape="rect" id="node11" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="1088,204,1331,971"/>
+<area shape="rect" id="node12" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="1034,1173,1275,1543"/>
+<area shape="rect" id="node13" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="1299,1129,1525,1587"/>
+<area shape="rect" id="node14" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="1143,5,1276,127"/>
+</map>

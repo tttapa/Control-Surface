@@ -1,0 +1,10 @@
+<map id="NoteCCKPLEDBar&lt; Type, NumLEDs &gt;" name="NoteCCKPLEDBar&lt; Type, NumLEDs &gt;">
+<area shape="rect" id="node1" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="146,1020,330,1156"/>
+<area shape="rect" id="node2" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,851,233,972"/>
+<area shape="rect" id="node3" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="20,593,219,803"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="19,233,219,545"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="19,5,219,185"/>
+<area shape="rect" id="node6" href="$d6/d44/classNoteCCKPLEDBarDriver.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="258,858,458,965"/>
+<area shape="rect" id="node7" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="271,601,445,795"/>
+<area shape="rect" id="node8" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="291,307,425,472"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="SmartMIDIFilteredAnalog&lt; NumBanks, BankAddress, Sender &gt;" name="SmartMIDIFilteredAnalog&lt; NumBanks, BankAddress, Sender &gt;">
+<area shape="rect" id="Node000001" title="A class for potentiometers and faders that send MIDI events." alt="" coords="5,655,207,1089"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="35,481,177,607"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,621,109,654,103,654,103,621"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="8,193,204,433"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="109,447,109,481,103,481,103,447"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="8,5,204,145"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="109,159,109,193,103,193,103,159"/>
+</map>

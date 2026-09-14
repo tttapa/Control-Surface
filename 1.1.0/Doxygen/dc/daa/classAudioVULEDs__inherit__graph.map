@@ -1,0 +1,7 @@
+<map id="AudioVULEDs&lt; N &gt;" name="AudioVULEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="A VU meter that reads from an Audio stream using the AudioAnalyzePeak class, and displays it on an LE..." alt="" coords="84,520,225,685"/>
+<area shape="rect" id="node2" href="$d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="5,241,128,421"/>
+<area shape="rect" id="node3" href="$d2/de9/classIVU.html" title="An abstract interface for VU meters." alt="" coords="5,5,128,141"/>
+<area shape="rect" id="node4" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="152,189,336,472"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="153,20,335,127"/>
+</map>

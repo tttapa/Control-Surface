@@ -1,0 +1,29 @@
+<map id="Vector.cpp" name="Vector.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="275,5,365,31"/>
+<area shape="rect" id="Node000002" href="$de/dd9/Vector_8hpp.html" title="Definition of Vec2f and Vec3f." alt="" coords="183,79,273,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="307,33,255,72,252,68,304,29"/>
+<area shape="rect" id="Node000011" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="298,79,529,104"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="337,29,389,68,386,72,333,33"/>
+<area shape="rect" id="Node000003" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="175,152,340,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="235,103,250,138,245,140,230,105"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="37,152,150,177"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="208,106,129,148,126,143,205,102"/>
+<area shape="rect" id="Node000004" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="195,225,376,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="265,177,278,212,273,214,260,179"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="22,372,106,397"/>
+<area shape="poly" id="edge10_Node000003_Node000007" title=" " alt="" coords="194,180,84,203,39,216,17,227,12,238,8,259,10,287,20,323,30,343,44,360,40,363,26,346,15,325,5,288,3,258,6,237,13,223,37,211,82,198,193,175"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="27,225,170,251"/>
+<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="233,180,138,222,136,217,231,175"/>
+<area shape="rect" id="Node000005" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="29,299,256,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="264,253,179,295,177,290,261,248"/>
+<area shape="rect" id="Node000008" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="281,299,541,324"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="307,248,380,289,377,294,304,253"/>
+<area shape="rect" id="Node000006" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="221,372,411,397"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="172,322,276,364,274,369,170,326"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="132,326,89,365,85,361,128,322"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="397,326,344,366,341,361,394,322"/>
+<area shape="poly" id="edge13_Node000011_Node000003" title=" " alt="" coords="389,106,297,149,294,144,387,102"/>
+<area shape="poly" id="edge14_Node000011_Node000008" title=" " alt="" coords="416,104,414,284,408,284,411,104"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="451,152,688,177"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="440,102,533,144,530,149,437,106"/>
+</map>

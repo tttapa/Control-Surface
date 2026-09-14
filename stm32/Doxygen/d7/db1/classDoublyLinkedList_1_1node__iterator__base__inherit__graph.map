@@ -1,0 +1,5 @@
+<map id="DoublyLinkedList&lt; Node &gt;::node_iterator_base&lt; INode &gt;" name="DoublyLinkedList&lt; Node &gt;::node_iterator_base&lt; INode &gt;">
+<area shape="rect" id="node1" title="Base class for doubly linked list iterators." alt="" coords="107,5,289,171"/>
+<area shape="rect" id="node2" href="$dd/d02/classDoublyLinkedList_1_1node__iterator.html" title="Forward bidirectional doubly linked list iterator." alt="" coords="5,226,183,333"/>
+<area shape="rect" id="node3" href="$d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html" title="Reverse bidirectional doubly linked list iterator." alt="" coords="207,219,397,340"/>
+</map>

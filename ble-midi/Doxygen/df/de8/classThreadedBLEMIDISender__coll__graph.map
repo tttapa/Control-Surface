@@ -1,0 +1,5 @@
+<map id="ThreadedBLEMIDISender&lt; Derived &gt;" name="ThreadedBLEMIDISender&lt; Derived &gt;">
+<area shape="rect" id="Node000001" title="Class that manages a background thread that sends BLE packets asynchronously." alt="" coords="5,553,215,1053"/>
+<area shape="rect" id="Node000002" href="$d7/d8e/classBLEMIDIPacketBuilder.html" title="Class for building MIDI over Bluetooth Low Energy packets." alt="" coords="19,5,201,491"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,491,113,537,107,537,107,491"/>
+</map>

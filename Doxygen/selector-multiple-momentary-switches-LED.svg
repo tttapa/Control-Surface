@@ -1,0 +1,34 @@
+<svg 
+    version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    width="496" height="220">
+    <text x="12" y="16" font-family="Verdana" font-size="16">Try it:</text>
+    <rect id="button1" x="52" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button2" x="136" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button3" x="220" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button4" x="304" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button5" x="388" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <circle id="led1" cx="80" cy="180" r="16" stroke-width="3" stroke="black" fill="red"/>
+    <circle id="led2" cx="164" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led3" cx="248" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led4" cx="332" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led5" cx="416" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+
+    <text id="setting" x="248" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
+    <script>
+        let prevSetting = 1;
+        let setting = document.getElementById("setting");
+        for (let i = 1; i &lt;= 5; i++) {
+            let button = document.getElementById("button"+i);
+            let led = document.getElementById("led"+i);
+            button.onclick = function() {
+                let prevLed = document.getElementById("led"+prevSetting);
+                prevLed.setAttribute("fill", "white");
+                led.setAttribute("fill", "red");
+                setting.textContent = i;
+                prevSetting = i;
+            }
+        }
+    </script>
+</svg>

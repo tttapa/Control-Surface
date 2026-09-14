@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/MIDI_Interfaces/BLEMIDI/BLEAPI.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/MIDI_Interfaces/BLEMIDI">src/MIDI_Interfaces/BLEMIDI</a> - BLEAPI.hpp<span style="font-size: 80%;"> (source / <a href="BLEAPI.hpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 17:27:32</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #pragma once</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : /**</span>
+<span id="L4"><span class="lineNum">       4</span>              :  * @file</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * Type definitions and callback interfaces for communication between the</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * low-level BLE stacks and higher-level MIDI BLE backends.</span>
+<span id="L7"><span class="lineNum">       7</span>              :  */</span>
+<span id="L8"><span class="lineNum">       8</span>              : </span>
+<span id="L9"><span class="lineNum">       9</span>              : #include &lt;Settings/NamespaceSettings.hpp&gt;</span>
+<span id="L10"><span class="lineNum">      10</span>              : </span>
+<span id="L11"><span class="lineNum">      11</span>              : #include &quot;Util/compat.hpp&quot;</span>
+<span id="L12"><span class="lineNum">      12</span>              : </span>
+<span id="L13"><span class="lineNum">      13</span>              : #include &lt;cstddef&gt;</span>
+<span id="L14"><span class="lineNum">      14</span>              : #include &lt;cstdint&gt;</span>
+<span id="L15"><span class="lineNum">      15</span>              : </span>
+<span id="L16"><span class="lineNum">      16</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L17"><span class="lineNum">      17</span>              : </span>
+<span id="L18"><span class="lineNum">      18</span>              : /// Represents a handle to the connection to another device.</span>
+<span id="L19"><span class="lineNum">      19</span>              : struct BLEConnectionHandle {</span>
+<span id="L20"><span class="lineNum">      20</span>              :     uint16_t conn = 0xFFFF;</span>
+<span id="L21"><span class="lineNum">      21</span>              :     explicit operator bool() const { return conn != 0xFFFF; }</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #if __cplusplus &lt; 201402L</span>
+<span id="L24"><span class="lineNum">      24</span>              :     BLEConnectionHandle() = default;</span>
+<span id="L25"><span class="lineNum">      25</span>              :     BLEConnectionHandle(uint16_t conn) : conn {conn} {}</span>
+<span id="L26"><span class="lineNum">      26</span>              : #endif</span>
+<span id="L27"><span class="lineNum">      27</span>              : };</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              : /// Represents a handle to a local GATT characteristic.</span>
+<span id="L30"><span class="lineNum">      30</span>              : struct BLECharacteristicHandle {</span>
+<span id="L31"><span class="lineNum">      31</span>              :     uint16_t characteristic = 0xFFFF;</span>
+<span id="L32"><span class="lineNum">      32</span>              :     explicit operator bool() const { return characteristic != 0xFFFF; }</span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span>              : #if __cplusplus &lt; 201402L</span>
+<span id="L35"><span class="lineNum">      35</span>              :     BLECharacteristicHandle() = default;</span>
+<span id="L36"><span class="lineNum">      36</span>              :     BLECharacteristicHandle(uint16_t characteristic)</span>
+<span id="L37"><span class="lineNum">      37</span>              :         : characteristic {characteristic} {}</span>
+<span id="L38"><span class="lineNum">      38</span>              : #endif</span>
+<span id="L39"><span class="lineNum">      39</span>              : };</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : /// Non-owning, std::span-style read-only view of BLE data.</span>
+<span id="L42"><span class="lineNum">      42</span>              : struct BLEDataView {</span>
+<span id="L43"><span class="lineNum">      43</span>              :     const uint8_t *data = nullptr;</span>
+<span id="L44"><span class="lineNum">      44</span>              :     uint16_t length = 0;</span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">          30 :     explicit operator bool() const { return length &gt; 0; }</span></span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              : #if __cplusplus &lt; 201402L</span>
+<span id="L48"><span class="lineNum">      48</span>              :     BLEDataView() = default;</span>
+<span id="L49"><span class="lineNum">      49</span>              :     BLEDataView(const uint8_t *data, uint16_t length)</span>
+<span id="L50"><span class="lineNum">      50</span>              :         : data {data}, length {length} {}</span>
+<span id="L51"><span class="lineNum">      51</span>              : #endif</span>
+<span id="L52"><span class="lineNum">      52</span>              : };</span>
+<span id="L53"><span class="lineNum">      53</span>              : </span>
+<span id="L54"><span class="lineNum">      54</span>              : /// Describes a byte buffer containing (part of) a BLE packet.</span>
+<span id="L55"><span class="lineNum">      55</span>              : /// Packets can be stored across multiple buffers, in which case the first</span>
+<span id="L56"><span class="lineNum">      56</span>              : /// first buffer has type `Packet` and subsequent buffers of the same packet</span>
+<span id="L57"><span class="lineNum">      57</span>              : /// have the type `Continuation`.</span>
+<span id="L58"><span class="lineNum">      58</span>              : enum class BLEDataType : uint8_t {</span>
+<span id="L59"><span class="lineNum">      59</span>              :     None = 0,     ///&lt; No buffers available.</span>
+<span id="L60"><span class="lineNum">      60</span>              :     Packet,       ///&lt; Buffer contains the start of a BLE packet.</span>
+<span id="L61"><span class="lineNum">      61</span>              :     Continuation, ///&lt; Buffer contains a chunk of a BLE packet.</span>
+<span id="L62"><span class="lineNum">      62</span>              : };</span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span>              : /// Callable that returns the next chunk of data from a BLE packet when called.</span>
+<span id="L65"><span class="lineNum">      65</span>              : /// Uses type erasure with a static buffer (no dynamic memory allocations).</span>
+<span id="L66"><span class="lineNum">      66</span>              : class BLEDataGenerator {</span>
+<span id="L67"><span class="lineNum">      67</span>              :   public:</span>
+<span id="L68"><span class="lineNum">      68</span>              :     /// Get the next chunk of data from the BLE packet.</span>
+<span id="L69"><span class="lineNum">      69</span>              :     /// Returns a chunk of size zero to indicate completion.</span>
+<span id="L70"><span class="lineNum">      70</span>              :     /// @pre This wrapper is not empty.</span>
+<span id="L71"><span class="lineNum">      71</span>              :     /// @pre There is still data available. Calling this function again after</span>
+<span id="L72"><span class="lineNum">      72</span>              :     ///      the previous call returned an empty chunk is not allowed.</span>
+<span id="L73"><span class="lineNum">      73</span>              :     BLEDataView operator()();</span>
+<span id="L74"><span class="lineNum">      74</span>              :     /// Release the resources of the underlying data generator.</span>
+<span id="L75"><span class="lineNum">      75</span>              :     void clear();</span>
+<span id="L76"><span class="lineNum">      76</span>              :     /// Check if this wrapper contains an underlying data generator.</span>
+<span id="L77"><span class="lineNum">      77</span>              :     explicit operator bool() const { return instance; }</span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span>              :     /// Create an empty BLEDataGenerator.</span>
+<span id="L80"><span class="lineNum">      80</span>              :     BLEDataGenerator() = default;</span>
+<span id="L81"><span class="lineNum">      81</span>              :     /// Store a callable of type @p T and initialize it by @p args.</span>
+<span id="L82"><span class="lineNum">      82</span>              :     template &lt;class T, class... Args&gt;</span>
+<span id="L83"><span class="lineNum">      83</span>              :     BLEDataGenerator(compat::in_place_type_t&lt;T&gt;, Args &amp;&amp;...args);</span>
+<span id="L84"><span class="lineNum">      84</span>              :     /// Store a callable of type @p T (with cv qualifiers and references</span>
+<span id="L85"><span class="lineNum">      85</span>              :     /// removed) and initialize it by forwarding @p t.</span>
+<span id="L86"><span class="lineNum">      86</span>              :     template &lt;class T&gt;</span>
+<span id="L87"><span class="lineNum">      87</span>              :     BLEDataGenerator(compat::in_place_t, T &amp;&amp;t);</span>
+<span id="L88"><span class="lineNum">      88</span>              :     BLEDataGenerator(const BLEDataGenerator &amp;) = delete;</span>
+<span id="L89"><span class="lineNum">      89</span>              :     BLEDataGenerator &amp;operator=(const BLEDataGenerator &amp;) = delete;</span>
+<span id="L90"><span class="lineNum">      90</span>              :     BLEDataGenerator(BLEDataGenerator &amp;&amp;other) noexcept;</span>
+<span id="L91"><span class="lineNum">      91</span>              :     BLEDataGenerator &amp;operator=(BLEDataGenerator &amp;&amp;other) noexcept;</span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">          15 :     ~BLEDataGenerator() { clear(); }</span></span>
+<span id="L93"><span class="lineNum">      93</span>              : </span>
+<span id="L94"><span class="lineNum">      94</span>              :   private:</span>
+<span id="L95"><span class="lineNum">      95</span>              :     /// Type-erased interface.</span>
+<span id="L96"><span class="lineNum">      96</span>              :     struct Iface;</span>
+<span id="L97"><span class="lineNum">      97</span>              :     /// Specific class that implements the type-erased interface, wrapping the</span>
+<span id="L98"><span class="lineNum">      98</span>              :     /// type @p T.</span>
+<span id="L99"><span class="lineNum">      99</span>              :     template &lt;class T&gt;</span>
+<span id="L100"><span class="lineNum">     100</span>              :     struct Impl;</span>
+<span id="L101"><span class="lineNum">     101</span>              :     /// Alignment of the buffer to allocate the underlying data generator.</span>
+<span id="L102"><span class="lineNum">     102</span>              :     using buffer_align_t = max_align_t;</span>
+<span id="L103"><span class="lineNum">     103</span>              :     /// Size of the buffer to allocate the underlying data generator.</span>
+<span id="L104"><span class="lineNum">     104</span>              :     static constexpr size_t capacity = 4 * sizeof(void *) - sizeof(Iface *);</span>
+<span id="L105"><span class="lineNum">     105</span>              :     /// Buffer used for allocation of the underlying data generator.</span>
+<span id="L106"><span class="lineNum">     106</span>              :     alignas(buffer_align_t) compat::byte storage[capacity];</span>
+<span id="L107"><span class="lineNum">     107</span>              :     //// Type-erased pointer to the underlying data generator in @ref storage.</span>
+<span id="L108"><span class="lineNum">     108</span>              :     Iface *instance = nullptr;</span>
+<span id="L109"><span class="lineNum">     109</span>              : };</span>
+<span id="L110"><span class="lineNum">     110</span>              : </span>
+<span id="L111"><span class="lineNum">     111</span>              : /// Should a buffer of BLEData be consumed immediately inside of the callback,</span>
+<span id="L112"><span class="lineNum">     112</span>              : /// or can we hold on to it and process it later?</span>
+<span id="L113"><span class="lineNum">     113</span>              : enum class BLEDataLifetime {</span>
+<span id="L114"><span class="lineNum">     114</span>              :     /// Buffer is valid only during the callback. Do not keep any pointers to it.</span>
+<span id="L115"><span class="lineNum">     115</span>              :     ConsumeImmediately,</span>
+<span id="L116"><span class="lineNum">     116</span>              :     /// Buffer is valid for as long as the owning @ref BLEDataGenerator is not</span>
+<span id="L117"><span class="lineNum">     117</span>              :     /// resumed or destroyed.</span>
+<span id="L118"><span class="lineNum">     118</span>              :     Managed,</span>
+<span id="L119"><span class="lineNum">     119</span>              : };</span>
+<span id="L120"><span class="lineNum">     120</span>              : </span>
+<span id="L121"><span class="lineNum">     121</span>              : /// Defines the interface for callback functions registered by the low-level</span>
+<span id="L122"><span class="lineNum">     122</span>              : /// BLE code.</span>
+<span id="L123"><span class="lineNum">     123</span>              : /// @warning    These functions may be called from different tasks/threads or</span>
+<span id="L124"><span class="lineNum">     124</span>              : ///             low-priority interrupt handlers. You cannot take locks, and you</span>
+<span id="L125"><span class="lineNum">     125</span>              : ///             need to synchronize appropriately (e.g. using `std::atomic` or</span>
+<span id="L126"><span class="lineNum">     126</span>              : ///             by using critical sections).</span>
+<span id="L127"><span class="lineNum">     127</span>              : class MIDIBLEInstance {</span>
+<span id="L128"><span class="lineNum">     128</span>              :   public:</span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">          29 :     virtual ~MIDIBLEInstance() = default;</span></span>
+<span id="L130"><span class="lineNum">     130</span>              :     /// Called by the BLE stack when a connection is established.</span>
+<span id="L131"><span class="lineNum">     131</span>              :     virtual void handleConnect(BLEConnectionHandle conn_handle) = 0;</span>
+<span id="L132"><span class="lineNum">     132</span>              :     /// Called by the BLE stack when a connection is terminated.</span>
+<span id="L133"><span class="lineNum">     133</span>              :     virtual void handleDisconnect(BLEConnectionHandle conn_handle) = 0;</span>
+<span id="L134"><span class="lineNum">     134</span>              :     /// Called by the BLE stack when the maximum transmission unit for the</span>
+<span id="L135"><span class="lineNum">     135</span>              :     /// connection changes.</span>
+<span id="L136"><span class="lineNum">     136</span>              :     virtual void handleMTU(BLEConnectionHandle conn_handle, uint16_t mtu) = 0;</span>
+<span id="L137"><span class="lineNum">     137</span>              :     /// Called by the BLE stack when the central subscribes to receive</span>
+<span id="L138"><span class="lineNum">     138</span>              :     /// notifications for the MIDI GATT characteristic.</span>
+<span id="L139"><span class="lineNum">     139</span>              :     virtual void handleSubscribe(BLEConnectionHandle conn_handle,</span>
+<span id="L140"><span class="lineNum">     140</span>              :                                  BLECharacteristicHandle char_handle,</span>
+<span id="L141"><span class="lineNum">     141</span>              :                                  bool notify) = 0;</span>
+<span id="L142"><span class="lineNum">     142</span>              :     /// Called by the BLE stack when the central writes data to the MIDI GATT</span>
+<span id="L143"><span class="lineNum">     143</span>              :     /// characteristic.</span>
+<span id="L144"><span class="lineNum">     144</span>              :     virtual void handleData(BLEConnectionHandle conn_handle,</span>
+<span id="L145"><span class="lineNum">     145</span>              :                             BLEDataGenerator &amp;&amp;data,</span>
+<span id="L146"><span class="lineNum">     146</span>              :                             BLEDataLifetime lifetime) = 0;</span>
+<span id="L147"><span class="lineNum">     147</span>              : };</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span>              : /// Configuration options for the low-level BLE code.</span>
+<span id="L150"><span class="lineNum">     150</span>              : struct BLESettings {</span>
+<span id="L151"><span class="lineNum">     151</span>              :     /// Device name (used for advertising)</span>
+<span id="L152"><span class="lineNum">     152</span>              :     const char *device_name = &quot;Control Surface MIDI&quot;;</span>
+<span id="L153"><span class="lineNum">     153</span>              :     /// Connection intervals as multiples of 1.25 milliseconds</span>
+<span id="L154"><span class="lineNum">     154</span>              :     /// (e.g.0x000C = 15 ms).</span>
+<span id="L155"><span class="lineNum">     155</span>              :     struct {</span>
+<span id="L156"><span class="lineNum">     156</span>              :         uint16_t minimum = 0x000C;</span>
+<span id="L157"><span class="lineNum">     157</span>              :         uint16_t maximum = 0x000C;</span>
+<span id="L158"><span class="lineNum">     158</span>              :     } connection_interval {};</span>
+<span id="L159"><span class="lineNum">     159</span>              :     /// Encrypt the MIDI characteristic (NimBLE only).</span>
+<span id="L160"><span class="lineNum">     160</span>              :     bool require_encryption = false;</span>
+<span id="L161"><span class="lineNum">     161</span>              :     /// Set to true if you want the Arduino to always initiate the Bluetooth</span>
+<span id="L162"><span class="lineNum">     162</span>              :     /// bonding or secure connection. As a result, it will show up as a &quot;paired&quot;</span>
+<span id="L163"><span class="lineNum">     163</span>              :     /// device on your computer/phone/tablet. If set to false, security is still</span>
+<span id="L164"><span class="lineNum">     164</span>              :     /// supported, but the central device should take the initiative.</span>
+<span id="L165"><span class="lineNum">     165</span>              :     bool initiate_security = false;</span>
+<span id="L166"><span class="lineNum">     166</span>              : };</span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span>              : END_CS_NAMESPACE</span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span>              : #include &quot;BLEAPI.ipp&quot;</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<map id="VU" name="VU">
+<area shape="rect" id="node1" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="527,1460,694,1655"/>
+<area shape="rect" id="node2" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="220,1232,447,1368"/>
+<area shape="rect" id="node3" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="143,931,342,1140"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="120,519,320,831"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,123,205,303"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,5,440,420"/>
+<area shape="rect" id="node7" href="$db/d84/structMCU_1_1VUMatcher.html" title="MIDI Input matcher for Mackie Control Universal VU meters." alt="" coords="375,989,494,1081"/>
+<area shape="rect" id="node8" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="344,483,533,868"/>
+<area shape="rect" id="node9" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="471,1203,609,1397"/>
+<area shape="rect" id="node10" href="$dc/d11/structMCU_1_1VUState.html" title="Struct that keeps track of the value and overload indicator of a Mackie Control Universal VU meter." alt="" coords="633,1239,733,1361"/>
+<area shape="rect" id="node11" href="$d2/de5/classAH_1_1Timer.html" title=" " alt="" coords="756,1217,911,1383"/>
+</map>

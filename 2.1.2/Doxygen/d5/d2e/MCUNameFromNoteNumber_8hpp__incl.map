@@ -1,0 +1,22 @@
+<map id="MCUNameFromNoteNumber.hpp" name="MCUNameFromNoteNumber.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="222,5,457,31"/>
+<area shape="rect" id="Node000002" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="145,79,310,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="323,33,259,73,256,69,320,28"/>
+<area shape="rect" id="Node000009" href="$d0/da7/Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="413,79,650,104"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="371,28,488,71,486,76,369,33"/>
+<area shape="rect" id="Node000003" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="230,152,411,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="244,102,296,141,293,146,241,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="20,299,104,324"/>
+<area shape="poly" id="edge9_Node000002_Node000006" title=" " alt="" coords="155,107,101,124,75,137,52,154,28,176,13,197,8,221,14,250,25,270,40,288,36,291,21,273,9,252,3,221,9,195,24,172,48,150,72,133,99,119,153,102"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="63,152,205,177"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="214,106,162,146,158,141,211,102"/>
+<area shape="rect" id="Node000004" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="23,225,250,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="292,180,181,223,179,218,290,175"/>
+<area shape="rect" id="Node000007" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="275,225,535,251"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="336,175,382,214,379,218,332,179"/>
+<area shape="rect" id="Node000005" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="309,299,500,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="180,248,349,293,348,298,179,253"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="126,253,86,291,82,287,123,249"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="407,251,407,285,402,285,402,251"/>
+<area shape="poly" id="edge11_Node000009_Node000005" title=" " alt="" coords="540,103,551,131,561,170,563,212,559,233,549,252,522,279,487,297,485,292,519,275,545,249,554,231,558,212,556,171,546,133,535,105"/>
+</map>

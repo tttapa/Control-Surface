@@ -1,0 +1,5 @@
+<map id="ManyAddressesMIDIOutput" name="ManyAddressesMIDIOutput">
+<area shape="rect" id="node1" title="A base class for all MIDIOutputElements that can have one of many addresses." alt="" coords="5,419,209,496"/>
+<area shape="rect" id="node2" href="$d4/d6e/classBankableMIDIOutput__Base.html" title=" " alt="" coords="7,219,207,369"/>
+<area shape="rect" id="node3" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="32,5,183,156"/>
+</map>

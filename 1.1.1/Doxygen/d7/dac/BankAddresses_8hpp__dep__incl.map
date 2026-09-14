@@ -1,0 +1,26 @@
+<map id="BankAddresses.hpp" name="BankAddresses.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="1171,5,1310,32"/>
+<area shape="rect" id="node2" href="$dc/d34/Bankable_2Abstract_2MIDIChordButton_8hpp.html" title=" " alt="" coords="23,80,173,107"/>
+<area shape="rect" id="node5" href="$db/d15/Bankable_2CCButton_8hpp.html" title=" " alt="" coords="177,155,283,181"/>
+<area shape="rect" id="node6" href="$db/d53/Bankable_2CCButtonLatched_8hpp.html" title=" " alt="" coords="307,155,457,181"/>
+<area shape="rect" id="node7" href="$d2/dac/Bankable_2CCButtonLatching_8hpp.html" title=" " alt="" coords="482,155,637,181"/>
+<area shape="rect" id="node8" href="$d9/d55/Bankable_2CCButtonMatrix_8hpp.html" title=" " alt="" coords="661,155,802,181"/>
+<area shape="rect" id="node9" href="$d7/dcc/Bankable_2CCIncrementDecrementButtons_8hpp.html" title=" " alt="" coords="826,155,1061,181"/>
+<area shape="rect" id="node10" href="$d6/ddd/Bankable_2CCPotentiometer_8hpp.html" title=" " alt="" coords="1084,155,1232,181"/>
+<area shape="rect" id="node11" href="$d5/d8e/Bankable_2NoteButton_8hpp.html" title=" " alt="" coords="1256,155,1369,181"/>
+<area shape="rect" id="node12" href="$df/de8/Bankable_2NoteButtonLatched_8hpp.html" title=" " alt="" coords="1393,155,1552,181"/>
+<area shape="rect" id="node13" href="$d6/d6e/Bankable_2NoteButtonLatching_8hpp.html" title=" " alt="" coords="1577,155,1739,181"/>
+<area shape="rect" id="node14" href="$dc/dde/Bankable_2NoteButtonMatrix_8hpp.html" title=" " alt="" coords="1763,155,1913,181"/>
+<area shape="rect" id="node15" href="$d9/d99/Bankable_2PBPotentiometer_8hpp.html" title=" " alt="" coords="1278,80,1425,107"/>
+<area shape="rect" id="node16" href="$d0/d52/Bankable_2PCButton_8hpp.html" title=" " alt="" coords="1449,80,1553,107"/>
+<area shape="rect" id="node17" href="$de/da8/ManyAddresses_2CCButton_8hpp.html" title=" " alt="" coords="1577,80,1683,107"/>
+<area shape="rect" id="node18" href="$de/dfd/ManyAddresses_2CCButtonMatrix_8hpp.html" title=" " alt="" coords="1706,80,1847,107"/>
+<area shape="rect" id="node19" href="$d7/d70/ManyAddresses_2CCIncrementDecrementButtons_8hpp.html" title=" " alt="" coords="1871,80,2106,107"/>
+<area shape="rect" id="node20" href="$d1/d82/ManyAddresses_2CCPotentiometer_8hpp.html" title=" " alt="" coords="2129,80,2277,107"/>
+<area shape="rect" id="node21" href="$de/d14/ManyAddresses_2NoteButton_8hpp.html" title=" " alt="" coords="2301,80,2415,107"/>
+<area shape="rect" id="node22" href="$d1/da1/ManyAddresses_2NoteButtonMatrix_8hpp.html" title=" " alt="" coords="2439,80,2589,107"/>
+<area shape="rect" id="node23" href="$da/df2/ManyAddresses_2PBPotentiometer_8hpp.html" title=" " alt="" coords="2613,80,2759,107"/>
+<area shape="rect" id="node24" href="$df/de2/ManyAddresses_2PCButton_8hpp.html" title=" " alt="" coords="2783,80,2887,107"/>
+<area shape="rect" id="node3" href="$de/de3/Bankable_2NoteChordButton_8hpp.html" title=" " alt="" coords="5,155,153,181"/>
+<area shape="rect" id="node4" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="1775,229,1901,256"/>
+</map>

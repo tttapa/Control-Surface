@@ -1,0 +1,4 @@
+<map id="OutputBankableMIDIAddress_Base" name="OutputBankableMIDIAddress_Base">
+<area shape="rect" id="node1" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="5,263,252,428"/>
+<area shape="rect" id="node2" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="45,5,213,200"/>
+</map>

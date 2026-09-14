@@ -1,0 +1,18 @@
+<map id="AnyMIDIMessage::Message" name="AnyMIDIMessage::Message">
+<area shape="rect" id="Node000001" title=" " alt="" coords="243,1636,437,1781"/>
+<area shape="rect" id="Node000002" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="5,1180,160,1565"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,1565,102,1589,115,1610,139,1635,166,1655,197,1670,228,1683,227,1688,195,1675,164,1659,135,1639,111,1614,97,1591,86,1567"/>
+<area shape="rect" id="Node000003" href="$d4/d61/structMIDIMessage.html" title=" " alt="" coords="145,321,397,747"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="223,761,128,1181,123,1179,217,760"/>
+<area shape="rect" id="Node000005" href="$d5/dad/structSysCommonMessage.html" title=" " alt="" coords="184,1220,379,1525"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="276,760,282,1220,277,1220,271,760"/>
+<area shape="rect" id="Node000004" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="368,5,501,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="370,240,353,276,340,307,335,305,348,274,365,238"/>
+<area shape="rect" id="Node000006" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="348,771,513,1156"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="437,251,434,754,429,754,431,251"/>
+<area shape="rect" id="Node000007" href="$db/d45/structSysExMessage.html" title=" " alt="" coords="523,801,693,1126"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="490,250,497,274,530,406,557,540,593,784,587,785,552,541,525,407,492,275,485,252"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="244,1526,246,1569,256,1611,260,1620,255,1622,251,1613,240,1570,239,1526"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="440,1156,441,1283,438,1414,430,1529,423,1576,413,1613,409,1622,404,1621,408,1611,417,1575,425,1529,433,1413,436,1283,435,1156"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="642,1126,650,1231,646,1345,638,1403,625,1460,606,1515,580,1567,554,1600,523,1628,489,1651,453,1670,451,1666,486,1647,520,1624,550,1596,575,1564,601,1513,620,1458,633,1402,641,1344,644,1231,636,1127"/>
+</map>

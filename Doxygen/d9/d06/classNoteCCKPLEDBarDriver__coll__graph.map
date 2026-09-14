@@ -1,0 +1,9 @@
+<map id="NoteCCKPLEDBarDriver&lt; NumLEDs &gt;" name="NoteCCKPLEDBarDriver&lt; NumLEDs &gt;">
+<area shape="rect" id="Node000001" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="5,985,197,1085"/>
+<area shape="rect" id="Node000002" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="19,596,184,936"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,950,104,985,99,985,99,950"/>
+<area shape="rect" id="Node000003" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="38,361,165,547"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,561,104,596,99,596,99,561"/>
+<area shape="rect" id="Node000004" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="17,5,186,291"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="104,291,104,345,99,345,99,291"/>
+</map>

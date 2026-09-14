@@ -1,0 +1,16 @@
+<map id="ExtendedIOElement" name="ExtendedIOElement">
+<area shape="rect" id="Node000001" title="An abstract base class for Extended Input/Output elements." alt="" coords="479,321,685,907"/>
+<area shape="rect" id="Node000002" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="53,5,327,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="297,218,346,259,398,295,417,302,434,304,451,308,469,319,480,331,476,334,466,323,449,313,433,310,416,308,395,300,342,263,293,222"/>
+<area shape="rect" id="Node000004" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="248,321,455,907"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="229,223,260,320,255,322,224,225"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1087,196,1207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,1073,89,747,91,535,99,321,101,277,110,234,120,210,125,212,115,235,106,278,105,321,96,536,94,747,101,1073"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="250,866,231,908,144,1074,139,1072,226,905,246,864"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="235,997,436,1297"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="345,907,343,981,338,981,340,907"/>
+<area shape="rect" id="Node000005" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="371,5,487,211"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="462,210,491,305,486,306,457,212"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="416,212,401,305,396,304,410,211"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="233,1030,172,955,141,908,117,818,104,725,100,632,103,539,112,450,124,367,154,226,159,227,129,368,117,451,108,540,105,632,110,725,123,817,146,906,177,952,237,1026"/>
+</map>

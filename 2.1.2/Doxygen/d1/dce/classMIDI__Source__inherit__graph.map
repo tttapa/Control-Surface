@@ -1,0 +1,67 @@
+<map id="MIDI_Source" name="MIDI_Source">
+<area shape="rect" id="Node000001" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="821,5,1044,591"/>
+<area shape="rect" id="Node000002" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="704,639,943,1704"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="897,605,893,639,887,638,892,604"/>
+<area shape="rect" id="Node000003" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="967,1139,1117,1204"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="974,604,1041,1138,1035,1139,968,605"/>
+<area shape="rect" id="Node000004" href="$dc/d45/classControl__Surface__.html" title="This class ensures initialization, updating, and interaction between all other classes,..." alt="" coords="809,1752,1035,2452"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1039,1218,970,1752,964,1751,1034,1217"/>
+<area shape="rect" id="Node000005" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="1059,1809,1268,2395"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="1051,1218,1128,1809,1123,1809,1045,1218"/>
+<area shape="rect" id="Node000006" href="$d0/dea/classGenericBLEMIDI__Interface.html" title=" " alt="" coords="5,2500,244,4820"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1092,2407,1072,2432,1048,2454,1017,2471,978,2482,932,2488,881,2490,768,2485,646,2473,525,2462,413,2459,364,2462,321,2470,285,2483,257,2502,246,2512,243,2509,254,2498,283,2478,320,2465,363,2457,413,2454,525,2457,646,2468,768,2480,881,2485,932,2483,977,2477,1014,2466,1044,2450,1068,2429,1088,2404"/>
+<area shape="rect" id="Node000008" href="$dd/d0e/classGenericUSBMIDI__Interface.html" title=" " alt="" coords="268,2520,507,4800"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="1091,2408,1071,2433,1048,2454,1027,2466,1001,2474,937,2481,861,2480,779,2475,699,2471,624,2471,563,2480,539,2489,521,2502,502,2521,498,2518,518,2498,537,2484,562,2475,624,2465,699,2465,780,2470,861,2475,936,2476,1000,2469,1025,2461,1044,2450,1067,2429,1087,2405"/>
+<area shape="rect" id="Node000010" href="$dd/d0e/classGenericUSBMIDI__Interface.html" title=" " alt="" coords="531,2520,771,4800"/>
+<area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="1089,2408,1070,2432,1048,2454,1013,2475,979,2483,945,2481,911,2475,878,2470,846,2469,815,2479,785,2502,768,2522,764,2518,782,2498,813,2474,846,2464,879,2465,912,2470,945,2476,978,2477,1011,2470,1044,2450,1066,2429,1084,2405"/>
+<area shape="rect" id="Node000012" href="$dd/d0e/classGenericUSBMIDI__Interface.html" title=" " alt="" coords="796,2520,1035,4800"/>
+<area shape="poly" id="edge11_Node000005_Node000012" title=" " alt="" coords="1070,2409,1049,2501,1037,2558,1032,2557,1043,2499,1065,2407"/>
+<area shape="rect" id="Node000014" href="$dd/dd7/classFortySevenEffectsMIDI__Interface.html" title="Class that wraps the FortySevenEffects MIDI library." alt="" coords="1059,3453,1268,3867"/>
+<area shape="poly" id="edge13_Node000005_Node000014" title=" " alt="" coords="1166,2409,1166,3452,1161,3452,1161,2409"/>
+<area shape="rect" id="Node000015" href="$d0/dea/classGenericBLEMIDI__Interface.html" title="Bluetooth Low Energy MIDI Interface." alt="" coords="1292,3390,1501,3930"/>
+<area shape="poly" id="edge14_Node000005_Node000015" title=" " alt="" coords="1261,2407,1282,2499,1321,2733,1351,2969,1372,3193,1386,3390,1381,3390,1367,3194,1345,2970,1316,2733,1277,2501,1256,2409"/>
+<area shape="rect" id="Node000016" href="$dd/d0e/classGenericUSBMIDI__Interface.html" title="A class for MIDI interfaces sending MIDI messages over a USB MIDI connection." alt="" coords="1526,3380,1737,3940"/>
+<area shape="poly" id="edge15_Node000005_Node000016" title=" " alt="" coords="1280,2196,1344,2258,1408,2330,1468,2411,1493,2455,1515,2499,1557,2608,1589,2722,1614,2838,1632,2954,1644,3069,1650,3180,1652,3380,1647,3380,1645,3180,1638,3069,1626,2955,1609,2839,1584,2723,1552,2610,1510,2501,1489,2457,1463,2414,1404,2334,1340,2261,1277,2200"/>
+<area shape="rect" id="Node000017" href="$d8/d0b/classStreamDebugMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving human&#45;readable MIDI messages over a Stream." alt="" coords="1760,3477,1983,3843"/>
+<area shape="poly" id="edge16_Node000005_Node000017" title=" " alt="" coords="1282,2145,1398,2199,1462,2235,1528,2276,1591,2323,1652,2376,1705,2434,1751,2499,1783,2557,1811,2618,1835,2682,1855,2747,1885,2879,1903,3012,1911,3142,1912,3266,1908,3379,1899,3478,1894,3477,1902,3378,1907,3266,1906,3142,1898,3013,1880,2880,1850,2748,1830,2683,1806,2621,1778,2560,1746,2501,1701,2438,1648,2379,1588,2327,1525,2280,1460,2239,1396,2204,1280,2149"/>
+<area shape="rect" id="Node000025" href="$d3/dc3/classStreamMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Stream." alt="" coords="2544,3487,2753,3833"/>
+<area shape="poly" id="edge24_Node000005_Node000025" title=" " alt="" coords="1282,2132,1438,2183,1529,2219,1625,2260,1723,2309,1819,2365,1911,2428,1996,2498,2052,2553,2105,2612,2204,2737,2294,2870,2374,3006,2443,3140,2503,3267,2553,3384,2592,3486,2587,3488,2548,3386,2498,3270,2438,3142,2369,3008,2289,2873,2200,2741,2101,2615,2048,2557,1992,2502,1908,2432,1817,2369,1720,2314,1623,2265,1527,2223,1436,2188,1281,2137"/>
+<area shape="rect" id="Node000007" href="$df/d43/structBluetoothMIDI__Interface.html" title="A class for MIDI interfaces sending MIDI messages over a Bluetooth Low Energy (BLE) connection." alt="" coords="39,6015,211,6081"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="127,4834,127,6015,122,6015,122,4834"/>
+<area shape="rect" id="Node000009" href="$d3/d56/classUSBHostMIDI__Interface.html" title="A class for MIDI interfaces sending MIDI messages to a MIDI USB device connected to a Teensy&#39;s USB ho..." alt="" coords="292,6015,483,6081"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="390,4814,390,6015,385,6015,385,4814"/>
+<area shape="rect" id="Node000011" href="$d5/de5/classUSBHostMIDI__Interface__BigBuffer.html" title="A class for MIDI interfaces sending MIDI messages to a MIDI USB device connected to a Teensy&#39;s USB ho..." alt="" coords="561,6001,742,6095"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="654,4814,654,6001,649,6001,649,4814"/>
+<area shape="rect" id="Node000013" href="$de/d05/classUSBMIDI__Interface.html" title="A class for MIDI interfaces sending MIDI messages over a USB MIDI connection." alt="" coords="847,6015,983,6081"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="918,4814,918,6015,913,6015,913,4814"/>
+<area shape="rect" id="Node000018" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="1227,4868,1465,7228"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="1917,3856,1933,3960,1944,4078,1948,4205,1942,4337,1922,4469,1906,4534,1885,4597,1860,4658,1829,4716,1793,4771,1751,4822,1734,4836,1717,4847,1683,4855,1648,4854,1612,4847,1577,4840,1543,4838,1510,4846,1494,4856,1479,4870,1468,4882,1464,4878,1475,4866,1491,4852,1508,4841,1543,4833,1578,4834,1613,4841,1648,4848,1682,4850,1715,4842,1731,4832,1747,4818,1789,4768,1825,4713,1855,4656,1880,4595,1901,4532,1917,4468,1936,4337,1943,4205,1939,4079,1927,3961,1912,3857"/>
+<area shape="rect" id="Node000020" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="1489,4868,1728,7228"/>
+<area shape="poly" id="edge19_Node000017_Node000020" title=" " alt="" coords="1859,3857,1817,4299,1787,4560,1751,4820,1742,4868,1731,4945,1725,4944,1737,4868,1746,4820,1781,4559,1811,4298,1853,3856"/>
+<area shape="rect" id="Node000022" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="1752,4868,1991,7228"/>
+<area shape="poly" id="edge21_Node000017_Node000022" title=" " alt="" coords="1874,3856,1874,4868,1869,4868,1869,3856"/>
+<area shape="rect" id="Node000024" href="$db/dc4/classSerialDebugMIDI__Interface.html" title="A wrapper class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a S..." alt="" coords="2015,5995,2242,6101"/>
+<area shape="poly" id="edge23_Node000017_Node000024" title=" " alt="" coords="1895,3856,2005,4868,2126,5995,2120,5995,1999,4868,1890,3856"/>
+<area shape="rect" id="Node000019" href="$d8/d29/classHardwareSerialDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a HardwareS..." alt="" coords="1245,7276,1447,7405"/>
+<area shape="poly" id="edge18_Node000018_Node000019" title=" " alt="" coords="1349,7242,1349,7276,1343,7276,1343,7242"/>
+<area shape="rect" id="Node000021" href="$d3/d54/classSoftwareSerialDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a SoftwareS..." alt="" coords="1511,7276,1706,7405"/>
+<area shape="poly" id="edge20_Node000020_Node000021" title=" " alt="" coords="1611,7242,1611,7276,1606,7276,1606,7242"/>
+<area shape="rect" id="Node000023" href="$de/d2d/classUSBDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over the USB CDC..." alt="" coords="1770,7298,1973,7383"/>
+<area shape="poly" id="edge22_Node000022_Node000023" title=" " alt="" coords="1874,7242,1874,7298,1869,7298,1869,7242"/>
+<area shape="rect" id="Node000026" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="2267,4958,2505,7138"/>
+<area shape="poly" id="edge25_Node000025_Node000026" title=" " alt="" coords="2631,3847,2508,4963,2503,4962,2626,3846"/>
+<area shape="rect" id="Node000028" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="2529,4958,2768,7138"/>
+<area shape="poly" id="edge27_Node000025_Node000028" title=" " alt="" coords="2651,3846,2651,4958,2646,4958,2646,3846"/>
+<area shape="rect" id="Node000030" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="2792,4958,3031,7138"/>
+<area shape="poly" id="edge29_Node000025_Node000030" title=" " alt="" coords="2672,3846,2795,4962,2789,4963,2666,3847"/>
+<area shape="rect" id="Node000033" href="$d9/db8/classSerialMIDI__Interface.html" title="A wrapper class for MIDI interfaces sending and receiving MIDI messages over a Serial port of generic..." alt="" coords="3055,6005,3239,6091"/>
+<area shape="poly" id="edge32_Node000025_Node000033" title=" " alt="" coords="2726,3845,2804,4051,2892,4304,2977,4584,3014,4726,3046,4867,3076,5036,3100,5209,3118,5380,3131,5543,3145,5824,3150,6005,3144,6005,3140,5824,3126,5544,3113,5380,3095,5209,3071,5037,3041,4869,3009,4728,2972,4585,2887,4306,2799,4053,2721,3846"/>
+<area shape="rect" id="Node000027" href="$d9/d78/classHardwareSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Hardware Serial port." alt="" coords="2307,7293,2465,7388"/>
+<area shape="poly" id="edge26_Node000026_Node000027" title=" " alt="" coords="2389,7152,2389,7293,2383,7293,2383,7152"/>
+<area shape="rect" id="Node000029" href="$d6/d6d/classSoftwareSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a SoftwareSerial interface." alt="" coords="2572,7293,2725,7388"/>
+<area shape="poly" id="edge28_Node000028_Node000029" title=" " alt="" coords="2651,7152,2651,7293,2646,7293,2646,7152"/>
+<area shape="rect" id="Node000031" href="$d8/d57/classUSBSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over the Serial port of the USB conne..." alt="" coords="2813,7308,3010,7373"/>
+<area shape="poly" id="edge30_Node000030_Node000031" title=" " alt="" coords="2914,7152,2914,7308,2909,7308,2909,7152"/>
+<area shape="rect" id="Node000032" href="$dc/dff/classHairlessMIDI__Interface.html" title="A class for MIDI Interfaces sending and receiving data over the USB Serial CDC connection for the use..." alt="" coords="2818,7453,3005,7519"/>
+<area shape="poly" id="edge31_Node000031_Node000032" title=" " alt="" coords="2914,7387,2914,7453,2909,7453,2909,7387"/>
+</map>

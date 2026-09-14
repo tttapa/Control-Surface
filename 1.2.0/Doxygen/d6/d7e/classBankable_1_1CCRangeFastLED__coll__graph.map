@@ -1,0 +1,16 @@
+<map id="CCRangeFastLED&lt; RangeLen, BankSize, ColorMapper &gt;" name="CCRangeFastLED&lt; RangeLen, BankSize, ColorMapper &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="654,1764,869,1915"/>
+<area shape="rect" id="node2" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="662,1505,861,1715"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="477,1122,755,1390"/>
+<area shape="rect" id="node4" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="169,769,362,935"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1210,205,1302"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,1056,440,1456"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="178,453,353,663"/>
+<area shape="rect" id="node6" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="171,5,360,391"/>
+<area shape="rect" id="node9" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="387,791,523,913"/>
+<area shape="rect" id="node10" href="$d8/d80/classNoteCCFastLEDCallback.html" title=" " alt="" coords="547,740,749,964"/>
+<area shape="rect" id="node11" href="$de/d07/structSimpleNoteCCValueCallback.html" title="A callback for NoteCCRange with an action that can be implemented by the user." alt="" coords="454,497,687,619"/>
+<area shape="rect" id="node12" href="$d8/dc6/structDefaultColorMapper.html" title="The default mapping from a 7&#45;bit MIDI value to an RGB color." alt="" coords="711,519,865,597"/>
+<area shape="rect" id="node13" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="774,725,989,979"/>
+<area shape="rect" id="node14" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="780,1122,1033,1390"/>
+</map>

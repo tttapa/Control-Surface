@@ -1,0 +1,7 @@
+<map id="TimeDisplayDisplay" name="TimeDisplayDisplay">
+<area shape="rect" id="Node000001" title="Displays the MCU time code display." alt="" coords="44,672,213,1017"/>
+<area shape="rect" id="Node000002" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="52,239,205,624"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,638,131,672,126,672,126,638"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,252,191"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="131,205,131,238,126,238,126,205"/>
+</map>

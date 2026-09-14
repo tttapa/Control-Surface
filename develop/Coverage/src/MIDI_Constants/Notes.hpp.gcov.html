@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/MIDI_Constants/Notes.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/MIDI_Constants">src/MIDI_Constants</a> - Notes.hpp<span style="font-size: 80%;"> (source / <a href="Notes.hpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 17:27:32</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /* ✔ */</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : #pragma once</span>
+<span id="L4"><span class="lineNum">       4</span>              : </span>
+<span id="L5"><span class="lineNum">       5</span>              : #include &lt;Settings/NamespaceSettings.hpp&gt;</span>
+<span id="L6"><span class="lineNum">       6</span>              : #include &lt;stdint.h&gt;</span>
+<span id="L7"><span class="lineNum">       7</span>              : </span>
+<span id="L8"><span class="lineNum">       8</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L9"><span class="lineNum">       9</span>              : </span>
+<span id="L10"><span class="lineNum">      10</span>              : /// @addtogroup    MIDIConstants</span>
+<span id="L11"><span class="lineNum">      11</span>              : /// @{</span>
+<span id="L12"><span class="lineNum">      12</span>              : </span>
+<span id="L13"><span class="lineNum">      13</span>              : /// MIDI note names.</span>
+<span id="L14"><span class="lineNum">      14</span>              : /// Uses the [Scientific Pitch Notation system](https://en.wikipedia.org/wiki/Scientific_pitch_notation),</span>
+<span id="L15"><span class="lineNum">      15</span>              : /// where &lt;b&gt;A&lt;sub&gt;4&lt;/sub&gt;&lt;/b&gt; is 440 Hz, and &lt;b&gt;C&lt;sub&gt;-1&lt;/sub&gt;&lt;/b&gt; is 8.1758 Hz.</span>
+<span id="L16"><span class="lineNum">      16</span>              : ///</span>
+<span id="L17"><span class="lineNum">      17</span>              : /// |Octave| C |C♯/D♭| D |D♯/E♭| E | F  |F♯/G♭| G |G♯/A♭| A |A♯/B♭| B  |</span>
+<span id="L18"><span class="lineNum">      18</span>              : /// |:-----|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|</span>
+<span id="L19"><span class="lineNum">      19</span>              : /// |-1    |   0|   1|   2|   3|   4|   5|   6|   7|   8|   9|  10|  11|</span>
+<span id="L20"><span class="lineNum">      20</span>              : /// |0     |  12|  13|  14|  15|  16|  17|  18|  19|  20|  21|  22|  23|</span>
+<span id="L21"><span class="lineNum">      21</span>              : /// |1     |  24|  25|  26|  27|  28|  29|  30|  31|  32|  33|  34|  35|</span>
+<span id="L22"><span class="lineNum">      22</span>              : /// |2     |  36|  37|  38|  39|  40|  41|  42|  43|  44|  45|  46|  47|</span>
+<span id="L23"><span class="lineNum">      23</span>              : /// |3     |  48|  49|  50|  51|  52|  53|  54|  55|  56|  57|  58|  59|</span>
+<span id="L24"><span class="lineNum">      24</span>              : /// |4     |  60|  61|  62|  63|  64|  65|  66|  67|  68|  69|  70|  71|</span>
+<span id="L25"><span class="lineNum">      25</span>              : /// |5     |  72|  73|  74|  75|  76|  77|  78|  79|  80|  81|  82|  83|</span>
+<span id="L26"><span class="lineNum">      26</span>              : /// |6     |  84|  85|  86|  87|  88|  89|  90|  91|  92|  93|  94|  95|</span>
+<span id="L27"><span class="lineNum">      27</span>              : /// |7     |  96|  97|  98|  99| 100| 101| 102| 103| 104| 105| 106| 107|</span>
+<span id="L28"><span class="lineNum">      28</span>              : /// |8     | 108| 109| 110| 111| 112| 113| 114| 115| 116| 117| 118| 119|</span>
+<span id="L29"><span class="lineNum">      29</span>              : namespace MIDI_Notes {</span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : class Note {</span>
+<span id="L32"><span class="lineNum">      32</span>              :   private:</span>
+<span id="L33"><span class="lineNum">      33</span>              :     int8_t base;</span>
+<span id="L34"><span class="lineNum">      34</span>              :     constexpr Note(int8_t base) : base(base) {}</span>
+<span id="L35"><span class="lineNum">      35</span>              : </span>
+<span id="L36"><span class="lineNum">      36</span>              :   public:</span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           4 :     constexpr int8_t operator()(int8_t octave = -1) const {</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           4 :         return base + 12 * (octave + 1);</span></span>
+<span id="L39"><span class="lineNum">      39</span>              :     }</span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           4 :     constexpr int8_t operator[](int8_t octave) const { return (*this)(octave); }</span></span>
+<span id="L41"><span class="lineNum">      41</span>              : </span>
+<span id="L42"><span class="lineNum">      42</span>              :     constexpr static Note(C)() { return Note {0}; }</span>
+<span id="L43"><span class="lineNum">      43</span>              :     constexpr static Note(Db)() { return Note {1}; }</span>
+<span id="L44"><span class="lineNum">      44</span>              :     constexpr static Note(D)() { return Note {2}; }</span>
+<span id="L45"><span class="lineNum">      45</span>              :     constexpr static Note(Eb)() { return Note {3}; }</span>
+<span id="L46"><span class="lineNum">      46</span>              :     constexpr static Note(E)() { return Note {4}; }</span>
+<span id="L47"><span class="lineNum">      47</span>              :     constexpr static Note(F)() { return Note {5}; }</span>
+<span id="L48"><span class="lineNum">      48</span>              :     constexpr static Note(Gb)() { return Note {6}; }</span>
+<span id="L49"><span class="lineNum">      49</span>              :     constexpr static Note(G)() { return Note {7}; }</span>
+<span id="L50"><span class="lineNum">      50</span>              :     constexpr static Note(Ab)() { return Note {8}; }</span>
+<span id="L51"><span class="lineNum">      51</span>              :     constexpr static Note(A)() { return Note {9}; }</span>
+<span id="L52"><span class="lineNum">      52</span>              :     constexpr static Note(Bb)() { return Note {10}; }</span>
+<span id="L53"><span class="lineNum">      53</span>              :     constexpr static Note(B)() { return Note {11}; }</span>
+<span id="L54"><span class="lineNum">      54</span>              : };</span>
+<span id="L55"><span class="lineNum">      55</span>              : </span>
+<span id="L56"><span class="lineNum">      56</span>              : constexpr Note C = (Note::C)();   ///&lt; C (Do)</span>
+<span id="L57"><span class="lineNum">      57</span>              : constexpr Note Db = (Note::Db)(); ///&lt; C♯, D♭ (Do sharp, Re flat)</span>
+<span id="L58"><span class="lineNum">      58</span>              : constexpr Note D = (Note::D)();   ///&lt; D (Re)</span>
+<span id="L59"><span class="lineNum">      59</span>              : constexpr Note Eb = (Note::Eb)(); ///&lt; D♯, E♭ (Re sharp, Mi flat)</span>
+<span id="L60"><span class="lineNum">      60</span>              : constexpr Note E = (Note::E)();   ///&lt; E (Mi)</span>
+<span id="L61"><span class="lineNum">      61</span>              : constexpr Note F = (Note::F)();   ///&lt; F (Fa)</span>
+<span id="L62"><span class="lineNum">      62</span>              : constexpr Note Gb = (Note::Gb)(); ///&lt; F♯, G♭ (Fa sharp, Sol flat)</span>
+<span id="L63"><span class="lineNum">      63</span>              : constexpr Note G = (Note::G)();   ///&lt; G (Sol)</span>
+<span id="L64"><span class="lineNum">      64</span>              : constexpr Note Ab = (Note::Ab)(); ///&lt; G♯, A♭ (Sol sharp, La flat)</span>
+<span id="L65"><span class="lineNum">      65</span>              : constexpr Note A = (Note::A)();   ///&lt; A (La)</span>
+<span id="L66"><span class="lineNum">      66</span>              : constexpr Note Bb = (Note::Bb)(); ///&lt; A♯, B♭ (La sharp, Si flat)</span>
+<span id="L67"><span class="lineNum">      67</span>              : constexpr Note B = (Note::B)();   ///&lt; B (Si)</span>
+<span id="L68"><span class="lineNum">      68</span>              : </span>
+<span id="L69"><span class="lineNum">      69</span>              : CS_DEPREC(&quot;Instead of `MIDI_Notes::F_(4)`, use `MIDI_Notes::F[4]`&quot;)</span>
+<span id="L70"><span class="lineNum">      70</span>              : constexpr Note F_ = (Note::F)(); ///&lt; F (Fa)</span>
+<span id="L71"><span class="lineNum">      71</span>              : </span>
+<span id="L72"><span class="lineNum">      72</span>              : /// Get the MIDI note in the given octave.</span>
+<span id="L73"><span class="lineNum">      73</span>              : CS_DEPREC(&quot;Instead of `note(C, 4)`, use `MIDI_Notes::C(4)`&quot;)</span>
+<span id="L74"><span class="lineNum">      74</span>              : constexpr int8_t note(Note note, int8_t numOctave) { return note(numOctave); }</span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              : } // namespace MIDI_Notes</span>
+<span id="L77"><span class="lineNum">      77</span>              : </span>
+<span id="L78"><span class="lineNum">      78</span>              : /// @}</span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span>              : END_CS_NAMESPACE</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

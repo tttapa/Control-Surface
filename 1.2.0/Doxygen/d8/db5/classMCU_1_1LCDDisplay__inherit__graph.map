@@ -1,0 +1,5 @@
+<map id="LCDDisplay" name="LCDDisplay">
+<area shape="rect" id="node1" title="Displays the text of the Mackie Control Universal LCD screen for a single track." alt="" coords="60,359,205,597"/>
+<area shape="rect" id="node2" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="52,145,213,311"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,260,97"/>
+</map>

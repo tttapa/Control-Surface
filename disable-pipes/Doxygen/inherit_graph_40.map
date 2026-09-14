@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$d3/d28/structBankableTwoByteMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure." alt="" coords="5,5,225,47"/>
+<area shape="rect" id="node2" href="$d2/d5a/structMCU_1_1BankableVPotMatcher.html" title="MIDI Input matcher for Mackie Control Universal VPot LED rings with bank support." alt="" coords="273,5,439,47"/>
+</map>

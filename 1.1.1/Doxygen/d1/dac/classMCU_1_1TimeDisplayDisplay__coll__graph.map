@@ -1,0 +1,18 @@
+<map id="TimeDisplayDisplay" name="TimeDisplayDisplay">
+<area shape="rect" id="node1" title=" " alt="" coords="733,1909,892,2163"/>
+<area shape="rect" id="node2" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="465,1513,608,1663"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="279,1997,506,2075"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="530,1851,709,2221"/>
+<area shape="rect" id="node5" href="$df/d42/classDisplayInterface.html" title="An interface for displays." alt="" coords="139,925,332,1325"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1549,236,1627"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="261,1403,439,1773"/>
+<area shape="rect" id="node6" title=" " alt="" coords="211,727,260,804"/>
+<area shape="rect" id="node9" href="$df/d69/classMCU_1_1TimeDisplay.html" title=" " alt="" coords="757,1520,871,1656"/>
+<area shape="rect" id="node10" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="779,1006,953,1245"/>
+<area shape="rect" id="node11" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="531,683,707,848"/>
+<area shape="rect" id="node14" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="573,1079,754,1171"/>
+<area shape="rect" id="node15" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="357,940,549,1311"/>
+<area shape="rect" id="node12" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="541,424,697,633"/>
+<area shape="rect" id="node13" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="526,5,713,361"/>
+<area shape="rect" id="node16" title=" " alt="" coords="829,727,903,804"/>
+</map>

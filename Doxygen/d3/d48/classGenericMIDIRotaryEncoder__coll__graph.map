@@ -1,0 +1,19 @@
+<map id="GenericMIDIRotaryEncoder&lt; Enc, Sender &gt;" name="GenericMIDIRotaryEncoder&lt; Enc, Sender &gt;">
+<area shape="rect" id="Node000001" title="An abstract class for rotary encoders that send MIDI events." alt="" coords="157,901,370,1141"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="5,465,148,590"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,602,163,779,212,899,207,901,158,781,97,604"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="563,5,759,225"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="549,126,456,140,353,168,301,187,251,212,204,241,163,277,130,319,107,368,93,419,84,465,79,464,87,417,102,366,125,316,159,273,201,237,248,207,299,182,351,163,455,135,548,121"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="623,405,850,650"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="686,238,717,404,711,405,681,239"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="511,961,707,1081"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="599,947,591,820,586,652,590,464,597,368,609,274,619,225,625,226,614,275,602,368,595,464,591,652,596,820,604,947"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="707,651,631,945,626,944,702,650"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="773,871,980,1171"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="774,650,832,854,827,856,769,651"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="907,870,924,738,928,663,928,585,923,505,910,426,890,349,860,276,842,248,821,223,771,179,774,175,825,219,847,245,864,273,895,347,915,425,928,504,934,584,934,663,929,738,912,871"/>
+<area shape="rect" id="Node000007" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="173,275,354,780"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="266,780,266,884,261,884,261,780"/>
+<area shape="rect" id="Node000008" href="$db/dd2/classEncoderState.html" title=" " alt="" coords="378,427,549,627"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="428,628,368,781,324,886,319,884,364,779,424,626"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="MIDI Input Elements" name="MIDI Input Elements">
+<area shape="rect" id="node1" href="$d8/d6f/group__BankableMIDIInputElements.html" title="All Elements that listen for incoming MIDI events, and that can be banked." alt="" coords="227,5,380,45"/>
+<area shape="rect" id="node2" title="All Elements that listen for incoming MIDI events." alt="" coords="5,70,160,95"/>
+<area shape="rect" id="node3" href="$dd/d67/group__MIDIInputMatchers.html" title="Classes for matching incoming MIDI messages." alt="" coords="227,70,380,95"/>
+<area shape="rect" id="node4" href="$d7/de4/group__midi-input-elements-leds.html" title="All MIDIInputElements that visualize their state using LEDs." alt="" coords="208,119,399,145"/>
+</map>

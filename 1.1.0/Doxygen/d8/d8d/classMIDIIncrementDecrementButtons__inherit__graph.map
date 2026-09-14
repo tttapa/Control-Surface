@@ -1,0 +1,5 @@
+<map id="MIDIIncrementDecrementButtons&lt; RelativeSender, ResetSender &gt;" name="MIDIIncrementDecrementButtons&lt; RelativeSender, ResetSender &gt;">
+<area shape="rect" id="node1" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="5,491,243,729"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="55,160,193,443"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="33,5,215,112"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="VPotRingLEDs&lt; BankSize &gt;" name="VPotRingLEDs&lt; BankSize &gt;">
+<area shape="rect" id="node1" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays its value usin..." alt="" coords="460,1637,663,1788"/>
+<area shape="rect" id="node2" href="$da/d93/classMCU_1_1Bankable_1_1VPotRing.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="362,1263,553,1589"/>
+<area shape="rect" id="node3" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="84,1035,391,1215"/>
+<area shape="rect" id="node4" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,851,229,987"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="18,593,217,803"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="17,233,217,545"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="17,5,217,185"/>
+<area shape="rect" id="node8" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="254,880,461,957"/>
+<area shape="rect" id="node9" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="249,608,465,788"/>
+<area shape="rect" id="node10" href="$d2/dde/classInterfaces_1_1MCU_1_1IVPot.html" title=" " alt="" coords="415,1057,550,1193"/>
+<area shape="rect" id="node11" href="$db/d36/classMCU_1_1VPotRingLEDsDriver.html" title=" " alt="" coords="577,1380,756,1472"/>
+<area shape="rect" id="node12" href="$df/d06/classAH_1_1LEDs.html" title=" " alt="" coords="599,1042,734,1207"/>
+</map>

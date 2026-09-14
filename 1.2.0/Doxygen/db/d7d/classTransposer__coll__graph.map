@@ -1,0 +1,7 @@
+<map id="Transposer&lt; MINIMUM_SEMITONES, MAXIMUM_SEMITONES &gt;" name="Transposer&lt; MINIMUM_SEMITONES, MAXIMUM_SEMITONES &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="185,683,367,804"/>
+<area shape="rect" id="node2" href="$db/dbd/classBank.html" title=" " alt="" coords="165,483,387,633"/>
+<area shape="rect" id="node3" href="$de/de7/classSelectable.html" title=" " alt="" coords="5,145,171,281"/>
+<area shape="rect" id="node4" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="195,137,357,288"/>
+<area shape="rect" id="node5" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="381,5,589,420"/>
+</map>

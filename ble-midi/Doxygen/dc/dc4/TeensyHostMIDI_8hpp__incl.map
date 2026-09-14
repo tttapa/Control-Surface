@@ -1,0 +1,15 @@
+<map id="TeensyHostMIDI.hpp" name="TeensyHostMIDI.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="238,5,393,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,124,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="276,33,119,77,118,72,274,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="149,79,215,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="295,33,217,74,215,70,293,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="239,79,306,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="311,32,289,68,284,66,306,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="331,79,385,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="325,30,346,66,342,68,320,32"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="409,79,646,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="350,28,481,72,479,77,349,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="671,79,821,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="385,28,663,74,663,79,384,33"/>
+</map>

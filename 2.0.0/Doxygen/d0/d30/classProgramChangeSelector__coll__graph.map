@@ -1,0 +1,33 @@
+<map id="ProgramChangeSelector&lt; N &gt;" name="ProgramChangeSelector&lt; N &gt;">
+<area shape="rect" id="Node000001" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="368,1777,579,1843"/>
+<area shape="rect" id="Node000002" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="351,1588,596,1728"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="476,1742,476,1777,471,1777,471,1742"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="287,1339,433,1539"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="420,1550,440,1586,435,1589,416,1552"/>
+<area shape="rect" id="Node000004" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="83,1111,207,1196"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="177,1206,221,1274,289,1358,285,1361,217,1278,173,1209"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="231,1091,350,1216"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="311,1228,338,1338,333,1339,306,1230"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="193,595,388,961"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="293,974,293,1091,288,1091,288,974"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,173,200,358"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="144,370,226,594,221,596,139,372"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,13,431,518"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="312,518,308,579,303,578,307,518"/>
+<area shape="rect" id="Node000009" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="373,1101,539,1206"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="441,1207,401,1324,396,1322,436,1206"/>
+<area shape="rect" id="Node000010" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="527,1371,790,1506"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="595,1518,534,1590,530,1586,591,1515"/>
+<area shape="rect" id="Node000011" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="563,1031,754,1276"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="661,1290,661,1371,656,1371,656,1290"/>
+<area shape="rect" id="Node000012" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="563,588,755,968"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="661,982,661,1030,656,1030,656,982"/>
+<area shape="rect" id="Node000013" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="531,173,709,358"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="631,372,647,588,642,588,625,372"/>
+<area shape="rect" id="Node000014" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="733,5,936,525"/>
+<area shape="poly" id="edge13_Node000012_Node000014" title=" " alt="" coords="748,526,732,573,727,572,743,525"/>
+<area shape="rect" id="Node000015" href="$dc/dd7/structOneByteMIDIMatcher.html" title="Matcher for MIDI messages with 1 data byte, such as Channel Pressure and Program Change." alt="" coords="779,1111,957,1196"/>
+<area shape="poly" id="edge14_Node000010_Node000015" title=" " alt="" coords="839,1198,719,1360,715,1357,835,1195"/>
+<area shape="rect" id="Node000016" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="779,625,957,931"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="871,931,871,1094,865,1094,865,931"/>
+</map>

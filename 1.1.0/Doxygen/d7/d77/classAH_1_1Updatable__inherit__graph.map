@@ -1,0 +1,10 @@
+<map id="AH::Updatable&lt; T &gt;" name="AH::Updatable&lt; T &gt;">
+<area shape="rect" id="node1" title="A super class for object that have to be updated regularly." alt="" coords="567,160,707,443"/>
+<area shape="rect" id="node3" href="$d9/df9/classBankable_1_1MIDIButton.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="5,527,172,678"/>
+<area shape="rect" id="node4" href="$d3/d0b/classBankable_1_1MIDIButtonLatching.html" title="A class for latching buttons and switches that send MIDI events." alt="" coords="197,527,413,678"/>
+<area shape="rect" id="node5" href="$da/d96/classBankable_1_1MIDIChordButton.html" title="An abstract class for momentary push buttons that send multiple MIDI events." alt="" coords="437,505,639,700"/>
+<area shape="rect" id="node6" href="$d0/d54/classMIDIButtonMatrix.html" title="MIDIButtonMatrix." alt="" coords="663,527,807,678"/>
+<area shape="rect" id="node7" href="$d0/dd2/classMIDIFilteredAnalogAddressable.html" title="A class for potentiometers and faders that send MIDI events." alt="" coords="832,505,1057,700"/>
+<area shape="rect" id="node8" href="$dc/dc2/classMIDIIncrementDecrementButtons.html" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="1081,491,1318,715"/>
+<area shape="rect" id="node2" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="545,5,728,112"/>
+</map>

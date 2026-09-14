@@ -1,0 +1,7 @@
+<map id="PollingBLEMIDISender.hpp" name="PollingBLEMIDISender.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="113,5,305,31"/>
+<area shape="rect" id="Node000002" href="$d0/d3e/ArduinoBLEBackend_8hpp.html" title=" " alt="" coords="5,79,184,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,40,115,81,112,76,178,35"/>
+<area shape="rect" id="Node000003" href="$d7/d71/BTstackBackgroundBackend_8hpp.html" title=" " alt="" coords="208,79,440,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="241,35,307,76,304,81,238,40"/>
+</map>

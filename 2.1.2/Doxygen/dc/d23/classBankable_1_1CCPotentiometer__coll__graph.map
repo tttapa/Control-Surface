@@ -1,0 +1,39 @@
+<map id="CCPotentiometer" name="CCPotentiometer">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="762,2557,911,2623"/>
+<area shape="rect" id="Node000002" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="735,2093,938,2508"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="839,2522,839,2557,834,2557,834,2522"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="500,1540,643,1665"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="583,1679,611,1830,633,1917,662,2002,697,2077,738,2150,733,2152,692,2080,657,2004,628,1919,606,1832,578,1680"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="208,769,404,989"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="348,1001,381,1068,402,1101,425,1130,435,1138,446,1141,456,1145,467,1154,496,1201,520,1251,538,1303,552,1356,568,1457,574,1540,569,1540,563,1458,547,1357,533,1305,515,1253,492,1203,463,1158,454,1150,444,1146,433,1142,421,1134,397,1104,376,1071,343,1003"/>
+<area shape="rect" id="Node000006" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="186,1480,413,1725"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="308,1003,303,1480,298,1480,302,1003"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="313,2241,509,2361"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="419,2226,439,2045,449,1925,455,1791,458,1647,454,1498,443,1349,422,1203,409,1148,393,1092,354,990,359,988,398,1091,415,1146,427,1202,448,1348,459,1498,463,1647,461,1791,454,1925,444,2046,424,2227"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="313,1725,331,1889,358,2069,393,2224,388,2225,353,2070,326,1890,307,1726"/>
+<area shape="rect" id="Node000007" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="5,2151,212,2451"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="269,1726,156,2135,151,2134,263,1725"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="73,2151,42,1958,30,1842,22,1718,21,1589,29,1458,48,1328,79,1202,101,1146,129,1093,162,1043,195,997,200,1001,166,1046,134,1096,106,1149,85,1203,53,1329,35,1458,27,1589,27,1718,35,1842,47,1957,78,2150"/>
+<area shape="rect" id="Node000008" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="672,1550,825,1655"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="756,1655,774,1838,802,2069,803,2077,798,2077,797,2070,769,1839,751,1656"/>
+<area shape="rect" id="Node000009" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="641,817,867,942"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="756,956,752,1550,746,1550,751,956"/>
+<area shape="rect" id="Node000010" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="512,339,751,519"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="662,532,740,816,735,817,657,533"/>
+<area shape="rect" id="Node000011" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="551,5,711,231"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="634,231,634,322,629,322,629,231"/>
+<area shape="rect" id="Node000012" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="435,627,617,1132"/>
+<area shape="poly" id="edge13_Node000008_Node000012" title=" " alt="" coords="619,1102,657,1202,705,1380,738,1533,733,1534,700,1382,651,1203,614,1103"/>
+<area shape="rect" id="Node000013" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="849,1203,1045,2003"/>
+<area shape="poly" id="edge14_Node000002_Node000013" title=" " alt="" coords="886,2003,875,2077,869,2077,881,2003"/>
+<area shape="rect" id="Node000014" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="966,685,1177,1074"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="1038,1088,1019,1203,1013,1202,1033,1087"/>
+<area shape="rect" id="Node000015" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="1273,326,1389,531"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="1278,533,1264,557,1187,690,1183,687,1260,555,1273,530"/>
+<area shape="rect" id="Node000016" href="$d9/d74/classAH_1_1EMA.html" title=" " alt="" coords="775,301,968,556"/>
+<area shape="poly" id="edge17_Node000014_Node000016" title=" " alt="" coords="930,555,981,669,976,671,925,558"/>
+<area shape="rect" id="Node000017" href="$da/df9/classAH_1_1Hysteresis.html" title=" " alt="" coords="992,307,1249,551"/>
+<area shape="poly" id="edge18_Node000014_Node000017" title=" " alt="" coords="1110,552,1097,669,1092,668,1105,551"/>
+<area shape="rect" id="Node000018" href="$da/d07/classContinuousCCSender.html" title="Class that sends continuous MIDI control change messages with a resolution of 7 bits." alt="" coords="1069,1560,1220,1645"/>
+<area shape="poly" id="edge19_Node000002_Node000018" title=" " alt="" coords="1144,1646,1135,1716,1120,1807,1095,1906,1059,2004,1036,2049,1009,2094,950,2175,946,2172,1005,2091,1031,2047,1054,2002,1090,1905,1115,1805,1130,1715,1139,1645"/>
+</map>

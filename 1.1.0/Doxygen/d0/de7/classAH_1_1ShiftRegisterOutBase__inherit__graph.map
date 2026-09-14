@@ -1,0 +1,8 @@
+<map id="AH::ShiftRegisterOutBase&lt; N &gt;" name="AH::ShiftRegisterOutBase&lt; N &gt;">
+<area shape="rect" id="node1" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="98,719,309,1001"/>
+<area shape="rect" id="node5" href="$d0/dca/classAH_1_1ShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="5,1049,185,1171"/>
+<area shape="rect" id="node6" href="$d5/d09/classAH_1_1SPIShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595 that are connected to the SPI bu..." alt="" coords="210,1057,413,1163"/>
+<area shape="rect" id="node2" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title="A class for ExtendedIOElements with a fixed size." alt="" coords="73,564,333,671"/>
+<area shape="rect" id="node3" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="120,160,287,516"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="114,5,293,112"/>
+</map>

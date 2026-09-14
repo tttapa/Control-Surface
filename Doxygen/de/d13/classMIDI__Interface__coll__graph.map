@@ -1,0 +1,36 @@
+<map id="MIDI_Interface" name="MIDI_Interface">
+<area shape="rect" id="Node000001" title="An abstract class for MIDI interfaces." alt="" coords="714,2608,923,3173"/>
+<area shape="poly" id="edge20_Node000001_Node000001" title=" " alt="" coords="926,2836,943,2857,950,2891,947,2915,938,2934,933,2931,942,2914,945,2891,938,2859,922,2840"/>
+<area shape="rect" id="Node000002" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="533,2202,683,2267"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="623,2279,699,2537,722,2607,717,2609,693,2538,618,2281"/>
+<area shape="rect" id="Node000003" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="85,1357,323,1823"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="310,1834,337,1881,400,1976,468,2066,581,2200,577,2204,464,2069,395,1979,332,1884,306,1836"/>
+<area shape="rect" id="Node000004" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="391,221,630,1227"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="394,990,341,1120,293,1252,266,1342,260,1341,288,1250,336,1118,389,988"/>
+<area shape="rect" id="Node000005" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="347,1357,586,1823"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="394,1104,387,1189,391,1273,402,1341,396,1342,385,1274,382,1189,389,1103"/>
+<area shape="rect" id="Node000006" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="610,1297,833,1883"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="564,1226,581,1272,589,1284,600,1296,604,1304,600,1307,595,1299,585,1287,576,1275,559,1228"/>
+<area shape="rect" id="Node000008" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="857,1297,1079,1883"/>
+<area shape="poly" id="edge12_Node000008_Node000004" title=" " alt="" coords="633,915,740,1098,846,1296,852,1307,847,1310,842,1299,735,1101,628,918"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="476,1343,482,1227,488,1227,482,1344"/>
+<area shape="poly" id="edge8_Node000004_Node000005" title=" " alt="" coords="476,1357,482,1243,487,1243,481,1357"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="664,1284,656,1251,627,1136,633,1135,661,1250,669,1283"/>
+<area shape="poly" id="edge9_Node000004_Node000006" title=" " alt="" coords="687,1298,677,1251,632,1080,637,1079,683,1250,692,1297"/>
+<area shape="rect" id="Node000007" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="5,5,131,131"/>
+<area shape="poly" id="edge18_Node000001_Node000007" title=" " alt="" coords="67,145,56,401,49,723,49,2236,54,2299,69,2358,93,2414,123,2467,161,2516,204,2563,252,2606,303,2646,411,2716,522,2774,625,2820,715,2854,713,2859,623,2825,519,2779,409,2721,300,2650,248,2610,200,2566,157,2520,119,2470,88,2416,64,2360,49,2300,44,2236,44,723,50,400,61,144"/>
+<area shape="poly" id="edge10_Node000004_Node000007" title=" " alt="" coords="112,129,384,531,380,534,107,132"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="849,1882,846,1885,826,1899,807,1906,769,1909,733,1912,715,1920,698,1934,674,1964,654,1999,639,2036,628,2073,615,2145,611,2202,605,2202,610,2144,623,2072,634,2034,649,1997,669,1961,694,1930,713,1915,732,1907,769,1904,806,1901,824,1894,842,1881,845,1878"/>
+<area shape="rect" id="Node000009" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="708,1932,929,2537"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="821,2551,821,2608,816,2608,816,2551"/>
+<area shape="rect" id="Node000010" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="954,2112,1161,2357"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="1011,2371,924,2609,919,2607,1006,2369"/>
+<area shape="rect" id="Node000011" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="1103,1480,1299,1700"/>
+<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="1177,1714,1087,2112,1082,2111,1171,1713"/>
+<area shape="rect" id="Node000012" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="939,654,1135,794"/>
+<area shape="poly" id="edge16_Node000011_Node000012" title=" " alt="" coords="1056,807,1183,1479,1178,1480,1050,808"/>
+<area shape="rect" id="Node000013" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="1159,564,1366,884"/>
+<area shape="poly" id="edge17_Node000011_Node000013" title=" " alt="" coords="1254,884,1213,1464,1208,1463,1249,884"/>
+<area shape="rect" id="Node000014" href="$de/d55/classMIDI__Callbacks.html" title="A class for callbacks from MIDI input." alt="" coords="1185,2162,1380,2307"/>
+<area shape="poly" id="edge19_Node000001_Node000014" title=" " alt="" coords="1269,2308,1233,2420,1207,2481,1176,2539,1122,2613,1061,2682,998,2744,938,2799,934,2795,995,2741,1057,2678,1118,2609,1171,2536,1203,2479,1228,2418,1264,2307"/>
+</map>

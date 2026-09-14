@@ -1,0 +1,34 @@
+<map id="SerialMIDI_Parser.hpp" name="SerialMIDI_Parser.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1169,5,1332,31"/>
+<area shape="rect" id="Node000002" href="$dc/d8a/BufferedBLEMIDIParser_8hpp.html" title=" " alt="" coords="331,79,530,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1156,30,531,84,530,79,1155,25"/>
+<area shape="rect" id="Node000008" href="$db/d55/DebugMIDI__Interface_8hpp.html" title=" " alt="" coords="1053,79,1240,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1224,41,1165,81,1162,76,1221,36"/>
+<area shape="rect" id="Node000013" href="$d1/d23/SerialMIDI__Interface_8hpp.html" title=" " alt="" coords="1265,79,1447,104"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1281,36,1340,76,1337,81,1278,41"/>
+<area shape="rect" id="Node000016" href="$d1/d49/SerialMIDI__Parser_8cpp.html" title=" " alt="" coords="1472,79,1635,104"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="1313,31,1505,76,1504,81,1312,36"/>
+<area shape="rect" id="Node000003" href="$d0/d3e/ArduinoBLEBackend_8hpp.html" title=" " alt="" coords="5,159,184,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="369,110,144,162,143,157,368,104"/>
+<area shape="rect" id="Node000004" href="$d7/d71/BTstackBackgroundBackend_8hpp.html" title=" " alt="" coords="208,159,440,185"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="406,114,341,161,338,157,402,110"/>
+<area shape="rect" id="Node000005" href="$d8/d26/ESP32Backend_8hpp.html" title=" " alt="" coords="465,159,610,185"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="459,110,523,157,520,161,456,114"/>
+<area shape="rect" id="Node000006" href="$df/daf/ESP32BluedroidBackend_8hpp.html" title=" " alt="" coords="322,240,529,265"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="511,195,443,242,440,238,508,191"/>
+<area shape="rect" id="Node000007" href="$d7/da6/ESP32NimBLEBackend_8hpp.html" title=" " alt="" coords="553,240,749,265"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="567,190,635,238,632,242,564,195"/>
+<area shape="rect" id="Node000009" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="1277,159,1414,185"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="1189,107,1317,157,1315,162,1187,112"/>
+<area shape="rect" id="Node000010" href="$d9/d38/Control__Surface__Class_8cpp.html" title=" " alt="" coords="635,159,829,185"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="1073,109,793,162,792,157,1072,104"/>
+<area shape="rect" id="Node000011" href="$d1/d40/DebugMIDI__Interface_8cpp.html" title=" " alt="" coords="853,159,1040,185"/>
+<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="1106,112,977,162,975,157,1104,107"/>
+<area shape="rect" id="Node000012" href="$de/d83/SoftwareSerialDebugMIDI__Interface_8hpp.html" title=" " alt="" coords="1065,152,1253,192"/>
+<area shape="poly" id="edge11_Node000008_Node000012" title=" " alt="" coords="1153,117,1158,151,1153,152,1148,118"/>
+<area shape="poly" id="edge13_Node000013_Node000009" title=" " alt="" coords="1355,118,1350,159,1344,159,1350,117"/>
+<area shape="rect" id="Node000014" href="$d5/db6/SerialMIDI__Interface_8cpp.html" title=" " alt="" coords="1439,159,1620,185"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="1395,107,1505,157,1503,162,1393,112"/>
+<area shape="rect" id="Node000015" href="$d3/df2/SoftwareSerialMIDI__Interface_8hpp.html" title=" " alt="" coords="1644,152,1791,192"/>
+<area shape="poly" id="edge15_Node000013_Node000015" title=" " alt="" coords="1423,104,1633,149,1644,152,1643,157,1631,155,1422,110"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="FortySevenEffectsMIDI_Parser" name="FortySevenEffectsMIDI_Parser">
+<area shape="rect" id="Node000001" title="Wrapper class for the FortySevenEffects MIDI parser." alt="" coords="297,1315,521,1475"/>
+<area shape="rect" id="Node000002" href="$df/d0c/classMIDI__Parser.html" title="Base class for MIDI parsers." alt="" coords="235,1120,435,1265"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="369,1277,382,1314,377,1316,364,1279"/>
+<area shape="rect" id="Node000003" href="$d4/d61/structMIDIMessage.html" title=" " alt="" coords="5,321,257,747"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,747,160,832,180,922,207,1011,244,1095,250,1105,246,1108,240,1097,202,1013,174,923,155,833,142,747"/>
+<area shape="rect" id="Node000004" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="298,5,431,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="300,246,264,308,260,306,295,244"/>
+<area shape="rect" id="Node000005" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="282,341,447,727"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="367,251,367,325,362,325,362,251"/>
+<area shape="rect" id="Node000006" href="$db/d45/structSysExMessage.html" title=" " alt="" coords="399,771,570,1096"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="434,245,450,282,462,321,484,431,496,545,500,655,499,754,494,754,495,655,490,545,478,432,457,322,445,284,429,247"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="337,727,333,771,328,862,327,933,333,1096,333,1103,328,1103,327,1096,322,933,322,862,327,770,331,727"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="475,1097,465,1181,450,1266,442,1299,437,1298,445,1265,459,1180,470,1096"/>
+</map>

@@ -1,0 +1,63 @@
+<map id="SelectorBase" name="SelectorBase">
+<area shape="rect" id="Node000001" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="1203,5,1327,91"/>
+<area shape="rect" id="Node000002" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="781,139,940,373"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1190,60,1135,71,1074,87,1012,110,954,141,942,150,939,146,951,136,1009,105,1072,82,1134,65,1189,55"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="965,146,1149,366"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1205,102,1163,141,1151,152,1147,148,1159,137,1202,98"/>
+<area shape="rect" id="Node000004" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="1173,146,1357,366"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1267,104,1267,146,1262,146,1262,104"/>
+<area shape="rect" id="Node000005" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="1381,146,1588,366"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1327,98,1370,137,1383,149,1380,152,1367,141,1323,102"/>
+<area shape="rect" id="Node000006" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="1613,146,1759,366"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1341,53,1401,62,1468,78,1537,102,1601,136,1614,147,1611,151,1598,141,1535,107,1467,83,1400,67,1340,58"/>
+<area shape="rect" id="Node000007" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="5,421,199,656"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1602,375,1600,376,1563,388,1506,396,1345,405,1137,406,907,403,676,400,468,400,306,407,249,414,212,424,200,430,198,426,210,419,248,408,306,401,468,394,676,394,907,398,1137,401,1344,399,1506,391,1562,382,1598,371,1599,370"/>
+<area shape="rect" id="Node000009" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="223,441,519,636"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="1602,375,1600,376,1556,394,1503,407,1442,415,1376,419,1228,419,1071,412,912,404,763,399,633,404,579,412,532,424,490,444,487,439,530,419,577,406,633,399,763,394,913,398,1071,407,1228,414,1375,414,1442,410,1502,401,1554,389,1598,371,1599,370"/>
+<area shape="rect" id="Node000011" href="$d1/d94/classGenericIncrementSelector.html" title=" " alt="" coords="543,459,786,619"/>
+<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="1602,375,1600,376,1567,390,1527,400,1431,410,1320,411,1202,406,1083,401,971,400,874,406,833,413,799,424,768,440,740,461,737,456,766,435,797,419,832,408,873,401,971,395,1083,396,1202,401,1320,405,1431,404,1526,394,1565,385,1598,371,1599,370"/>
+<area shape="rect" id="Node000013" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="810,469,1053,609"/>
+<area shape="poly" id="edge12_Node000006_Node000013" title=" " alt="" coords="1603,374,1601,376,1562,394,1526,408,1492,416,1459,419,1396,418,1336,409,1275,398,1212,393,1143,400,1105,409,1066,424,1029,444,996,471,992,466,1026,440,1064,419,1104,404,1142,395,1211,388,1276,393,1337,403,1397,412,1459,414,1491,410,1525,402,1560,390,1598,371,1600,370"/>
+<area shape="rect" id="Node000015" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="1077,469,1322,609"/>
+<area shape="poly" id="edge14_Node000006_Node000015" title=" " alt="" coords="1603,374,1601,376,1564,394,1531,403,1499,405,1469,404,1407,404,1373,410,1335,424,1300,445,1267,471,1264,466,1297,440,1333,419,1372,404,1407,398,1469,399,1499,400,1530,398,1562,389,1598,371,1600,370"/>
+<area shape="rect" id="Node000017" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="1346,459,1565,619"/>
+<area shape="poly" id="edge16_Node000006_Node000017" title=" " alt="" coords="1606,370,1601,375,1529,460,1525,457,1597,372,1602,366"/>
+<area shape="rect" id="Node000019" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="1589,429,1783,649"/>
+<area shape="poly" id="edge18_Node000006_Node000019" title=" " alt="" coords="1689,380,1689,429,1683,429,1683,380"/>
+<area shape="rect" id="Node000021" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="1807,441,2024,636"/>
+<area shape="poly" id="edge20_Node000006_Node000021" title=" " alt="" coords="1770,356,1839,440,1835,443,1766,359"/>
+<area shape="rect" id="Node000023" href="$d1/d94/classGenericIncrementSelector.html" title=" " alt="" coords="2049,459,2257,619"/>
+<area shape="poly" id="edge22_Node000006_Node000023" title=" " alt="" coords="1773,286,1901,341,1971,378,2037,419,2082,456,2079,460,2034,423,1968,382,1899,346,1771,291"/>
+<area shape="rect" id="Node000025" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="2281,469,2509,609"/>
+<area shape="poly" id="edge24_Node000006_Node000025" title=" " alt="" coords="1773,266,1878,285,2005,316,2140,360,2207,387,2270,419,2303,441,2333,466,2330,470,2300,445,2267,424,2205,392,2139,365,2004,321,1877,290,1772,271"/>
+<area shape="rect" id="Node000027" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="2534,469,2779,609"/>
+<area shape="poly" id="edge26_Node000006_Node000027" title=" " alt="" coords="1774,257,1921,269,2112,295,2215,316,2320,343,2423,377,2522,419,2558,440,2591,466,2588,470,2555,445,2519,424,2422,382,2319,348,2214,321,2111,301,1921,274,1773,263"/>
+<area shape="rect" id="Node000029" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="2804,459,2989,619"/>
+<area shape="poly" id="edge28_Node000006_Node000029" title=" " alt="" coords="1773,260,2004,278,2302,310,2452,331,2590,356,2707,385,2754,402,2793,419,2818,436,2841,457,2837,461,2815,440,2790,424,2752,407,2705,391,2589,361,2451,336,2301,315,2004,283,1773,265"/>
+<area shape="rect" id="Node000031" href="$d1/d54/classSelector.html" title="A Selector with an empty callback." alt="" coords="3014,506,3121,571"/>
+<area shape="poly" id="edge30_Node000006_Node000031" title=" " alt="" coords="1773,256,2046,264,2223,273,2409,288,2593,308,2762,337,2836,354,2903,373,2959,395,3004,419,3024,437,3040,459,3061,505,3056,507,3035,462,3020,441,3000,424,2957,400,2901,378,2835,359,2761,342,2592,314,2409,293,2222,278,2046,269,1773,261"/>
+<area shape="rect" id="Node000008" href="$d8/df7/classEncoderSelectorLEDs.html" title="Selector that reads from a rotary encoder. &#160;&#160;This version displays the setting using LEDs." alt="" coords="7,719,197,784"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="105,669,105,718,99,718,99,669"/>
+<area shape="rect" id="Node000010" href="$d5/d2d/classIncrementDecrementSelectorLEDs.html" title="Selector with two buttons (one to increment, one to decrement). &#160;&#160;This version displays the setting u..." alt="" coords="261,704,481,799"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="374,650,374,704,369,704,369,650"/>
+<area shape="rect" id="Node000012" href="$dc/df8/classIncrementSelectorLEDs.html" title="Selector with one button that increments the selection. &#160;&#160;This version displays the setting using LED..." alt="" coords="562,719,767,784"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="667,632,667,719,662,719,662,632"/>
+<area shape="rect" id="Node000014" href="$d0/d68/classManyButtonsSelectorLEDs.html" title="Selector that reads from &#160;buttons. &#160;&#160;This version displays the setting using LEDs." alt="" coords="819,719,1044,784"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="934,622,934,718,929,718,929,622"/>
+<area shape="rect" id="Node000016" href="$d9/dee/classProgramChangeSelectorLEDs.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="1078,719,1321,784"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="1202,622,1202,718,1197,718,1197,622"/>
+<area shape="rect" id="Node000018" href="$df/d64/classSwitchSelectorLED.html" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch...." alt="" coords="1375,719,1535,784"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="1458,632,1458,719,1453,719,1453,632"/>
+<area shape="rect" id="Node000020" href="$d3/dc5/classEncoderSelector.html" title="Selector that reads from a rotary encoder." alt="" coords="1607,719,1765,784"/>
+<area shape="poly" id="edge19_Node000019_Node000020" title=" " alt="" coords="1689,662,1689,719,1683,719,1683,662"/>
+<area shape="rect" id="Node000022" href="$d2/deb/classIncrementDecrementSelector.html" title="Selector with two buttons (one to increment, one to decrement)." alt="" coords="1793,719,2038,784"/>
+<area shape="poly" id="edge21_Node000021_Node000022" title=" " alt="" coords="1918,650,1918,718,1913,718,1913,650"/>
+<area shape="rect" id="Node000024" href="$dc/d4c/classIncrementSelector.html" title="Selector with one button that increments the selection." alt="" coords="2066,709,2239,794"/>
+<area shape="poly" id="edge23_Node000023_Node000024" title=" " alt="" coords="2155,632,2155,709,2150,709,2150,632"/>
+<area shape="rect" id="Node000026" href="$d3/d69/classManyButtonsSelector.html" title="Selector that reads from &#160;buttons." alt="" coords="2299,719,2492,784"/>
+<area shape="poly" id="edge25_Node000025_Node000026" title=" " alt="" coords="2398,622,2398,718,2393,718,2393,622"/>
+<area shape="rect" id="Node000028" href="$dd/dd4/classProgramChangeSelector.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="2551,719,2762,784"/>
+<area shape="poly" id="edge27_Node000027_Node000028" title=" " alt="" coords="2659,622,2659,718,2654,718,2654,622"/>
+<area shape="rect" id="Node000030" href="$df/def/classSwitchSelector.html" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch." alt="" coords="2829,719,2964,784"/>
+<area shape="poly" id="edge29_Node000029_Node000030" title=" " alt="" coords="2899,632,2899,719,2894,719,2894,632"/>
+</map>

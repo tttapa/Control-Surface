@@ -1,0 +1,8 @@
+<map id="VPotRing.hpp" name="VPotRing.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="19,5,129,31"/>
+<area shape="rect" id="Node000002" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="5,152,143,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,44,50,73,47,88,49,103,58,129,69,150,64,153,53,131,43,105,42,88,45,71,56,42"/>
+<area shape="rect" id="Node000003" href="$dc/d48/VPotRingLEDs_8hpp.html" title=" " alt="" coords="58,79,199,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="93,40,122,77,118,80,89,43"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="113,117,85,154,81,150,109,113"/>
+</map>

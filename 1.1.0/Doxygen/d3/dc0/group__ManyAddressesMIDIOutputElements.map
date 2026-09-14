@@ -1,0 +1,4 @@
+<map id="Many Addresses MIDI Output Elements" name="Many Addresses MIDI Output Elements">
+<area shape="rect" id="node1" href="$d7/dcd/group__MIDIOutputElements.html" title="All Elements that send out MIDI events. &#160;&#160;This includes potentiometers, faders, buttons,..." alt="" coords="5,13,159,38"/>
+<area shape="rect" id="node2" title="All Elements that send out MIDI events, and that can banked, with a list of arbitrary addresses...." alt="" coords="207,5,360,45"/>
+</map>

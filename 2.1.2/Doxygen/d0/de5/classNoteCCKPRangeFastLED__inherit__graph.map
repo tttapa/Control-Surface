@@ -1,0 +1,11 @@
+<map id="NoteCCKPRangeFastLED&lt; Type, RangeLen, ColorMapper &gt;" name="NoteCCKPRangeFastLED&lt; Type, RangeLen, ColorMapper &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="17,1223,255,1703"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,775,267,1175"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,1188,139,1222,133,1222,133,1188"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="41,481,231,727"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="139,740,139,774,133,774,133,740"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="40,193,232,433"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="139,447,139,481,133,481,133,447"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="40,5,232,145"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="139,159,139,193,133,193,133,159"/>
+</map>

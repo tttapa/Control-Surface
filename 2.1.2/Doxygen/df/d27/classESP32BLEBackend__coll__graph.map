@@ -1,0 +1,30 @@
+<map id="ESP32BLEBackend&lt; Impl &gt;" name="ESP32BLEBackend&lt; Impl &gt;">
+<area shape="rect" id="Node000001" title="ESP32 backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="255,2240,448,2665"/>
+<area shape="rect" id="Node000002" href="$dd/da0/classThreadedBLEMIDISender.html" title=" " alt="" coords="5,1689,228,2169"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="233,2181,258,2239,254,2241,228,2183"/>
+<area shape="rect" id="Node000003" href="$d7/d8e/classBLEMIDIPacketBuilder.html" title="Class for building MIDI over Bluetooth Low Energy packets." alt="" coords="21,1133,202,1619"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="116,1619,117,1673,112,1673,111,1619"/>
+<area shape="rect" id="Node000004" href="$dd/da4/classMIDIBLEInstance.html" title="Defines the interface for callback functions registered by the low&#45;level BLE code." alt="" coords="272,1847,431,2012"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="354,2026,354,2240,349,2240,349,2026"/>
+<area shape="rect" id="Node000005" href="$d9/df0/classBufferedBLEMIDIParser.html" title=" " alt="" coords="464,1872,652,1987"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="538,1988,444,2225,439,2223,533,1986"/>
+<area shape="rect" id="Node000006" href="$d4/d2d/classBLERingBuf.html" title=" " alt="" coords="227,1266,460,1486"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="388,1485,533,1856,528,1858,383,1487"/>
+<area shape="rect" id="Node000007" href="$dd/d81/structESP32BLEBackend_1_1AtomicSize.html" title=" " alt="" coords="283,867,404,1013"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="346,1013,346,1250,341,1250,341,1013"/>
+<area shape="rect" id="Node000008" href="$d9/d19/classBLEMIDIParser.html" title="Class for parsing BLE&#45;MIDI packets." alt="" coords="484,1273,643,1479"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="565,1479,561,1855,556,1855,560,1479"/>
+<area shape="rect" id="Node000009" href="$d0/d0d/classSerialMIDI__Parser.html" title="Parser for Serial MIDI streams (and BLE&#45;MIDI)." alt="" coords="667,1143,921,1609"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="697,1610,591,1858,586,1856,692,1608"/>
+<area shape="rect" id="Node000010" href="$df/d0c/classMIDI__Parser.html" title="Base class for MIDI parsers." alt="" coords="565,867,765,1013"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="693,1025,727,1142,722,1144,687,1027"/>
+<area shape="rect" id="Node000011" href="$d4/d61/structMIDIMessage.html" title=" " alt="" coords="407,321,659,747"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="604,746,639,851,634,853,599,748"/>
+<area shape="rect" id="Node000012" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="582,5,715,251"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="616,252,601,306,596,305,611,250"/>
+<area shape="rect" id="Node000013" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="683,341,849,727"/>
+<area shape="poly" id="edge13_Node000013_Node000012" title=" " alt="" coords="687,250,708,325,703,327,681,252"/>
+<area shape="poly" id="edge12_Node000010_Node000013" title=" " alt="" coords="720,728,689,852,684,851,715,726"/>
+<area shape="rect" id="Node000014" href="$d1/db1/classSysExBuffer.html" title="Helper for storing the System Exclusive messages being received by a MIDI parser." alt="" coords="789,817,914,1063"/>
+<area shape="poly" id="edge14_Node000009_Node000014" title=" " alt="" coords="838,1064,829,1127,824,1127,833,1063"/>
+</map>

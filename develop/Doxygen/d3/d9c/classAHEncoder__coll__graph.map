@@ -1,0 +1,14 @@
+<map id="AHEncoder" name="AHEncoder">
+<area shape="rect" id="Node000001" title="Class for reading quadrature encoders, heavily influenced by http://www.pjrc.com/teensy/td_libs_Encod..." alt="" coords="220,648,381,1013"/>
+<area shape="poly" id="edge6_Node000001_Node000001" title=" " alt="" coords="383,791,401,805,408,831,405,848,397,861,393,858,400,847,403,831,396,807,380,795"/>
+<area shape="rect" id="Node000002" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="5,292,183,577"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,576,215,660,210,662,166,579"/>
+<area shape="rect" id="Node000003" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="207,302,394,567"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="303,568,303,631,298,631,298,568"/>
+<area shape="rect" id="Node000004" href="$dc/d9d/structDirectPinRead.html" title=" " alt="" coords="247,156,354,221"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="303,222,303,285,298,285,298,222"/>
+<area shape="rect" id="Node000005" href="$df/ddb/structAH_1_1function__traits.html" title=" " alt="" coords="211,5,390,85"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="303,85,303,140,298,140,298,85"/>
+<area shape="rect" id="Node000006" href="$de/d62/structAtomicPosition.html" title=" " alt="" coords="418,342,605,527"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="465,529,392,665,387,663,460,526"/>
+</map>

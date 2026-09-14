@@ -1,0 +1,17 @@
+<map id="VPotDisplay&lt; VPot_t &gt;" name="VPotDisplay&lt; VPot_t &gt;">
+<area shape="rect" id="Node000001" title="Displays the position of a MCU V&#45;Pot." alt="" coords="490,1089,655,1355"/>
+<area shape="rect" id="Node000002" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="225,616,379,981"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="389,928,438,1004,480,1071,492,1089,488,1092,476,1073,433,1007,384,931"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1169,252,1275"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="227,874,178,936,157,970,141,1006,130,1043,125,1081,124,1153,118,1153,119,1080,125,1042,135,1004,152,968,174,932,223,871"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="277,1072,466,1372"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="293,981,301,1048,302,1056,297,1057,295,1048,287,982"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,1156,217,1047,243,980,248,982,222,1049,167,1158"/>
+<area shape="rect" id="Node000004" href="$df/d42/classDisplayInterface.html" title="An interface for displays." alt="" coords="199,120,405,545"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="305,546,305,600,299,600,299,546"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="280,5,324,71"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="305,85,305,120,299,120,299,85"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="350,1072,339,1006,338,998,343,997,345,1005,355,1071"/>
+<area shape="rect" id="Node000007" href="$d2/dde/classInterfaces_1_1MCU_1_1IVPot.html" title=" " alt="" coords="510,726,635,871"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="575,871,575,1073,570,1073,570,871"/>
+</map>

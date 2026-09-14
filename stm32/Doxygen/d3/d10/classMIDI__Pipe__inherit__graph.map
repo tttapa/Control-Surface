@@ -1,0 +1,5 @@
+<map id="MIDI_Pipe" name="MIDI_Pipe">
+<area shape="rect" id="node1" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="133,512,375,1352"/>
+<area shape="rect" id="node2" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="5,49,247,420"/>
+<area shape="rect" id="node3" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="271,5,496,464"/>
+</map>

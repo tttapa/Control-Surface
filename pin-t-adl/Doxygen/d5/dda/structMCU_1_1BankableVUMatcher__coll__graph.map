@@ -1,0 +1,20 @@
+<map id="BankableVUMatcher&lt; BankSize &gt;" name="BankableVUMatcher&lt; BankSize &gt;">
+<area shape="rect" id="Node000001" title="MIDI Input matcher for Mackie Control Universal VU meters with bank support." alt="" coords="318,1487,489,1687"/>
+<area shape="rect" id="Node000002" href="$d7/daf/classBaseBankConfig.html" title=" " alt="" coords="187,1139,398,1204"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="304,1203,375,1470,370,1471,298,1205"/>
+<area shape="rect" id="Node000003" href="$db/dbd/classBank.html" title=" " alt="" coords="209,711,376,856"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="295,856,295,1122,290,1122,290,856"/>
+<area shape="rect" id="Node000004" href="$de/de7/classSelectable.html" title=" " alt="" coords="5,325,188,471"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="129,483,163,563,203,647,242,709,237,712,198,649,158,566,124,485"/>
+<area shape="rect" id="Node000005" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="213,285,373,511"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="295,524,295,711,290,711,290,524"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="397,148,615,648"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="399,628,387,649,356,699,351,696,382,647,394,626"/>
+<area shape="rect" id="Node000007" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="556,5,755,71"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="627,73,611,96,591,134,587,132,606,93,623,70"/>
+<area shape="rect" id="Node000008" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="639,308,847,488"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="653,71,654,124,674,210,702,292,697,293,669,212,649,124,648,71"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="754,294,755,246,751,195,741,144,722,96,704,73,708,69,727,93,746,142,757,194,761,246,760,294"/>
+<area shape="rect" id="Node000009" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="422,919,603,1424"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="449,1425,436,1471,431,1470,443,1423"/>
+</map>

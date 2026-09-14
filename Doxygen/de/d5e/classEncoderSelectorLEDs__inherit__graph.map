@@ -1,0 +1,15 @@
+<map id="EncoderSelectorLEDs&lt; N &gt;" name="EncoderSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="Selector that reads from a rotary encoder. &#160;&#160;&#160;This version displays the setting using LEDs." alt="" coords="44,1780,235,1845"/>
+<area shape="rect" id="Node000002" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="43,1157,236,1732"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,1745,142,1780,137,1780,137,1745"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="60,655,219,1109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="142,1123,142,1157,137,1157,137,1123"/>
+<area shape="rect" id="Node000004" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,501,129,587"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="82,600,93,654,88,655,76,601"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="153,481,272,607"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="199,621,191,655,186,654,194,620"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="115,193,311,433"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="215,447,215,481,210,481,210,447"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="115,5,311,145"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="215,159,215,193,210,193,210,159"/>
+</map>

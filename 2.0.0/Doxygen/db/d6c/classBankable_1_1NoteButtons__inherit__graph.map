@@ -1,0 +1,11 @@
+<map id="NoteButtons&lt; NumButtons &gt;" name="NoteButtons&lt; NumButtons &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="23,1113,229,1219"/>
+<area shape="rect" id="Node000002" href="$dc/d22/classBankable_1_1MIDIButtons.html" title=" " alt="" coords="5,825,247,1065"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,1079,129,1113,123,1113,123,1079"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="55,652,197,777"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="129,791,129,825,123,825,123,791"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="29,239,223,604"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="129,618,129,652,123,652,123,618"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="29,5,223,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="129,204,129,238,123,238,123,204"/>
+</map>

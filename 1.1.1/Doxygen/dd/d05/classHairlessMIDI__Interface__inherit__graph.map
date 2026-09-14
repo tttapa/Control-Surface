@@ -1,0 +1,8 @@
+<map id="HairlessMIDI_Interface" name="HairlessMIDI_Interface">
+<area shape="rect" id="node1" title="A class for MIDI Interfaces sending and receiving data over the USB Serial CDC connection for the use..." alt="" coords="12,1365,189,1443"/>
+<area shape="rect" id="node2" href="$d8/d57/classUSBSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over the Serial port of the USB conne..." alt="" coords="5,1240,196,1317"/>
+<area shape="rect" id="node3" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="19,1071,182,1192"/>
+<area shape="rect" id="node4" href="$d3/dc3/classStreamMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Stream." alt="" coords="15,857,186,1023"/>
+<area shape="rect" id="node5" href="$de/d76/classParsing__MIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="11,527,190,809"/>
+<area shape="rect" id="node6" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="21,5,180,479"/>
+</map>

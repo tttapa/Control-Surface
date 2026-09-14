@@ -1,0 +1,9 @@
+<map id="MIDI_Staller.hpp" name="MIDI_Staller.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="235,5,363,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,220,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="270,33,157,76,155,71,268,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="244,79,355,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="302,31,302,65,297,65,297,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="379,79,617,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="332,28,453,71,452,76,330,33"/>
+</map>

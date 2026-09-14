@@ -1,0 +1,11 @@
+<map id="VULEDsDriver&lt; NumLEDs &gt;" name="VULEDsDriver&lt; NumLEDs &gt;">
+<area shape="rect" id="Node000001" title="Small helper to display the VU meters on an LED bar display." alt="" coords="5,1005,204,1091"/>
+<area shape="rect" id="Node000002" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="22,736,187,956"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,970,107,1005,102,1005,102,970"/>
+<area shape="rect" id="Node000003" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="41,501,168,687"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,700,107,736,102,736,102,700"/>
+<area shape="rect" id="Node000004" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="47,133,163,439"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="107,439,107,485,102,485,102,439"/>
+<area shape="rect" id="Node000005" href="$d7/d14/classN.html" title=" " alt="" coords="93,5,117,71"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="107,71,107,117,102,117,102,71"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="SelectorDisplay" name="SelectorDisplay">
+<area shape="rect" id="node1" title="A class for displaying the setting of a Selector object." alt="" coords="759,1204,909,1369"/>
+<area shape="rect" id="node2" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="204,734,365,885"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1248,260,1325"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="285,1087,482,1487"/>
+<area shape="rect" id="node5" href="$df/d42/classDisplayInterface.html" title="An interface for displays." alt="" coords="500,132,715,532"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="390,771,649,848"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="673,609,870,1009"/>
+<area shape="rect" id="node6" title=" " alt="" coords="581,5,633,83"/>
+<area shape="rect" id="node9" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="895,763,1027,855"/>
+</map>

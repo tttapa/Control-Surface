@@ -1,0 +1,11 @@
+<map id="MIDIButtonMatrix&lt; Sender, nb_rows, nb_cols &gt;" name="MIDIButtonMatrix&lt; Sender, nb_rows, nb_cols &gt;">
+<area shape="rect" id="node1" title="MIDIButtonMatrix." alt="" coords="471,799,653,935"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="217,453,355,736"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,145,188,251"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="212,5,365,391"/>
+<area shape="rect" id="node5" href="$dd/d29/classAH_1_1ButtonMatrix.html" title="A class that reads the states of a button matrix." alt="" coords="380,475,541,714"/>
+<area shape="rect" id="node6" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="392,79,519,317"/>
+<area shape="rect" id="node7" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="543,79,666,317"/>
+<area shape="rect" id="node8" title=" " alt="" coords="565,556,628,633"/>
+<area shape="rect" id="node9" href="$df/d9b/classMIDICNChannel.html" title="A class for saving a MIDI channel and cable number." alt="" coords="652,505,792,685"/>
+</map>

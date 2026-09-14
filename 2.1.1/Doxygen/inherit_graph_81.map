@@ -1,0 +1,19 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d5/d1c/structBulkRX.html" title="Receives Bulk packets (OUT for device mode, IN for host mode)" alt="" coords="5,69,207,109"/>
+<area shape="rect" id="Node000001" href="$de/d93/classTeensyHostMIDI.html" title="Teensy USB Host MIDI driver." alt="" coords="255,69,467,109"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="220,87,255,87,255,92,220,92"/>
+<area shape="rect" id="Node000005" href="$d5/d1c/structBulkRX.html" title=" " alt="" coords="7,262,205,317"/>
+<area shape="rect" id="Node000004" href="$de/d93/classTeensyHostMIDI.html" title=" " alt="" coords="255,220,467,260"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="218,265,256,257,257,263,219,270"/>
+<area shape="rect" id="Node000006" href="$de/d93/classTeensyHostMIDI.html" title=" " alt="" coords="270,170,451,195"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="194,254,205,247,228,226,238,216,253,206,286,193,288,198,256,210,242,220,232,230,208,251,196,258"/>
+<area shape="rect" id="Node000002" href="$dc/d2d/structBulkTX.html" title="Sends Bulk packets (IN for device mode, OUT for host mode)" alt="" coords="6,5,206,45"/>
+<area shape="poly" id="edge7_Node000002_Node000001" title=" " alt="" coords="200,46,281,67,280,72,199,51"/>
+<area shape="rect" id="Node000007" href="$dc/d2d/structBulkTX.html" title=" " alt="" coords="7,183,205,238"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="219,221,255,225,254,230,218,226"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="219,196,269,190,270,195,219,201"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="61,134,151,159"/>
+<area shape="poly" id="edge12_Node000003_Node000001" title=" " alt="" coords="164,131,270,107,272,112,165,136"/>
+<area shape="poly" id="edge10_Node000003_Node000004" title=" " alt="" coords="165,154,208,168,232,186,256,204,286,217,284,222,253,209,229,190,205,173,163,159"/>
+<area shape="poly" id="edge11_Node000003_Node000006" title=" " alt="" coords="165,152,271,167,270,173,164,157"/>
+</map>

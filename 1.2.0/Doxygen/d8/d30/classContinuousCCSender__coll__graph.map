@@ -1,0 +1,3 @@
+<map id="ContinuousCCSender" name="ContinuousCCSender">
+<area shape="rect" id="node1" title="Class that sends continuous MIDI control change messages with a resolution of 7 bits." alt="" coords="5,5,164,97"/>
+</map>

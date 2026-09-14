@@ -1,0 +1,5 @@
+<map id="FortySevenEffectsMIDI_Parser" name="FortySevenEffectsMIDI_Parser">
+<area shape="rect" id="Node000001" title="Wrapper class for the FortySevenEffects MIDI parser." alt="" coords="5,219,229,379"/>
+<area shape="rect" id="Node000002" href="$df/d0c/classMIDI__Parser.html" title="Base class for MIDI parsers." alt="" coords="17,5,217,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,185,120,218,115,218,115,185"/>
+</map>

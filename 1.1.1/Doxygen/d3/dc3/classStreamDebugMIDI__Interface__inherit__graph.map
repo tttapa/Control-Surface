@@ -1,0 +1,13 @@
+<map id="StreamDebugMIDI_Interface" name="StreamDebugMIDI_Interface">
+<area shape="rect" id="node1" title="A class for MIDI interfaces sending and receiving human&#45;readable MIDI messages over a Stream." alt="" coords="348,1071,557,1251"/>
+<area shape="rect" id="node5" href="$db/dc4/classSerialDebugMIDI__Interface.html" title="A wrapper class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a S..." alt="" coords="5,1306,217,1413"/>
+<area shape="rect" id="node6" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="241,1299,441,1420"/>
+<area shape="rect" id="node8" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="465,1299,665,1420"/>
+<area shape="rect" id="node10" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="689,1299,889,1420"/>
+<area shape="rect" id="node2" href="$d3/dc3/classStreamMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Stream." alt="" coords="367,857,538,1023"/>
+<area shape="rect" id="node3" href="$de/d76/classParsing__MIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="363,527,542,809"/>
+<area shape="rect" id="node4" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="373,5,532,479"/>
+<area shape="rect" id="node7" href="$de/d2d/classUSBDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over the USB CDC..." alt="" coords="243,1483,438,1560"/>
+<area shape="rect" id="node9" href="$d8/d29/classHardwareSerialDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a HardwareS..." alt="" coords="469,1468,660,1575"/>
+<area shape="rect" id="node11" href="$d3/d54/classSoftwareSerialDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a SoftwareS..." alt="" coords="695,1468,882,1575"/>
+</map>

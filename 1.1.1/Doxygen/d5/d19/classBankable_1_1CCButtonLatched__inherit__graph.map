@@ -1,0 +1,6 @@
+<map id="CCButtonLatched" name="CCButtonLatched">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a momentary push button, and send out MIDI Contr..." alt="" coords="46,763,193,840"/>
+<area shape="rect" id="node2" href="$df/dca/classBankable_1_1MIDIButtonLatched.html" title=" " alt="" coords="5,491,233,715"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="50,160,189,443"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="28,5,211,112"/>
+</map>

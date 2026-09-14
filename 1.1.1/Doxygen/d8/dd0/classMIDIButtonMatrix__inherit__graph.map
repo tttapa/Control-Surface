@@ -1,0 +1,6 @@
+<map id="MIDIButtonMatrix&lt; Sender, nb_rows, nb_cols &gt;" name="MIDIButtonMatrix&lt; Sender, nb_rows, nb_cols &gt;">
+<area shape="rect" id="node1" title="MIDIButtonMatrix." alt="" coords="92,491,275,656"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="27,160,166,443"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,188,112"/>
+<area shape="rect" id="node4" href="$dd/d29/classAH_1_1ButtonMatrix.html" title="A class that reads the states of a button matrix." alt="" coords="191,167,352,435"/>
+</map>

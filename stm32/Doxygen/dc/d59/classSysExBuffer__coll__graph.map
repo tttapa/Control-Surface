@@ -1,0 +1,3 @@
+<map id="SysExBuffer" name="SysExBuffer">
+<area shape="rect" id="node1" title="Helper for storing the System Exclusive messages being received by a MIDI parser." alt="" coords="5,5,139,215"/>
+</map>

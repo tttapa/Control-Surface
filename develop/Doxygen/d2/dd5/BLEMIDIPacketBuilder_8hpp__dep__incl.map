@@ -1,0 +1,19 @@
+<map id="BLEMIDIPacketBuilder.hpp" name="BLEMIDIPacketBuilder.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="222,5,413,31"/>
+<area shape="rect" id="Node000002" href="$de/d48/BLEMIDIPacketBuilder_8cpp.html" title=" " alt="" coords="6,79,197,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="270,37,137,81,135,76,269,32"/>
+<area shape="rect" id="Node000003" href="$d1/d0b/PollingBLEMIDISender_8hpp.html" title=" " alt="" coords="221,79,413,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="320,44,320,79,315,79,315,44"/>
+<area shape="rect" id="Node000006" href="$d2/d66/ThreadedBLEMIDISender_8hpp.html" title=" " alt="" coords="438,79,647,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="367,32,507,76,505,81,366,37"/>
+<area shape="rect" id="Node000004" href="$d0/d3e/ArduinoBLEBackend_8hpp.html" title=" " alt="" coords="5,152,184,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="270,111,132,154,130,149,268,106"/>
+<area shape="rect" id="Node000005" href="$d7/d71/BTstackBackgroundBackend_8hpp.html" title=" " alt="" coords="208,152,440,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="322,118,326,152,320,152,317,118"/>
+<area shape="rect" id="Node000007" href="$d8/d26/ESP32Backend_8hpp.html" title=" " alt="" coords="470,152,615,177"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="545,118,545,152,540,152,540,118"/>
+<area shape="rect" id="Node000008" href="$df/daf/ESP32BluedroidBackend_8hpp.html" title=" " alt="" coords="326,225,533,251"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="514,187,449,227,446,223,511,183"/>
+<area shape="rect" id="Node000009" href="$d7/da6/ESP32NimBLEBackend_8hpp.html" title=" " alt="" coords="557,225,753,251"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="574,183,638,223,635,227,571,187"/>
+</map>

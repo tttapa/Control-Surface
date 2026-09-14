@@ -1,0 +1,10 @@
+<map id="MIDIInputElementPC" name="MIDIInputElementPC">
+<area shape="rect" id="node1" title="Class for objects that listen for incoming MIDI Program Change events." alt="" coords="323,263,515,443"/>
+<area shape="rect" id="node4" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="5,491,260,627"/>
+<area shape="rect" id="node5" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="285,498,554,619"/>
+<area shape="rect" id="node7" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="579,491,833,627"/>
+<area shape="rect" id="node2" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="227,5,401,215"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="426,57,626,163"/>
+<area shape="rect" id="node6" href="$dd/dd4/classProgramChangeSelector.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="310,675,529,752"/>
+<area shape="rect" id="node8" href="$d9/dee/classProgramChangeSelectorLEDs.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="581,675,831,752"/>
+</map>

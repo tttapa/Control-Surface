@@ -1,0 +1,17 @@
+<map id="CCRotaryEncoder&lt; NumBanks &gt;" name="CCRotaryEncoder&lt; NumBanks &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="5,1095,233,1160"/>
+<area shape="rect" id="Node000002" href="$d6/dcd/classBankable_1_1GenericMIDIRotaryEncoder.html" title=" " alt="" coords="13,611,226,1045"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,1059,122,1094,117,1094,117,1059"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="48,335,191,460"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="122,474,122,610,117,610,117,474"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="256,5,452,225"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="248,222,223,251,160,336,156,333,219,248,244,219"/>
+<area shape="rect" id="Node000006" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="355,275,582,520"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="406,237,421,274,416,276,401,239"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="512,768,708,888"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="625,754,642,654,647,594,649,530,646,465,636,399,618,336,592,276,564,238,529,206,491,179,451,157,454,152,494,174,533,202,568,235,596,273,623,334,641,398,651,464,654,530,652,594,647,654,630,755"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="506,520,527,586,585,752,580,753,522,588,501,521"/>
+<area shape="rect" id="Node000007" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="261,678,468,978"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="436,521,430,545,402,662,397,661,425,543,431,520"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="292,679,262,587,239,485,234,432,233,379,237,326,249,274,262,239,267,241,254,275,243,326,238,379,239,432,245,484,267,586,297,677"/>
+</map>

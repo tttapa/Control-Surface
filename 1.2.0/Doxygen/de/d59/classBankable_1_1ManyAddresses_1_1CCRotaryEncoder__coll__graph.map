@@ -1,0 +1,9 @@
+<map id="CCRotaryEncoder&lt; NumBanks &gt;" name="CCRotaryEncoder&lt; NumBanks &gt;">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="221,1360,457,1437"/>
+<area shape="rect" id="node2" href="$dc/dd5/classBankable_1_1MIDIRotaryEncoder.html" title=" " alt="" coords="232,1116,447,1311"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="164,917,315,1039"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="137,483,341,853"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,159,228,266"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="252,5,475,420"/>
+<area shape="rect" id="node7" href="$d3/dd0/classRelativeCCSender.html" title="Class that sends relative/incremental MIDI control change messages." alt="" coords="339,903,540,1053"/>
+</map>

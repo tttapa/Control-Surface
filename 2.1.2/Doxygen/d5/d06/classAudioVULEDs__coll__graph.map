@@ -1,0 +1,19 @@
+<map id="AudioVULEDs&lt; N &gt;" name="AudioVULEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A VU meter that reads from an Audio stream using the AudioAnalyzePeak class, and displays it on an LE..." alt="" coords="311,987,453,1172"/>
+<area shape="rect" id="Node000002" href="$d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="232,732,361,897"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="330,909,355,986,350,987,325,911"/>
+<area shape="rect" id="Node000003" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="5,396,135,621"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="145,614,149,620,234,730,230,733,145,623,141,617"/>
+<area shape="rect" id="Node000004" href="$d0/d49/classMovingCoilBallistics.html" title=" " alt="" coords="159,396,330,621"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="266,621,283,716,277,716,261,622"/>
+<area shape="rect" id="Node000005" href="$d0/d18/classAudioVU_1_1Analyzer.html" title="The AudioAnalyzePeak and AudioAnalyzeRMS classes don&#39;t implement a common interface,..." alt="" coords="354,436,453,581"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="381,583,351,669,334,717,329,716,346,667,376,581"/>
+<area shape="rect" id="Node000006" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="412,692,579,937"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="440,951,424,987,419,985,435,949"/>
+<area shape="rect" id="Node000007" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="477,399,673,619"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="546,633,530,693,525,691,540,632"/>
+<area shape="rect" id="Node000008" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="365,95,561,235"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="493,248,542,397,537,399,488,249"/>
+<area shape="rect" id="Node000009" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="585,5,792,325"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="638,326,619,384,614,382,633,325"/>
+</map>

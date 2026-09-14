@@ -1,0 +1,8 @@
+<map id="ProgramChangeSelector.hpp" name="ProgramChangeSelector.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,212,31"/>
+<area shape="rect" id="Node000002" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="40,152,177,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,44,86,73,85,104,93,129,104,150,99,153,88,131,79,104,81,71,92,42"/>
+<area shape="rect" id="Node000003" href="$d3/dce/SelectorLEDs_8hpp.html" title=" " alt="" coords="95,79,229,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,40,155,77,151,80,123,43"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="147,117,119,153,115,150,143,113"/>
+</map>

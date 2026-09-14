@@ -1,0 +1,21 @@
+<map id="MIDIButtonMatrix&lt; BankAddress, Sender, NumRows, NumCols &gt;" name="MIDIButtonMatrix&lt; BankAddress, Sender, NumRows, NumCols &gt;">
+<area shape="rect" id="Node000001" title="MIDIButtonMatrix." alt="" coords="551,876,784,1056"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="488,488,631,613"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="581,626,647,875,642,877,576,627"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="193,45,389,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,275,471,375,505,431,533,487,529,489,500,434,466,377,393,278"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="97,428,323,673"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="269,279,238,428,233,427,263,278"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,906,201,1026"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="81,893,59,789,50,725,45,657,44,586,49,514,61,443,82,375,103,334,129,295,160,261,191,230,195,233,164,264,134,299,107,336,87,377,66,444,54,515,49,586,50,657,56,725,65,788,86,892"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="181,674,125,891,120,890,176,673"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="232,816,439,1116"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="249,673,288,800,283,801,244,674"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="341,815,344,607,341,491,333,376,318,282,323,281,338,376,346,491,349,607,346,816"/>
+<area shape="rect" id="Node000007" href="$dd/d29/classAH_1_1ButtonMatrix.html" title=" " alt="" coords="655,376,899,725"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="730,740,694,876,688,875,725,738"/>
+<area shape="rect" id="Node000008" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="624,5,764,305"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="728,305,739,359,734,360,723,306"/>
+<area shape="rect" id="Node000009" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="788,5,928,305"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="830,306,819,360,813,359,825,305"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="PluggableUSBMIDI::Reading" name="PluggableUSBMIDI::Reading">
+<area shape="rect" id="node1" title="State for reading incoming USB&#45;MIDI data." alt="" coords="5,175,209,355"/>
+<area shape="rect" id="node2" href="$d1/dd4/classPluggableUSBMIDI.html#d8/d24/structPluggableUSBMIDI_1_1Reading_1_1Buffer" title=" " alt="" coords="70,5,145,112"/>
+</map>

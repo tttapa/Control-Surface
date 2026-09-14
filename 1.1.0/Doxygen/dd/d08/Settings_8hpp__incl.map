@@ -1,0 +1,11 @@
+<map id="Settings.hpp" name="Settings.hpp">
+<area shape="rect" id="node1" title="All user settings and debugging options can be changed here." alt="" coords="542,5,637,32"/>
+<area shape="rect" id="node2" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="141,80,312,107"/>
+<area shape="rect" id="node5" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec..." alt="" coords="336,80,533,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="557,80,621,107"/>
+<area shape="rect" id="node8" title=" " alt="" coords="645,80,715,107"/>
+<area shape="rect" id="node9" title=" " alt="" coords="739,80,805,107"/>
+<area shape="rect" id="node3" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="270,155,447,181"/>
+<area shape="rect" id="node4" href="$dc/dc7/NamespaceSettings_8hpp.html" title=" " alt="" coords="5,155,245,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="472,155,549,181"/>
+</map>

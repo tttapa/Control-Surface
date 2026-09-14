@@ -1,0 +1,7 @@
+<map id="MatchingMIDIInputElement&lt; Type, Matcher &gt;" name="MatchingMIDIInputElement&lt; Type, Matcher &gt;">
+<area shape="rect" id="node1" title="The MIDIInputElement base class is very general: you give it a MIDI message, and it calls the updateW..." alt="" coords="9,851,233,972"/>
+<area shape="rect" id="node5" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title="Similar to MatchingMIDIInputElement, but for Bankable MIDI Input Elements." alt="" coords="5,1020,236,1171"/>
+<area shape="rect" id="node2" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="21,593,220,803"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="21,233,221,545"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="21,5,221,185"/>
+</map>

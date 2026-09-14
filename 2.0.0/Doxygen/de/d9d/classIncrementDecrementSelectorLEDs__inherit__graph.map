@@ -1,0 +1,15 @@
+<map id="IncrementDecrementSelectorLEDs&lt; N &gt;" name="IncrementDecrementSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="Selector with two buttons (one to increment, one to decrement). &#160;&#160;This version displays the setting u..." alt="" coords="43,1336,263,1431"/>
+<area shape="rect" id="Node000002" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="5,1093,301,1288"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,1302,156,1336,151,1336,151,1302"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="80,825,227,1045"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="156,1059,156,1093,151,1093,151,1059"/>
+<area shape="rect" id="Node000004" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="19,672,143,757"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="102,770,120,824,115,826,97,771"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="167,652,286,777"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="204,792,192,826,187,824,199,790"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="129,239,324,604"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="229,618,229,652,224,652,224,618"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="129,5,324,191"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="229,204,229,238,224,238,224,204"/>
+</map>

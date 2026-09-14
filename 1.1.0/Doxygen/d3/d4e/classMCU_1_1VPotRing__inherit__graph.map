@@ -1,0 +1,9 @@
+<map id="MCU::VPotRing" name="MCU::VPotRing">
+<area shape="rect" id="node1" title="A class for MIDI input elements that represent Mackie Control Universal V&#45;Pots." alt="" coords="207,903,325,980"/>
+<area shape="rect" id="node2" href="$df/dc2/classMCU_1_1GenericVPotRing.html" title=" " alt="" coords="177,777,355,855"/>
+<area shape="rect" id="node3" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="177,520,355,729"/>
+<area shape="rect" id="node4" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="91,285,267,450"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="5,5,161,215"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="186,57,367,163"/>
+<area shape="rect" id="node7" href="$da/d50/classMCU_1_1IVPotRing.html" title=" " alt="" coords="292,263,413,472"/>
+</map>

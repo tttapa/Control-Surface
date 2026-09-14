@@ -1,0 +1,4 @@
+<map id="TwoByteRangeMIDIMatcher" name="TwoByteRangeMIDIMatcher">
+<area shape="rect" id="node1" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="5,453,232,545"/>
+<area shape="rect" id="node2" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="24,5,213,391"/>
+</map>

@@ -1,0 +1,23 @@
+<map id="ProgramChangeSelectorLEDs&lt; N &gt;" name="ProgramChangeSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="201,2065,443,2131"/>
+<area shape="rect" id="Node000002" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="199,1277,445,2017"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="325,2031,325,2065,319,2065,319,2031"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="125,775,284,1229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="251,1242,257,1276,252,1277,246,1243"/>
+<area shape="rect" id="Node000004" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,561,129,647"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="89,659,129,774,124,775,84,660"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="153,541,272,667"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="214,680,212,774,207,774,208,680"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="115,193,311,433"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="215,447,215,541,210,541,210,447"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="115,5,311,145"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="215,159,215,193,210,193,210,159"/>
+<area shape="rect" id="Node000008" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="308,795,571,1209"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="402,1224,392,1278,387,1277,397,1223"/>
+<area shape="rect" id="Node000009" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="344,481,535,727"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="442,741,442,794,437,794,437,741"/>
+<area shape="rect" id="Node000010" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="343,193,535,433"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="442,447,442,481,437,481,437,447"/>
+<area shape="rect" id="Node000011" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="343,5,535,145"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="442,159,442,193,437,193,437,159"/>
+</map>

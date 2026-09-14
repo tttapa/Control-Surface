@@ -1,0 +1,13 @@
+<map id="SwitchSelectorLED" name="SwitchSelectorLED">
+<area shape="rect" id="node1" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch...." alt="" coords="267,1675,435,1752"/>
+<area shape="rect" id="node2" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="238,1475,465,1625"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="132,1166,347,1346"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="28,931,160,1023"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="184,916,295,1037"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="137,483,341,853"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,159,228,266"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="252,5,475,420"/>
+<area shape="rect" id="node9" href="$d9/d15/classSelectorSingleLEDCallback.html" title=" " alt="" coords="319,916,541,1037"/>
+<area shape="rect" id="node10" title=" " alt="" coords="403,629,457,707"/>
+<area shape="rect" id="node11" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="371,1100,555,1412"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="PBSmartPotentiometer&lt; NumBanks &gt;" name="PBSmartPotentiometer&lt; NumBanks &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="13,1308,201,1388"/>
+<area shape="rect" id="Node000002" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title=" " alt="" coords="5,825,209,1260"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,1274,110,1308,105,1308,105,1274"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="36,652,179,777"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="110,791,110,825,105,825,105,791"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="10,239,205,604"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="110,618,110,652,105,652,105,618"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="10,5,205,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="110,204,110,238,105,238,105,204"/>
+</map>

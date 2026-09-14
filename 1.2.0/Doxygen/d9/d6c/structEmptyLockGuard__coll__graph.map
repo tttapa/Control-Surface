@@ -1,0 +1,3 @@
+<map id="EmptyLockGuard&lt; Mutex &gt;" name="EmptyLockGuard&lt; Mutex &gt;">
+<area shape="rect" id="node1" title="Lock guard that doesn&#39;t lock it&#39;s mutex, used on single&#45;core systems." alt="" coords="5,5,209,97"/>
+</map>

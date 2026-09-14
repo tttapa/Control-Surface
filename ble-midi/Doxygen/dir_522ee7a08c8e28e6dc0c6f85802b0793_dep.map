@@ -1,0 +1,23 @@
+<map id="BLEMIDI" name="BLEMIDI">
+<area shape="rect" id="node2" href="dir_6ff81dae355a269fce80f28bc26db413.html" title="ArduinoBLE" alt="" coords="37,136,133,161"/>
+<area shape="poly" id="edge4" href="dir_000008_000003.html" alt="" coords="280,91,136,135,135,129,278,85"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000008_000003.html" title="1" alt="" coords="138,131,147,146"/>
+<area shape="rect" id="node3" href="dir_751cbd3cc665dc9c465deb187a3d8e0f.html" title="BTstack" alt="" coords="157,136,229,161"/>
+<area shape="poly" id="edge5" href="dir_000008_000009.html" alt="" coords="298,90,226,131,224,127,295,86"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000008_000009.html" title="1" alt="" coords="229,127,238,141"/>
+<area shape="rect" id="node4" href="dir_63a820b5eb5cb0b621e2dbc6bb54a5c1.html" title="ESP32" alt="" coords="254,136,317,161"/>
+<area shape="poly" id="edge3" href="dir_000008_000020.html" alt="" coords="313,89,298,125,293,123,308,87"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000008_000020.html" title="2" alt="" coords="301,115,310,130"/>
+<area shape="rect" id="node6" href="dir_424b1c167dca143e48b3aa5110e89b7e.html" title="Util" alt="" coords="341,136,387,161"/>
+<area shape="poly" id="edge2" href="dir_000008_000055.html" alt="" coords="326,87,351,123,346,126,322,90"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000008_000055.html" title="2" alt="" coords="348,109,358,123"/>
+<area shape="rect" id="node7" href="dir_15b6432dff6a6d357bf70f8fbf2cdf14.html" title="AH" alt="" coords="419,136,461,161"/>
+<area shape="poly" id="edge1" href="dir_000008_000002.html" alt="" coords="337,86,409,127,407,131,335,90"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000008_000002.html" title="3" alt="" coords="403,112,413,127"/>
+<area shape="rect" id="node8" href="dir_9c9f4aef8027530753ea2ed5df8d4f38.html" title="MIDI_Parsers" alt="" coords="485,136,592,161"/>
+<area shape="poly" id="edge6" href="dir_000008_000041.html" alt="" coords="353,85,491,129,489,134,351,91"/>
+<area shape="rect" id="edge6-headlabel" href="dir_000008_000041.html" title="4" alt="" coords="483,115,493,130"/>
+<area shape="rect" id="node5" href="dir_5a46310ba47afc7687c80002bd7046d7.html" title="ESP32&#45;NimBLE" alt="" coords="102,63,221,88"/>
+<area shape="rect" id="clust2" href="dir_522ee7a08c8e28e6dc0c6f85802b0793.html" alt="" coords="27,52,397,172"/>
+<area shape="rect" id="clust1" href="dir_6a6436ad46e42aad24bc1ce93af4f420.html" title="MIDI_Interfaces" alt="" coords="16,16,408,183"/>
+</map>

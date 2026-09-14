@@ -1,0 +1,9 @@
+<map id="MIDIButton&lt; BankAddress, Sender &gt;" name="MIDIButton&lt; BankAddress, Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="297,828,480,979"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="123,468,262,751"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,145,188,251"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="212,5,365,391"/>
+<area shape="rect" id="node5" title=" " alt="" coords="287,571,387,648"/>
+<area shape="rect" id="node6" title=" " alt="" coords="411,571,473,648"/>
+<area shape="rect" id="node7" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="497,453,661,765"/>
+</map>

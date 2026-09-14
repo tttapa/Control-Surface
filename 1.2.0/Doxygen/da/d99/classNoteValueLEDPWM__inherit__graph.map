@@ -1,0 +1,9 @@
+<map id="NoteValueLEDPWM" name="NoteValueLEDPWM">
+<area shape="rect" id="node1" title="MIDI Input Element that listens for MIDI Note messages for the given note, and displays its velocity ..." alt="" coords="209,961,381,1039"/>
+<area shape="rect" id="node2" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="194,792,397,913"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="141,476,450,744"/>
+<area shape="rect" id="node4" href="$db/d4b/classMIDIInputElementNote.html" title="Class for objects that listen for incoming MIDI Note events." alt="" coords="95,263,301,428"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="5,5,180,215"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="205,57,405,163"/>
+<area shape="rect" id="node7" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="326,285,462,406"/>
+</map>

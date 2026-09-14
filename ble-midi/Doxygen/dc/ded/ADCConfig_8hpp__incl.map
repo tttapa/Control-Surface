@@ -1,0 +1,20 @@
+<map id="ADCConfig.hpp" name="ADCConfig.hpp">
+<area shape="rect" id="Node000001" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="91,5,209,31"/>
+<area shape="rect" id="Node000002" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="5,299,196,324"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,31,130,112,109,226,104,285,99,285,103,225,125,111,144,30"/>
+<area shape="rect" id="Node000003" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="453,79,618,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,28,461,74,460,79,209,33"/>
+<area shape="rect" id="Node000004" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="294,152,475,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="512,106,423,148,421,144,510,102"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="432,299,516,324"/>
+<area shape="poly" id="edge10_Node000003_Node000006" title=" " alt="" coords="558,102,600,128,643,164,660,185,671,207,673,230,663,252,635,278,601,296,565,306,530,312,529,306,564,301,599,291,632,274,658,249,667,229,666,208,656,188,640,168,597,132,556,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="724,152,867,177"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="578,101,741,146,739,151,576,107"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="294,180,195,199,154,212,128,227,118,240,111,254,104,285,99,284,106,253,113,237,124,223,152,207,194,194,293,174"/>
+<area shape="rect" id="Node000005" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="138,225,365,251"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="364,180,286,221,284,216,362,175"/>
+<area shape="rect" id="Node000007" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="389,225,649,251"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="408,175,486,216,484,221,405,180"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="228,253,139,295,137,290,226,248"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="288,248,426,292,424,297,286,253"/>
+</map>

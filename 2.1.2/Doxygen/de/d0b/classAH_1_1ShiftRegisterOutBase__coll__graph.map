@@ -1,0 +1,18 @@
+<map id="ShiftRegisterOutBase&lt; N &gt;" name="ShiftRegisterOutBase&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="5,1368,197,1813"/>
+<area shape="rect" id="Node000002" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title="A class for ExtendedIOElements with a fixed size." alt="" coords="98,1095,345,1200"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,1214,164,1368,159,1367,201,1212"/>
+<area shape="rect" id="Node000003" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="361,321,567,907"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="357,855,247,1095,243,1093,352,853"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="369,1087,559,1207"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="467,907,467,1071,461,1071,461,907"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="583,997,785,1297"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="570,864,619,981,614,983,565,866"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="547,1488,821,1693"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="739,1474,779,1371,796,1312,809,1250,817,1187,819,1122,812,1059,795,998,775,953,751,910,693,829,629,758,566,699,569,695,633,754,697,826,756,907,780,951,800,996,817,1058,824,1122,823,1187,815,1251,801,1313,784,1373,744,1476"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="502,1219,636,1486,631,1489,497,1221"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="687,1298,687,1472,681,1472,681,1298"/>
+<area shape="rect" id="Node000007" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="25,5,141,211"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="84,211,82,680,84,987,89,1297,91,1352,86,1352,84,1297,78,987,77,680,79,211"/>
+<area shape="poly" id="edge8_Node000003_Node000007" title=" " alt="" coords="143,185,352,461,348,464,139,188"/>
+</map>

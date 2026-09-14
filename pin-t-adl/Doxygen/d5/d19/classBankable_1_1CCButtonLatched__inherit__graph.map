@@ -1,0 +1,11 @@
+<map id="CCButtonLatched&lt; NumBanks &gt;" name="CCButtonLatched&lt; NumBanks &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of a momentary push button, and send out MIDI Contr..." alt="" coords="5,1148,232,1213"/>
+<area shape="rect" id="Node000002" href="$df/dca/classBankable_1_1MIDIButtonLatched.html" title=" " alt="" coords="22,825,215,1100"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,1114,121,1148,116,1148,116,1114"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="47,652,190,777"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,791,121,825,116,825,116,791"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="21,239,216,604"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="121,618,121,652,116,652,116,618"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="21,5,216,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="121,204,121,238,116,238,116,204"/>
+</map>

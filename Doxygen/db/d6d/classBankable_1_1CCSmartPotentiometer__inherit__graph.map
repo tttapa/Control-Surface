@@ -1,0 +1,11 @@
+<map id="CCSmartPotentiometer&lt; NumBanks &gt;" name="CCSmartPotentiometer&lt; NumBanks &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="13,1297,202,1377"/>
+<area shape="rect" id="Node000002" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title=" " alt="" coords="5,655,209,1249"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,1263,110,1297,105,1297,105,1263"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="36,481,179,607"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="110,620,110,655,105,655,105,620"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="9,193,205,433"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="110,447,110,481,105,481,105,447"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="9,5,205,145"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="110,159,110,193,105,193,105,159"/>
+</map>

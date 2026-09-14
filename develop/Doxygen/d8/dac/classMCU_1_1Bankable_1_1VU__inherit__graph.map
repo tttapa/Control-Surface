@@ -1,0 +1,21 @@
+<map id="VU&lt; BankSize &gt;" name="VU&lt; BankSize &gt;">
+<area shape="rect" id="Node000001" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="250,1844,433,2189"/>
+<area shape="rect" id="Node000010" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="228,2237,455,2443"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="344,2203,344,2237,339,2237,339,2203"/>
+<area shape="rect" id="Node000002" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="94,1237,365,1796"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="298,1809,305,1843,300,1845,292,1810"/>
+<area shape="rect" id="Node000003" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,775,221,1189"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="164,1202,171,1236,166,1238,159,1203"/>
+<area shape="rect" id="Node000004" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="18,481,209,727"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="116,740,116,774,111,774,111,740"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="17,193,209,433"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="116,447,116,481,111,481,111,447"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="17,5,209,145"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="116,159,116,193,111,193,111,159"/>
+<area shape="rect" id="Node000007" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="246,949,445,1015"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="338,1029,293,1237,287,1236,333,1028"/>
+<area shape="rect" id="Node000008" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="241,534,449,674"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="348,688,348,949,343,949,343,688"/>
+<area shape="rect" id="Node000009" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="389,1404,518,1629"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="428,1643,383,1844,377,1843,423,1642"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="AnalogMultiplex&lt; N &gt;" name="AnalogMultiplex&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A class for reading multiplexed analog inputs." alt="" coords="201,632,390,1077"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,389,247,454"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,466,211,631,206,633,141,468"/>
+<area shape="rect" id="Node000003" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="259,5,375,211"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="313,211,310,281,301,616,296,616,305,281,308,211"/>
+<area shape="rect" id="Node000004" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="403,281,558,561"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="373,210,402,265,397,268,368,212"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="423,563,399,619,394,617,418,561"/>
+</map>

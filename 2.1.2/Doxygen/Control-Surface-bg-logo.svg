@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" version="1.1" viewBox="0 0 67.733 67.733" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<linearGradient id="c" x1="20.254" x2="55.266" y1="18.432" y2="49.9" gradientUnits="userSpaceOnUse">
+<stop stop-color="#dfe7ee" offset="0"/>
+<stop stop-color="#b0b5ba" offset="1"/>
+</linearGradient>
+</defs>
+<rect x="7.1208e-6" y="2.4496" width="67.733" height="62.413" ry="9.0451" fill="url(#c)"/>
+<g transform="matrix(.97432 0 0 .97432 1.0631 .98142)">
+<g transform="translate(.12027)">
+<g transform="translate(-.042354 -.020832)">
+<path id="b" d="m17.83 22.458h2.3651" fill="none" stroke="#8e9bac" stroke-linecap="round" stroke-width=".635"/>
+<use width="100%" height="100%" xlink:href="#b"/>
+<use transform="translate(0 3.81)" width="100%" height="100%" xlink:href="#b"/>
+<use transform="translate(0 7.62)" width="100%" height="100%" xlink:href="#b"/>
+<use transform="translate(0 11.43)" width="100%" height="100%" xlink:href="#b"/>
+<use transform="translate(0 15.24)" width="100%" height="100%" xlink:href="#b"/>
+<use transform="translate(0 19.05)" width="100%" height="100%" xlink:href="#b"/>
+<use transform="translate(0 22.86)" width="100%" height="100%" xlink:href="#b"/>
+</g>
+<g transform="translate(8.2012 -.020832)">
+<path id="a" d="m17.83 22.458h2.3651" fill="none" stroke="#8e9bac" stroke-linecap="round" stroke-width=".635"/>
+<use width="100%" height="100%" xlink:href="#a"/>
+<use transform="translate(0 3.81)" width="100%" height="100%" xlink:href="#a"/>
+<use transform="translate(0 7.62)" width="100%" height="100%" xlink:href="#a"/>
+<use transform="translate(0 11.43)" width="100%" height="100%" xlink:href="#a"/>
+<use transform="translate(0 15.24)" width="100%" height="100%" xlink:href="#a"/>
+<use transform="translate(0 19.05)" width="100%" height="100%" xlink:href="#a"/>
+<use transform="translate(0 22.86)" width="100%" height="100%" xlink:href="#a"/>
+</g>
+<g fill="none" stroke-linecap="round">
+<path d="m34.474 50.578a19.844 19.844 0 0 1-26.206-3.063 19.844 19.844 0 0 1-2e-7 -26.384 19.844 19.844 0 0 1 26.206-3.063" stroke="#48566b" stroke-width="3.9688"/>
+<path d="m34.474 50.122a19.844 19.844 0 0 1-26.206-3.063 19.844 19.844 0 0 1-2e-7 -26.384 19.844 19.844 0 0 1 26.206-3.063" stroke="#1b232d" stroke-width="3.9688"/>
+<path d="m23.092 20.386v26.962" stroke="#8e9bac" stroke-width="1.905"/>
+</g>
+<g transform="translate(-.68032 -4.4138)">
+<rect x="19.122" y="31.118" width="9.3019" height="5.4968" ry="1.1562" fill="#00979d"/>
+<path d="m26.854 33.867h-6.1629" fill="none" stroke="#fff" stroke-linecap="round" stroke-width=".84589"/>
+</g>
+</g>
+<g transform="translate(-.4089)">
+<path d="m62.551 14.377h-12.51c-3.5447 0-6.8202 1.8911-8.5926 4.9609s-1.7724 6.852 0 9.9219 5.0479 4.9609 10.709 4.9609c5.6614 0 8.9369 1.8911 10.709 4.9609s1.7724 6.852 0 9.9219-5.0479 4.9609-8.5926 4.9609h-12.25" fill="none" stroke="#48566b" stroke-width="3.969"/>
+<path d="m62.551 14.027h-12.51c-3.5447 0-6.8202 1.8911-8.5926 4.9609s-1.7724 6.852 0 9.9219 5.0479 4.9609 10.709 4.9609c5.6614 0 8.9369 1.8911 10.709 4.9609s1.7724 6.852 0 9.9219-5.0479 4.9609-8.5926 4.9609h-12.25" fill="none" stroke="#1b232d" stroke-width="3.969"/>
+<g transform="translate(-175.68 5.9954e-5)">
+<g transform="translate(195.33,7.6004)" stroke="#1b232d">
+<circle cx="42.906" cy="6.427" r="4.2333" fill="#fff" stroke-width="1.1112"/>
+<path d="m42.76 10.142h0.29199" fill="none" stroke-linecap="round" stroke-width="1.2189"/>
+</g>
+<g fill="#1b232d">
+<circle cx="238.24" cy="11.782" r=".52917"/>
+<circle cx="239.82" cy="12.44" r=".52917"/>
+<circle cx="240.48" cy="14.027" r=".52917"/>
+<circle cx="236.65" cy="12.44" r=".52917"/>
+<circle cx="235.99" cy="14.027" r=".52917"/>
+</g>
+</g>
+<g transform="translate(-196.21 39.688)">
+<g transform="translate(195.33,7.6004)" stroke="#1b232d">
+<circle cx="42.906" cy="6.427" r="4.2333" fill="#fff" stroke-width="1.1112"/>
+<path d="m42.76 10.142h0.29199" fill="none" stroke-linecap="round" stroke-width="1.2189"/>
+</g>
+<g fill="#1b232d">
+<circle cx="238.24" cy="11.782" r=".52917"/>
+<circle cx="239.82" cy="12.44" r=".52917"/>
+<circle cx="240.48" cy="14.027" r=".52917"/>
+<circle cx="236.65" cy="12.44" r=".52917"/>
+<circle cx="235.99" cy="14.027" r=".52917"/>
+</g>
+</g>
+</g>
+</g>
+</svg>

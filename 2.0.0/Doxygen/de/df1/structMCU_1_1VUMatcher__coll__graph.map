@@ -1,0 +1,5 @@
+<map id="VUMatcher" name="VUMatcher">
+<area shape="rect" id="Node000001" title="MIDI Input matcher for Mackie Control Universal VU meters." alt="" coords="41,573,151,659"/>
+<area shape="rect" id="Node000002" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="5,5,187,511"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,511,99,557,93,557,93,511"/>
+</map>

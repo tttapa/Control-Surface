@@ -1,0 +1,16 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="5,52,224,121"/>
+<area shape="rect" id="Node000001" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="286,149,462,189"/>
+<area shape="poly" id="edge439_Node000000_Node000001" title=" " alt="" coords="236,123,273,135,310,147,308,152,271,140,235,128"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="272,213,476,253"/>
+<area shape="poly" id="edge440_Node000000_Node000003" title=" " alt="" coords="220,127,226,131,242,149,250,167,258,183,274,199,294,211,291,215,270,203,254,186,245,169,237,152,222,135,217,131"/>
+<area shape="rect" id="Node000004" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="273,5,475,45"/>
+<area shape="poly" id="edge441_Node000000_Node000004" title=" " alt="" coords="237,55,288,43,289,48,238,60"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title="A class that reads and filters an analog input." alt="" coords="273,70,475,125"/>
+<area shape="poly" id="edge442_Node000000_Node000005" title=" " alt="" coords="238,89,273,91,272,96,238,94"/>
+<area shape="rect" id="Node000002" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="5,145,224,215"/>
+<area shape="poly" id="edge443_Node000002_Node000001" title=" " alt="" coords="238,172,286,170,286,176,238,178"/>
+<area shape="poly" id="edge444_Node000002_Node000003" title=" " alt="" coords="238,203,277,211,276,216,237,208"/>
+<area shape="poly" id="edge445_Node000002_Node000004" title=" " alt="" coords="218,135,222,131,238,113,245,94,253,74,270,55,290,43,293,48,274,59,258,77,250,96,242,115,226,135,221,139"/>
+<area shape="poly" id="edge446_Node000002_Node000005" title=" " alt="" coords="236,139,287,122,288,127,238,144"/>
+</map>

@@ -1,0 +1,28 @@
+<map id="MCU.hpp" name="MCU.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="332,5,413,31"/>
+<area shape="rect" id="Node000002" href="$d7/d42/Channel_8hpp.html" title=" " alt="" coords="205,79,335,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="358,33,300,73,297,68,355,28"/>
+<area shape="rect" id="Node000011" href="$d8/dc0/MCUNameFromNoteNumber_8hpp.html" title=" " alt="" coords="359,79,594,104"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="391,28,450,68,447,73,388,33"/>
+<area shape="rect" id="Node000003" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="178,152,343,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="271,105,267,139,261,138,266,104"/>
+<area shape="rect" id="Node000010" href="$d0/da7/Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="367,152,605,177"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="306,101,439,145,437,150,304,107"/>
+<area shape="rect" id="Node000004" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="246,225,427,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="275,175,316,214,312,218,271,179"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="220,372,304,397"/>
+<area shape="poly" id="edge10_Node000003_Node000007" title=" " alt="" coords="254,179,237,205,219,241,209,282,209,303,214,323,225,343,240,361,236,364,221,346,209,325,204,304,204,282,214,240,232,203,250,176"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="5,225,148,251"/>
+<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="232,180,121,223,119,218,230,175"/>
+<area shape="rect" id="Node000005" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="223,299,450,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="339,251,339,285,334,285,334,251"/>
+<area shape="rect" id="Node000008" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="475,299,735,324"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="380,248,549,293,548,298,379,253"/>
+<area shape="rect" id="Node000006" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="509,372,700,397"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="380,321,549,366,548,371,379,327"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="327,326,286,364,282,361,323,322"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="607,324,607,358,602,358,602,324"/>
+<area shape="poly" id="edge12_Node000010_Node000006" title=" " alt="" coords="546,175,598,190,655,215,708,250,731,272,750,297,755,311,754,323,739,344,712,359,679,371,677,366,710,354,736,340,749,321,750,312,745,300,727,275,704,254,652,219,596,195,545,180"/>
+<area shape="poly" id="edge14_Node000011_Node000003" title=" " alt="" coords="443,107,309,150,308,145,441,101"/>
+<area shape="poly" id="edge15_Node000011_Node000010" title=" " alt="" coords="481,104,485,138,480,139,476,105"/>
+</map>

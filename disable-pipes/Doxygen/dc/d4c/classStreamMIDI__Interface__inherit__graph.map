@@ -1,0 +1,20 @@
+<map id="StreamMIDI_Interface" name="StreamMIDI_Interface">
+<area shape="rect" id="node1" title="A class for MIDI interfaces sending and receiving MIDI messages over a Stream." alt="" coords="502,1915,721,2183"/>
+<area shape="rect" id="node11" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="218,2231,397,2337"/>
+<area shape="rect" id="node13" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="421,2231,599,2337"/>
+<area shape="rect" id="node15" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="623,2231,802,2337"/>
+<area shape="rect" id="node18" href="$d9/db8/classSerialMIDI__Interface.html" title="A wrapper class for MIDI interfaces sending and receiving MIDI messages over a Serial port of generic..." alt="" coords="826,2238,1018,2330"/>
+<area shape="rect" id="node2" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="502,1423,721,1867"/>
+<area shape="rect" id="node3" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="191,1019,349,1096"/>
+<area shape="rect" id="node4" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="5,277,247,648"/>
+<area shape="rect" id="node5" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="271,233,496,692"/>
+<area shape="rect" id="node6" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="374,740,603,1375"/>
+<area shape="rect" id="node7" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="628,997,843,1118"/>
+<area shape="rect" id="node8" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="633,307,837,619"/>
+<area shape="rect" id="node9" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="633,5,837,185"/>
+<area shape="rect" id="node10" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="867,997,1001,1118"/>
+<area shape="rect" id="node12" href="$d9/d78/classHardwareSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Hardware Serial port." alt="" coords="224,2385,391,2492"/>
+<area shape="rect" id="node14" href="$d6/d6d/classSoftwareSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a SoftwareSerial interface." alt="" coords="427,2385,588,2492"/>
+<area shape="rect" id="node16" href="$d8/d57/classUSBSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over the Serial port of the USB conne..." alt="" coords="612,2400,819,2477"/>
+<area shape="rect" id="node17" href="$dc/dff/classHairlessMIDI__Interface.html" title="A class for MIDI Interfaces sending and receiving data over the USB Serial CDC connection for the use..." alt="" coords="618,2540,813,2617"/>
+</map>
