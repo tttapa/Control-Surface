@@ -20,10 +20,11 @@ struct ESP32_USBDeviceMIDIBackend {
         backend.readPacket(&packet);
         return {packet.header, packet.byte1, packet.byte2, packet.byte3};
     }
-    /// Write a single packet to the output buffer.
+    /// Write a single packet to the output buffer and wait for it to be sent.
     void write(MIDIUSBPacket_t p) {
         midiEventPacket_t packet {p[0], p[1], p[2], p[3]};
-        backend.writePacket(&packet);
+        while (!backend.writePacket(&packet))
+            yield();  // Wait until the packet is sent
     }
     /// Transmit the output buffer immediately (not implemented).
     void sendNow() {}
