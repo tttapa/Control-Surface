@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/MIDI_Interfaces/GenericBLEMIDI_Interface.ipp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/MIDI_Interfaces">src/MIDI_Interfaces</a> - GenericBLEMIDI_Interface.ipp<span style="font-size: 80%;"> (source / <a href="GenericBLEMIDI_Interface.ipp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">98.6&nbsp;%</td>
+            <td class="headerCovTableEntry">74</td>
+            <td class="headerCovTableEntry">73</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 17:27:32</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntry">20</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #include &quot;GenericBLEMIDI_Interface.hpp&quot;</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L4"><span class="lineNum">       4</span>              : </span>
+<span id="L5"><span class="lineNum">       5</span>              : // -------------------------------------------------------------------------- //</span>
+<span id="L6"><span class="lineNum">       6</span>              : </span>
+<span id="L7"><span class="lineNum">       7</span>              : // The following section implements the MIDI sending functions.</span>
+<span id="L8"><span class="lineNum">       8</span>              : </span>
+<span id="L9"><span class="lineNum">       9</span>              : template &lt;class BackendT&gt;</span>
+<span id="L10"><span class="lineNum">      10</span>              : template &lt;class L, class F&gt;</span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">          18 : void GenericBLEMIDI_Interface&lt;BackendT&gt;::sendImpl(L &amp;lck, F add_to_buffer) {</span></span>
+<span id="L12"><span class="lineNum">      12</span>              :     // BLE packets are sent asynchronously, so we need a lock to access the</span>
+<span id="L13"><span class="lineNum">      13</span>              :     // packet buffer</span>
+<span id="L14"><span class="lineNum">      14</span>              :     //     assert(lck.lck.owns_lock());</span>
+<span id="L15"><span class="lineNum">      15</span>              : </span>
+<span id="L16"><span class="lineNum">      16</span>              :     // Try adding the message to the current packet</span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">          18 :     if (!add_to_buffer()) {</span></span>
+<span id="L18"><span class="lineNum">      18</span>              :         // If that doesn't work, flush the packet (send it now and wait until</span>
+<span id="L19"><span class="lineNum">      19</span>              :         // it is sent)</span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           4 :         backend.sendNow(lck);</span></span>
+<span id="L21"><span class="lineNum">      21</span>              :         // And then add it to the (now emtpy) buffer</span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           4 :         add_to_buffer();</span></span>
+<span id="L23"><span class="lineNum">      23</span>              :     }</span>
+<span id="L24"><span class="lineNum">      24</span>              :     // Notify the sending thread that data has been added to the buffer</span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">          18 :     backend.releasePacketAndNotify(lck);</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">          18 : }</span></span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : template &lt;class BackendT&gt;</span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">          11 : void GenericBLEMIDI_Interface&lt;BackendT&gt;::sendChannelMessageImpl(</span></span>
+<span id="L30"><span class="lineNum">      30</span>              :     ChannelMessage msg) {</span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">          11 :     uint16_t timestamp = millis(); // BLE MIDI timestamp</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">          11 :     auto lck = backend.acquirePacket();</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">          11 :     if (msg.hasTwoDataBytes()) {</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           8 :         sendImpl(lck, [&amp;] {</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           9 :             return lck.packet-&gt;add3B(msg.header, msg.data1, msg.data2,</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           9 :                                      timestamp);</span></span>
+<span id="L37"><span class="lineNum">      37</span>              :         });</span>
+<span id="L38"><span class="lineNum">      38</span>              :     } else {</span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           3 :         sendImpl(lck, [&amp;] {</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           4 :             return lck.packet-&gt;add2B(msg.header, msg.data1, timestamp);</span></span>
+<span id="L41"><span class="lineNum">      41</span>              :         });</span>
+<span id="L42"><span class="lineNum">      42</span>              :     }</span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">          22 : }</span></span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span>              : template &lt;class BackendT&gt;</span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           4 : void GenericBLEMIDI_Interface&lt;BackendT&gt;::sendRealTimeImpl(RealTimeMessage msg) {</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           4 :     uint16_t timestamp = millis(); // BLE MIDI timestamp</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           4 :     auto lck = backend.acquirePacket();</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           4 :     sendImpl(lck,</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           5 :              [&amp;] { return lck.packet-&gt;addRealTime(msg.message, timestamp); });</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           8 : }</span></span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span>              : template &lt;class BackendT&gt;</span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           3 : void GenericBLEMIDI_Interface&lt;BackendT&gt;::sendSysCommonImpl(</span></span>
+<span id="L55"><span class="lineNum">      55</span>              :     SysCommonMessage msg) {</span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           3 :     uint16_t timestamp = millis(); // BLE MIDI timestamp</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           3 :     auto lck = backend.acquirePacket();</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           3 :     sendImpl(lck, [&amp;] {</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">           8 :         return lck.packet-&gt;addSysCommon(msg.getNumberOfDataBytes(), msg.header,</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           8 :                                         msg.data1, msg.data2, timestamp);</span></span>
+<span id="L61"><span class="lineNum">      61</span>              :     });</span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">           6 : }</span></span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span>              : template &lt;class BackendT&gt;</span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">           3 : void GenericBLEMIDI_Interface&lt;BackendT&gt;::sendSysExImpl(SysExMessage msg) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           3 :     uint16_t timestamp = millis(); // BLE MIDI timestamp</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           3 :     size_t length = msg.length;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           3 :     const uint8_t *data = msg.data;</span></span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              :     // BLE packets are sent asynchronously, so we need a lock to access the</span>
+<span id="L71"><span class="lineNum">      71</span>              :     // packet buffer</span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           3 :     auto lck = backend.acquirePacket();</span></span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span>              :     // TODO: I have no idea why, but the last byte gets cut off when the LSB</span>
+<span id="L75"><span class="lineNum">      75</span>              :     // of the timestamp is 0x77 ... (Problem is probably in the BlueZ parser)</span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           3 :     if ((timestamp &amp; 0x77) == 0x77)</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaUNC">           0 :         timestamp &amp;= 0xFFFE;</span></span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span>              :     // Try adding at least the SysExStart header to the current packet</span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">           3 :     if (!lck.packet-&gt;addSysEx(data, length, timestamp)) {</span></span>
+<span id="L81"><span class="lineNum">      81</span>              :         // If that didn't fit, flush the packet</span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">           1 :         backend.sendNow(lck);</span></span>
+<span id="L83"><span class="lineNum">      83</span>              :         // Add the first part of the SysEx message to this packet</span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           1 :         lck.packet-&gt;addSysEx(data, length, timestamp);</span></span>
+<span id="L85"><span class="lineNum">      85</span>              :     }</span>
+<span id="L86"><span class="lineNum">      86</span>              :     // As long as there's data to be sent in the next packet</span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">           7 :     while (data) {</span></span>
+<span id="L88"><span class="lineNum">      88</span>              :         // Send the previous (full) packet</span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">           4 :         backend.sendNow(lck);</span></span>
+<span id="L90"><span class="lineNum">      90</span>              :         // And add the next part of the SysEx message to a continuation packet</span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">           4 :         lck.packet-&gt;continueSysEx(data, length, timestamp);</span></span>
+<span id="L92"><span class="lineNum">      92</span>              :     }</span>
+<span id="L93"><span class="lineNum">      93</span>              :     // Notify the sending thread that data has been added to the buffer</span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">           3 :     backend.releasePacketAndNotify(lck);</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">           6 : }</span></span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              : template &lt;class BackendT&gt;</span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">          12 : void GenericBLEMIDI_Interface&lt;BackendT&gt;::sendNowImpl() {</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">          12 :     auto lck = backend.acquirePacket();</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">          12 :     backend.sendNow(lck);</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">          24 : }</span></span>
+<span id="L102"><span class="lineNum">     102</span>              : </span>
+<span id="L103"><span class="lineNum">     103</span>              : // -------------------------------------------------------------------------- //</span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              : template &lt;class BackendT&gt;</span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">          52 : MIDIReadEvent GenericBLEMIDI_Interface&lt;BackendT&gt;::read() {</span></span>
+<span id="L107"><span class="lineNum">     107</span>              :     // Pop a new message from the queue</span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">          52 :     if (!backend.popMessage(incomingMessage))</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">          12 :         return MIDIReadEvent::NO_MESSAGE;</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">          40 :     return incomingMessage.eventType;</span></span>
+<span id="L111"><span class="lineNum">     111</span>              : }</span>
+<span id="L112"><span class="lineNum">     112</span>              : </span>
+<span id="L113"><span class="lineNum">     113</span>              : template &lt;class BackendT&gt;</span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          33 : ChannelMessage GenericBLEMIDI_Interface&lt;BackendT&gt;::getChannelMessage() const {</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">          33 :     return incomingMessage.eventType == MIDIReadEvent::CHANNEL_MESSAGE</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">          33 :                ? incomingMessage.message.channelmessage</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">          33 :                : ChannelMessage(0, 0, 0);</span></span>
+<span id="L118"><span class="lineNum">     118</span>              : }</span>
+<span id="L119"><span class="lineNum">     119</span>              : </span>
+<span id="L120"><span class="lineNum">     120</span>              : template &lt;class BackendT&gt;</span>
+<span id="L121"><span class="lineNum">     121</span>              : SysCommonMessage</span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           1 : GenericBLEMIDI_Interface&lt;BackendT&gt;::getSysCommonMessage() const {</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">           1 :     return incomingMessage.eventType == MIDIReadEvent::SYSCOMMON_MESSAGE</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">           1 :                ? incomingMessage.message.syscommonmessage</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">           1 :                : SysCommonMessage(0, 0, 0);</span></span>
+<span id="L126"><span class="lineNum">     126</span>              : }</span>
+<span id="L127"><span class="lineNum">     127</span>              : </span>
+<span id="L128"><span class="lineNum">     128</span>              : template &lt;class BackendT&gt;</span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           2 : RealTimeMessage GenericBLEMIDI_Interface&lt;BackendT&gt;::getRealTimeMessage() const {</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">           2 :     return incomingMessage.eventType == MIDIReadEvent::REALTIME_MESSAGE</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">           2 :                ? incomingMessage.message.realtimemessage</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           2 :                : RealTimeMessage(0);</span></span>
+<span id="L133"><span class="lineNum">     133</span>              : }</span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span>              : template &lt;class BackendT&gt;</span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">           8 : SysExMessage GenericBLEMIDI_Interface&lt;BackendT&gt;::getSysExMessage() const {</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">           8 :     auto evt = incomingMessage.eventType;</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">           8 :     bool hasSysEx = evt == MIDIReadEvent::SYSEX_MESSAGE ||</span></span>
+<span id="L139"><span class="lineNum">     139</span>              :                     evt == MIDIReadEvent::SYSEX_CHUNK;</span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">           8 :     return hasSysEx ? incomingMessage.message.sysexmessage</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">           8 :                     : SysExMessage(nullptr, 0);</span></span>
+<span id="L142"><span class="lineNum">     142</span>              : }</span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span>              : template &lt;class BackendT&gt;</span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">          13 : uint16_t GenericBLEMIDI_Interface&lt;BackendT&gt;::getTimestamp() const {</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">          13 :     return incomingMessage.timestamp;</span></span>
+<span id="L147"><span class="lineNum">     147</span>              : }</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span>              : // -------------------------------------------------------------------------- //</span>
+<span id="L150"><span class="lineNum">     150</span>              : </span>
+<span id="L151"><span class="lineNum">     151</span>              : template &lt;class BackendT&gt;</span>
+<span id="L152"><span class="lineNum">     152</span>              : void GenericBLEMIDI_Interface&lt;BackendT&gt;::setName(const char *name) {</span>
+<span id="L153"><span class="lineNum">     153</span>              :     ble_settings.device_name = name;</span>
+<span id="L154"><span class="lineNum">     154</span>              : }</span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span>              : template &lt;class BackendT&gt;</span>
+<span id="L157"><span class="lineNum">     157</span>              : void GenericBLEMIDI_Interface&lt;BackendT&gt;::requireEncryption(bool require) {</span>
+<span id="L158"><span class="lineNum">     158</span>              :     ble_settings.require_encryption = require;</span>
+<span id="L159"><span class="lineNum">     159</span>              : }</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              : template &lt;class BackendT&gt;</span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">          28 : void GenericBLEMIDI_Interface&lt;BackendT&gt;::begin() {</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          28 :     backend.begin(ble_settings);</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">          28 : }</span></span>
+<span id="L165"><span class="lineNum">     165</span>              : </span>
+<span id="L166"><span class="lineNum">     166</span>              : template &lt;class BackendT&gt;</span>
+<span id="L167"><span class="lineNum">     167</span>              : void GenericBLEMIDI_Interface&lt;BackendT&gt;::end() {</span>
+<span id="L168"><span class="lineNum">     168</span>              :     backend.end();</span>
+<span id="L169"><span class="lineNum">     169</span>              : }</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              : // -------------------------------------------------------------------------- //</span>
+<span id="L172"><span class="lineNum">     172</span>              : </span>
+<span id="L173"><span class="lineNum">     173</span>              : END_CS_NAMESPACE</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

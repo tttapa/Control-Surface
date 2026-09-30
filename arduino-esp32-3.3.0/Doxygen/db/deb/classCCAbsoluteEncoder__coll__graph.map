@@ -1,0 +1,17 @@
+<map id="CCAbsoluteEncoder" name="CCAbsoluteEncoder">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="319,1965,484,2031"/>
+<area shape="rect" id="Node000002" href="$df/d5d/classGenericMIDIAbsoluteEncoder.html" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="287,1556,515,1916"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="404,1930,404,1965,399,1965,399,1930"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="143,1178,286,1303"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="240,1316,301,1492,326,1554,321,1556,296,1494,235,1317"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="117,573,312,939"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="217,952,217,1177,212,1177,212,952"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="129,363,176,572,171,574,124,364"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="273,512,262,558,257,557,268,510"/>
+<area shape="rect" id="Node000007" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="311,988,492,1493"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="404,1493,404,1540,399,1540,399,1493"/>
+<area shape="rect" id="Node000008" href="$db/dd2/classEncoderState.html" title=" " alt="" coords="516,1141,687,1341"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="566,1342,506,1494,487,1542,482,1540,502,1492,561,1340"/>
+</map>

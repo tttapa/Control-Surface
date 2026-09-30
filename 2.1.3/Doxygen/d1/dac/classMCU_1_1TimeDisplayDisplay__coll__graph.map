@@ -1,0 +1,37 @@
+<map id="TimeDisplayDisplay" name="TimeDisplayDisplay">
+<area shape="rect" id="Node000001" title="Displays the MCU time code display." alt="" coords="496,3140,665,3465"/>
+<area shape="rect" id="Node000002" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="211,2684,364,3049"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="374,2985,480,3139,498,3166,494,3169,476,3141,370,2988"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,3250,252,3355"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="213,2947,169,3007,150,3040,135,3074,125,3114,120,3156,122,3234,116,3234,115,3155,120,3113,130,3072,145,3037,164,3004,208,2944"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="277,3153,466,3453"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="281,3049,290,3115,295,3136,290,3138,285,3117,276,3050"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="158,3237,212,3115,234,3049,239,3050,216,3117,163,3239"/>
+<area shape="rect" id="Node000004" href="$df/d42/classDisplayInterface.html" title="An interface for displays." alt="" coords="119,1971,325,2396"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="245,2396,271,2667,266,2668,240,2397"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="199,1453,243,1518"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="223,1532,224,1971,219,1971,218,1532"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="343,3153,329,3074,327,3066,332,3065,334,3073,349,3152"/>
+<area shape="rect" id="Node000007" href="$df/d69/classMCU_1_1TimeDisplay.html" title="Class that receives and stores the text of the Mackie Control Universal 7&#45;segment time display." alt="" coords="520,2794,641,2939"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="583,2940,583,3123,578,3123,578,2940"/>
+<area shape="rect" id="Node000008" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="489,1753,675,2613"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="584,2627,583,2794,578,2794,578,2627"/>
+<area shape="rect" id="Node000009" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="267,1288,521,1683"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="453,1695,492,1838,487,1840,448,1697"/>
+<area shape="rect" id="Node000010" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="161,972,352,1217"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="307,1230,327,1287,322,1289,302,1231"/>
+<area shape="rect" id="Node000011" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="161,539,353,759"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="259,772,259,972,254,972,254,772"/>
+<area shape="rect" id="Node000012" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="50,95,242,235"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="168,248,234,538,229,539,162,250"/>
+<area shape="rect" id="Node000013" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="266,5,469,325"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="333,326,288,523,283,522,328,325"/>
+<area shape="rect" id="Node000014" href="$d1/d7a/structTwoByteRangeMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="376,1052,593,1137"/>
+<area shape="poly" id="edge15_Node000009_Node000014" title=" " alt="" coords="478,1138,446,1273,441,1271,472,1137"/>
+<area shape="rect" id="Node000015" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="394,396,575,901"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="487,901,487,1035,482,1035,482,901"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="546,1453,618,1518"/>
+<area shape="poly" id="edge17_Node000008_Node000016" title=" " alt="" coords="585,1532,585,1753,579,1753,579,1532"/>
+<area shape="rect" id="Node000017" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="642,1343,810,1628"/>
+<area shape="poly" id="edge18_Node000008_Node000017" title=" " alt="" coords="699,1629,677,1737,672,1736,694,1628"/>
+</map>

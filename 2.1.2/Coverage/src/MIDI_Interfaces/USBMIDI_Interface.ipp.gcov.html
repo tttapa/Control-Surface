@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/MIDI_Interfaces/USBMIDI_Interface.ipp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/MIDI_Interfaces">src/MIDI_Interfaces</a> - USBMIDI_Interface.ipp<span style="font-size: 80%;"> (source / <a href="USBMIDI_Interface.ipp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">71.8&nbsp;%</td>
+            <td class="headerCovTableEntry">39</td>
+            <td class="headerCovTableEntry">28</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 18:06:03</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryMed">83.3&nbsp;%</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">10</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #include &lt;Def/TypeTraits.hpp&gt;</span>
+<span id="L2"><span class="lineNum">       2</span>              : #include &lt;MIDI_Parsers/LambdaPuller.hpp&gt;</span>
+<span id="L3"><span class="lineNum">       3</span>              : </span>
+<span id="L4"><span class="lineNum">       4</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L5"><span class="lineNum">       5</span>              : </span>
+<span id="L6"><span class="lineNum">       6</span>              : // Reading MIDI</span>
+<span id="L7"><span class="lineNum">       7</span>              : // -----------------------------------------------------------------------------</span>
+<span id="L8"><span class="lineNum">       8</span>              : </span>
+<span id="L9"><span class="lineNum">       9</span>              : template &lt;class Backend&gt;</span>
+<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC">          18 : MIDIReadEvent GenericUSBMIDI_Interface&lt;Backend&gt;::read() {</span></span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">          18 :     auto pullpacket = [this](typename Backend::MIDIUSBPacket_t &amp;packet) {</span></span>
+<span id="L12"><span class="lineNum">      12</span> <span class="tlaGNC">          26 :         packet = backend.read();</span></span>
+<span id="L13"><span class="lineNum">      13</span> <span class="tlaGNC">          26 :         return packet[0] != 0x00;</span></span>
+<span id="L14"><span class="lineNum">      14</span>              :     };</span>
+<span id="L15"><span class="lineNum">      15</span> <span class="tlaGNC">          36 :     return parser.pull(LambdaPuller(std::move(pullpacket)));</span></span>
+<span id="L16"><span class="lineNum">      16</span>              : }</span>
+<span id="L17"><span class="lineNum">      17</span>              : </span>
+<span id="L18"><span class="lineNum">      18</span>              : template &lt;class Backend&gt;</span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaUNC">           0 : void GenericUSBMIDI_Interface&lt;Backend&gt;::begin() {</span></span>
+<span id="L20"><span class="lineNum">      20</span>              : #ifndef __SAM3X8E__ // Due compiler too old, doesn't support begin_if_possible()</span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaUNC">           0 :     begin_if_possible(backend);</span></span>
+<span id="L22"><span class="lineNum">      22</span>              : #endif</span>
+<span id="L23"><span class="lineNum">      23</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : template &lt;class Backend&gt;</span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           6 : void GenericUSBMIDI_Interface&lt;Backend&gt;::update() {</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           6 :     MIDI_Interface::updateIncoming(this);</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           6 : }</span></span>
+<span id="L29"><span class="lineNum">      29</span>              : </span>
+<span id="L30"><span class="lineNum">      30</span>              : // Retrieving the received messages</span>
+<span id="L31"><span class="lineNum">      31</span>              : // -----------------------------------------------------------------------------</span>
+<span id="L32"><span class="lineNum">      32</span>              : </span>
+<span id="L33"><span class="lineNum">      33</span>              : template &lt;class Backend&gt;</span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           3 : ChannelMessage GenericUSBMIDI_Interface&lt;Backend&gt;::getChannelMessage() const {</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           3 :     return parser.getChannelMessage();</span></span>
+<span id="L36"><span class="lineNum">      36</span>              : }</span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              : template &lt;class Backend&gt;</span>
+<span id="L39"><span class="lineNum">      39</span>              : SysCommonMessage</span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           3 : GenericUSBMIDI_Interface&lt;Backend&gt;::getSysCommonMessage() const {</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           3 :     return parser.getSysCommonMessage();</span></span>
+<span id="L42"><span class="lineNum">      42</span>              : }</span>
+<span id="L43"><span class="lineNum">      43</span>              : </span>
+<span id="L44"><span class="lineNum">      44</span>              : template &lt;class Backend&gt;</span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           2 : RealTimeMessage GenericUSBMIDI_Interface&lt;Backend&gt;::getRealTimeMessage() const {</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           2 :     return parser.getRealTimeMessage();</span></span>
+<span id="L47"><span class="lineNum">      47</span>              : }</span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span>              : template &lt;class Backend&gt;</span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           7 : SysExMessage GenericUSBMIDI_Interface&lt;Backend&gt;::getSysExMessage() const {</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           7 :     return parser.getSysExMessage();</span></span>
+<span id="L52"><span class="lineNum">      52</span>              : }</span>
+<span id="L53"><span class="lineNum">      53</span>              : </span>
+<span id="L54"><span class="lineNum">      54</span>              : // Sending MIDI</span>
+<span id="L55"><span class="lineNum">      55</span>              : // -----------------------------------------------------------------------------</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              : template &lt;class Backend&gt;</span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           3 : void GenericUSBMIDI_Interface&lt;Backend&gt;::sendChannelMessageImpl(</span></span>
+<span id="L59"><span class="lineNum">      59</span>              :     ChannelMessage msg) {</span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           3 :     sender.sendChannelMessage(msg, Sender {this});</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           3 :     if (alwaysSendImmediately_)</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :         backend.sendNow();</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           3 : }</span></span>
+<span id="L64"><span class="lineNum">      64</span>              : </span>
+<span id="L65"><span class="lineNum">      65</span>              : template &lt;class Backend&gt;</span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 : void GenericUSBMIDI_Interface&lt;Backend&gt;::sendSysCommonImpl(</span></span>
+<span id="L67"><span class="lineNum">      67</span>              :     SysCommonMessage msg) {</span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC">           0 :     sender.sendSysCommonMessage(msg, Sender {this});</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC">           0 :     if (alwaysSendImmediately_)</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :         backend.sendNow();</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              : template &lt;class Backend&gt;</span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">          19 : void GenericUSBMIDI_Interface&lt;Backend&gt;::sendSysExImpl(const SysExMessage msg) {</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          19 :     sender.sendSysEx(msg, Sender {this});</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">          19 :     if (alwaysSendImmediately_)</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaUNC">           0 :         backend.sendNow();</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">          19 : }</span></span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span>              : template &lt;class Backend&gt;</span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">           1 : void GenericUSBMIDI_Interface&lt;Backend&gt;::sendRealTimeImpl(RealTimeMessage msg) {</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">           1 :     sender.sendRealTimeMessage(msg, Sender {this});</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">           1 :     if (alwaysSendImmediately_)</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaUNC">           0 :         backend.sendNow();</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L86"><span class="lineNum">      86</span>              : </span>
+<span id="L87"><span class="lineNum">      87</span>              : END_CS_NAMESPACE</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

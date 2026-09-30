@@ -1,0 +1,20 @@
+<map id="AnyMIDIMessage" name="AnyMIDIMessage">
+<area shape="rect" id="Node000001" title="MIDI message variant type (with timestamp)." alt="" coords="264,1852,416,2017"/>
+<area shape="rect" id="Node000002" href="$d1/d7e/unionAnyMIDIMessage_1_1Message.html" title=" " alt="" coords="291,1636,389,1781"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="343,1782,343,1836,337,1836,337,1782"/>
+<area shape="rect" id="Node000003" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="5,1180,160,1565"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,1565,102,1589,115,1610,149,1643,190,1667,234,1684,276,1695,275,1701,232,1690,188,1672,146,1647,111,1614,97,1591,86,1567"/>
+<area shape="rect" id="Node000004" href="$d4/d61/structMIDIMessage.html" title=" " alt="" coords="145,321,397,747"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="223,761,128,1181,123,1179,217,760"/>
+<area shape="rect" id="Node000006" href="$d5/dad/structSysCommonMessage.html" title=" " alt="" coords="184,1220,379,1525"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="276,760,282,1220,277,1220,271,760"/>
+<area shape="rect" id="Node000005" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="368,5,501,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="370,240,353,276,340,307,335,305,348,274,365,238"/>
+<area shape="rect" id="Node000007" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="348,771,513,1156"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="437,251,434,754,429,754,431,251"/>
+<area shape="rect" id="Node000008" href="$db/d45/structSysExMessage.html" title=" " alt="" coords="523,801,693,1126"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="490,250,497,274,530,406,557,540,593,784,587,785,552,541,525,407,492,275,485,252"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="244,1526,246,1569,256,1611,267,1633,283,1654,278,1657,263,1636,251,1613,240,1570,239,1526"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="440,1156,441,1283,438,1414,430,1529,423,1576,413,1613,400,1641,395,1638,408,1611,417,1575,425,1529,433,1413,436,1283,435,1156"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="642,1126,650,1231,646,1345,638,1403,625,1460,606,1515,580,1567,544,1610,499,1645,451,1672,405,1691,403,1686,449,1667,496,1641,540,1607,575,1564,601,1513,620,1458,633,1402,641,1344,644,1231,636,1127"/>
+</map>

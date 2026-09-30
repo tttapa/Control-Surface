@@ -1,0 +1,29 @@
+<map id="IncrementSelectorLEDs&lt; N &gt;" name="IncrementSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="Selector with one button that increments the selection. &#160;&#160;&#160;This version displays the setting using LE..." alt="" coords="406,1747,611,1812"/>
+<area shape="rect" id="Node000002" href="$d1/d94/classGenericIncrementSelector.html" title=" " alt="" coords="387,1217,630,1697"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="511,1711,511,1746,506,1746,506,1711"/>
+<area shape="rect" id="Node000003" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="107,692,265,1147"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="274,1136,279,1145,332,1229,389,1309,385,1312,327,1232,274,1148,269,1139"/>
+<area shape="rect" id="Node000004" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="148,406,272,491"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="210,505,200,692,195,692,205,505"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="5,386,124,511"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="87,524,130,691,125,693,81,525"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="259,5,455,225"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="249,191,190,241,137,298,110,341,88,387,83,385,105,339,133,294,187,237,246,187"/>
+<area shape="rect" id="Node000008" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="347,326,574,571"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="397,238,425,325,420,327,392,239"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="289,859,485,979"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="369,846,349,732,333,602,326,449,333,296,339,225,344,226,338,296,331,449,338,601,354,731,375,845"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="444,572,402,843,396,843,439,571"/>
+<area shape="rect" id="Node000009" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="509,769,716,1069"/>
+<area shape="poly" id="edge10_Node000009_Node000008" title=" " alt="" coords="503,571,562,753,557,755,498,573"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="618,769,620,640,618,504,607,382,597,333,584,297,561,262,533,230,501,202,467,178,470,174,504,198,536,226,565,259,588,295,602,332,612,381,623,503,626,640,623,769"/>
+<area shape="rect" id="Node000010" href="$d7/d83/classAH_1_1IncrementButton.html" title="A class for buttons that increment some counter or setting." alt="" coords="740,817,928,1022"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="793,1023,730,1148,642,1284,637,1281,725,1145,788,1021"/>
+<area shape="rect" id="Node000011" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="746,296,922,601"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="837,602,837,800,831,800,831,602"/>
+<area shape="rect" id="Node000012" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="700,13,816,218"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="784,218,798,279,793,280,779,219"/>
+<area shape="rect" id="Node000013" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="841,43,979,188"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="896,189,875,281,870,279,891,187"/>
+</map>

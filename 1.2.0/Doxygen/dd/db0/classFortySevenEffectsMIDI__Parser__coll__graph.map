@@ -1,0 +1,7 @@
+<map id="FortySevenEffectsMIDI_Parser" name="FortySevenEffectsMIDI_Parser">
+<area shape="rect" id="node1" title="Wrapper class for the FortySevenEffects MIDI parser." alt="" coords="173,608,379,744"/>
+<area shape="rect" id="node2" href="$df/d0c/classMIDI__Parser.html" title=" " alt="" coords="87,365,275,531"/>
+<area shape="rect" id="node3" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="5,5,168,288"/>
+<area shape="rect" id="node4" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="193,49,359,244"/>
+<area shape="rect" id="node5" href="$db/d45/structSysExMessage.html" title=" " alt="" coords="300,351,444,545"/>
+</map>

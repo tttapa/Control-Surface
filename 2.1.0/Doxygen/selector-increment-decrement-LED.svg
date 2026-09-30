@@ -1,0 +1,47 @@
+<svg 
+    version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    width="496" height="220">
+    <text x="12" y="16" font-family="Verdana" font-size="16">Try it:</text>
+    <rect id="incr_bg" x="178" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue"/>
+    <text x="206" y="117" font-family="Verdana" font-size="28" text-anchor="middle">+</text>
+    <rect id="incr" x="178" y="80" width="56" height="56" rx="4" ry="4" fill="rgba(0,0,0,0)" style="cursor: pointer"/>
+    <rect id="decr_bg" x="262" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue"/>
+    <text x="290" y="117" font-family="Verdana" font-size="28" text-anchor="middle">–</text>
+    <rect id="decr" x="262" y="80" width="56" height="56" rx="4" ry="4" fill="rgba(0,0,0,0)" style="cursor: pointer"/>
+    <circle id="led1" cx="80" cy="180" r="16" stroke-width="3" stroke="black" fill="red"/>
+    <circle id="led2" cx="164" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led3" cx="248" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led4" cx="332" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <circle id="led5" cx="416" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+
+    <text id="setting" x="248" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
+    <script>
+        let prevSetting = 1;
+        let setting = document.getElementById("setting");
+        let incr = document.getElementById("incr");
+        incr.onclick = function() {
+            setLed(prevSetting, false);
+            prevSetting++;
+            if (prevSetting == 6)
+                prevSetting = 1;
+            setLed(prevSetting, true);
+            setting.textContent = prevSetting;
+        }
+        let decr = document.getElementById("decr");
+        decr.onclick = function() {
+            setLed(prevSetting, false);
+            prevSetting--;
+            if (prevSetting == 0)
+                prevSetting = 5;
+            setLed(prevSetting, true);
+            setting.textContent = prevSetting;
+        }
+        function setLed(i, state) {
+            let led = document.getElementById("led"+i);
+            led.setAttribute("fill", state ? "red" : "white");
+        }
+        
+    </script>
+</svg>

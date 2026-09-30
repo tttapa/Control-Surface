@@ -1,0 +1,7 @@
+<map id="MIDIRotaryEncoder.hpp" name="MIDIRotaryEncoder.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,180,31"/>
+<area shape="rect" id="Node000002" href="$dd/dd9/CCRotaryEncoder_8hpp.html" title=" " alt="" coords="11,79,174,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,44,95,79,90,79,90,44"/>
+<area shape="rect" id="Node000003" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="24,152,161,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,118,95,152,90,152,90,118"/>
+</map>

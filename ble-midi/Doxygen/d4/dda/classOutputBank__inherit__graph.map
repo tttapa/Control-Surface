@@ -1,0 +1,11 @@
+<map id="OutputBank" name="OutputBank">
+<area shape="rect" id="Node000001" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="229,5,389,231"/>
+<area shape="rect" id="Node000002" href="$db/dbd/classBank.html" title=" " alt="" coords="25,279,201,439"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,229,180,280,176,277,218,225"/>
+<area shape="rect" id="Node000004" href="$db/dbd/classBank.html" title=" " alt="" coords="225,286,392,431"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="311,244,311,286,306,286,306,244"/>
+<area shape="rect" id="Node000005" href="$db/dbd/classBank.html" title="A class that groups Bankable MIDI Output Elements and Bankable MIDI Input Elements,..." alt="" coords="416,286,583,431"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="399,228,444,284,440,288,395,231"/>
+<area shape="rect" id="Node000003" href="$da/db8/classTransposer.html" title="Class for transposing the address of NoteButton and other MIDI elements." alt="" coords="5,487,220,647"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,452,115,486,110,486,110,452"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="MultiPurposeButton" name="MultiPurposeButton">
+<area shape="rect" id="Node000001" title="Class for detecting short/long button presses and double clicks." alt="" coords="5,581,219,1047"/>
+<area shape="rect" id="Node000002" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="24,213,200,519"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,519,115,565,109,565,109,519"/>
+<area shape="rect" id="Node000003" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="43,5,181,151"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,151,115,197,109,197,109,151"/>
+</map>

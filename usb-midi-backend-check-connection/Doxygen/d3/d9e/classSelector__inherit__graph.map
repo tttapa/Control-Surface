@@ -1,0 +1,13 @@
+<map id="Selector&lt; N &gt;" name="Selector&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A Selector with an empty callback." alt="" coords="86,1093,193,1159"/>
+<area shape="rect" id="Node000002" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="66,825,213,1045"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,1059,142,1093,137,1093,137,1059"/>
+<area shape="rect" id="Node000003" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,672,129,757"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,770,106,824,101,826,83,771"/>
+<area shape="rect" id="Node000004" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="153,652,272,777"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="190,792,178,826,173,824,185,790"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="115,239,310,604"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="215,618,215,652,210,652,210,618"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="115,5,310,191"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="215,204,215,238,210,238,210,204"/>
+</map>

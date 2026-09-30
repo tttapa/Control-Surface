@@ -1,0 +1,13 @@
+<map id="MatrixAddress&lt; NumRows, NumCols &gt;" name="MatrixAddress&lt; NumRows, NumCols &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="267,916,460,1036"/>
+<area shape="rect" id="Node000002" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="12,625,237,751"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,760,252,844,313,914,309,918,248,847,180,763"/>
+<area shape="rect" id="Node000003" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="5,301,244,481"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,495,127,625,122,625,122,495"/>
+<area shape="rect" id="Node000004" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="45,5,205,231"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="127,231,127,285,122,285,122,231"/>
+<area shape="rect" id="Node000005" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="262,531,465,845"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="366,845,366,899,361,899,361,845"/>
+<area shape="rect" id="Node000006" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="489,535,667,841"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="491,839,451,894,440,906,436,902,447,890,487,836"/>
+</map>

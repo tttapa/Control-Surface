@@ -1,0 +1,24 @@
+<map id="PluggableUSBMIDI" name="PluggableUSBMIDI">
+<area shape="rect" id="Node000001" title=" " alt="" coords="299,1109,511,1849"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="23,767,177,833"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,845,147,944,190,1059,244,1176,302,1288,297,1290,239,1178,186,1061,142,946,110,847"/>
+<area shape="rect" id="Node000003" href="$d5/d1c/structBulkRX.html" title=" " alt="" coords="201,650,402,950"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="329,963,351,1109,346,1110,324,964"/>
+<area shape="rect" id="Node000004" href="$d2/da9/structBulkRX_1_1Reading.html" title="State for reading incoming USB data." alt="" coords="199,392,305,477"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="260,477,282,633,276,634,255,478"/>
+<area shape="rect" id="Node000005" href="$de/dc6/structBulkRX_1_1Reading_1_1Buffer.html" title=" " alt="" coords="5,93,72,198"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="53,198,67,241,86,284,115,329,152,366,187,393,184,397,149,370,111,332,82,287,62,243,48,199"/>
+<area shape="rect" id="Node000006" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="96,13,309,278"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="214,278,229,367,231,375,226,377,224,369,209,279"/>
+<area shape="rect" id="Node000007" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="333,13,547,278"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="439,279,418,1093,413,1093,434,279"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="364,280,305,370,297,380,293,377,300,366,359,277"/>
+<area shape="rect" id="Node000008" href="$dc/d2d/structBulkTX.html" title=" " alt="" coords="487,540,687,1060"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="516,1074,507,1109,502,1108,511,1073"/>
+<area shape="rect" id="Node000009" href="$d4/d25/structBulkTX_1_1Writing.html" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="551,402,657,467"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="605,468,602,524,597,523,600,467"/>
+<area shape="rect" id="Node000010" href="$d1/db2/structBulkTX_1_1Writing_1_1Buffer.html" title=" " alt="" coords="571,103,637,188"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="607,188,607,386,601,386,601,188"/>
+<area shape="rect" id="Node000011" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="661,5,875,285"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="719,287,698,329,673,370,655,391,651,388,668,366,693,327,714,284"/>
+</map>

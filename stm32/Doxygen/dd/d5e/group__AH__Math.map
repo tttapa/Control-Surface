@@ -1,0 +1,5 @@
+<map id="Math Utilities" name="Math Utilities">
+<area shape="rect" id="node1" title="Mathematics helper functions." alt="" coords="180,5,291,31"/>
+<area shape="rect" id="node3" href="$d5/d99/group__math-types.html" title="Vector and Quaternion types with the necessary operators and functions." alt="" coords="339,5,435,31"/>
+<area shape="rect" id="node2" href="$d7/d07/group__AH__group.html" title="Common utility library: https://github.com/tttapa/Arduino&#45;Helpers" alt="" coords="5,5,132,31"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="AudioVULEDs&lt; N &gt;" name="AudioVULEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A VU meter that reads from an Audio stream using the AudioAnalyzePeak class, and displays it on an LE..." alt="" coords="92,775,235,960"/>
+<area shape="rect" id="Node000002" href="$d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="9,501,139,707"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,719,135,774,129,775,111,720"/>
+<area shape="rect" id="Node000003" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="5,201,135,426"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="74,439,75,501,70,501,69,439"/>
+<area shape="rect" id="Node000004" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="169,481,336,727"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="209,741,197,775,192,774,204,739"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="159,193,355,433"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="257,447,257,481,252,481,252,447"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="159,5,355,145"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="259,159,259,193,254,193,254,159"/>
+</map>

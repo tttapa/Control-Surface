@@ -1,0 +1,6 @@
+<map id="PBPotentiometer" name="PBPotentiometer">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="28,763,169,840"/>
+<area shape="rect" id="node2" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="5,491,192,715"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="29,160,168,443"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="7,5,190,112"/>
+</map>

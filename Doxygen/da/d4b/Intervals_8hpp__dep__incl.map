@@ -1,0 +1,17 @@
+<map id="Intervals.hpp" name="Intervals.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="61,5,167,31"/>
+<area shape="rect" id="Node000002" href="$d9/dac/Chords_8hpp.html" title=" " alt="" coords="67,79,161,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,44,117,79,111,79,111,44"/>
+<area shape="rect" id="Node000003" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="45,299,183,324"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="71,112,45,130,24,153,12,179,8,201,12,224,23,249,34,265,49,278,82,296,80,301,46,282,31,268,18,252,6,225,3,201,7,177,20,151,41,126,68,108"/>
+<area shape="rect" id="Node000004" href="$dd/d31/Abstract_2MIDIChordButton_8hpp.html" title=" " alt="" coords="33,152,195,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="117,118,117,152,111,152,111,118"/>
+<area shape="rect" id="Node000006" href="$dc/d34/Bankable_2Abstract_2MIDIChordButton_8hpp.html" title=" " alt="" coords="219,152,380,177"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="157,106,270,149,268,154,155,111"/>
+<area shape="rect" id="Node000005" href="$df/de2/NoteChordButton_8hpp.html" title=" " alt="" coords="33,225,195,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="117,191,117,225,111,225,111,191"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="117,264,117,299,111,299,111,264"/>
+<area shape="rect" id="Node000007" href="$de/de3/Bankable_2NoteChordButton_8hpp.html" title=" " alt="" coords="219,225,382,251"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="303,191,303,225,298,225,297,191"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="259,258,146,301,144,296,257,253"/>
+</map>

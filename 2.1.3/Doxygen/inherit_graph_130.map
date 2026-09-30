@@ -1,0 +1,22 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$dd/da4/classMIDIBLEInstance.html" title="Defines the interface for callback functions registered by the low&#45;level BLE code." alt="" coords="57,134,188,159"/>
+<area shape="rect" id="Node000001" href="$de/d82/classESP32BLEBackend.html" title=" " alt="" coords="288,69,520,109"/>
+<area shape="poly" id="edge452_Node000000_Node000001" title=" " alt="" coords="198,129,305,107,306,112,200,134"/>
+<area shape="rect" id="Node000003" href="$de/d82/classESP32BLEBackend.html" title=" " alt="" coords="305,5,503,45"/>
+<area shape="poly" id="edge453_Node000000_Node000003" title=" " alt="" coords="201,135,239,119,254,104,262,88,270,72,286,55,308,43,311,48,290,59,274,75,267,91,258,108,241,124,203,140"/>
+<area shape="rect" id="Node000004" href="$d9/d88/classArduinoBLEBackend.html" title="ArduinoBLE backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="329,134,479,159"/>
+<area shape="poly" id="edge454_Node000000_Node000004" title=" " alt="" coords="202,144,328,144,328,149,202,149"/>
+<area shape="rect" id="Node000006" href="$d5/d2a/classBTstackBackgroundBackend.html" title="Raspberry Pi Pico BTstack background backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="302,187,506,213"/>
+<area shape="poly" id="edge455_Node000000_Node000006" title=" " alt="" coords="202,159,337,185,336,190,201,164"/>
+<area shape="rect" id="Node000008" href="$de/d82/classESP32BLEBackend.html" title="ESP32 backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="304,243,504,269"/>
+<area shape="poly" id="edge456_Node000000_Node000008" title=" " alt="" coords="202,154,241,170,257,183,266,197,275,210,289,223,331,241,329,246,287,228,271,214,262,200,253,187,239,174,200,159"/>
+<area shape="rect" id="Node000005" href="$d9/dc8/classPollingBLEMIDISender.html" title=" " alt="" coords="32,69,213,109"/>
+<area shape="poly" id="edge457_Node000005_Node000004" title=" " alt="" coords="228,108,341,131,340,137,227,113"/>
+<area shape="rect" id="Node000007" href="$d9/dc8/classPollingBLEMIDISender.html" title=" " alt="" coords="5,184,240,224"/>
+<area shape="poly" id="edge458_Node000007_Node000006" title=" " alt="" coords="254,199,302,199,302,204,254,205"/>
+<area shape="rect" id="Node000002" href="$dd/da0/classThreadedBLEMIDISender.html" title="Class that manages a background thread that sends BLE packets asynchronously." alt="" coords="31,5,214,45"/>
+<area shape="poly" id="edge459_Node000002_Node000001" title=" " alt="" coords="225,46,316,67,315,72,224,51"/>
+<area shape="poly" id="edge460_Node000002_Node000003" title=" " alt="" coords="228,23,305,23,305,28,228,28"/>
+<area shape="rect" id="Node000009" href="$dd/da0/classThreadedBLEMIDISender.html" title=" " alt="" coords="7,248,238,288"/>
+<area shape="poly" id="edge461_Node000009_Node000008" title=" " alt="" coords="251,260,304,258,304,263,252,265"/>
+</map>

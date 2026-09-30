@@ -1,0 +1,7 @@
+<map id="ThreadedBLEMIDISender&lt; Derived &gt;" name="ThreadedBLEMIDISender&lt; Derived &gt;">
+<area shape="rect" id="Node000001" title="Class that manages a background thread that sends BLE packets asynchronously." alt="" coords="129,5,338,525"/>
+<area shape="rect" id="Node000002" href="$de/d82/classESP32BLEBackend.html" title=" " alt="" coords="5,573,229,1293"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,540,183,573,177,572,183,539"/>
+<area shape="rect" id="Node000003" href="$de/d82/classESP32BLEBackend.html" title=" " alt="" coords="254,573,447,1293"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="284,538,290,572,285,573,279,539"/>
+</map>

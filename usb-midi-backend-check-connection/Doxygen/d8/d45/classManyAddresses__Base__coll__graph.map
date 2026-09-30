@@ -1,0 +1,7 @@
+<map id="ManyAddresses_Base" name="ManyAddresses_Base">
+<area shape="rect" id="Node000001" title="A base class for all MIDIOutputElements that can have one of many addresses." alt="" coords="34,523,215,588"/>
+<area shape="rect" id="Node000002" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="5,293,244,473"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,487,127,523,122,523,122,487"/>
+<area shape="rect" id="Node000003" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="45,5,205,231"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,231,127,277,122,277,122,231"/>
+</map>

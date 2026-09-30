@@ -1,0 +1,3 @@
+<map id="SelectorBase" name="SelectorBase">
+<area shape="rect" id="node1" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,5,137,97"/>
+</map>

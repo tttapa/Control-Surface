@@ -1,0 +1,57 @@
+<map id="PBPotentiometer.hpp" name="PBPotentiometer.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="2487,5,2646,32"/>
+<area shape="rect" id="node2" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="1874,1273,2065,1300"/>
+<area shape="rect" id="node3" href="$d3/de4/Abstract_2MIDIFilteredAnalog_8hpp.html" title=" " alt="" coords="1228,155,1407,196"/>
+<area shape="rect" id="node42" href="$de/daf/PitchBendSender_8hpp.html" title=" " alt="" coords="2441,80,2693,107"/>
+<area shape="rect" id="node4" href="$d8/df3/FilteredAnalog_8hpp.html" title=" " alt="" coords="2425,333,2660,360"/>
+<area shape="rect" id="node32" href="$d0/d4e/Def_8hpp.html" title=" " alt="" coords="663,415,761,442"/>
+<area shape="rect" id="node35" href="$d1/d41/MIDIOutputElement_8hpp.html" title=" " alt="" coords="850,244,1033,285"/>
+<area shape="rect" id="node5" href="$d3/df0/EMA_8hpp.html" title=" " alt="" coords="2288,900,2435,927"/>
+<area shape="rect" id="node7" href="$d3/d09/Hysteresis_8hpp.html" title=" " alt="" coords="2459,900,2645,927"/>
+<area shape="rect" id="node8" href="$dd/ddf/ExtendedInputOutput_8hpp.html" title=" " alt="" coords="2669,408,2905,449"/>
+<area shape="rect" id="node11" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="2384,1124,2565,1151"/>
+<area shape="rect" id="node14" title=" " alt="" coords="2217,1124,2359,1151"/>
+<area shape="rect" id="node15" href="$d4/d35/Hardware-Types_8hpp.html" title=" " alt="" coords="2041,497,2215,539"/>
+<area shape="rect" id="node21" href="$de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html" title=" " alt="" coords="1579,818,1816,845"/>
+<area shape="rect" id="node30" href="$d5/dee/IncreaseBitDepth_8hpp.html" title=" " alt="" coords="2821,900,3043,927"/>
+<area shape="rect" id="node31" title=" " alt="" coords="786,587,897,613"/>
+<area shape="rect" id="node6" title=" " alt="" coords="691,975,762,1001"/>
+<area shape="rect" id="node9" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="1638,1199,1898,1225"/>
+<area shape="rect" id="node10" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="2405,1049,2571,1076"/>
+<area shape="rect" id="node13" title=" " alt="" coords="2862,1273,2946,1300"/>
+<area shape="rect" id="node12" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="2361,1199,2588,1225"/>
+<area shape="rect" id="node16" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="1074,587,1254,613"/>
+<area shape="rect" id="node17" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="964,661,1103,688"/>
+<area shape="rect" id="node26" title=" " alt="" coords="1069,975,1144,1001"/>
+<area shape="rect" id="node29" title=" " alt="" coords="1385,661,1505,688"/>
+<area shape="rect" id="node18" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="1349,736,1510,763"/>
+<area shape="rect" id="node19" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="1297,900,1527,927"/>
+<area shape="rect" id="node28" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="1280,818,1392,845"/>
+<area shape="rect" id="node20" title=" " alt="" coords="205,975,443,1001"/>
+<area shape="rect" id="node22" href="$d5/d4f/AH_2Settings_2Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="1551,900,1654,927"/>
+<area shape="rect" id="node27" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="1678,900,1909,927"/>
+<area shape="rect" id="node23" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="1512,1124,1691,1151"/>
+<area shape="rect" id="node24" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="1969,975,2178,1001"/>
+<area shape="rect" id="node25" title=" " alt="" coords="2355,975,2426,1001"/>
+<area shape="rect" id="node33" href="$d7/d42/Channel_8hpp.html" title=" " alt="" coords="195,900,298,927"/>
+<area shape="rect" id="node34" href="$d2/dbc/Cable_8hpp.html" title=" " alt="" coords="425,900,511,927"/>
+<area shape="rect" id="node36" href="$d4/d93/Updatable_8hpp.html" title=" " alt="" coords="1563,505,1778,531"/>
+<area shape="rect" id="node41" href="$db/dd6/MIDIAddress_8hpp.html" title=" " alt="" coords="739,333,898,360"/>
+<area shape="rect" id="node37" href="$d8/db4/AH_2Containers_2CRTP_8hpp.html" title=" " alt="" coords="1543,587,1721,613"/>
+<area shape="rect" id="node38" href="$de/dd1/LinkedList_8hpp.html" title=" " alt="" coords="1897,587,2109,613"/>
+<area shape="rect" id="node40" href="$d4/d84/Mutex_8hpp.html" title=" " alt="" coords="1330,587,1518,613"/>
+<area shape="rect" id="node39" title=" " alt="" coords="1847,661,1918,688"/>
+<area shape="rect" id="node43" href="$d3/d37/Control__Surface__Class_8hpp.html" title=" " alt="" coords="1876,155,2052,196"/>
+<area shape="rect" id="node44" href="$d1/dd0/MillisMicrosTimer_8hpp.html" title=" " alt="" coords="2704,975,2941,1001"/>
+<area shape="rect" id="node45" href="$d6/dd2/DisplayElement_8hpp.html" title=" " alt="" coords="1931,251,2138,278"/>
+<area shape="rect" id="node46" href="$dc/d77/DisplayInterface_8hpp.html" title=" " alt="" coords="1788,333,1999,360"/>
+<area shape="rect" id="node48" href="$d6/d04/MIDI__Interface_8hpp.html" title=" " alt="" coords="1179,244,1338,285"/>
+<area shape="rect" id="node53" title=" " alt="" coords="1447,415,1662,442"/>
+<area shape="rect" id="node47" title=" " alt="" coords="1851,415,1915,442"/>
+<area shape="rect" id="node49" href="$dd/ddf/MIDI__Pipes_8hpp.html" title=" " alt="" coords="113,505,236,531"/>
+<area shape="rect" id="node52" href="$d7/d2d/MIDI__Parser_8hpp.html" title=" " alt="" coords="1025,333,1239,360"/>
+<area shape="rect" id="node54" href="$d6/d38/MIDI__Interface_8ipp.html" title=" " alt="" coords="1315,333,1456,360"/>
+<area shape="rect" id="node50" href="$d1/d40/BitArray_8hpp.html" title=" " alt="" coords="462,587,661,613"/>
+<area shape="rect" id="node51" href="$dc/d40/MIDI__MessageTypes_8hpp.html" title=" " alt="" coords="233,811,439,852"/>
+<area shape="rect" id="node55" href="$d6/d0b/Def_2CRTP_8hpp.html" title=" " alt="" coords="1315,415,1423,442"/>
+</map>

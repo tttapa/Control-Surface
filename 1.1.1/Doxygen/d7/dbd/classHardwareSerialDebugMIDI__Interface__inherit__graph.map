@@ -1,0 +1,8 @@
+<map id="HardwareSerialDebugMIDI_Interface" name="HardwareSerialDebugMIDI_Interface">
+<area shape="rect" id="node1" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a HardwareS..." alt="" coords="15,1468,205,1575"/>
+<area shape="rect" id="node2" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="10,1299,210,1420"/>
+<area shape="rect" id="node3" href="$d8/d0b/classStreamDebugMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving human&#45;readable MIDI messages over a Stream." alt="" coords="5,1071,215,1251"/>
+<area shape="rect" id="node4" href="$d3/dc3/classStreamMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Stream." alt="" coords="25,857,195,1023"/>
+<area shape="rect" id="node5" href="$de/d76/classParsing__MIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="21,527,199,809"/>
+<area shape="rect" id="node6" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="31,5,189,479"/>
+</map>

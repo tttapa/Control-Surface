@@ -1,0 +1,6 @@
+<map id="AudioVU" name="AudioVU">
+<area shape="rect" id="node1" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="188,263,325,413"/>
+<area shape="rect" id="node2" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="5,5,143,200"/>
+<area shape="rect" id="node3" href="$d0/d49/classMovingCoilBallistics.html" title=" " alt="" coords="167,5,346,200"/>
+<area shape="rect" id="node4" href="$d0/d18/classAudioVU_1_1Analyzer.html" title="The AudioAnalyzePeak and AudioAnalyzeRMS classes don&#39;t implement a common interface,..." alt="" coords="370,35,477,171"/>
+</map>

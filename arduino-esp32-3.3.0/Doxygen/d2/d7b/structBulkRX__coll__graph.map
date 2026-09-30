@@ -1,0 +1,11 @@
+<map id="BulkRX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;" name="BulkRX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;">
+<area shape="rect" id="Node000001" title="Receives Bulk packets (OUT for device mode, IN for host mode)" alt="" coords="106,496,299,796"/>
+<area shape="rect" id="Node000002" href="$d2/da9/structBulkRX_1_1Reading.html" title="State for reading incoming USB data." alt="" coords="150,348,255,433"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,434,205,480,200,480,200,434"/>
+<area shape="rect" id="Node000003" href="$de/dc6/structBulkRX_1_1Reading_1_1Buffer.html" title=" " alt="" coords="5,85,72,191"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,190,67,230,86,269,112,304,141,334,137,338,107,307,82,272,62,232,48,192"/>
+<area shape="rect" id="Node000004" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="96,5,309,271"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="205,271,205,332,200,332,200,271"/>
+<area shape="rect" id="Node000005" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="333,5,547,271"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="336,273,286,326,270,341,266,337,282,322,332,269"/>
+</map>

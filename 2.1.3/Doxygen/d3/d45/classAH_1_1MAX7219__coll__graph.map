@@ -1,0 +1,22 @@
+<map id="MAX7219&lt; NumChips, SPIDriver &gt;" name="MAX7219&lt; NumChips, SPIDriver &gt;">
+<area shape="rect" id="Node000001" title="A class for LED outputs using the MAX7219 LED display driver." alt="" coords="670,2165,881,2545"/>
+<area shape="rect" id="Node000002" href="$dd/de5/classAH_1_1MAX7219__Base.html" title=" " alt="" coords="615,931,802,1331"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="752,1344,753,1354,770,1571,779,1790,783,1993,782,2165,777,2165,777,1993,774,1790,765,1572,747,1355,746,1345"/>
+<area shape="rect" id="Node000003" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="408,5,524,211"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="496,210,502,234,589,593,663,914,658,915,584,594,497,235,491,212"/>
+<area shape="rect" id="Node000005" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="277,321,484,907"/>
+<area shape="poly" id="edge10_Node000005_Node000003" title=" " alt="" coords="451,212,436,305,430,304,446,211"/>
+<area shape="rect" id="Node000004" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title=" " alt="" coords="506,1355,738,2095"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="718,2108,732,2164,727,2166,713,2109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="450,920,544,1354,539,1355,445,921"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="65,1665,256,1785"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="307,907,302,931,261,1134,225,1335,174,1649,169,1648,220,1334,256,1133,297,930,302,906"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="280,1575,481,1875"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="383,907,383,1558,378,1558,378,907"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="24,2253,297,2458"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="99,2241,71,2170,50,2095,14,1889,5,1804,3,1725,6,1646,15,1561,50,1354,68,1277,90,1199,147,1047,211,907,275,786,280,788,216,909,152,1049,96,1201,73,1278,55,1355,20,1562,11,1646,8,1725,11,1804,19,1888,55,2094,76,2168,104,2239"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="163,1799,163,2252,158,2252,158,1799"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="341,1876,270,2096,214,2239,209,2237,265,2094,336,1874"/>
+<area shape="rect" id="Node000009" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="813,1582,972,1867"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="869,1868,816,2150,811,2149,864,1867"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="Updatable&lt; T &gt;" name="Updatable&lt; T &gt;">
+<area shape="rect" id="Node000001" title="A super class for object that have to be updated regularly." alt="" coords="5,335,124,460"/>
+<area shape="rect" id="Node000002" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="109,5,305,225"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,239,99,335,94,333,143,236"/>
+<area shape="rect" id="Node000004" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="199,275,426,520"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="256,237,269,274,264,275,251,239"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="119,701,315,821"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="203,687,185,520,180,397,185,274,189,225,194,226,190,275,185,397,190,520,208,687"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="250,521,242,545,227,616,221,685,215,684,222,615,237,543,245,519"/>
+<area shape="rect" id="Node000005" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="355,611,561,911"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="364,519,394,594,389,596,359,521"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="482,610,487,529,484,443,468,356,454,315,436,276,413,243,384,214,352,189,318,168,321,163,355,185,388,210,417,240,440,273,459,313,473,355,489,442,493,529,488,610"/>
+</map>

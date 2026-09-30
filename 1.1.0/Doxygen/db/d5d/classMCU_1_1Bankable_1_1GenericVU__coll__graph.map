@@ -1,0 +1,14 @@
+<map id="MCU::Bankable::GenericVU&lt; NumBanks, Callback &gt;" name="MCU::Bankable::GenericVU&lt; NumBanks, Callback &gt;">
+<area shape="rect" id="node1" title="A class for MIDI input elements that represent Mackie Control Universal VU meters." alt="" coords="673,1433,859,1584"/>
+<area shape="rect" id="node2" href="$d4/d71/classMCU_1_1VU__Base.html" title=" " alt="" coords="499,1035,697,1362"/>
+<area shape="rect" id="node3" href="$d1/df7/classMIDIInputElementChannelPressure.html" title=" " alt="" coords="111,712,359,907"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1153,188,1245"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="213,1013,405,1384"/>
+<area shape="rect" id="node4" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="157,424,313,633"/>
+<area shape="rect" id="node5" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="142,5,329,361"/>
+<area shape="rect" id="node8" href="$d2/de9/classIVU.html" title="An abstract interface for VU meters." alt="" coords="383,741,506,877"/>
+<area shape="rect" id="node9" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="531,683,665,936"/>
+<area shape="rect" id="node10" title=" " alt="" coords="689,771,763,848"/>
+<area shape="rect" id="node11" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="741,1065,969,1333"/>
+<area shape="rect" id="node12" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="787,756,964,863"/>
+</map>

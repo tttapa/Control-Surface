@@ -1,0 +1,4 @@
+<map id="SerialMIDI_Parser" name="SerialMIDI_Parser">
+<area shape="rect" id="node1" title="Parser for Serial MIDI streams (and BLE&#45;MIDI)." alt="" coords="5,204,263,589"/>
+<area shape="rect" id="node2" href="$df/d0c/classMIDI__Parser.html" title="Base class for MIDI parsers." alt="" coords="30,5,238,156"/>
+</map>

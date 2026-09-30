@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - 73449d9b107c772cf65493691543348214e5d5eb - src/MIDI_Parsers/BLEMIDIParser.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/MIDI_Parsers">src/MIDI_Parsers</a> - BLEMIDIParser.hpp<span style="font-size: 80%;"> (source / <a href="BLEMIDIParser.hpp.func-c.html" title="Click to go to function table">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">73449d9b107c772cf65493691543348214e5d5eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">88.9&nbsp;%</td>
+            <td class="headerCovTableEntry">36</td>
+            <td class="headerCovTableEntry">32</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-06 17:27:32</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryMed">80.0&nbsp;%</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">4</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #pragma once</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : #include &lt;Settings/NamespaceSettings.hpp&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              : #include &lt;stddef.h&gt;</span>
+<span id="L5"><span class="lineNum">       5</span>              : #include &lt;stdint.h&gt;</span>
+<span id="L6"><span class="lineNum">       6</span>              : </span>
+<span id="L7"><span class="lineNum">       7</span>              : BEGIN_CS_NAMESPACE</span>
+<span id="L8"><span class="lineNum">       8</span>              : </span>
+<span id="L9"><span class="lineNum">       9</span>              : /** </span>
+<span id="L10"><span class="lineNum">      10</span>              :  * @brief   Class for parsing BLE-MIDI packets. It doesn't parse the actual MIDI</span>
+<span id="L11"><span class="lineNum">      11</span>              :  *          messages, it just extracts the relevant MIDI data from the BLE </span>
+<span id="L12"><span class="lineNum">      12</span>              :  *          packets.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  * </span>
+<span id="L14"><span class="lineNum">      14</span>              :  * @ingroup MIDIParsers</span>
+<span id="L15"><span class="lineNum">      15</span>              :  */</span>
+<span id="L16"><span class="lineNum">      16</span>              : class BLEMIDIParser {</span>
+<span id="L17"><span class="lineNum">      17</span>              :   public:</span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">          44 :     BLEMIDIParser(const uint8_t *data, size_t length)</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">          44 :         : data(data), end(data + length) {</span></span>
+<span id="L20"><span class="lineNum">      20</span>              :         // Need at least two bytes to be useful.</span>
+<span id="L21"><span class="lineNum">      21</span>              :         // Usually, we have header, timestamp and at least one MIDI byte,</span>
+<span id="L22"><span class="lineNum">      22</span>              :         // but a SysEx continuation could perhaps have only a header and a</span>
+<span id="L23"><span class="lineNum">      23</span>              :         // single data byte (this is not explicitly allowed by the spec, but</span>
+<span id="L24"><span class="lineNum">      24</span>              :         // handling this case requires no extra effort)</span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">          44 :         if (length &lt; 2) {</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">          30 :             this-&gt;data = end;</span></span>
+<span id="L27"><span class="lineNum">      27</span>              :         }</span>
+<span id="L28"><span class="lineNum">      28</span>              :         // First byte should be a header. If it's a data byte, discard packet.</span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">          14 :         else if (isData(data[0])) {</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           1 :             this-&gt;data = end;</span></span>
+<span id="L31"><span class="lineNum">      31</span>              :         }</span>
+<span id="L32"><span class="lineNum">      32</span>              :         // If the second byte is a data byte, this is a SysEx continuation</span>
+<span id="L33"><span class="lineNum">      33</span>              :         // packet</span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">          13 :         else if (isData(data[1])) {</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           1 :             this-&gt;timestamp = data[0] &amp; 0x7F;</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 :             this-&gt;timestamp &lt;&lt;= 7;</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           1 :             this-&gt;data += 1;</span></span>
+<span id="L38"><span class="lineNum">      38</span>              :         }</span>
+<span id="L39"><span class="lineNum">      39</span>              :         // Otherwise, the second byte is a timestamp, so skip it</span>
+<span id="L40"><span class="lineNum">      40</span>              :         else {</span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">          12 :             this-&gt;timestamp = data[0] &amp; 0x7F;</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">          12 :             this-&gt;timestamp &lt;&lt;= 7;</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">          12 :             this-&gt;timestamp |= data[1] &amp; 0x7F;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">          12 :             this-&gt;data += 2;</span></span>
+<span id="L45"><span class="lineNum">      45</span>              :         }</span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">          44 :     }</span></span>
+<span id="L47"><span class="lineNum">      47</span>              : </span>
+<span id="L48"><span class="lineNum">      48</span>              :     /// Extend the BLE packet with the given buffer.</span>
+<span id="L49"><span class="lineNum">      49</span>              :     /// @pre    The previous buffer was fully consumed (@ref pull returned false).</span>
+<span id="L50"><span class="lineNum">      50</span>              :     /// @note   This function should only be used for a single packet that spans</span>
+<span id="L51"><span class="lineNum">      51</span>              :     ///         multiple buffers. If you want to parse a new packet, you should</span>
+<span id="L52"><span class="lineNum">      52</span>              :     ///         create a new BLEMIDIParser instance.</span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaUNC">           0 :     void extend(const uint8_t *data, size_t length) {</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaUNC">           0 :         this-&gt;data = data;</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :         this-&gt;end = data + length;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span>              :     /// Get the next MIDI byte from the BLE packet (if available).</span>
+<span id="L59"><span class="lineNum">      59</span>              :     /// @return True if a byte was available, false otherwise.</span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">         133 :     bool pull(uint8_t &amp;output) {</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">         156 :         while (data != end) {</span></span>
+<span id="L62"><span class="lineNum">      62</span>              :             // Simply pass on all normal data bytes to the MIDI parser.</span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">         129 :             if (isData(*data)) {</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          77 :                 output = *data++;</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          77 :                 prevWasTimestamp = false;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          77 :                 return true;</span></span>
+<span id="L67"><span class="lineNum">      67</span>              :             }</span>
+<span id="L68"><span class="lineNum">      68</span>              :             // If it's not a data byte, it's either a timestamp byte or a</span>
+<span id="L69"><span class="lineNum">      69</span>              :             // MIDI status byte.</span>
+<span id="L70"><span class="lineNum">      70</span>              :             else {</span>
+<span id="L71"><span class="lineNum">      71</span>              :                 // Timestamp bytes and MIDI status bytes should alternate.</span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          52 :                 prevWasTimestamp = !prevWasTimestamp;</span></span>
+<span id="L73"><span class="lineNum">      73</span>              :                 // If the previous non-data byte was a timestamp, this one is</span>
+<span id="L74"><span class="lineNum">      74</span>              :                 // a MIDI status byte, so send it to the MIDI parser.</span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          52 :                 if (!prevWasTimestamp) {</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">          29 :                     output = *data++;</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">          29 :                     return true;</span></span>
+<span id="L78"><span class="lineNum">      78</span>              :                 }</span>
+<span id="L79"><span class="lineNum">      79</span>              :                 // Otherwise it's a time stamp</span>
+<span id="L80"><span class="lineNum">      80</span>              :                 else {</span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">          23 :                     uint16_t timestampLow = *data++ &amp; 0x7F;</span></span>
+<span id="L82"><span class="lineNum">      82</span>              :                     // The BLE MIDI spec has the following to say about overflow:</span>
+<span id="L83"><span class="lineNum">      83</span>              :                     // &gt; Should the timestamp value of a subsequent MIDI message</span>
+<span id="L84"><span class="lineNum">      84</span>              :                     // &gt; in the same packet overflow/wrap (i.e., the</span>
+<span id="L85"><span class="lineNum">      85</span>              :                     // &gt; timestampLow is smaller than a preceding timestampLow),</span>
+<span id="L86"><span class="lineNum">      86</span>              :                     // &gt; the receiver is responsible for tracking this by</span>
+<span id="L87"><span class="lineNum">      87</span>              :                     // &gt; incrementing the timestampHigh by one (the incremented</span>
+<span id="L88"><span class="lineNum">      88</span>              :                     // &gt; value is not transmitted, only understood as a result</span>
+<span id="L89"><span class="lineNum">      89</span>              :                     // &gt; of the overflow condition).</span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          23 :                     if (timestampLow &lt; (timestamp &amp; 0x7F)) // overflow</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">           1 :                         timestamp += 0x80;</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">          23 :                     timestamp = (timestamp &amp; 0x3F80) | timestampLow;</span></span>
+<span id="L93"><span class="lineNum">      93</span>              :                 }</span>
+<span id="L94"><span class="lineNum">      94</span>              :             }</span>
+<span id="L95"><span class="lineNum">      95</span>              :         }</span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          27 :         return false;</span></span>
+<span id="L97"><span class="lineNum">      97</span>              :     }</span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">          40 :     uint16_t getTimestamp() const { return timestamp; }</span></span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span>              :   private:</span>
+<span id="L102"><span class="lineNum">     102</span>              :     const uint8_t *data;</span>
+<span id="L103"><span class="lineNum">     103</span>              :     const uint8_t *end;</span>
+<span id="L104"><span class="lineNum">     104</span>              :     bool prevWasTimestamp = true;</span>
+<span id="L105"><span class="lineNum">     105</span>              :     uint16_t timestamp = 0;</span>
+<span id="L106"><span class="lineNum">     106</span>              : </span>
+<span id="L107"><span class="lineNum">     107</span>              :   private:</span>
+<span id="L108"><span class="lineNum">     108</span>              :     /// Check if the given byte is a data byte (and not a header, timestamp or</span>
+<span id="L109"><span class="lineNum">     109</span>              :     /// status byte).</span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         156 :     static bool isData(uint8_t data) { return (data &amp; (1 &lt;&lt; 7)) == 0; }</span></span>
+<span id="L111"><span class="lineNum">     111</span>              : };</span>
+<span id="L112"><span class="lineNum">     112</span>              : </span>
+<span id="L113"><span class="lineNum">     113</span>              : END_CS_NAMESPACE</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.4-beta</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

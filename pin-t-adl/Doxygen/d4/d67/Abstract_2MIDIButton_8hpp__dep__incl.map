@@ -1,0 +1,13 @@
+<map id="MIDIButton.hpp" name="MIDIButton.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="141,5,263,31"/>
+<area shape="rect" id="Node000002" href="$d3/dd8/CCButton_8hpp.html" title=" " alt="" coords="5,79,116,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,39,85,81,83,76,166,34"/>
+<area shape="rect" id="Node000004" href="$d3/d80/NoteButton_8hpp.html" title=" " alt="" coords="140,79,264,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="205,44,205,79,199,79,199,44"/>
+<area shape="rect" id="Node000005" href="$d2/dbf/PCButton_8hpp.html" title=" " alt="" coords="288,79,399,104"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="238,34,321,76,319,81,235,39"/>
+<area shape="rect" id="Node000003" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="133,152,271,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,108,180,149,178,154,94,112"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="205,118,205,152,199,152,199,118"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="310,112,226,154,224,149,307,108"/>
+</map>

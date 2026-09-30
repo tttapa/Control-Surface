@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['passing_20through_20a_20pipe_0',['Filtering or modifying messages passing through a pipe',['../d3/df7/midi-tutorial.html#midi_md-pipes-filtering',1,'']]],
+  ['passthrough_1',['USBHostMIDI_Interface-Passthrough',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#usbhostmidi_interface-passthrough',1,'']]],
+  ['pb_20and_20cc_2',['One-Pot-Both-PB-and-CC',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#one-pot-both-pb-and-cc',1,'']]],
+  ['pcbutton_3',['PCButton',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#pcbutton',1,'']]],
+  ['pin_20change_20interrupt_20encoders_4',['Pin-Change-Interrupt-Encoders',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#pin-change-interrupt-encoders',1,'']]],
+  ['pipe_5',['Filtering or modifying messages passing through a pipe',['../d3/df7/midi-tutorial.html#midi_md-pipes-filtering',1,'']]],
+  ['pipe_20factories_6',['MIDI pipe factories',['../d3/df7/midi-tutorial.html#midi_md-pipe-factories',1,'']]],
+  ['pipes_7',['Bidirectional MIDI pipes',['../d3/df7/midi-tutorial.html#midi_md-bidir-pipes',1,'']]],
+  ['pitch_20bend_20potentiometer_8',['Pitch-Bend-Potentiometer',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#pitch-bend-potentiometer',1,'']]],
+  ['pitch_20bend_20value_9',['Pitch-Bend-Value',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#pitch-bend-value',1,'']]],
+  ['platformio_10',['PlatformIO',['../d8/da8/md_pages_Installation.html#platformio',1,'']]],
+  ['pot_20both_20pb_20and_20cc_11',['One-Pot-Both-PB-and-CC',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#one-pot-both-pb-and-cc',1,'']]],
+  ['potentiometer_12',['Potentiometer',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#bankable-smart-control-change-potentiometer',1,'Bankable-Smart-Control-Change-Potentiometer'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#control-change-potentiometer',1,'Control-Change-Potentiometer'],['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#pitch-bend-potentiometer',1,'Pitch-Bend-Potentiometer']]],
+  ['potentiometers_13',['Multiple-Control-Change-Potentiometers',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#multiple-control-change-potentiometers',1,'']]],
+  ['potentiometers_20faders_14',['Potentiometers &amp;amp; Faders',['../d4/de9/examples.html#examples-midi-output-elements-potentiometers-faders',1,'']]],
+  ['program_20change_20names_15',['MIDI Program Change names',['../d3/df7/midi-tutorial.html#midi_md-midi-program-change-names',1,'']]],
+  ['program_20changer_16',['Program-Changer',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#program-changer',1,'']]],
+  ['program_20changers_17',['Program Changers',['../d4/de9/examples.html#examples-midi-output-elements-program-changers',1,'']]],
+  ['protocol_18',['The MIDI protocol',['../d3/df7/midi-tutorial.html#the-midi-protocol',1,'']]],
+  ['purpose_20midi_20library_19',['Can I use Control Surface as a general purpose MIDI library?',['../da/dc1/FAQ.html#faq-midi',1,'']]],
+  ['purpose_20of_20the_20control_5fsurface_20singleton_20',['Purpose of the Control_Surface singleton',['../d8/df5/control-surface-purpose.html',1,'']]],
+  ['purpose_20usb_20to_20ttl_20chip_21',['Boards with a single-purpose USB-to-TTL chip',['../d8/d4a/md_pages_MIDI-over-USB.html#boards-with-a-single-purpose-usb-to-ttl-chip',1,'']]],
+  ['pwm_22',['5.Note-LED-PWM',['..//home/runner/work/Control-Surface/Control-Surface/examples/examples.dox#autotoc_md5note-led-pwm',1,'']]]
+];

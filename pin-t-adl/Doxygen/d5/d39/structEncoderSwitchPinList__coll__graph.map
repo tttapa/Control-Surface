@@ -1,0 +1,5 @@
+<map id="EncoderSwitchPinList" name="EncoderSwitchPinList">
+<area shape="rect" id="Node000001" title="A struct for the pins of a rotary (quadrature) encoder with a switch." alt="" coords="5,273,183,379"/>
+<area shape="rect" id="Node000002" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="36,5,152,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,211,97,257,91,257,91,211"/>
+</map>

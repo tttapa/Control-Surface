@@ -1,0 +1,25 @@
+<map id="MIDIIncrementDecrementButtons&lt; RelativeSender, ResetSender &gt;" name="MIDIIncrementDecrementButtons&lt; RelativeSender, ResetSender &gt;">
+<area shape="rect" id="Node000001" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="617,1273,875,1593"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="488,867,631,993"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="585,1005,646,1182,681,1272,676,1274,641,1184,580,1007"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="193,324,389,544"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="392,554,433,613,471,676,515,775,545,866,540,868,510,777,466,679,429,616,387,557"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="97,807,323,1053"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="274,558,233,808,227,807,269,557"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1373,201,1493"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="82,1361,56,1229,45,1146,37,1056,35,961,41,864,56,769,82,676,103,632,129,591,159,552,191,518,195,522,163,556,134,594,107,635,87,678,61,770,46,865,40,961,42,1056,50,1146,61,1228,87,1360"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="187,1054,122,1358,117,1357,181,1053"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="232,1283,439,1583"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="243,1053,297,1267,292,1268,238,1054"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="341,1283,346,1002,343,839,333,678,316,561,321,560,338,677,348,839,351,1002,346,1283"/>
+<area shape="rect" id="Node000007" href="$df/dc6/classAH_1_1IncrementDecrementButtons.html" title="A class for buttons that increment and decrement some counter or setting." alt="" coords="861,827,1087,1033"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="941,1034,901,1139,852,1250,848,1260,843,1257,848,1248,896,1137,936,1032"/>
+<area shape="rect" id="Node000008" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="886,281,1062,587"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="977,587,977,811,971,811,971,587"/>
+<area shape="rect" id="Node000009" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="840,5,956,211"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="924,210,937,265,932,266,919,211"/>
+<area shape="rect" id="Node000010" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="981,35,1119,181"/>
+<area shape="poly" id="edge11_Node000008_Node000010" title=" " alt="" coords="1036,181,1016,266,1011,265,1031,180"/>
+<area shape="rect" id="Node000011" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="655,677,837,1183"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="749,1183,749,1257,743,1257,743,1183"/>
+</map>

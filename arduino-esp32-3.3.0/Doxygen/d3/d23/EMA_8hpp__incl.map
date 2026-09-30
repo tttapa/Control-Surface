@@ -1,0 +1,13 @@
+<map id="EMA.hpp" name="EMA.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="191,5,269,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,76,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,33,85,76,84,71,199,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="101,79,210,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,33,179,71,176,67,216,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="235,79,377,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="244,29,285,67,282,71,240,33"/>
+<area shape="rect" id="Node000005" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="401,79,661,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="270,26,470,73,469,78,269,31"/>
+<area shape="rect" id="Node000006" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="436,152,627,177"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="534,104,534,138,529,138,529,104"/>
+</map>

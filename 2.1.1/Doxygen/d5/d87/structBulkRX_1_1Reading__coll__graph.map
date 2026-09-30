@@ -1,0 +1,9 @@
+<map id="BulkRX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;::Reading" name="BulkRX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;::Reading">
+<area shape="rect" id="Node000001" title="State for reading incoming USB data." alt="" coords="106,348,299,463"/>
+<area shape="rect" id="Node000002" href="$de/dc6/structBulkRX_1_1Reading_1_1Buffer.html" title=" " alt="" coords="5,85,72,191"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="54,190,68,230,86,269,109,303,135,334,131,337,105,306,82,272,63,232,49,192"/>
+<area shape="rect" id="Node000003" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="96,5,309,271"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="205,271,205,331,200,331,200,271"/>
+<area shape="rect" id="Node000004" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="333,5,547,271"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="335,271,286,326,274,338,270,334,282,322,331,267"/>
+</map>

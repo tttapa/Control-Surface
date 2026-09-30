@@ -1,0 +1,13 @@
+<map id="MIDIBLEInstance" name="MIDIBLEInstance">
+<area shape="rect" id="Node000001" title="Defines the interface for callback functions registered by the low&#45;level BLE code." alt="" coords="489,5,647,171"/>
+<area shape="rect" id="Node000002" href="$de/d82/classESP32BLEBackend.html" title=" " alt="" coords="5,219,229,939"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="476,107,418,122,355,146,295,178,268,198,243,221,231,234,227,230,239,217,265,194,293,173,353,141,416,117,475,102"/>
+<area shape="rect" id="Node000003" href="$de/d82/classESP32BLEBackend.html" title=" " alt="" coords="254,219,447,939"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="485,183,461,220,450,242,445,239,456,217,480,180"/>
+<area shape="rect" id="Node000004" href="$d9/d88/classArduinoBLEBackend.html" title="ArduinoBLE backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="471,366,665,791"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="571,185,571,366,565,366,565,185"/>
+<area shape="rect" id="Node000005" href="$d5/d2a/classBTstackBackgroundBackend.html" title="Raspberry Pi Pico BTstack background backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="689,366,885,791"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="656,180,680,217,713,290,740,365,735,367,708,292,675,220,651,183"/>
+<area shape="rect" id="Node000006" href="$de/d82/classESP32BLEBackend.html" title="ESP32 backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="909,356,1102,801"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="662,101,721,116,785,139,846,172,874,193,899,217,924,248,944,282,975,355,970,357,940,284,919,251,895,220,871,197,843,177,783,144,720,121,660,106"/>
+</map>

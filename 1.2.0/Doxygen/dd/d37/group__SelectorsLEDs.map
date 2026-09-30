@@ -1,0 +1,4 @@
+<map id="Selectors LEDs" name="Selectors LEDs">
+<area shape="rect" id="node1" title="Selectors with LED feedback." alt="" coords="136,5,255,31"/>
+<area shape="rect" id="node2" href="$d0/d0c/group__Selectors.html" title="Selectors are elements that change the bank setting or any other selection, such as program selectors..." alt="" coords="5,5,88,31"/>
+</map>

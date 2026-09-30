@@ -1,0 +1,5 @@
+<map id="MIDIInputElementSysEx" name="MIDIInputElementSysEx">
+<area shape="rect" id="node1" title="Class for objects that listen for incoming MIDI SysEx events." alt="" coords="131,5,346,244"/>
+<area shape="rect" id="node2" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,475,205,567"/>
+<area shape="rect" id="node3" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,321,440,721"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="AnalogVUDisplay&lt; VU_t &gt;" name="AnalogVUDisplay&lt; VU_t &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="491,1188,679,1413"/>
+<area shape="rect" id="Node000002" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="229,608,383,973"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="393,908,438,977,480,1049,514,1118,544,1187,539,1189,510,1120,476,1052,433,980,388,911"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1218,252,1383"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="231,876,190,934,158,998,143,1049,133,1102,127,1202,121,1201,128,1101,138,1048,153,996,186,931,227,873"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="277,1051,466,1551"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="305,973,305,997,305,1026,306,1034,300,1035,299,1027,299,997,300,973"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="159,1204,240,972,245,974,164,1206"/>
+<area shape="rect" id="Node000004" href="$df/d42/classDisplayInterface.html" title="An interface for displays." alt="" coords="203,120,409,545"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="309,546,309,591,303,591,303,546"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="284,5,328,71"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="309,85,309,120,303,120,303,85"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="346,1051,339,998,338,990,344,989,345,997,351,1050"/>
+<area shape="rect" id="Node000007" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="520,678,649,903"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="587,903,587,1172,582,1172,582,903"/>
+</map>

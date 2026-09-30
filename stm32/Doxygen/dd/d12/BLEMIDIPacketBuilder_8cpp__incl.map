@@ -1,0 +1,35 @@
+<map id="BLEMIDIPacketBuilder.cpp" name="BLEMIDIPacketBuilder.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="402,5,593,32"/>
+<area shape="rect" id="node2" href="$dc/d21/BLEMIDIPacketBuilder_8hpp.html" title=" " alt="" coords="402,80,593,107"/>
+<area shape="rect" id="node3" href="$dc/d40/MIDI__MessageTypes_8hpp.html" title=" " alt="" coords="325,155,531,196"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1682,244,1795,271"/>
+<area shape="rect" id="node4" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="105,931,271,957"/>
+<area shape="rect" id="node6" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="961,1155,1151,1181"/>
+<area shape="rect" id="node11" title=" " alt="" coords="532,244,652,271"/>
+<area shape="rect" id="node13" title=" " alt="" coords="173,781,411,808"/>
+<area shape="rect" id="node14" href="$d2/dbc/Cable_8hpp.html" title=" " alt="" coords="144,483,259,509"/>
+<area shape="rect" id="node15" href="$d7/d42/Channel_8hpp.html" title=" " alt="" coords="93,632,224,659"/>
+<area shape="rect" id="node16" href="$db/dd6/MIDIAddress_8hpp.html" title=" " alt="" coords="349,244,507,271"/>
+<area shape="rect" id="node5" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="187,1005,368,1032"/>
+<area shape="rect" id="node8" title=" " alt="" coords="125,1155,209,1181"/>
+<area shape="rect" id="node10" title=" " alt="" coords="531,1005,674,1032"/>
+<area shape="rect" id="node7" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="128,1080,355,1107"/>
+<area shape="rect" id="node9" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="479,1080,739,1107"/>
+<area shape="rect" id="node17" href="$d0/d4e/Def_8hpp.html" title=" " alt="" coords="443,319,541,345"/>
+<area shape="rect" id="node18" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="965,483,1145,509"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1479,856,1553,883"/>
+<area shape="rect" id="node28" title=" " alt="" coords="851,856,922,883"/>
+<area shape="rect" id="node32" href="$d4/d35/Hardware-Types_8hpp.html" title=" " alt="" coords="571,393,746,435"/>
+<area shape="rect" id="node33" title=" " alt="" coords="437,401,547,427"/>
+<area shape="rect" id="node19" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="1139,557,1277,584"/>
+<area shape="rect" id="node31" title=" " alt="" coords="995,557,1115,584"/>
+<area shape="rect" id="node20" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="1118,632,1279,659"/>
+<area shape="rect" id="node21" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="587,707,818,733"/>
+<area shape="rect" id="node22" href="$de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html" title=" " alt="" coords="1080,707,1317,733"/>
+<area shape="rect" id="node30" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="944,707,1056,733"/>
+<area shape="rect" id="node23" href="$d5/d4f/AH_2Settings_2Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="1250,781,1353,808"/>
+<area shape="rect" id="node29" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="995,781,1226,808"/>
+<area shape="rect" id="node24" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="1093,1005,1272,1032"/>
+<area shape="rect" id="node25" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="998,856,1207,883"/>
+<area shape="rect" id="node26" title=" " alt="" coords="1231,856,1302,883"/>
+</map>

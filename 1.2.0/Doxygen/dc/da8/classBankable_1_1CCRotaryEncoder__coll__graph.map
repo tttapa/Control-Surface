@@ -1,0 +1,14 @@
+<map id="CCRotaryEncoder" name="CCRotaryEncoder">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="450,1572,610,1649"/>
+<area shape="rect" id="node2" href="$dc/dd5/classBankable_1_1MIDIRotaryEncoder.html" title=" " alt="" coords="401,1357,659,1523"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="255,1159,405,1280"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="228,703,432,1074"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,373,228,479"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="252,219,475,633"/>
+<area shape="rect" id="node7" href="$d3/dd0/classRelativeCCSender.html" title="Class that sends relative/incremental MIDI control change messages." alt="" coords="429,1144,631,1295"/>
+<area shape="rect" id="node8" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="655,1166,816,1273"/>
+<area shape="rect" id="node9" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="584,835,817,942"/>
+<area shape="rect" id="node10" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title=" " alt="" coords="565,351,837,501"/>
+<area shape="rect" id="node11" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="619,5,782,156"/>
+<area shape="rect" id="node12" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="842,696,1031,1081"/>
+</map>

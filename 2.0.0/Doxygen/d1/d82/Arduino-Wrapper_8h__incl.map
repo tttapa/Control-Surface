@@ -1,0 +1,17 @@
+<map id="Arduino&#45;Wrapper.h" name="Arduino&#45;Wrapper.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="483,5,625,31"/>
+<area shape="rect" id="Node000002" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="313,79,494,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="531,33,442,75,439,70,529,28"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="436,225,520,251"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="557,31,553,96,545,138,531,178,518,199,503,217,499,214,514,196,526,176,540,136,548,95,552,31"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="592,79,735,104"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="573,28,635,69,632,73,570,33"/>
+<area shape="rect" id="Node000003" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="290,152,517,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="406,104,406,138,401,138,401,104"/>
+<area shape="rect" id="Node000006" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="5,152,265,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="361,107,192,151,191,146,360,101"/>
+<area shape="rect" id="Node000004" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="168,225,359,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="382,180,299,221,297,217,380,175"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="417,175,458,214,454,218,413,179"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="157,175,231,216,229,221,155,180"/>
+</map>

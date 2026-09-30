@@ -1,0 +1,9 @@
+<map id="VPotRingLEDsDriver" name="VPotRingLEDsDriver">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,736,175,821"/>
+<area shape="rect" id="Node000002" href="$df/d06/classAH_1_1LEDs.html" title=" " alt="" coords="27,501,153,687"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,700,93,736,87,736,87,700"/>
+<area shape="rect" id="Node000003" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="32,133,148,439"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,439,93,485,87,485,87,439"/>
+<area shape="rect" id="Node000004" href="$d7/d14/classN.html" title=" " alt="" coords="78,5,102,71"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="93,71,93,117,87,117,87,71"/>
+</map>

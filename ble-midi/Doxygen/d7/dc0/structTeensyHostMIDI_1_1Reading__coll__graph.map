@@ -1,0 +1,5 @@
+<map id="TeensyHostMIDI&lt; MaxPacketSize &gt;::Reading" name="TeensyHostMIDI&lt; MaxPacketSize &gt;::Reading">
+<area shape="rect" id="Node000001" title="State for reading incoming USB&#45;MIDI data." alt="" coords="5,173,209,313"/>
+<area shape="rect" id="Node000002" href="$d6/ddc/structTeensyHostMIDI_1_1Reading_1_1Buffer.html" title=" " alt="" coords="74,5,141,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,111,110,157,105,157,105,111"/>
+</map>

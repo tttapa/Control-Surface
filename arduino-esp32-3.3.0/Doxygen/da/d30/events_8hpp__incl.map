@@ -1,0 +1,33 @@
+<map id="events.hpp" name="events.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="427,5,522,31"/>
+<area shape="rect" id="Node000002" href="$d7/d2a/ble_8h.html" title=" " alt="" coords="27,86,82,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="428,25,277,41,185,58,94,81,89,83,87,78,93,76,184,53,276,36,427,20"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="106,79,278,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="434,33,274,78,272,72,433,28"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="302,79,477,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="464,33,422,71,418,67,460,29"/>
+<area shape="rect" id="Node000006" href="$d3/d95/ble-macro-fix_8h.html" title=" " alt="" coords="501,86,622,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="489,29,540,75,536,78,486,33"/>
+<area shape="rect" id="Node000007" href="$dd/d05/BLEAPI_8hpp.html" title="Type definitions and callback interfaces for communication between the low&#45;level BLE stacks and highe..." alt="" coords="647,86,753,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="508,28,655,79,654,84,507,33"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="777,86,868,111"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="523,25,634,46,766,76,777,79,776,84,765,81,633,51,522,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,104,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="57,112,57,153,52,153,52,112"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="756,240,993,265"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="740,109,810,134,842,149,862,165,876,195,879,226,874,226,871,196,858,168,839,154,808,139,738,114"/>
+<area shape="rect" id="Node000009" href="$dc/da9/compat_8hpp.html" title=" " alt="" coords="515,167,642,192"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="684,114,609,161,606,157,681,109"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="447,240,518,265"/>
+<area shape="poly" id="edge13_Node000007_Node000010" title=" " alt="" coords="664,114,565,146,504,169,496,181,490,196,485,226,480,226,485,195,491,179,501,165,563,141,662,109"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="667,167,733,192"/>
+<area shape="poly" id="edge14_Node000007_Node000013" title=" " alt="" coords="703,112,703,153,697,153,697,112"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="757,167,848,192"/>
+<area shape="poly" id="edge15_Node000007_Node000014" title=" " alt="" coords="717,109,778,156,775,160,714,114"/>
+<area shape="poly" id="edge9_Node000009_Node000008" title=" " alt="" coords="627,189,814,234,813,239,626,195"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="565,194,511,234,508,229,562,190"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="629,240,721,265"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="596,190,649,229,646,234,593,194"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="545,240,605,265"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="581,192,579,227,573,226,575,192"/>
+</map>

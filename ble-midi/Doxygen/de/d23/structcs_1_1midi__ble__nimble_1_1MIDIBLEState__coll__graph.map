@@ -1,0 +1,5 @@
+<map id="MIDIBLEState" name="MIDIBLEState">
+<area shape="rect" id="Node000001" title=" " alt="" coords="8,233,161,353"/>
+<area shape="rect" id="Node000002" href="$dd/da4/classMIDIBLEInstance.html" title="Defines the interface for callback functions registered by the low&#45;level BLE code." alt="" coords="5,5,164,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,171,87,217,82,217,82,171"/>
+</map>

@@ -1,0 +1,33 @@
+<map id="LCDDisplay" name="LCDDisplay">
+<area shape="rect" id="Node000001" title="Displays the text of the Mackie Control Universal LCD screen for a single track." alt="" coords="512,1617,649,1963"/>
+<area shape="rect" id="Node000002" href="$d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display." alt="" coords="196,1161,349,1527"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="360,1449,436,1549,480,1616,514,1671,509,1674,476,1619,432,1552,356,1452"/>
+<area shape="rect" id="Node000003" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1737,252,1843"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="198,1448,170,1498,147,1552,136,1594,130,1639,127,1721,122,1721,125,1638,131,1593,142,1550,165,1496,194,1445"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="277,1640,466,1940"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="286,1526,298,1593,306,1623,301,1625,293,1594,281,1527"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,1724,195,1662,223,1592,242,1526,247,1528,229,1594,200,1664,168,1727"/>
+<area shape="rect" id="Node000004" href="$df/d42/classDisplayInterface.html" title="An interface for displays." alt="" coords="91,665,297,1091"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="233,1091,242,1145,237,1146,227,1091"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="172,473,216,539"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="197,552,197,665,191,665,191,552"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="353,1640,337,1551,335,1543,340,1542,342,1550,358,1639"/>
+<area shape="rect" id="Node000007" href="$d5/d2e/classMCU_1_1LCD.html" title="A class that represents the Mackie Control Universal LCD display and saves the text it receives." alt="" coords="502,1211,659,1477"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="583,1477,583,1601,578,1601,578,1477"/>
+<area shape="rect" id="Node000008" href="$d9/db1/classMIDIInputElement.html" title=" " alt="" coords="322,695,493,1061"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="483,1073,534,1210,529,1212,478,1075"/>
+<area shape="rect" id="Node000009" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="311,396,503,616"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="410,630,410,695,405,695,405,630"/>
+<area shape="rect" id="Node000010" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="201,95,393,235"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="326,247,374,395,369,396,321,249"/>
+<area shape="rect" id="Node000011" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="417,5,619,325"/>
+<area shape="poly" id="edge12_Node000009_Node000011" title=" " alt="" coords="468,327,451,381,446,379,463,325"/>
+<area shape="rect" id="Node000012" href="$d5/d37/classMCU_1_1LCDCounter.html" title="Counts the number of instances of the LCD class." alt="" coords="517,825,644,931"/>
+<area shape="poly" id="edge13_Node000007_Node000012" title=" " alt="" coords="583,944,583,1211,578,1211,578,944"/>
+<area shape="rect" id="Node000013" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="668,735,827,1021"/>
+<area shape="poly" id="edge14_Node000007_Node000013" title=" " alt="" coords="699,1022,636,1197,631,1195,694,1020"/>
+<area shape="rect" id="Node000014" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="851,755,985,1001"/>
+<area shape="poly" id="edge15_Node000007_Node000014" title=" " alt="" coords="894,1002,872,1050,841,1093,827,1103,806,1113,757,1129,707,1145,673,1163,643,1199,639,1195,670,1159,705,1140,755,1124,804,1108,824,1099,837,1089,868,1047,889,1000"/>
+<area shape="rect" id="Node000015" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="683,1231,843,1457"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="720,1458,658,1608,653,1606,715,1456"/>
+</map>

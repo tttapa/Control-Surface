@@ -1,0 +1,7 @@
+<map id="BTstackBackgroundBackend" name="BTstackBackgroundBackend">
+<area shape="rect" id="Node000001" title="Raspberry Pi Pico BTstack background backend intended to be plugged into GenericBLEMIDI_Interface." alt="" coords="129,453,325,879"/>
+<area shape="rect" id="Node000002" href="$d9/dc8/classPollingBLEMIDISender.html" title=" " alt="" coords="5,5,232,405"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,418,179,453,174,454,166,419"/>
+<area shape="rect" id="Node000003" href="$dd/da4/classMIDIBLEInstance.html" title="Defines the interface for callback functions registered by the low&#45;level BLE code." alt="" coords="257,123,415,288"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="316,302,280,454,275,453,311,301"/>
+</map>

@@ -1,0 +1,23 @@
+<map id="midi.hpp" name="midi.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="389,5,467,31"/>
+<area shape="rect" id="Node000002" href="$dd/d05/BLEAPI_8hpp.html" title="Type definitions and callback interfaces for communication between the low&#45;level BLE stacks and highe..." alt="" coords="261,79,443,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="419,33,382,71,378,67,415,29"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="468,86,543,111"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="441,29,486,74,482,78,438,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,240,243,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="325,121,154,234,151,230,322,117"/>
+<area shape="rect" id="Node000004" href="$dc/da9/compat_8hpp.html" title=" " alt="" coords="289,167,415,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="355,119,355,153,349,153,349,119"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="266,240,337,265"/>
+<area shape="poly" id="edge8_Node000002_Node000005" title=" " alt="" coords="321,121,297,141,278,168,275,182,276,197,288,227,283,229,271,199,270,182,274,166,293,138,318,117"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="440,167,507,192"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="383,117,445,157,443,161,380,121"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="531,167,621,192"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="407,116,531,160,529,165,405,121"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="316,195,175,238,173,233,315,189"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="346,194,320,230,315,227,341,191"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="361,240,453,265"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="363,191,392,228,387,231,359,194"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="477,240,537,265"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="378,190,470,232,468,237,376,194"/>
+</map>

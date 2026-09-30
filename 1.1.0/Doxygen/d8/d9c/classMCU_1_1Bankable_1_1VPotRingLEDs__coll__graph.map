@@ -1,0 +1,18 @@
+<map id="MCU::Bankable::VPotRingLEDs&lt; NumBanks &gt;" name="MCU::Bankable::VPotRingLEDs&lt; NumBanks &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="706,1787,918,1879"/>
+<area shape="rect" id="node2" href="$d5/d07/classMCU_1_1Bankable_1_1GenericVPotRing.html" title=" " alt="" coords="669,1587,955,1737"/>
+<area shape="rect" id="node3" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="435,1255,693,1449"/>
+<area shape="rect" id="node4" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="151,880,327,1045"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1306,187,1398"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="211,1167,403,1537"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="161,564,317,773"/>
+<area shape="rect" id="node6" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="145,145,332,501"/>
+<area shape="rect" id="node9" href="$da/d50/classMCU_1_1IVPotRing.html" title=" " alt="" coords="351,858,473,1067"/>
+<area shape="rect" id="node10" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="497,836,631,1089"/>
+<area shape="rect" id="node11" href="$d2/d4a/classMCU_1_1VPotRingLEDsCallback.html" title=" " alt="" coords="655,909,857,1016"/>
+<area shape="rect" id="node12" href="$df/d06/classAH_1_1LEDs.html" title=" " alt="" coords="695,586,817,751"/>
+<area shape="rect" id="node13" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="699,211,813,435"/>
+<area shape="rect" id="node14" title=" " alt="" coords="737,5,775,83"/>
+<area shape="rect" id="node15" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="809,1218,1037,1486"/>
+<area shape="rect" id="node16" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="881,909,1058,1016"/>
+</map>

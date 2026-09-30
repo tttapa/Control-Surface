@@ -1,0 +1,10 @@
+<map id="MCU::Bankable::GenericVPotRing&lt; NumBanks, Callback &gt;" name="MCU::Bankable::GenericVPotRing&lt; NumBanks, Callback &gt;">
+<area shape="rect" id="node1" title="A class for MIDI input elements that represent Mackie Control Universal V&#45;Pots." alt="" coords="341,836,538,987"/>
+<area shape="rect" id="node2" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="242,549,413,759"/>
+<area shape="rect" id="node3" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="91,285,267,450"/>
+<area shape="rect" id="node4" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="5,5,161,215"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="186,57,367,163"/>
+<area shape="rect" id="node6" href="$da/d50/classMCU_1_1IVPotRing.html" title=" " alt="" coords="292,263,413,472"/>
+<area shape="rect" id="node7" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="437,520,665,788"/>
+<area shape="rect" id="node8" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="463,314,640,421"/>
+</map>

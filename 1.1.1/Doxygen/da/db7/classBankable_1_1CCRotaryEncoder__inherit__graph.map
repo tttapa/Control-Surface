@@ -1,0 +1,8 @@
+<map id="CCRotaryEncoder" name="CCRotaryEncoder">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="137,792,287,869"/>
+<area shape="rect" id="node2" href="$dc/dd5/classBankable_1_1MIDIRotaryEncoder.html" title=" " alt="" coords="133,549,291,744"/>
+<area shape="rect" id="node3" href="$d3/d43/classBankableMIDIOutput.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="33,307,197,413"/>
+<area shape="rect" id="node4" href="$d4/d6e/classBankableMIDIOutput__Base.html" title=" " alt="" coords="5,5,205,171"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="241,219,380,501"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="230,35,413,141"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="PluggableUSBMIDI" name="PluggableUSBMIDI">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,119,217,1553"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="35,5,188,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,85,108,118,103,118,104,84"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="118,84,120,118,114,118,113,85"/>
+</map>

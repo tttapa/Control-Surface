@@ -1,0 +1,21 @@
+<map id="DisplayElement" name="DisplayElement">
+<area shape="rect" id="Node000001" title="An interface for elements that draw to a display." alt="" coords="655,239,808,624"/>
+<area shape="rect" id="Node000003" href="$d6/dc4/classBankDisplay.html" title="A class for displaying the setting of a Bank object." alt="" coords="5,762,127,987"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="642,448,529,473,463,492,394,516,325,546,258,581,196,624,140,674,110,715,90,763,85,761,106,713,136,670,192,620,255,577,323,541,392,511,461,487,527,468,641,443"/>
+<area shape="rect" id="Node000004" href="$da/dce/classBitmapDisplay.html" title="A class that displays a bitmap depending on the state of a MIDINote or any other object that has a ge..." alt="" coords="151,782,339,967"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="644,474,574,509,498,555,421,610,352,674,313,726,282,783,278,780,308,723,348,670,417,606,495,551,572,505,641,469"/>
+<area shape="rect" id="Node000005" href="$dc/d95/classMCU_1_1AnalogVUDisplay.html" title=" " alt="" coords="363,752,551,997"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="649,547,564,673,519,753,515,750,560,671,644,544"/>
+<area shape="rect" id="Node000006" href="$d7/dae/classMCU_1_1LCDDisplay.html" title="Displays the text of the Mackie Control Universal LCD screen for a single track." alt="" coords="575,682,712,1067"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="693,638,684,682,679,681,688,637"/>
+<area shape="rect" id="Node000007" href="$d1/dc8/classMCU_1_1TimeDisplayDisplay.html" title="Displays the MCU time code display." alt="" coords="736,702,905,1047"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="775,637,789,701,783,702,770,638"/>
+<area shape="rect" id="Node000008" href="$d3/d98/classMCU_1_1VPotDisplay.html" title="Displays the position of a MCU V&#45;Pot." alt="" coords="930,732,1095,1017"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="819,530,871,598,920,671,953,730,949,733,916,673,867,601,815,533"/>
+<area shape="rect" id="Node000009" href="$d4/d42/classMCU_1_1VUDisplay.html" title="Displays a MCU level meter." alt="" coords="1119,672,1293,1077"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="822,470,890,505,966,551,1042,606,1109,670,1121,684,1117,688,1105,674,1038,610,963,555,888,510,819,474"/>
+<area shape="rect" id="Node000010" href="$d3/d51/classSelectorDisplay.html" title="A class for displaying the setting of a Selector object." alt="" coords="1317,752,1458,997"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="822,445,931,472,1060,516,1126,546,1191,581,1252,622,1307,670,1336,708,1358,751,1353,753,1331,711,1303,674,1249,626,1188,585,1124,550,1058,521,930,477,821,451"/>
+<area shape="rect" id="Node000002" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="608,5,855,191"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="734,205,734,238,729,238,729,205"/>
+</map>

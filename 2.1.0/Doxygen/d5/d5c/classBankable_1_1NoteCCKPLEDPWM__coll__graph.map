@@ -1,0 +1,28 @@
+<map id="NoteCCKPLEDPWM&lt; Type, BankSize &gt;" name="NoteCCKPLEDPWM&lt; Type, BankSize &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="676,2785,863,3005"/>
+<area shape="rect" id="Node000002" href="$d5/dcd/classBankable_1_1NoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="591,2520,774,2720"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="721,2732,737,2784,732,2786,716,2734"/>
+<area shape="rect" id="Node000003" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="138,2060,374,2224"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="280,2236,298,2290,321,2347,351,2403,389,2453,435,2496,487,2532,541,2561,592,2584,590,2589,539,2566,484,2536,431,2500,385,2456,347,2405,316,2349,293,2292,275,2238"/>
+<area shape="rect" id="Node000004" href="$d5/dae/classMatchingMIDIInputElement.html" title="The MIDIInputElement base class is very general: you give it a MIDI message, and it calls the updateW..." alt="" coords="93,1632,309,1752"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="213,1765,249,2059,243,2060,208,1766"/>
+<area shape="rect" id="Node000005" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="106,1337,297,1583"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="204,1596,204,1632,199,1632,199,1596"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="105,588,297,1288"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="204,1302,204,1337,199,1337,199,1302"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="114,371,148,587,143,588,109,372"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="270,526,263,572,258,571,265,525"/>
+<area shape="rect" id="Node000009" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="334,1659,533,1725"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="418,1738,290,2061,285,2059,413,1736"/>
+<area shape="rect" id="Node000010" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="399,2052,607,2232"/>
+<area shape="poly" id="edge10_Node000010_Node000009" title=" " alt="" coords="428,1725,422,1763,423,1805,444,1925,473,2035,467,2037,439,1926,417,1806,417,1763,423,1724"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="513,2038,516,1978,515,1911,507,1843,491,1777,478,1750,461,1726,465,1723,483,1748,496,1775,512,1842,520,1911,522,1978,519,2038"/>
+<area shape="rect" id="Node000011" href="$d8/d87/classInterfaces_1_1IValue.html" title="Abstract interface for MIDI input elements that receive and store a 7&#45;bit value." alt="" coords="631,2089,734,2195"/>
+<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="685,2208,685,2520,680,2520,680,2208"/>
+<area shape="rect" id="Node000012" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="759,1829,951,2455"/>
+<area shape="poly" id="edge12_Node000002_Node000012" title=" " alt="" coords="761,2419,748,2456,729,2506,724,2504,743,2454,756,2417"/>
+<area shape="rect" id="Node000013" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="798,2517,914,2723"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="826,2724,811,2770,806,2769,821,2722"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,56,56"/>
+<area shape="rect" id="Node000001" href="$df/d72/structAH_1_1round__div__helper.html" title="Select the right rounding division operator, depending on whether T is an integer or not." alt="" coords="104,5,295,31"/>
+<area shape="poly" id="edge487_Node000000_Node000001" title=" " alt="" coords="69,35,115,28,115,33,70,40"/>
+<area shape="rect" id="Node000002" href="$d9/de8/structAH_1_1round__div__int.html" title="Select the right rounding division operator, depending on whether T is a signed or unsigned integer." alt="" coords="116,55,283,80"/>
+<area shape="poly" id="edge488_Node000000_Node000002" title=" " alt="" coords="70,46,116,53,115,58,69,51"/>
+</map>

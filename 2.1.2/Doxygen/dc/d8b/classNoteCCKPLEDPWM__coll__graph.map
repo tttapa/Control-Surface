@@ -1,0 +1,19 @@
+<map id="NoteCCKPLEDPWM&lt; Type &gt;" name="NoteCCKPLEDPWM&lt; Type &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="362,1739,561,1864"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="207,1288,427,1668"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="410,1679,436,1737,431,1740,405,1682"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="119,972,310,1217"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,1230,269,1287,264,1289,248,1232"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="116,539,308,759"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="215,772,217,972,211,972,210,772"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,95,197,235"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="123,248,190,538,184,539,118,250"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="221,5,424,325"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="289,326,243,523,238,522,284,325"/>
+<area shape="rect" id="Node000007" href="$d8/d6b/structTwoByteMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="334,1052,511,1137"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="414,1138,377,1273,371,1271,409,1137"/>
+<area shape="rect" id="Node000008" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="332,396,513,901"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="425,901,425,1035,420,1035,420,901"/>
+<area shape="rect" id="Node000009" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="451,1375,567,1581"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="497,1581,476,1722,470,1722,492,1580"/>
+</map>

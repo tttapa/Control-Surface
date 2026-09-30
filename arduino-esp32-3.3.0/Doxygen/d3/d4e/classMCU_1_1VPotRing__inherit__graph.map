@@ -1,0 +1,15 @@
+<map id="VPotRing" name="VPotRing">
+<area shape="rect" id="Node000001" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="160,1153,319,1419"/>
+<area shape="rect" id="Node000007" href="$d6/d0d/classMCU_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays it using LEDs." alt="" coords="173,1467,306,1612"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="242,1433,242,1466,237,1466,237,1433"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,965,260,1100"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,1112,186,1152,181,1154,164,1114"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="37,667,228,912"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,926,135,965,130,965,130,926"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="37,239,229,619"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="135,633,135,667,130,667,130,633"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="43,5,222,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="135,204,135,239,130,239,130,204"/>
+<area shape="rect" id="Node000006" href="$d2/dde/classInterfaces_1_1MCU_1_1IVPot.html" title=" " alt="" coords="285,960,410,1105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="314,1119,299,1154,294,1152,309,1117"/>
+</map>

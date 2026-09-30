@@ -1,0 +1,13 @@
+<map id="NoteButtonMatrix&lt; NumRows, NumCols &gt;" name="NoteButtonMatrix&lt; NumRows, NumCols &gt;">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="643,1219,865,1340"/>
+<area shape="rect" id="node2" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="633,879,875,1059"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="496,475,647,597"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="279,5,483,317"/>
+<area shape="rect" id="node6" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="186,475,421,597"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="319,887,523,1052"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="5,769,220,1169"/>
+<area shape="rect" id="node8" href="$dd/d29/classAH_1_1ButtonMatrix.html" title=" " alt="" coords="862,380,1163,692"/>
+<area shape="rect" id="node9" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="1023,42,1176,281"/>
+<area shape="rect" id="node10" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="851,42,998,281"/>
+<area shape="rect" id="node11" href="$dc/dd4/classDigitalNoteSender.html" title="Class that sends MIDI note on and off messages." alt="" coords="671,468,837,604"/>
+</map>

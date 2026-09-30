@@ -1,0 +1,6 @@
+<map id="CCPotentiometer" name="CCPotentiometer">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="67,748,209,825"/>
+<area shape="rect" id="node2" href="$d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html" title=" " alt="" coords="5,491,271,700"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="69,160,207,443"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="47,5,229,112"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="PluggableUSBMIDI::Writing" name="PluggableUSBMIDI::Writing">
+<area shape="rect" id="Node000001" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="5,243,196,408"/>
+<area shape="rect" id="Node000002" href="$d1/d78/structPluggableUSBMIDI_1_1Writing_1_1Buffer.html" title=" " alt="" coords="39,5,163,151"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,151,103,226,98,226,98,151"/>
+</map>

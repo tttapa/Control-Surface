@@ -1,0 +1,11 @@
+<map id="Bankable::CCRange&lt; RangeLen, NumBanks &gt;" name="Bankable::CCRange&lt; RangeLen, NumBanks &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="357,1035,527,1127"/>
+<area shape="rect" id="node2" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="327,807,557,987"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="167,476,443,759"/>
+<area shape="rect" id="node4" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="91,263,267,428"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="5,5,161,215"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="186,57,367,163"/>
+<area shape="rect" id="node7" href="$d7/dab/classINoteCCValue.html" title=" " alt="" coords="292,285,419,406"/>
+<area shape="rect" id="node8" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="467,483,695,751"/>
+<area shape="rect" id="node9" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="492,292,669,399"/>
+</map>

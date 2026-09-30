@@ -1,0 +1,11 @@
+<map id="VULEDs&lt; NumBanks, NumLEDs &gt;" name="VULEDs&lt; NumBanks, NumLEDs &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="359,1108,591,1273"/>
+<area shape="rect" id="node2" href="$db/d5e/classMCU_1_1Bankable_1_1GenericVU.html" title=" " alt="" coords="362,909,589,1060"/>
+<area shape="rect" id="node3" href="$d4/d71/classMCU_1_1VU__Base.html" title=" " alt="" coords="237,505,463,861"/>
+<area shape="rect" id="node4" href="$d1/df7/classMIDIInputElementChannelPressure.html" title=" " alt="" coords="55,263,303,457"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="5,5,161,215"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="185,57,368,163"/>
+<area shape="rect" id="node7" href="$d2/de9/classIVU.html" title="An abstract interface for VU meters." alt="" coords="327,292,450,428"/>
+<area shape="rect" id="node8" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="488,549,716,817"/>
+<area shape="rect" id="node9" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="513,307,691,413"/>
+</map>

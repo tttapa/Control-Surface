@@ -1,0 +1,7 @@
+<map id="USBMIDI_Interface.hpp" name="USBMIDI_Interface.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="85,5,257,31"/>
+<area shape="rect" id="Node000002" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="5,79,143,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,41,91,81,88,76,143,37"/>
+<area shape="rect" id="Node000003" href="$df/d33/USBHostMIDI__Interface_8hpp.html" title=" " alt="" coords="167,79,370,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,37,254,76,251,81,197,41"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="OneByteMIDIMatcher" name="OneByteMIDIMatcher">
+<area shape="rect" id="Node000001" title="Matcher for MIDI messages with 1 data byte, such as Channel Pressure and Program Change." alt="" coords="5,373,183,459"/>
+<area shape="rect" id="Node000002" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="5,5,183,311"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,311,97,357,91,357,91,311"/>
+</map>

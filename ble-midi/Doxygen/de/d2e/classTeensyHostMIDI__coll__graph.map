@@ -1,0 +1,13 @@
+<map id="TeensyHostMIDI&lt; MaxPacketSize &gt;" name="TeensyHostMIDI&lt; MaxPacketSize &gt;">
+<area shape="rect" id="Node000001" title="Teensy USB Host MIDI driver." alt="" coords="53,401,258,1321"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,223,87,289"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,302,75,401,69,402,52,303"/>
+<area shape="rect" id="Node000003" href="$d1/d81/structTeensyHostMIDI_1_1Reading.html" title="State for reading incoming USB&#45;MIDI data." alt="" coords="111,193,200,319"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="158,319,158,385,153,385,153,319"/>
+<area shape="rect" id="Node000004" href="$d6/ddc/structTeensyHostMIDI_1_1Reading_1_1Buffer.html" title=" " alt="" coords="122,5,189,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="158,111,158,177,153,177,153,111"/>
+<area shape="rect" id="Node000005" href="$d0/d0e/structTeensyHostMIDI_1_1Writing.html" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="225,173,403,339"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="295,340,265,455,260,453,290,339"/>
+<area shape="rect" id="Node000006" href="$d9/dec/structTeensyHostMIDI_1_1Writing_1_1Buffer.html" title=" " alt="" coords="252,5,376,111"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="317,111,317,157,311,157,311,111"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="MIDIButtonLatching.hpp" name="MIDIButtonLatching.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="98,5,277,31"/>
+<area shape="rect" id="Node000002" href="$d0/d04/CCButtonLatching_8hpp.html" title=" " alt="" coords="5,79,172,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,41,106,81,103,76,159,36"/>
+<area shape="rect" id="Node000004" href="$d6/d09/NoteButtonLatching_8hpp.html" title=" " alt="" coords="197,79,375,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="216,36,271,76,268,81,212,41"/>
+<area shape="rect" id="Node000003" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="119,152,256,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="117,110,173,150,170,154,114,114"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="261,114,205,154,202,150,258,110"/>
+</map>

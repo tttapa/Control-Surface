@@ -1,0 +1,12 @@
+<map id="SwitchSelector" name="SwitchSelector">
+<area shape="rect" id="node1" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch." alt="" coords="289,1816,419,1893"/>
+<area shape="rect" id="node2" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="267,1645,441,1767"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="123,1351,297,1531"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,1050,124,1142"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="148,955,272,1237"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="144,5,327,112"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="227,161,460,444"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="226,521,453,892"/>
+<area shape="rect" id="node9" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="296,1043,455,1149"/>
+<area shape="rect" id="node10" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="321,1300,485,1583"/>
+</map>

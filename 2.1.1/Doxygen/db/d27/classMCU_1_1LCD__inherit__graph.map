@@ -1,0 +1,11 @@
+<map id="LCD&lt; BufferSize &gt;" name="LCD&lt; BufferSize &gt;">
+<area shape="rect" id="Node000001" title="A class that represents the Mackie Control Universal LCD display and saves the text it receives." alt="" coords="109,1300,267,1605"/>
+<area shape="rect" id="Node000002" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="16,1007,187,1252"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,1265,150,1299,144,1300,135,1266"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="5,239,197,959"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,972,104,1006,99,1006,99,972"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="12,5,191,191"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="104,204,104,238,99,238,99,204"/>
+<area shape="rect" id="Node000005" href="$d5/d37/classMCU_1_1LCDCounter.html" title="Counts the number of instances of the LCD class." alt="" coords="211,1077,338,1182"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="260,1196,232,1301,226,1299,255,1194"/>
+</map>

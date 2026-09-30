@@ -1,0 +1,12 @@
+<map id="DisplayElement" name="DisplayElement">
+<area shape="rect" id="node1" title="An interface for elements that draw to a display." alt="" coords="684,219,845,531"/>
+<area shape="rect" id="node3" href="$d6/dc4/classBankDisplay.html" title="A class for displaying the setting of a Bank object." alt="" coords="5,645,135,839"/>
+<area shape="rect" id="node4" href="$da/dce/classBitmapDisplay.html" title="A class that displays a bitmap depending on the state of a MIDINote or any other object that has a ge..." alt="" coords="159,659,355,825"/>
+<area shape="rect" id="node5" href="$dc/d95/classMCU_1_1AnalogVUDisplay.html" title=" " alt="" coords="379,637,575,847"/>
+<area shape="rect" id="node6" href="$d7/dae/classMCU_1_1LCDDisplay.html" title="Displays the text of the Mackie Control Universal LCD screen for a single track." alt="" coords="599,601,744,883"/>
+<area shape="rect" id="node7" href="$d1/dc8/classMCU_1_1TimeDisplayDisplay.html" title=" " alt="" coords="769,601,947,883"/>
+<area shape="rect" id="node8" href="$d3/d98/classMCU_1_1VPotDisplay.html" title=" " alt="" coords="971,623,1145,861"/>
+<area shape="rect" id="node9" href="$d4/d42/classMCU_1_1VUDisplay.html" title=" " alt="" coords="1169,579,1345,905"/>
+<area shape="rect" id="node10" href="$d3/d51/classSelectorDisplay.html" title="A class for displaying the setting of a Selector object." alt="" coords="1369,637,1518,847"/>
+<area shape="rect" id="node2" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="637,5,892,171"/>
+</map>

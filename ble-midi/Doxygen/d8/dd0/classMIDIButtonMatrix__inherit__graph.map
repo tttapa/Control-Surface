@@ -1,0 +1,11 @@
+<map id="MIDIButtonMatrix&lt; Sender, NumRows, NumCols &gt;" name="MIDIButtonMatrix&lt; Sender, NumRows, NumCols &gt;">
+<area shape="rect" id="Node000001" title="MIDIButtonMatrix." alt="" coords="115,1075,309,1335"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="31,777,174,902"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,915,176,1074,171,1075,123,916"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="5,239,200,604"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="105,618,105,777,100,777,100,618"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,200,191"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="105,204,105,238,100,238,100,204"/>
+<area shape="rect" id="Node000005" href="$dd/d29/classAH_1_1ButtonMatrix.html" title=" " alt="" coords="199,652,447,1027"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="264,1040,254,1075,249,1074,259,1039"/>
+</map>

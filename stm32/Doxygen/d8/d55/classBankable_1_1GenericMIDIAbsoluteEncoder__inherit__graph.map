@@ -1,0 +1,10 @@
+<map id="GenericMIDIAbsoluteEncoder&lt; Enc, NumBanks, BankAddress, Sender &gt;" name="GenericMIDIAbsoluteEncoder&lt; Enc, NumBanks, BankAddress, Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="272,763,508,1104"/>
+<area shape="rect" id="node5" href="$d7/d2c/classBankable_1_1CCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="5,1152,180,1244"/>
+<area shape="rect" id="node6" href="$da/d5c/classBankable_1_1ManyAddresses_1_1CCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="204,1152,379,1244"/>
+<area shape="rect" id="node7" href="$d5/dd6/classBankable_1_1ManyAddresses_1_1PBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="403,1152,577,1244"/>
+<area shape="rect" id="node8" href="$d1/d38/classBankable_1_1PBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="601,1152,774,1244"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="315,593,465,715"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="288,233,492,545"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="288,5,492,185"/>
+</map>

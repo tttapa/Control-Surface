@@ -1,0 +1,16 @@
+<map id="BluetoothMIDI_Interface" name="BluetoothMIDI_Interface">
+<area shape="rect" id="node1" title="Bluetooth Low Energy MIDI Interface for the ESP32." alt="" coords="583,1864,789,2308"/>
+<area shape="rect" id="node2" href="$de/d76/classParsing__MIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="391,1519,587,1816"/>
+<area shape="rect" id="node3" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="401,1173,576,1471"/>
+<area shape="rect" id="node4" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="191,923,349,1001"/>
+<area shape="rect" id="node5" href="$d5/dc1/structTrueMIDI__Sink.html" title="A MIDI_Sink that is not a MIDI_Pipe." alt="" coords="83,519,198,597"/>
+<area shape="rect" id="node6" href="$d9/db6/classMIDI__Sink.html" title="Class that can receive MIDI messages from a MIDI pipe." alt="" coords="5,13,247,310"/>
+<area shape="rect" id="node7" href="$d2/dcd/structTrueMIDI__Source.html" title="A MIDI_Source that is not a MIDI_Pipe." alt="" coords="270,519,401,597"/>
+<area shape="rect" id="node8" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="271,5,496,317"/>
+<area shape="rect" id="node9" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="374,799,603,1125"/>
+<area shape="rect" id="node10" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="628,901,843,1023"/>
+<area shape="rect" id="node11" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="633,365,837,751"/>
+<area shape="rect" id="node12" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="633,108,837,215"/>
+<area shape="rect" id="node13" title=" " alt="" coords="611,1629,761,1706"/>
+<area shape="rect" id="node14" title=" " alt="" coords="785,1629,984,1706"/>
+</map>

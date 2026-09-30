@@ -1,0 +1,11 @@
+<map id="NoteCCKPRange&lt; Type, RangeLen &gt;" name="NoteCCKPRange&lt; Type, RangeLen &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="51,1468,221,1688"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,1300,267,1420"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,1434,139,1468,133,1468,133,1434"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="41,1007,231,1252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="139,1266,139,1300,133,1300,133,1266"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="40,239,232,959"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="139,972,139,1006,133,1006,133,972"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="47,5,225,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="139,204,139,238,133,238,133,204"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="Arduino Helpers" name="Arduino Helpers">
+<area shape="rect" id="node1" href="$d1/df1/group__AH__Timing.html" title="Blink Without Delay&#45;style timers." alt="" coords="214,5,275,31"/>
+<area shape="rect" id="node2" href="$db/dd3/group__AH__ExtIO.html" title="All Elements that extend the number of IO pins of the Arduino: Currently only shift registers and mul..." alt="" coords="168,55,321,80"/>
+<area shape="rect" id="node3" href="$dd/d5e/group__AH__Math.html" title="Mathematics helper functions. Min/max functions, functions to uniformly increase the effective bid de..." alt="" coords="195,104,294,129"/>
+<area shape="rect" id="node4" href="$d4/da5/group__AH__Debug.html" title="Macros for printing debug information that can be easily enabled or disabled." alt="" coords="215,153,275,179"/>
+<area shape="rect" id="node5" href="$da/de8/group__AH__Containers.html" title="Containers like Array, BitArray, DoublyLinkedList and UniquePtr." alt="" coords="202,203,287,228"/>
+<area shape="rect" id="node6" href="$d8/d4b/group__AH__PrintStream.html" title="Functions for printing to Streams using the streaming operator &lt;&lt;." alt="" coords="199,252,290,277"/>
+<area shape="rect" id="node7" href="$d8/d53/group__AH__HardwareUtils.html" title="Classes used for debouncing buttons, incrementing/decrementing push buttons, scanning switch matrices..." alt="" coords="181,301,308,327"/>
+<area shape="rect" id="node8" title="Common utility library: https://github.com/tttapa/Arduino&#45;Helpers" alt="" coords="5,228,120,253"/>
+<area shape="rect" id="node9" href="$dc/def/group__AH__Filters.html" title="Classes for basic filtering and hysteresis." alt="" coords="215,351,274,376"/>
+<area shape="rect" id="node10" href="$d4/dc6/group__AH__Settings.html" title="User settings and debugging options." alt="" coords="209,400,280,425"/>
+<area shape="rect" id="node11" href="$d0/df7/group__AH__Error.html" title="Macros for handling and reporting both fatal and non&#45;fatal errors." alt="" coords="219,449,270,475"/>
+</map>

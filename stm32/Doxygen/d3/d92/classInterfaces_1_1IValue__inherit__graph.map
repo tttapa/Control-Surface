@@ -1,0 +1,8 @@
+<map id="IValue" name="IValue">
+<area shape="rect" id="node1" title="Abstract interface for MIDI input elements that receive and store a 7&#45;bit value." alt="" coords="367,5,474,112"/>
+<area shape="rect" id="node2" href="$d5/dcd/classBankable_1_1NoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="220,160,411,340"/>
+<area shape="rect" id="node6" href="$d6/d45/classNoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="435,182,619,318"/>
+<area shape="rect" id="node3" href="$d5/d3a/classBankable_1_1NoteCCKPLED.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="5,388,196,627"/>
+<area shape="rect" id="node4" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="220,425,411,590"/>
+<area shape="rect" id="node5" href="$df/d8a/classBankable_1_1NoteCCKPLEDPWM.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="435,410,630,605"/>
+</map>

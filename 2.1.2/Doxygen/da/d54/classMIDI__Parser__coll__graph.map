@@ -1,0 +1,10 @@
+<map id="MIDI_Parser" name="MIDI_Parser">
+<area shape="rect" id="Node000001" title="Base class for MIDI parsers." alt="" coords="147,817,347,963"/>
+<area shape="rect" id="Node000002" href="$d4/d61/structMIDIMessage.html" title=" " alt="" coords="5,321,257,747"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,746,221,801,216,803,198,748"/>
+<area shape="rect" id="Node000003" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="181,5,314,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="215,252,199,306,194,305,210,250"/>
+<area shape="rect" id="Node000004" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="282,341,447,727"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="285,250,307,325,302,327,280,252"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="322,728,299,794,296,803,291,801,294,792,317,726"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="LEDs&lt; N &gt;" name="LEDs&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A class for collections of LEDs that can display ranges." alt="" coords="474,5,601,191"/>
+<area shape="rect" id="Node000002" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="356,239,521,639"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="509,204,499,239,494,238,504,203"/>
+<area shape="rect" id="Node000009" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title="A class for LED bars." alt="" coords="546,336,726,541"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="570,203,609,335,604,336,565,204"/>
+<area shape="rect" id="Node000003" href="$d1/d29/classMCU_1_1VULEDsDriver.html" title="Small helper to display the VU meters on an LED bar display." alt="" coords="230,694,429,779"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="363,653,347,695,342,693,358,651"/>
+<area shape="rect" id="Node000006" href="$d6/d44/classNoteCCKPLEDBarDriver.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="453,687,645,787"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="521,651,534,686,529,687,516,653"/>
+<area shape="rect" id="Node000004" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="5,835,232,1040"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="277,791,228,837,225,833,273,787"/>
+<area shape="rect" id="Node000005" href="$df/d36/classMCU_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="257,845,415,1030"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="334,793,336,844,330,844,329,793"/>
+<area shape="rect" id="Node000007" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="451,847,634,1027"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="550,801,548,847,543,847,545,801"/>
+<area shape="rect" id="Node000008" href="$d2/daa/classNoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="659,867,835,1007"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="610,795,649,833,681,865,677,869,645,837,607,798"/>
+</map>

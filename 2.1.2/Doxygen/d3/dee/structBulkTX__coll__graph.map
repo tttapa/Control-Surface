@@ -1,0 +1,11 @@
+<map id="BulkTX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;" name="BulkTX&lt; Derived, MessageTypeT, MaxPacketSizeV &gt;">
+<area shape="rect" id="Node000001" title="Sends Bulk packets (IN for device mode, OUT for host mode)." alt="" coords="107,532,299,1132"/>
+<area shape="rect" id="Node000002" href="$d4/d25/structBulkTX_1_1Writing.html" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="150,396,255,461"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,461,205,515,200,515,200,461"/>
+<area shape="rect" id="Node000003" href="$d1/db2/structBulkTX_1_1Writing_1_1Buffer.html" title=" " alt="" coords="5,93,72,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="50,177,62,220,79,271,103,323,134,370,145,383,142,387,130,374,99,325,75,273,57,222,45,179"/>
+<area shape="rect" id="Node000004" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="96,5,309,265"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="205,265,205,379,200,379,200,265"/>
+<area shape="rect" id="Node000005" href="$de/df5/classinterrupt__atomic.html" title=" " alt="" coords="333,13,547,258"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="415,260,387,320,369,349,347,374,312,399,272,416,270,411,309,395,344,370,365,345,383,318,410,257"/>
+</map>

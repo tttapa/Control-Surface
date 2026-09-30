@@ -1,0 +1,17 @@
+<map id="Atomic.hpp" name="Atomic.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="175,5,271,31"/>
+<area shape="rect" id="Node000002" href="$d0/d64/BulkRX_8hpp.html" title=" " alt="" coords="114,79,211,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,43,174,80,170,77,202,40"/>
+<area shape="rect" id="Node000007" href="$d5/d4e/BulkTX_8hpp.html" title=" " alt="" coords="236,79,332,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="244,40,276,77,272,80,240,43"/>
+<area shape="rect" id="Node000003" href="$dd/dbf/PluggableUSBMIDI_8hpp.html" title=" " alt="" coords="45,152,216,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="154,118,138,153,133,151,149,116"/>
+<area shape="rect" id="Node000005" href="$d2/df7/TeensyHostMIDI_8hpp.html" title=" " alt="" coords="240,152,395,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="201,107,293,149,291,154,199,112"/>
+<area shape="rect" id="Node000004" href="$d5/d22/USBMIDI__Arduino__mbed_8hpp.html" title=" " alt="" coords="5,225,213,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="126,192,115,226,110,224,121,190"/>
+<area shape="rect" id="Node000006" href="$df/d33/USBHostMIDI__Interface_8hpp.html" title=" " alt="" coords="237,225,440,251"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="327,190,338,224,333,226,322,192"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="248,112,157,154,155,149,246,107"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="298,115,314,151,310,153,293,118"/>
+</map>

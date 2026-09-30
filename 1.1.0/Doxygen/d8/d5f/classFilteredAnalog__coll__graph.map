@@ -1,0 +1,5 @@
+<map id="FilteredAnalog&lt; Precision, FilterShiftFactor, FilterType, AnalogType, Upsample &gt;" name="FilteredAnalog&lt; Precision, FilterShiftFactor, FilterType, AnalogType, Upsample &gt;">
+<area shape="rect" id="node1" title="A class that reads and filters an analog input." alt="" coords="88,248,277,472"/>
+<area shape="rect" id="node2" href="$d7/d40/classEMA.html" title=" " alt="" coords="5,35,165,156"/>
+<area shape="rect" id="node3" href="$d2/dcb/classHysteresis.html" title=" " alt="" coords="189,5,373,185"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="MIDI_Parser" name="MIDI_Parser">
+<area shape="rect" id="node1" title="Base class for MIDI parsers." alt="" coords="281,5,489,156"/>
+<area shape="rect" id="node2" href="$d3/ded/classFortySevenEffectsMIDI__Parser.html" title="Wrapper class for the FortySevenEffects MIDI parser." alt="" coords="5,321,232,472"/>
+<area shape="rect" id="node3" href="$d0/d0d/classSerialMIDI__Parser.html" title="Parser for Serial MIDI streams (and BLE&#45;MIDI)." alt="" coords="257,204,514,589"/>
+<area shape="rect" id="node4" href="$db/db0/classUSBMIDI__Parser.html" title="Parser for MIDI over USB packets." alt="" coords="539,204,741,589"/>
+</map>

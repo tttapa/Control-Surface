@@ -1,0 +1,5 @@
+<map id="Bankable::MIDIButtonLatching&lt; BankAddress, Sender &gt;" name="Bankable::MIDIButtonLatching&lt; BankAddress, Sender &gt;">
+<area shape="rect" id="node1" title="A class for latching buttons and switches that send MIDI events." alt="" coords="5,491,205,656"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="36,160,175,443"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="14,5,197,112"/>
+</map>

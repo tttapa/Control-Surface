@@ -1,0 +1,29 @@
+<map id="GenericIncrementDecrementSelector&lt; N, Callback &gt;" name="GenericIncrementDecrementSelector&lt; N, Callback &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="185,1183,403,1357"/>
+<area shape="rect" id="Node000002" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="358,692,542,1112"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="358,1126,333,1184,328,1182,353,1124"/>
+<area shape="rect" id="Node000003" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="584,406,708,491"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="625,505,543,693,539,690,620,503"/>
+<area shape="rect" id="Node000004" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="252,386,371,511"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="337,524,388,691,383,692,332,526"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="725,5,921,225"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="712,140,633,163,546,196,460,240,420,267,384,298,367,318,352,340,331,387,326,385,347,337,362,314,380,294,417,263,457,236,544,191,631,158,711,135"/>
+<area shape="rect" id="Node000007" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="873,326,1099,571"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="885,236,929,325,924,327,880,239"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="977,842,1173,962"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1100,828,1132,719,1146,653,1156,582,1159,509,1153,435,1137,364,1109,297,1092,272,1072,248,1025,208,972,176,920,151,923,146,975,171,1028,203,1076,244,1096,268,1114,295,1143,362,1159,435,1164,509,1161,582,1151,654,1138,720,1105,830"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1013,571,1063,825,1058,826,1007,572"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="700,752,907,1052"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="939,572,872,738,867,736,934,570"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="775,752,763,650,756,536,755,415,766,296,778,241,783,242,771,296,761,415,761,535,769,650,781,751"/>
+<area shape="rect" id="Node000009" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="394,396,559,501"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="476,502,466,676,461,676,471,502"/>
+<area shape="rect" id="Node000010" href="$df/dc6/classAH_1_1IncrementDecrementButtons.html" title="A class for buttons that increment and decrement some counter or setting." alt="" coords="66,799,293,1005"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="214,1004,265,1166,260,1168,209,1006"/>
+<area shape="rect" id="Node000011" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="51,296,227,601"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="155,602,172,783,166,783,150,602"/>
+<area shape="rect" id="Node000012" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="5,13,121,218"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="89,218,103,279,98,280,84,219"/>
+<area shape="rect" id="Node000013" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="146,43,285,188"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="202,189,180,281,175,279,196,187"/>
+</map>

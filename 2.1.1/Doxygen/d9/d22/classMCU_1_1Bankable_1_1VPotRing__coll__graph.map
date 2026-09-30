@@ -1,0 +1,26 @@
+<map id="VPotRing&lt; BankSize &gt;" name="VPotRing&lt; BankSize &gt;">
+<area shape="rect" id="Node000001" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="606,2577,789,2963"/>
+<area shape="rect" id="Node000002" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="109,2125,379,2304"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="283,2316,330,2415,359,2466,393,2513,443,2569,498,2621,608,2707,604,2711,495,2625,439,2573,389,2516,355,2469,325,2417,278,2318"/>
+<area shape="rect" id="Node000003" href="$d5/dae/classMatchingMIDIInputElement.html" title="The MIDIInputElement base class is very general: you give it a MIDI message, and it calls the updateW..." alt="" coords="93,1675,309,1795"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="210,1808,239,2125,233,2126,205,1809"/>
+<area shape="rect" id="Node000004" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="106,1337,297,1583"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="204,1596,204,1675,199,1675,199,1596"/>
+<area shape="rect" id="Node000005" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="105,588,297,1288"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="204,1302,204,1337,199,1337,199,1302"/>
+<area shape="rect" id="Node000006" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="114,371,148,587,143,588,109,372"/>
+<area shape="rect" id="Node000007" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="270,526,263,572,258,571,265,525"/>
+<area shape="rect" id="Node000008" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="334,1702,533,1767"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="418,1781,282,2126,277,2124,413,1779"/>
+<area shape="rect" id="Node000009" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="403,2125,611,2305"/>
+<area shape="poly" id="edge9_Node000009_Node000008" title=" " alt="" coords="432,1768,424,1861,426,1926,435,1991,450,2053,468,2109,462,2110,445,2054,430,1992,420,1926,419,1861,427,1767"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="512,2111,511,1990,504,1925,492,1862,474,1812,451,1769,456,1766,479,1810,497,1861,509,1925,516,1990,517,2111"/>
+<area shape="rect" id="Node000010" href="$d2/dde/classInterfaces_1_1MCU_1_1IVPot.html" title=" " alt="" coords="635,2142,760,2287"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="700,2301,700,2577,695,2577,695,2301"/>
+<area shape="rect" id="Node000011" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="784,1915,955,2515"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="787,2491,764,2563,759,2561,781,2490"/>
+<area shape="rect" id="Node000012" href="$d4/de4/structMCU_1_1VPotState.html" title="Struct that keeps track of the value and overload indicator of a Mackie Control Universal VPot LED ri..." alt="" coords="807,1632,932,1837"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="872,1838,872,1898,867,1898,867,1838"/>
+</map>

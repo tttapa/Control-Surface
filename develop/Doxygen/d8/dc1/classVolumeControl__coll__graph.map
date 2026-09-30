@@ -1,0 +1,27 @@
+<map id="VolumeControl&lt; N &gt;" name="VolumeControl&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A class for controlling the volume of AudioMixer4 objects using a potentiometer." alt="" coords="645,1237,796,1383"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="661,857,780,982"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="723,996,723,1237,718,1237,718,996"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="197,415,393,635"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="407,580,467,616,532,660,594,711,651,768,680,810,702,855,697,858,675,813,647,771,591,715,528,664,464,621,404,585"/>
+<area shape="rect" id="Node000005" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="101,797,327,1042"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="273,649,242,797,237,796,267,648"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1250,201,1370"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="82,1237,65,1142,53,1023,53,959,58,894,68,830,86,768,107,724,133,682,163,644,195,610,199,613,167,647,138,685,111,727,91,770,73,831,63,895,58,959,59,1023,70,1141,88,1236"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="182,1043,127,1235,122,1234,177,1042"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="239,1160,445,1460"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="257,1042,290,1143,285,1145,252,1043"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="346,1160,347,973,344,871,337,770,320,652,325,651,342,769,349,870,352,973,351,1160"/>
+<area shape="rect" id="Node000007" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="492,769,637,1069"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="627,1069,688,1221,683,1223,622,1071"/>
+<area shape="rect" id="Node000008" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title="A class that reads and filters an analog input." alt="" coords="805,842,999,997"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="869,998,763,1223,759,1221,864,996"/>
+<area shape="rect" id="Node000009" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="797,331,1007,720"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="905,734,905,842,899,842,899,734"/>
+<area shape="rect" id="Node000010" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="665,30,781,235"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="772,234,809,315,804,317,767,237"/>
+<area shape="rect" id="Node000011" href="$d9/d74/classAH_1_1EMA.html" title=" " alt="" coords="805,5,999,260"/>
+<area shape="poly" id="edge12_Node000009_Node000011" title=" " alt="" coords="905,260,905,314,899,314,899,260"/>
+<area shape="rect" id="Node000012" href="$da/df9/classAH_1_1Hysteresis.html" title=" " alt="" coords="1023,11,1280,255"/>
+<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="1076,256,1018,347,1014,344,1072,253"/>
+</map>

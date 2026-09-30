@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,55,255,80"/>
+<area shape="rect" id="Node000001" href="$d2/d94/classAH_1_1AnalogMultiplex.html" title=" " alt="" coords="303,5,470,31"/>
+<area shape="poly" id="edge483_Node000000_Node000001" title=" " alt="" coords="209,49,319,28,320,33,210,55"/>
+<area shape="rect" id="Node000002" href="$d2/d94/classAH_1_1AnalogMultiplex.html" title=" " alt="" coords="303,55,470,80"/>
+<area shape="poly" id="edge484_Node000000_Node000002" title=" " alt="" coords="268,65,303,65,303,70,268,70"/>
+<area shape="rect" id="Node000003" href="$d2/d94/classAH_1_1AnalogMultiplex.html" title="A class for reading multiplexed analog inputs." alt="" coords="303,104,471,129"/>
+<area shape="poly" id="edge485_Node000000_Node000003" title=" " alt="" coords="210,80,320,101,319,107,209,85"/>
+</map>

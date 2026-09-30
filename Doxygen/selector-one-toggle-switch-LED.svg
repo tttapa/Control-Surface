@@ -1,0 +1,25 @@
+<svg 
+    version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    width="160" height="220">
+    <text x="12" y="16" font-family="Verdana" font-size="16">Try it:</text>
+    <circle id="circle" cx="56" cy="108" r="24" stroke="none" fill="blue"/>
+    <rect id="rect" x="28" y="80" width="104" height="56" rx="28" ry="28" stroke-width="3" stroke="black" fill="rgba(0,0,0,0)" style="cursor: pointer"/>
+    <text id="setting" x="80" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
+    <circle id="led" cx="80" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>
+    <script>
+        let circle = document.getElementById("circle");
+        let rect   = document.getElementById("rect");
+        let setting = document.getElementById("setting");
+        let led = document.getElementById("led");
+        let buttonstate = false;
+        rect.onclick = function() {
+            circle.setAttribute("cx", buttonstate ? "56" : "104");
+            setting.textContent = buttonstate ? "1" : "2" ;
+            led.setAttribute("fill", buttonstate ? "white" : "red");
+            buttonstate = !buttonstate;
+        }
+    </script>
+</svg>
+

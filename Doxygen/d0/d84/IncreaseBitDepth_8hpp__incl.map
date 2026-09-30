@@ -1,0 +1,9 @@
+<map id="IncreaseBitDepth.hpp" name="IncreaseBitDepth.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="126,5,289,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,148,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,33,111,74,109,70,185,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="172,79,243,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,31,210,65,205,65,205,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="267,79,342,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="225,29,279,68,276,72,221,33"/>
+</map>
